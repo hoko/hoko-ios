@@ -7,9 +7,12 @@ Pod::Spec.new do |s|
     :type => 'Copyright',
     :file => 'LICENSE'
   }
-  s.author       = 'Hoko'
-  s.source       = { :git => "https://github.com/hokolinks/ios.git", :tag => s.version.to_s }
+  s.social_media_url  = 'https://twitter.com/hokolinks'
+  s.author       = { "Hoko S.A." => "support@hokolinks.com" }
+  s.source       = { :git => "https://github.com/hokolinks/ios.git", :tag => "v#{s.version}" }
   s.platform     = :ios, '5.0'
+  s.frameworks = %w(Foundation SystemConfiguration)
+  s.library = 'z'
   s.source_files = 'Hoko.framework/Versions/A/Headers/*.h'
   s.requires_arc = true
   s.ios.vendored_frameworks = 'Hoko.framework'
