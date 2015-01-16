@@ -10,14 +10,14 @@ your.app.scheme://<mapped_route>/<route_param>?<query_params>
 
 # Quick Start - HOKO framework for iOS
 
-This document is a quick start introduction to the HOKO framework for iOS. You can read the full documentation at [https://www.hoko.com/documentation/ios/](https://www.hoko.com/documentation/ios/).
+This document is a quick start introduction to the HOKO framework for iOS. You can read the full documentation at [http://hokolinks.com/documentation#ios](http://hokolinks.com/documentation#ios).
 
 To integrate HOKO in your app, simply follow the 4 simple steps below after adding it to your project.
 
-## Add HOKO to your project
-
-1. Drag the `Hoko.framework` file to your project's `Target Dependencies`.
-2. Be sure to also add `SystemConfiguration.framework` and `zlib.dylib` in case your project does not include it already.
+## Usage via CocoaPods
+``` ruby
+pod 'Hoko'
+```
 
 ## Start using HOKO
 
@@ -40,7 +40,7 @@ In your `AppDelegate.m` file setup the HOKO framework in the `application:willFi
 To register a URL scheme you should navigate to your project's application **target**, select the **info** tab, and under **URL Types** click the **plus** sign.
 Once there you should assign a custom (and unique) URL scheme. Following Apple's guidelines is should be in **reverse DNS notation** (e.g. *com.hoko.hokotestbed*).
 
-![URL Scheme](../master/Images/urlschemes.png?raw=true)
+![URL Scheme](https://s3-eu-west-1.amazonaws.com/hokoassets/urlschemes-ios.png)
 
 ### 2. Deeplinking
 
