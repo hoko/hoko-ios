@@ -87,7 +87,7 @@ You can also identify your users to create targeted campaigns on HOKO.
 
 ### Full documentation
 
-We recommend you to read the full documentation at [https://www.hoko.com/documentation/ios/](https://www.hoko.com/documentation/ios/).
+We recommend you to read the full documentation at [http://hokolinks.com/documentation#ios](http://hokolinks.com/documentation#ios).
 
 
 # Author
