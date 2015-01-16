@@ -14,10 +14,16 @@ This document is a quick start introduction to the HOKO framework for iOS. You c
 
 To integrate HOKO in your app, simply follow the 4 simple steps below after adding it to your project.
 
-## Usage via CocoaPods
-``` ruby
-pod 'Hoko'
-```
+## Install HOKO in your project
+
+1. Install [CocoaPods](http://cocoapods.org/) in your system
+2. Open your Xcode project folder and create a file called `Podfile` with the following content:
+
+    ```ruby
+    pod 'Hoko', "~> 1.0.1"
+    ```
+
+3. Run `pod install` and wait for CocoaPod to install HOKO SDK. From this moment on, instead of using `.xcodeproj` file, you should start using `.xcworkspace`.
 
 ## Start using HOKO
 
