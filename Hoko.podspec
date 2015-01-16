@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Hoko"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "Hoko is a mobile deeplinking platform."
   s.homepage     = "http://hokolinks.com"
   s.license      = { 
