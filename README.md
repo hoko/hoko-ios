@@ -12,9 +12,11 @@ your.app.scheme://<mapped_route>/<route_param>?<query_params>
 
 This document is a quick start introduction to the HOKO framework for iOS. You can read the full documentation at [http://hokolinks.com/documentation#ios](http://hokolinks.com/documentation#ios).
 
-To integrate HOKO in your app, simply follow the 4 simple steps below after adding it to your project.
+To integrate HOKO in your app, simply follow the 3 simple steps below after adding it to your project.
 
 ## Install HOKO in your project
+
+### Cocoapods
 
 1. Install [CocoaPods](http://cocoapods.org/) in your system
 2. Open your Xcode project folder and create a file called `Podfile` with the following content:
@@ -25,19 +27,30 @@ To integrate HOKO in your app, simply follow the 4 simple steps below after addi
 
 3. Run `pod install` and wait for CocoaPod to install HOKO SDK. From this moment on, instead of using `.xcodeproj` file, you should start using `.xcworkspace`.
 
-## Start using HOKO
+### Framework
 
-### 1. Setup the HOKO framework
+1. Download the [Hoko SDK](https://github.com/hokolinks/hoko-ios/archive/master.zip).
+2. Drag the `Hoko.framework` file to your project's `Target Dependencies`.
+3. Be sure to also add `SystemConfiguration.framework` and `zlib.dylib` in case your project does not include it already.
 
-In your `AppDelegate.m` file setup the HOKO framework in the `application:willFinishLaunchingWithOptions:` method:
+## SDK Setup
+
+Add the following line to your `applicationDidFinishLaunching` method in your `AppDelegate` class.
 
 ```objective-c
 #import <Hoko/Hoko.h>
 
 - (BOOL)application:(UIApplication *)application 
         didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [Hoko setupWithToken:@"YOUR-APP-TOKEN"];
-    // The rest of your code goes here...
+	[Hoko setupWithToken:@"YOUR-APP-TOKEN"];
+	// The rest of your code goes here...
+}
+```
+
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	Hoko.setupWithToken("YOUR-APP-TOKEN")
+	// The rest of your code goes here...
 }
 ```
 
