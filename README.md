@@ -67,7 +67,7 @@ Once there you should assign a custom (and unique) URL scheme. Following Apple's
 
 ### 2. Deeplinking
 
-To map routes to your View Controllers all you have to do is map them in the **deeplinking** module on your `AppDelegate`. 
+To map routes to your View Controllers all you have to do is map them in the **deeplinking** module on your `applicationDidFinishLaunching` method in your `AppDelegate` class. 
 
 ```objective-c
 [[Hoko deeplinking] mapRoute:@"product/:product_id" toTarget:^(HKDeeplink *deeplink) {
