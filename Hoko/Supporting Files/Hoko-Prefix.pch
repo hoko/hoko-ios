@@ -1,0 +1,24 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#ifdef __OBJC__
+
+  #import <Foundation/Foundation.h>
+
+  #import "HKLogger.h"
+  #ifndef HKErrorLog
+    #define HKErrorLog(error) [[HKLogger logger] logError:error]
+  #endif
+
+  #ifndef HKLog
+    #define HKLog(...) [[HKLogger logger] log:[NSString stringWithFormat:__VA_ARGS__]]
+  #endif
+
+  #ifndef HKSystemVersionGreaterThanOrEqualTo
+    #define HKSystemVersionGreaterThanOrEqualTo(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+  #endif
+
+#endif
