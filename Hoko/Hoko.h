@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
-#import "HokoAnalytics.h"
-#import "HokoDeeplinking.h"
+#import "HKAnalytics.h"
+#import "HKDeeplinking.h"
 
 #import "HKDeeplink.h"
 
@@ -19,8 +19,8 @@
  *  deeplinks are the point of entry to your application.
  *
  *  Hoko includes three seperate modules:
- *  - HokoDeeplinking - handles every incoming deeplink, so long as it has been mapped
- *  - HokoAnalytics - handles the tracking of users and events to allow creation and evaluation of campaigns
+ *  - HKDeeplinking - handles every incoming deeplink, so long as it has been mapped
+ *  - HKAnalytics - handles the tracking of users and events to allow creation and evaluation of campaigns
  *  
  *  You should setup Hoko on your AppDelegate's application:didFinishLaunchingWithOptions:, by calling
  *  [Hoko setupWithToken:@"YOUR-API-TOKEN"].
@@ -60,21 +60,21 @@
 + (void)setupWithToken:(NSString *)token debugMode:(BOOL)debugMode;
 
 /**
- *  The HokoDeeplinking module provides all the necessary APIs to map, handle and generate deeplinks.
+ *  The HKDeeplinking module provides all the necessary APIs to map, handle and generate deeplinks.
  *  Different APIs as provided in order to be as versatile as your application requires them to be.
  *
- *  @return A reference to the HokoDeeplinking instance.
+ *  @return A reference to the HKDeeplinking instance.
  */
-+ (HokoDeeplinking *)deeplinking;
++ (HKDeeplinking *)deeplinking;
 
 /**
- *  The HokoAnalytics module provides all the necessary APIs to manage user and application behavior.
+ *  The HKAnalytics module provides all the necessary APIs to manage user and application behavior.
  *  Users should be identified to this module, as well as key events (e.g. sales, referrals, etc) in order
  *  to track campaign value and allow user segmentation.
  *
- *  @return A reference to the HokoAnalytics instance.
+ *  @return A reference to the HKAnalytics instance.
  */
-+ (HokoAnalytics *)analytics;
++ (HKAnalytics *)analytics;
 
 /**
  *  Use this function to enable or disable logging from the Hoko SDK

@@ -14,18 +14,18 @@
 #import "HKLogger.h"
 #import "HKDevice.h"
 #import "HKVersionChecker.h"
-#import "HokoAnalytics+Private.h"
-#import "HokoDeeplinking+Private.h"
+#import "HKAnalytics+Private.h"
+#import "HKDeeplinking+Private.h"
 #import "HKNetworkOperationQueue.h"
 
-NSString *const HokoVersion = @"1.0.2";
+NSString *const HokoVersion = @"1.1.0";
 
 @interface Hoko ()
 
 @property (nonatomic, assign) BOOL debugMode;
 @property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) HokoAnalytics *analytics;
-@property (nonatomic, strong) HokoDeeplinking *deeplinking;
+@property (nonatomic, strong) HKAnalytics *analytics;
+@property (nonatomic, strong) HKDeeplinking *deeplinking;
 @property (nonatomic, strong) HKNetworkOperationQueue *networkOperationQueue;
 
 @end
@@ -37,7 +37,7 @@ NSString *const HokoVersion = @"1.0.2";
 static dispatch_once_t onceToken = 0;
 static Hoko *_sharedInstance = nil;
 
-+ (instancetype)sharedHoko
++ (instancetype)hoko
 {
   return _sharedInstance;
 }
@@ -71,15 +71,15 @@ static Hoko *_sharedInstance = nil;
     
     // Hoko Analytics implements the HKHandlerProtocol
     _networkOperationQueue = [HKNetworkOperationQueue sharedQueue];
-    _analytics = [[HokoAnalytics alloc] initWithToken:token];
-    _deeplinking = [[HokoDeeplinking alloc] initWithToken:token debugMode:debugMode];
+    _analytics = [[HKAnalytics alloc] initWithToken:token];
+    _deeplinking = [[HKDeeplinking alloc] initWithToken:token debugMode:debugMode];
     [_deeplinking addHandler:_analytics];
     
     // Only posting when in debug mode to avoid spaming the service
     // Also checking for new version on github public repo
     if (debugMode) {
       [[HKApp app] postIconWithToken:_token];
-      [[HKVersionChecker sharedInstance] checkForNewVersion:HokoVersion];
+      [[HKVersionChecker versionChecker] checkForNewVersion:HokoVersion];
     }
     
     if (![HKApp app].hasURLSchemes)
@@ -89,19 +89,20 @@ static Hoko *_sharedInstance = nil;
 }
 
 #pragma mark - Module accessors
-+ (HokoAnalytics *)analytics
++ (HKAnalytics *)analytics
 {
-  if (![Hoko sharedHoko].analytics) {
+  if (![Hoko hoko].analytics) {
     HKErrorLog([HKError setupNotCalledYetError]);
   }
-  return [Hoko sharedHoko].analytics;
+  return [Hoko hoko].analytics;
 }
-+ (HokoDeeplinking *)deeplinking
+
++ (HKDeeplinking *)deeplinking
 {
-  if (![Hoko sharedHoko].deeplinking) {
+  if (![Hoko hoko].deeplinking) {
     HKErrorLog([HKError setupNotCalledYetError]);
   }
-  return [Hoko sharedHoko].deeplinking;
+  return [Hoko hoko].deeplinking;
 }
 
 #pragma mark - Logging

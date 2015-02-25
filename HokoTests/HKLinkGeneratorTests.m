@@ -16,7 +16,7 @@
 #import "HKApp.h"
 #import "HKError.h"
 #import "HKLinkGenerator.h"
-#import "HokoDeeplinking+Private.h"
+#import "HKDeeplinking+Private.h"
 
 @interface HKLinkGeneratorTests : XCTestCase
 
@@ -49,7 +49,6 @@
 
 - (void)testBasicHokolink
 {
-  
   XCTestExpectation *expectation = [self expectationWithDescription:@"generate hokolink"];
   
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {

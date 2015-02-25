@@ -22,101 +22,98 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		306C605E1A2CBDF6004CE9EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 306C605D1A2CBDF6004CE9EC /* libz.dylib */; };
-		306C60621A2CBE2F004CE9EC /* HKGZip.h in Headers */ = {isa = PBXBuildFile; fileRef = 306C60601A2CBE2F004CE9EC /* HKGZip.h */; };
-		306C60631A2CBE2F004CE9EC /* HKGZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 306C60611A2CBE2F004CE9EC /* HKGZip.m */; };
-		3070533F19B899CB0008CD87 /* HKNetworkOperationQueue+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3070533E19B8997C0008CD87 /* HKNetworkOperationQueue+Private.h */; };
-		3074B3541A7150C500BD12D9 /* HKVersionChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 3074B3521A7150C500BD12D9 /* HKVersionChecker.h */; };
-		3074B3551A7150C500BD12D9 /* HKVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3074B3531A7150C500BD12D9 /* HKVersionChecker.m */; };
-		3074E24019C6EB880000B2C3 /* HKHandlerBlockWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3074E23E19C6EB880000B2C3 /* HKHandlerBlockWrapper.h */; };
-		3074E24119C6EB880000B2C3 /* HKHandlerBlockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3074E23F19C6EB880000B2C3 /* HKHandlerBlockWrapper.m */; };
-		3074E24219C6EB880000B2C3 /* HKHandlerBlockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3074E23F19C6EB880000B2C3 /* HKHandlerBlockWrapper.m */; };
-		3074E24619C72E1D0000B2C3 /* HKEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 3074E24419C72E1D0000B2C3 /* HKEvent.h */; };
-		3074E24719C72E1D0000B2C3 /* HKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3074E24519C72E1D0000B2C3 /* HKEvent.m */; };
-		3074E24819C72E1D0000B2C3 /* HKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3074E24519C72E1D0000B2C3 /* HKEvent.m */; };
-		3074E24C19C73AD00000B2C3 /* HKSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 3074E24A19C73AD00000B2C3 /* HKSession.h */; };
-		3074E24D19C73AD00000B2C3 /* HKSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3074E24B19C73AD00000B2C3 /* HKSession.m */; };
-		3074E24E19C73AD00000B2C3 /* HKSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3074E24B19C73AD00000B2C3 /* HKSession.m */; };
-		3079FA4F19B720F6007596FA /* HKNetworkOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 3079FA4D19B720F6007596FA /* HKNetworkOperationQueue.h */; };
-		3079FA5019B720F6007596FA /* HKNetworkOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3079FA4E19B720F6007596FA /* HKNetworkOperationQueue.m */; };
-		3079FA5119B720F6007596FA /* HKNetworkOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3079FA4E19B720F6007596FA /* HKNetworkOperationQueue.m */; };
+		305712F71A9E12A6002AFA43 /* HKApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712B91A9E12A6002AFA43 /* HKApp.h */; };
+		305712F81A9E12A6002AFA43 /* HKApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712BA1A9E12A6002AFA43 /* HKApp.m */; };
+		305712F91A9E12A6002AFA43 /* HKApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712BA1A9E12A6002AFA43 /* HKApp.m */; };
+		305712FA1A9E12A6002AFA43 /* HKDeeplink.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712BB1A9E12A6002AFA43 /* HKDeeplink.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		305712FB1A9E12A6002AFA43 /* HKDeeplink.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712BC1A9E12A6002AFA43 /* HKDeeplink.m */; };
+		305712FC1A9E12A6002AFA43 /* HKDeeplink.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712BC1A9E12A6002AFA43 /* HKDeeplink.m */; };
+		305712FD1A9E12A6002AFA43 /* HKDeeplink+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712BD1A9E12A6002AFA43 /* HKDeeplink+Private.h */; };
+		305712FE1A9E12A6002AFA43 /* HKDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712BE1A9E12A6002AFA43 /* HKDevice.h */; };
+		305712FF1A9E12A6002AFA43 /* HKDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712BF1A9E12A6002AFA43 /* HKDevice.m */; };
+		305713001A9E12A6002AFA43 /* HKDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712BF1A9E12A6002AFA43 /* HKDevice.m */; };
+		305713011A9E12A6002AFA43 /* HKError.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712C01A9E12A6002AFA43 /* HKError.h */; };
+		305713021A9E12A6002AFA43 /* HKError.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712C11A9E12A6002AFA43 /* HKError.m */; };
+		305713031A9E12A6002AFA43 /* HKError.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712C11A9E12A6002AFA43 /* HKError.m */; };
+		305713041A9E12A6002AFA43 /* HKEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712C21A9E12A6002AFA43 /* HKEvent.h */; };
+		305713051A9E12A6002AFA43 /* HKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712C31A9E12A6002AFA43 /* HKEvent.m */; };
+		305713061A9E12A6002AFA43 /* HKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712C31A9E12A6002AFA43 /* HKEvent.m */; };
+		305713071A9E12A6002AFA43 /* HKGZip.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712C41A9E12A6002AFA43 /* HKGZip.h */; };
+		305713081A9E12A6002AFA43 /* HKGZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712C51A9E12A6002AFA43 /* HKGZip.m */; };
+		305713091A9E12A6002AFA43 /* HKGZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712C51A9E12A6002AFA43 /* HKGZip.m */; };
+		3057130A1A9E12A6002AFA43 /* HKHandlerBlockWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712C61A9E12A6002AFA43 /* HKHandlerBlockWrapper.h */; };
+		3057130B1A9E12A6002AFA43 /* HKHandlerBlockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712C71A9E12A6002AFA43 /* HKHandlerBlockWrapper.m */; };
+		3057130C1A9E12A6002AFA43 /* HKHandlerBlockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712C71A9E12A6002AFA43 /* HKHandlerBlockWrapper.m */; };
+		3057130D1A9E12A6002AFA43 /* HKHandling.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712C81A9E12A6002AFA43 /* HKHandling.h */; };
+		3057130E1A9E12A6002AFA43 /* HKHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712C91A9E12A6002AFA43 /* HKHandling.m */; };
+		3057130F1A9E12A6002AFA43 /* HKHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712C91A9E12A6002AFA43 /* HKHandling.m */; };
+		305713101A9E12A6002AFA43 /* HKLinkGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712CA1A9E12A6002AFA43 /* HKLinkGenerator.h */; };
+		305713111A9E12A6002AFA43 /* HKLinkGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712CB1A9E12A6002AFA43 /* HKLinkGenerator.m */; };
+		305713121A9E12A6002AFA43 /* HKLinkGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712CB1A9E12A6002AFA43 /* HKLinkGenerator.m */; };
+		305713131A9E12A6002AFA43 /* HKLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712CC1A9E12A6002AFA43 /* HKLogger.h */; };
+		305713141A9E12A6002AFA43 /* HKLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712CD1A9E12A6002AFA43 /* HKLogger.m */; };
+		305713151A9E12A6002AFA43 /* HKLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712CD1A9E12A6002AFA43 /* HKLogger.m */; };
+		305713161A9E12A6002AFA43 /* HKNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712CE1A9E12A6002AFA43 /* HKNavigation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		305713171A9E12A6002AFA43 /* HKNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712CF1A9E12A6002AFA43 /* HKNavigation.m */; };
+		305713181A9E12A6002AFA43 /* HKNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712CF1A9E12A6002AFA43 /* HKNavigation.m */; };
+		305713191A9E12A6002AFA43 /* HKNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712D01A9E12A6002AFA43 /* HKNetworking.h */; };
+		3057131A1A9E12A6002AFA43 /* HKNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712D11A9E12A6002AFA43 /* HKNetworking.m */; };
+		3057131B1A9E12A6002AFA43 /* HKNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712D11A9E12A6002AFA43 /* HKNetworking.m */; };
+		3057131C1A9E12A6002AFA43 /* HKNetworkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712D21A9E12A6002AFA43 /* HKNetworkOperation.h */; };
+		3057131D1A9E12A6002AFA43 /* HKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712D31A9E12A6002AFA43 /* HKNetworkOperation.m */; };
+		3057131E1A9E12A6002AFA43 /* HKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712D31A9E12A6002AFA43 /* HKNetworkOperation.m */; };
+		3057131F1A9E12A6002AFA43 /* HKNetworkOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712D41A9E12A6002AFA43 /* HKNetworkOperationQueue.h */; };
+		305713201A9E12A6002AFA43 /* HKNetworkOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712D51A9E12A6002AFA43 /* HKNetworkOperationQueue.m */; };
+		305713211A9E12A6002AFA43 /* HKNetworkOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712D51A9E12A6002AFA43 /* HKNetworkOperationQueue.m */; };
+		305713221A9E12A6002AFA43 /* HKNetworkOperationQueue+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712D61A9E12A6002AFA43 /* HKNetworkOperationQueue+Private.h */; };
+		305713231A9E12A6002AFA43 /* HKNotificationObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712D71A9E12A6002AFA43 /* HKNotificationObserver.h */; };
+		305713241A9E12A6002AFA43 /* HKNotificationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712D81A9E12A6002AFA43 /* HKNotificationObserver.m */; };
+		305713251A9E12A6002AFA43 /* HKNotificationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712D81A9E12A6002AFA43 /* HKNotificationObserver.m */; };
+		305713261A9E12A6002AFA43 /* HKObjectObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712D91A9E12A6002AFA43 /* HKObjectObserver.h */; };
+		305713271A9E12A6002AFA43 /* HKObjectObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712DA1A9E12A6002AFA43 /* HKObjectObserver.m */; };
+		305713281A9E12A6002AFA43 /* HKObjectObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712DA1A9E12A6002AFA43 /* HKObjectObserver.m */; };
+		305713291A9E12A6002AFA43 /* HKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712DB1A9E12A6002AFA43 /* HKObserver.h */; };
+		3057132A1A9E12A6002AFA43 /* HKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712DC1A9E12A6002AFA43 /* HKObserver.m */; };
+		3057132B1A9E12A6002AFA43 /* HKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712DC1A9E12A6002AFA43 /* HKObserver.m */; };
+		3057132C1A9E12A6002AFA43 /* HKRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712DD1A9E12A6002AFA43 /* HKRoute.h */; };
+		3057132D1A9E12A6002AFA43 /* HKRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712DE1A9E12A6002AFA43 /* HKRoute.m */; };
+		3057132E1A9E12A6002AFA43 /* HKRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712DE1A9E12A6002AFA43 /* HKRoute.m */; };
+		3057132F1A9E12A6002AFA43 /* HKRouting.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712DF1A9E12A6002AFA43 /* HKRouting.h */; };
+		305713301A9E12A6002AFA43 /* HKRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712E01A9E12A6002AFA43 /* HKRouting.m */; };
+		305713311A9E12A6002AFA43 /* HKRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712E01A9E12A6002AFA43 /* HKRouting.m */; };
+		305713321A9E12A6002AFA43 /* HKSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712E11A9E12A6002AFA43 /* HKSession.h */; };
+		305713331A9E12A6002AFA43 /* HKSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712E21A9E12A6002AFA43 /* HKSession.m */; };
+		305713341A9E12A6002AFA43 /* HKSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712E21A9E12A6002AFA43 /* HKSession.m */; };
+		305713351A9E12A6002AFA43 /* HKSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712E31A9E12A6002AFA43 /* HKSwizzling.h */; };
+		305713361A9E12A6002AFA43 /* HKSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712E41A9E12A6002AFA43 /* HKSwizzling.m */; };
+		305713371A9E12A6002AFA43 /* HKSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712E41A9E12A6002AFA43 /* HKSwizzling.m */; };
+		305713381A9E12A6002AFA43 /* HKURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712E51A9E12A6002AFA43 /* HKURL.h */; };
+		305713391A9E12A6002AFA43 /* HKURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712E61A9E12A6002AFA43 /* HKURL.m */; };
+		3057133A1A9E12A6002AFA43 /* HKURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712E61A9E12A6002AFA43 /* HKURL.m */; };
+		3057133B1A9E12A6002AFA43 /* HKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712E71A9E12A6002AFA43 /* HKUser.h */; };
+		3057133C1A9E12A6002AFA43 /* HKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712E81A9E12A6002AFA43 /* HKUser.m */; };
+		3057133D1A9E12A6002AFA43 /* HKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712E81A9E12A6002AFA43 /* HKUser.m */; };
+		3057133E1A9E12A6002AFA43 /* HKUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712E91A9E12A6002AFA43 /* HKUtils.h */; };
+		3057133F1A9E12A6002AFA43 /* HKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712EA1A9E12A6002AFA43 /* HKUtils.m */; };
+		305713401A9E12A6002AFA43 /* HKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712EA1A9E12A6002AFA43 /* HKUtils.m */; };
+		305713411A9E12A6002AFA43 /* HKVersionChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712EB1A9E12A6002AFA43 /* HKVersionChecker.h */; };
+		305713421A9E12A6002AFA43 /* HKVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712EC1A9E12A6002AFA43 /* HKVersionChecker.m */; };
+		305713431A9E12A6002AFA43 /* HKVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712EC1A9E12A6002AFA43 /* HKVersionChecker.m */; };
+		305713451A9E12A6002AFA43 /* Hoko.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712EE1A9E12A6002AFA43 /* Hoko.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		305713461A9E12A6002AFA43 /* Hoko.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712EF1A9E12A6002AFA43 /* Hoko.m */; };
+		305713471A9E12A6002AFA43 /* Hoko.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712EF1A9E12A6002AFA43 /* Hoko.m */; };
+		305713481A9E12A6002AFA43 /* Hoko+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712F01A9E12A6002AFA43 /* Hoko+Private.h */; };
+		305713491A9E12A6002AFA43 /* HKAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712F11A9E12A6002AFA43 /* HKAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3057134A1A9E12A6002AFA43 /* HKAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712F21A9E12A6002AFA43 /* HKAnalytics.m */; };
+		3057134B1A9E12A6002AFA43 /* HKAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712F21A9E12A6002AFA43 /* HKAnalytics.m */; };
+		3057134C1A9E12A6002AFA43 /* HKAnalytics+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712F31A9E12A6002AFA43 /* HKAnalytics+Private.h */; };
+		3057134D1A9E12A6002AFA43 /* HKDeeplinking.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712F41A9E12A6002AFA43 /* HKDeeplinking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3057134E1A9E12A6002AFA43 /* HKDeeplinking.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712F51A9E12A6002AFA43 /* HKDeeplinking.m */; };
+		3057134F1A9E12A6002AFA43 /* HKDeeplinking.m in Sources */ = {isa = PBXBuildFile; fileRef = 305712F51A9E12A6002AFA43 /* HKDeeplinking.m */; };
+		305713501A9E12A6002AFA43 /* HKDeeplinking+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 305712F61A9E12A6002AFA43 /* HKDeeplinking+Private.h */; };
 		3079FA5419B73AE7007596FA /* HKNetworkOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3079FA5319B73AE7007596FA /* HKNetworkOperationTests.m */; };
-		307A051719B6332E0017AE8D /* HKNetworkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 307A051519B6332E0017AE8D /* HKNetworkOperation.h */; };
-		307A051819B6332E0017AE8D /* HKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 307A051619B6332E0017AE8D /* HKNetworkOperation.m */; };
-		307A051919B6332E0017AE8D /* HKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 307A051619B6332E0017AE8D /* HKNetworkOperation.m */; };
-		307E81BD19B755BA00935B2B /* HKNotificationObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 307E81BB19B755BA00935B2B /* HKNotificationObserver.h */; };
-		307E81BE19B755BA00935B2B /* HKNotificationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 307E81BC19B755BA00935B2B /* HKNotificationObserver.m */; };
-		307E81C219B7567F00935B2B /* HKObjectObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 307E81C019B7567F00935B2B /* HKObjectObserver.h */; };
-		307E81C319B7567F00935B2B /* HKObjectObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 307E81C119B7567F00935B2B /* HKObjectObserver.m */; };
-		307E81C419B7567F00935B2B /* HKObjectObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 307E81C119B7567F00935B2B /* HKObjectObserver.m */; };
-		30A3A38A19B7585E0049BC2A /* HKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 30A3A38819B7585E0049BC2A /* HKObserver.h */; };
-		30A3A38B19B7585E0049BC2A /* HKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A3A38919B7585E0049BC2A /* HKObserver.m */; };
-		30A3A38C19B7585E0049BC2A /* HKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A3A38919B7585E0049BC2A /* HKObserver.m */; };
-		30A3A38D19B759890049BC2A /* HKNotificationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 307E81BC19B755BA00935B2B /* HKNotificationObserver.m */; };
 		30B206F61992483F00343860 /* HKLinkGeneratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B206F51992483F00343860 /* HKLinkGeneratorTests.m */; };
-		30C94E021A76899C0083BC30 /* HKVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3074B3531A7150C500BD12D9 /* HKVersionChecker.m */; };
-		30C94E031A7689A10083BC30 /* HKGZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 306C60611A2CBE2F004CE9EC /* HKGZip.m */; };
 		30C94E041A7689C90083BC30 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 306C605D1A2CBDF6004CE9EC /* libz.dylib */; };
-		30CCF92019C32C0300F2682C /* HokoAnalytics+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 30CCF91F19C32BB800F2682C /* HokoAnalytics+Private.h */; };
-		30DDD87719B6077400C338AA /* Hoko.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD82A19B6077400C338AA /* Hoko.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		30DDD87819B6077400C338AA /* Hoko.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD82B19B6077400C338AA /* Hoko.m */; };
-		30DDD87919B6077400C338AA /* Hoko.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD82B19B6077400C338AA /* Hoko.m */; };
-		30DDD87A19B6077400C338AA /* Hoko+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD82C19B6077400C338AA /* Hoko+Private.h */; };
-		30DDD87E19B6077400C338AA /* HKNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD83219B6077400C338AA /* HKNavigation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		30DDD87F19B6077400C338AA /* HKNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD83319B6077400C338AA /* HKNavigation.m */; };
-		30DDD88019B6077400C338AA /* HKNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD83319B6077400C338AA /* HKNavigation.m */; };
-		30DDD88119B6077400C338AA /* HKApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD83619B6077400C338AA /* HKApp.h */; };
-		30DDD88219B6077400C338AA /* HKApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD83719B6077400C338AA /* HKApp.m */; };
-		30DDD88319B6077400C338AA /* HKApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD83719B6077400C338AA /* HKApp.m */; };
-		30DDD88419B6077400C338AA /* HKDeeplink+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD83919B6077400C338AA /* HKDeeplink+Private.h */; };
-		30DDD88519B6077400C338AA /* HKDeeplink.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD83A19B6077400C338AA /* HKDeeplink.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		30DDD88619B6077400C338AA /* HKDeeplink.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD83B19B6077400C338AA /* HKDeeplink.m */; };
-		30DDD88719B6077400C338AA /* HKDeeplink.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD83B19B6077400C338AA /* HKDeeplink.m */; };
-		30DDD88819B6077400C338AA /* HKDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD83D19B6077400C338AA /* HKDevice.h */; };
-		30DDD88919B6077400C338AA /* HKDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD83E19B6077400C338AA /* HKDevice.m */; };
-		30DDD88A19B6077400C338AA /* HKDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD83E19B6077400C338AA /* HKDevice.m */; };
-		30DDD88B19B6077400C338AA /* HKError.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD84019B6077400C338AA /* HKError.h */; };
-		30DDD88C19B6077400C338AA /* HKError.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD84119B6077400C338AA /* HKError.m */; };
-		30DDD88D19B6077400C338AA /* HKError.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD84119B6077400C338AA /* HKError.m */; };
-		30DDD88E19B6077400C338AA /* HKRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD84319B6077400C338AA /* HKRoute.h */; };
-		30DDD88F19B6077400C338AA /* HKRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD84419B6077400C338AA /* HKRoute.m */; };
-		30DDD89019B6077400C338AA /* HKRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD84419B6077400C338AA /* HKRoute.m */; };
-		30DDD89119B6077400C338AA /* HKURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD84619B6077400C338AA /* HKURL.h */; };
-		30DDD89219B6077400C338AA /* HKURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD84719B6077400C338AA /* HKURL.m */; };
-		30DDD89319B6077400C338AA /* HKURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD84719B6077400C338AA /* HKURL.m */; };
-		30DDD89419B6077400C338AA /* HKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD84919B6077400C338AA /* HKUser.h */; };
-		30DDD89519B6077400C338AA /* HKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD84A19B6077400C338AA /* HKUser.m */; };
-		30DDD89619B6077400C338AA /* HKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD84A19B6077400C338AA /* HKUser.m */; };
-		30DDD89719B6077400C338AA /* HokoAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD84D19B6077400C338AA /* HokoAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		30DDD89819B6077400C338AA /* HokoAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD84E19B6077400C338AA /* HokoAnalytics.m */; };
-		30DDD89919B6077400C338AA /* HokoAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD84E19B6077400C338AA /* HokoAnalytics.m */; };
-		30DDD89A19B6077400C338AA /* HKHandling.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD85119B6077400C338AA /* HKHandling.h */; };
-		30DDD89B19B6077400C338AA /* HKHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD85219B6077400C338AA /* HKHandling.m */; };
-		30DDD89C19B6077400C338AA /* HKHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD85219B6077400C338AA /* HKHandling.m */; };
-		30DDD89D19B6077400C338AA /* HokoDeeplinking+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD85319B6077400C338AA /* HokoDeeplinking+Private.h */; };
-		30DDD89E19B6077400C338AA /* HokoDeeplinking.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD85419B6077400C338AA /* HokoDeeplinking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		30DDD89F19B6077400C338AA /* HokoDeeplinking.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD85519B6077400C338AA /* HokoDeeplinking.m */; };
-		30DDD8A019B6077400C338AA /* HokoDeeplinking.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD85519B6077400C338AA /* HokoDeeplinking.m */; };
-		30DDD8A119B6077400C338AA /* HKLinkGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD85719B6077400C338AA /* HKLinkGenerator.h */; };
-		30DDD8A219B6077400C338AA /* HKLinkGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD85819B6077400C338AA /* HKLinkGenerator.m */; };
-		30DDD8A319B6077400C338AA /* HKLinkGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD85819B6077400C338AA /* HKLinkGenerator.m */; };
-		30DDD8A419B6077400C338AA /* HKRouting.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD85A19B6077400C338AA /* HKRouting.h */; };
-		30DDD8A519B6077400C338AA /* HKRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD85B19B6077400C338AA /* HKRouting.m */; };
-		30DDD8A619B6077400C338AA /* HKRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD85B19B6077400C338AA /* HKRouting.m */; };
-		30DDD8B119B6077400C338AA /* Hoko-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD86719B6077400C338AA /* Hoko-Prefix.pch */; };
-		30DDD8B519B6077400C338AA /* HKUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD86C19B6077400C338AA /* HKUtils.h */; };
-		30DDD8B619B6077400C338AA /* HKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD86D19B6077400C338AA /* HKUtils.m */; };
-		30DDD8B719B6077400C338AA /* HKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD86D19B6077400C338AA /* HKUtils.m */; };
-		30DDD8B819B6077400C338AA /* HKLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD86F19B6077400C338AA /* HKLogger.h */; };
-		30DDD8B919B6077400C338AA /* HKLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD87019B6077400C338AA /* HKLogger.m */; };
-		30DDD8BA19B6077400C338AA /* HKLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD87019B6077400C338AA /* HKLogger.m */; };
-		30DDD8BB19B6077400C338AA /* HKNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD87219B6077400C338AA /* HKNetworking.h */; };
-		30DDD8BC19B6077400C338AA /* HKNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD87319B6077400C338AA /* HKNetworking.m */; };
-		30DDD8BD19B6077400C338AA /* HKNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD87319B6077400C338AA /* HKNetworking.m */; };
-		30DDD8BE19B6077400C338AA /* HKSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DDD87519B6077400C338AA /* HKSwizzling.h */; };
-		30DDD8BF19B6077400C338AA /* HKSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD87619B6077400C338AA /* HKSwizzling.m */; };
-		30DDD8C019B6077400C338AA /* HKSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DDD87619B6077400C338AA /* HKSwizzling.m */; };
-		30E82872197FF9DA00CD4943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E82871197FF9DA00CD4943 /* Foundation.framework */; };
 		30E82880197FF9DA00CD4943 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E8287F197FF9DA00CD4943 /* XCTest.framework */; };
 		30E82881197FF9DA00CD4943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E82871197FF9DA00CD4943 /* Foundation.framework */; };
 		30E82883197FF9DA00CD4943 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E82882197FF9DA00CD4943 /* UIKit.framework */; };
@@ -156,72 +153,71 @@
 
 /* Begin PBXFileReference section */
 		304320F219812B5400C227C4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		305712B91A9E12A6002AFA43 /* HKApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKApp.h; sourceTree = "<group>"; };
+		305712BA1A9E12A6002AFA43 /* HKApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKApp.m; sourceTree = "<group>"; };
+		305712BB1A9E12A6002AFA43 /* HKDeeplink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDeeplink.h; sourceTree = "<group>"; };
+		305712BC1A9E12A6002AFA43 /* HKDeeplink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKDeeplink.m; sourceTree = "<group>"; };
+		305712BD1A9E12A6002AFA43 /* HKDeeplink+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HKDeeplink+Private.h"; sourceTree = "<group>"; };
+		305712BE1A9E12A6002AFA43 /* HKDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDevice.h; sourceTree = "<group>"; };
+		305712BF1A9E12A6002AFA43 /* HKDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKDevice.m; sourceTree = "<group>"; };
+		305712C01A9E12A6002AFA43 /* HKError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKError.h; sourceTree = "<group>"; };
+		305712C11A9E12A6002AFA43 /* HKError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKError.m; sourceTree = "<group>"; };
+		305712C21A9E12A6002AFA43 /* HKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKEvent.h; sourceTree = "<group>"; };
+		305712C31A9E12A6002AFA43 /* HKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKEvent.m; sourceTree = "<group>"; };
+		305712C41A9E12A6002AFA43 /* HKGZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKGZip.h; sourceTree = "<group>"; };
+		305712C51A9E12A6002AFA43 /* HKGZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKGZip.m; sourceTree = "<group>"; };
+		305712C61A9E12A6002AFA43 /* HKHandlerBlockWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKHandlerBlockWrapper.h; sourceTree = "<group>"; };
+		305712C71A9E12A6002AFA43 /* HKHandlerBlockWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKHandlerBlockWrapper.m; sourceTree = "<group>"; };
+		305712C81A9E12A6002AFA43 /* HKHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKHandling.h; sourceTree = "<group>"; };
+		305712C91A9E12A6002AFA43 /* HKHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKHandling.m; sourceTree = "<group>"; };
+		305712CA1A9E12A6002AFA43 /* HKLinkGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKLinkGenerator.h; sourceTree = "<group>"; };
+		305712CB1A9E12A6002AFA43 /* HKLinkGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLinkGenerator.m; sourceTree = "<group>"; };
+		305712CC1A9E12A6002AFA43 /* HKLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKLogger.h; sourceTree = "<group>"; };
+		305712CD1A9E12A6002AFA43 /* HKLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLogger.m; sourceTree = "<group>"; };
+		305712CE1A9E12A6002AFA43 /* HKNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKNavigation.h; sourceTree = "<group>"; };
+		305712CF1A9E12A6002AFA43 /* HKNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKNavigation.m; sourceTree = "<group>"; };
+		305712D01A9E12A6002AFA43 /* HKNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKNetworking.h; sourceTree = "<group>"; };
+		305712D11A9E12A6002AFA43 /* HKNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKNetworking.m; sourceTree = "<group>"; };
+		305712D21A9E12A6002AFA43 /* HKNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKNetworkOperation.h; sourceTree = "<group>"; };
+		305712D31A9E12A6002AFA43 /* HKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKNetworkOperation.m; sourceTree = "<group>"; };
+		305712D41A9E12A6002AFA43 /* HKNetworkOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKNetworkOperationQueue.h; sourceTree = "<group>"; };
+		305712D51A9E12A6002AFA43 /* HKNetworkOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKNetworkOperationQueue.m; sourceTree = "<group>"; };
+		305712D61A9E12A6002AFA43 /* HKNetworkOperationQueue+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HKNetworkOperationQueue+Private.h"; sourceTree = "<group>"; };
+		305712D71A9E12A6002AFA43 /* HKNotificationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKNotificationObserver.h; sourceTree = "<group>"; };
+		305712D81A9E12A6002AFA43 /* HKNotificationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKNotificationObserver.m; sourceTree = "<group>"; };
+		305712D91A9E12A6002AFA43 /* HKObjectObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKObjectObserver.h; sourceTree = "<group>"; };
+		305712DA1A9E12A6002AFA43 /* HKObjectObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKObjectObserver.m; sourceTree = "<group>"; };
+		305712DB1A9E12A6002AFA43 /* HKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKObserver.h; sourceTree = "<group>"; };
+		305712DC1A9E12A6002AFA43 /* HKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKObserver.m; sourceTree = "<group>"; };
+		305712DD1A9E12A6002AFA43 /* HKRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKRoute.h; sourceTree = "<group>"; };
+		305712DE1A9E12A6002AFA43 /* HKRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKRoute.m; sourceTree = "<group>"; };
+		305712DF1A9E12A6002AFA43 /* HKRouting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKRouting.h; sourceTree = "<group>"; };
+		305712E01A9E12A6002AFA43 /* HKRouting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKRouting.m; sourceTree = "<group>"; };
+		305712E11A9E12A6002AFA43 /* HKSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKSession.h; sourceTree = "<group>"; };
+		305712E21A9E12A6002AFA43 /* HKSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKSession.m; sourceTree = "<group>"; };
+		305712E31A9E12A6002AFA43 /* HKSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKSwizzling.h; sourceTree = "<group>"; };
+		305712E41A9E12A6002AFA43 /* HKSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKSwizzling.m; sourceTree = "<group>"; };
+		305712E51A9E12A6002AFA43 /* HKURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKURL.h; sourceTree = "<group>"; };
+		305712E61A9E12A6002AFA43 /* HKURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKURL.m; sourceTree = "<group>"; };
+		305712E71A9E12A6002AFA43 /* HKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKUser.h; sourceTree = "<group>"; };
+		305712E81A9E12A6002AFA43 /* HKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKUser.m; sourceTree = "<group>"; };
+		305712E91A9E12A6002AFA43 /* HKUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKUtils.h; sourceTree = "<group>"; };
+		305712EA1A9E12A6002AFA43 /* HKUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKUtils.m; sourceTree = "<group>"; };
+		305712EB1A9E12A6002AFA43 /* HKVersionChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKVersionChecker.h; sourceTree = "<group>"; };
+		305712EC1A9E12A6002AFA43 /* HKVersionChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKVersionChecker.m; sourceTree = "<group>"; };
+		305712EE1A9E12A6002AFA43 /* Hoko.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoko.h; sourceTree = "<group>"; };
+		305712EF1A9E12A6002AFA43 /* Hoko.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hoko.m; sourceTree = "<group>"; };
+		305712F01A9E12A6002AFA43 /* Hoko+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hoko+Private.h"; sourceTree = "<group>"; };
+		305712F11A9E12A6002AFA43 /* HKAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKAnalytics.h; sourceTree = "<group>"; };
+		305712F21A9E12A6002AFA43 /* HKAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKAnalytics.m; sourceTree = "<group>"; };
+		305712F31A9E12A6002AFA43 /* HKAnalytics+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HKAnalytics+Private.h"; sourceTree = "<group>"; };
+		305712F41A9E12A6002AFA43 /* HKDeeplinking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDeeplinking.h; sourceTree = "<group>"; };
+		305712F51A9E12A6002AFA43 /* HKDeeplinking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKDeeplinking.m; sourceTree = "<group>"; };
+		305712F61A9E12A6002AFA43 /* HKDeeplinking+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HKDeeplinking+Private.h"; sourceTree = "<group>"; };
 		306C605D1A2CBDF6004CE9EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		306C60601A2CBE2F004CE9EC /* HKGZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKGZip.h; path = GZip/HKGZip.h; sourceTree = "<group>"; };
-		306C60611A2CBE2F004CE9EC /* HKGZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKGZip.m; path = GZip/HKGZip.m; sourceTree = "<group>"; };
-		3070533E19B8997C0008CD87 /* HKNetworkOperationQueue+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "HKNetworkOperationQueue+Private.h"; path = "NetworkOperationQueue/HKNetworkOperationQueue+Private.h"; sourceTree = "<group>"; };
 		3074B34F1A713C9000BD12D9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		3074B3521A7150C500BD12D9 /* HKVersionChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKVersionChecker.h; path = VersionChecker/HKVersionChecker.h; sourceTree = "<group>"; };
-		3074B3531A7150C500BD12D9 /* HKVersionChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKVersionChecker.m; path = VersionChecker/HKVersionChecker.m; sourceTree = "<group>"; };
-		3074E23E19C6EB880000B2C3 /* HKHandlerBlockWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKHandlerBlockWrapper.h; path = HandlerBlock/HKHandlerBlockWrapper.h; sourceTree = "<group>"; };
-		3074E23F19C6EB880000B2C3 /* HKHandlerBlockWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKHandlerBlockWrapper.m; path = HandlerBlock/HKHandlerBlockWrapper.m; sourceTree = "<group>"; };
-		3074E24419C72E1D0000B2C3 /* HKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKEvent.h; path = Event/HKEvent.h; sourceTree = "<group>"; };
-		3074E24519C72E1D0000B2C3 /* HKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKEvent.m; path = Event/HKEvent.m; sourceTree = "<group>"; };
-		3074E24A19C73AD00000B2C3 /* HKSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKSession.h; path = Session/HKSession.h; sourceTree = "<group>"; };
-		3074E24B19C73AD00000B2C3 /* HKSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKSession.m; path = Session/HKSession.m; sourceTree = "<group>"; };
-		3079FA4D19B720F6007596FA /* HKNetworkOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKNetworkOperationQueue.h; path = NetworkOperationQueue/HKNetworkOperationQueue.h; sourceTree = "<group>"; };
-		3079FA4E19B720F6007596FA /* HKNetworkOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKNetworkOperationQueue.m; path = NetworkOperationQueue/HKNetworkOperationQueue.m; sourceTree = "<group>"; };
 		3079FA5319B73AE7007596FA /* HKNetworkOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKNetworkOperationTests.m; sourceTree = "<group>"; };
-		307A051519B6332E0017AE8D /* HKNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKNetworkOperation.h; path = "Network Operation/HKNetworkOperation.h"; sourceTree = "<group>"; };
-		307A051619B6332E0017AE8D /* HKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKNetworkOperation.m; path = "Network Operation/HKNetworkOperation.m"; sourceTree = "<group>"; };
-		307E81BB19B755BA00935B2B /* HKNotificationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKNotificationObserver.h; path = Hoko/Utils/Observer/Notification/HKNotificationObserver.h; sourceTree = SOURCE_ROOT; };
-		307E81BC19B755BA00935B2B /* HKNotificationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKNotificationObserver.m; path = Hoko/Utils/Observer/Notification/HKNotificationObserver.m; sourceTree = SOURCE_ROOT; };
-		307E81C019B7567F00935B2B /* HKObjectObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKObjectObserver.h; path = Hoko/Utils/Observer/Object/HKObjectObserver.h; sourceTree = SOURCE_ROOT; };
-		307E81C119B7567F00935B2B /* HKObjectObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKObjectObserver.m; path = Hoko/Utils/Observer/Object/HKObjectObserver.m; sourceTree = SOURCE_ROOT; };
-		30A3A38819B7585E0049BC2A /* HKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKObserver.h; path = Hoko/Utils/Observer/HKObserver.h; sourceTree = SOURCE_ROOT; };
-		30A3A38919B7585E0049BC2A /* HKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKObserver.m; path = Hoko/Utils/Observer/HKObserver.m; sourceTree = SOURCE_ROOT; };
 		30B206F51992483F00343860 /* HKLinkGeneratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLinkGeneratorTests.m; sourceTree = "<group>"; };
-		30CCF91F19C32BB800F2682C /* HokoAnalytics+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HokoAnalytics+Private.h"; sourceTree = "<group>"; };
-		30DDD82A19B6077400C338AA /* Hoko.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoko.h; sourceTree = "<group>"; };
-		30DDD82B19B6077400C338AA /* Hoko.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hoko.m; sourceTree = "<group>"; };
-		30DDD82C19B6077400C338AA /* Hoko+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hoko+Private.h"; sourceTree = "<group>"; };
-		30DDD83219B6077400C338AA /* HKNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKNavigation.h; sourceTree = "<group>"; };
-		30DDD83319B6077400C338AA /* HKNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKNavigation.m; sourceTree = "<group>"; };
-		30DDD83619B6077400C338AA /* HKApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKApp.h; sourceTree = "<group>"; };
-		30DDD83719B6077400C338AA /* HKApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKApp.m; sourceTree = "<group>"; };
-		30DDD83919B6077400C338AA /* HKDeeplink+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HKDeeplink+Private.h"; sourceTree = "<group>"; };
-		30DDD83A19B6077400C338AA /* HKDeeplink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDeeplink.h; sourceTree = "<group>"; };
-		30DDD83B19B6077400C338AA /* HKDeeplink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKDeeplink.m; sourceTree = "<group>"; };
-		30DDD83D19B6077400C338AA /* HKDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDevice.h; sourceTree = "<group>"; };
-		30DDD83E19B6077400C338AA /* HKDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKDevice.m; sourceTree = "<group>"; };
-		30DDD84019B6077400C338AA /* HKError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKError.h; sourceTree = "<group>"; };
-		30DDD84119B6077400C338AA /* HKError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKError.m; sourceTree = "<group>"; };
-		30DDD84319B6077400C338AA /* HKRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKRoute.h; sourceTree = "<group>"; };
-		30DDD84419B6077400C338AA /* HKRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKRoute.m; sourceTree = "<group>"; };
-		30DDD84619B6077400C338AA /* HKURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKURL.h; sourceTree = "<group>"; };
-		30DDD84719B6077400C338AA /* HKURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKURL.m; sourceTree = "<group>"; };
-		30DDD84919B6077400C338AA /* HKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKUser.h; sourceTree = "<group>"; };
-		30DDD84A19B6077400C338AA /* HKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKUser.m; sourceTree = "<group>"; };
-		30DDD84D19B6077400C338AA /* HokoAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HokoAnalytics.h; sourceTree = "<group>"; };
-		30DDD84E19B6077400C338AA /* HokoAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HokoAnalytics.m; sourceTree = "<group>"; };
-		30DDD85119B6077400C338AA /* HKHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKHandling.h; sourceTree = "<group>"; };
-		30DDD85219B6077400C338AA /* HKHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKHandling.m; sourceTree = "<group>"; };
-		30DDD85319B6077400C338AA /* HokoDeeplinking+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HokoDeeplinking+Private.h"; sourceTree = "<group>"; };
-		30DDD85419B6077400C338AA /* HokoDeeplinking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HokoDeeplinking.h; sourceTree = "<group>"; };
-		30DDD85519B6077400C338AA /* HokoDeeplinking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HokoDeeplinking.m; sourceTree = "<group>"; };
-		30DDD85719B6077400C338AA /* HKLinkGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKLinkGenerator.h; sourceTree = "<group>"; };
-		30DDD85819B6077400C338AA /* HKLinkGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLinkGenerator.m; sourceTree = "<group>"; };
-		30DDD85A19B6077400C338AA /* HKRouting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKRouting.h; sourceTree = "<group>"; };
-		30DDD85B19B6077400C338AA /* HKRouting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKRouting.m; sourceTree = "<group>"; };
-		30DDD86719B6077400C338AA /* Hoko-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hoko-Prefix.pch"; sourceTree = "<group>"; };
-		30DDD86C19B6077400C338AA /* HKUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKUtils.h; sourceTree = "<group>"; };
-		30DDD86D19B6077400C338AA /* HKUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKUtils.m; sourceTree = "<group>"; };
-		30DDD86F19B6077400C338AA /* HKLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKLogger.h; sourceTree = "<group>"; };
-		30DDD87019B6077400C338AA /* HKLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLogger.m; sourceTree = "<group>"; };
-		30DDD87219B6077400C338AA /* HKNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKNetworking.h; sourceTree = "<group>"; };
-		30DDD87319B6077400C338AA /* HKNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKNetworking.m; sourceTree = "<group>"; };
-		30DDD87519B6077400C338AA /* HKSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKSwizzling.h; sourceTree = "<group>"; };
-		30DDD87619B6077400C338AA /* HKSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKSwizzling.m; sourceTree = "<group>"; };
 		30E8286E197FF9DA00CD4943 /* libHoko.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHoko.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30E82871197FF9DA00CD4943 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		30E8287E197FF9DA00CD4943 /* HokoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HokoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,8 +236,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				306C605E1A2CBDF6004CE9EC /* libz.dylib in Frameworks */,
-				30E82872197FF9DA00CD4943 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,307 +254,275 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		306C605F1A2CBE12004CE9EC /* GZip */ = {
+		305713521A9E15E3002AFA43 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				306C60601A2CBE2F004CE9EC /* HKGZip.h */,
-				306C60611A2CBE2F004CE9EC /* HKGZip.m */,
+				305712F11A9E12A6002AFA43 /* HKAnalytics.h */,
+				305712F21A9E12A6002AFA43 /* HKAnalytics.m */,
+				305712F31A9E12A6002AFA43 /* HKAnalytics+Private.h */,
+				3057135C1A9E1BC2002AFA43 /* User */,
+				3057135A1A9E1B77002AFA43 /* Event */,
+				305713591A9E1B6D002AFA43 /* Session */,
 			);
-			name = GZip;
+			name = Analytics;
 			sourceTree = "<group>";
 		};
-		3074B3511A714F6000BD12D9 /* VersionChecker */ = {
+		305713531A9E192B002AFA43 /* Deeplinking */ = {
 			isa = PBXGroup;
 			children = (
-				3074B3521A7150C500BD12D9 /* HKVersionChecker.h */,
-				3074B3531A7150C500BD12D9 /* HKVersionChecker.m */,
+				305712F41A9E12A6002AFA43 /* HKDeeplinking.h */,
+				305712F51A9E12A6002AFA43 /* HKDeeplinking.m */,
+				305712F61A9E12A6002AFA43 /* HKDeeplinking+Private.h */,
+				3057135B1A9E1B83002AFA43 /* LinkGenerator */,
+				305713571A9E1AF7002AFA43 /* Routing */,
+				305713551A9E1991002AFA43 /* Handling */,
+				305713541A9E1984002AFA43 /* Deeplink */,
 			);
-			name = VersionChecker;
+			name = Deeplinking;
 			sourceTree = "<group>";
 		};
-		3074E23D19C6EB520000B2C3 /* HandlerBlock */ = {
+		305713541A9E1984002AFA43 /* Deeplink */ = {
 			isa = PBXGroup;
 			children = (
-				3074E23E19C6EB880000B2C3 /* HKHandlerBlockWrapper.h */,
-				3074E23F19C6EB880000B2C3 /* HKHandlerBlockWrapper.m */,
+				305712BB1A9E12A6002AFA43 /* HKDeeplink.h */,
+				305712BC1A9E12A6002AFA43 /* HKDeeplink.m */,
+				305712BD1A9E12A6002AFA43 /* HKDeeplink+Private.h */,
 			);
-			name = HandlerBlock;
+			name = Deeplink;
 			sourceTree = "<group>";
 		};
-		3074E24319C72E0D0000B2C3 /* Event */ = {
+		305713551A9E1991002AFA43 /* Handling */ = {
 			isa = PBXGroup;
 			children = (
-				3074E24419C72E1D0000B2C3 /* HKEvent.h */,
-				3074E24519C72E1D0000B2C3 /* HKEvent.m */,
+				305713561A9E1AC9002AFA43 /* HandlerBlockWrapper */,
+				305712C81A9E12A6002AFA43 /* HKHandling.h */,
+				305712C91A9E12A6002AFA43 /* HKHandling.m */,
 			);
-			name = Event;
+			name = Handling;
 			sourceTree = "<group>";
 		};
-		3074E24919C73AC00000B2C3 /* Session */ = {
+		305713561A9E1AC9002AFA43 /* HandlerBlockWrapper */ = {
 			isa = PBXGroup;
 			children = (
-				3074E24A19C73AD00000B2C3 /* HKSession.h */,
-				3074E24B19C73AD00000B2C3 /* HKSession.m */,
+				305712C61A9E12A6002AFA43 /* HKHandlerBlockWrapper.h */,
+				305712C71A9E12A6002AFA43 /* HKHandlerBlockWrapper.m */,
+			);
+			name = HandlerBlockWrapper;
+			sourceTree = "<group>";
+		};
+		305713571A9E1AF7002AFA43 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				305713601A9E1C28002AFA43 /* URL */,
+				305713581A9E1B04002AFA43 /* Route */,
+				305712DF1A9E12A6002AFA43 /* HKRouting.h */,
+				305712E01A9E12A6002AFA43 /* HKRouting.m */,
+			);
+			name = Routing;
+			sourceTree = "<group>";
+		};
+		305713581A9E1B04002AFA43 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				305712DD1A9E12A6002AFA43 /* HKRoute.h */,
+				305712DE1A9E12A6002AFA43 /* HKRoute.m */,
+			);
+			name = Route;
+			sourceTree = "<group>";
+		};
+		305713591A9E1B6D002AFA43 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				305712E11A9E12A6002AFA43 /* HKSession.h */,
+				305712E21A9E12A6002AFA43 /* HKSession.m */,
 			);
 			name = Session;
 			sourceTree = "<group>";
 		};
-		3079FA4C19B720D1007596FA /* NetworkOperationQueue */ = {
+		3057135A1A9E1B77002AFA43 /* Event */ = {
 			isa = PBXGroup;
 			children = (
-				3079FA4D19B720F6007596FA /* HKNetworkOperationQueue.h */,
-				3079FA4E19B720F6007596FA /* HKNetworkOperationQueue.m */,
-				3070533E19B8997C0008CD87 /* HKNetworkOperationQueue+Private.h */,
+				305712C21A9E12A6002AFA43 /* HKEvent.h */,
+				305712C31A9E12A6002AFA43 /* HKEvent.m */,
 			);
-			name = NetworkOperationQueue;
+			name = Event;
 			sourceTree = "<group>";
 		};
-		307A051419B633100017AE8D /* NetworkOperation */ = {
+		3057135B1A9E1B83002AFA43 /* LinkGenerator */ = {
 			isa = PBXGroup;
 			children = (
-				307A051519B6332E0017AE8D /* HKNetworkOperation.h */,
-				307A051619B6332E0017AE8D /* HKNetworkOperation.m */,
+				305712CA1A9E12A6002AFA43 /* HKLinkGenerator.h */,
+				305712CB1A9E12A6002AFA43 /* HKLinkGenerator.m */,
+			);
+			name = LinkGenerator;
+			sourceTree = "<group>";
+		};
+		3057135C1A9E1BC2002AFA43 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				305712E71A9E12A6002AFA43 /* HKUser.h */,
+				305712E81A9E12A6002AFA43 /* HKUser.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		3057135D1A9E1BE0002AFA43 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				305712D01A9E12A6002AFA43 /* HKNetworking.h */,
+				305712D11A9E12A6002AFA43 /* HKNetworking.m */,
+				305713611A9E1C46002AFA43 /* GZip */,
+				3057135F1A9E1BF3002AFA43 /* NetworkOperationQueue */,
+				3057135E1A9E1BEA002AFA43 /* NetworkOperation */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		3057135E1A9E1BEA002AFA43 /* NetworkOperation */ = {
+			isa = PBXGroup;
+			children = (
+				305712D21A9E12A6002AFA43 /* HKNetworkOperation.h */,
+				305712D31A9E12A6002AFA43 /* HKNetworkOperation.m */,
 			);
 			name = NetworkOperation;
 			sourceTree = "<group>";
 		};
-		307E81BA19B7558100935B2B /* Notification */ = {
+		3057135F1A9E1BF3002AFA43 /* NetworkOperationQueue */ = {
 			isa = PBXGroup;
 			children = (
-				307E81BB19B755BA00935B2B /* HKNotificationObserver.h */,
-				307E81BC19B755BA00935B2B /* HKNotificationObserver.m */,
+				305712D41A9E12A6002AFA43 /* HKNetworkOperationQueue.h */,
+				305712D51A9E12A6002AFA43 /* HKNetworkOperationQueue.m */,
+				305712D61A9E12A6002AFA43 /* HKNetworkOperationQueue+Private.h */,
 			);
-			name = Notification;
+			name = NetworkOperationQueue;
 			sourceTree = "<group>";
 		};
-		307E81BF19B7566200935B2B /* Object */ = {
+		305713601A9E1C28002AFA43 /* URL */ = {
 			isa = PBXGroup;
 			children = (
-				307E81C019B7567F00935B2B /* HKObjectObserver.h */,
-				307E81C119B7567F00935B2B /* HKObjectObserver.m */,
+				305712E51A9E12A6002AFA43 /* HKURL.h */,
+				305712E61A9E12A6002AFA43 /* HKURL.m */,
 			);
-			name = Object;
+			name = URL;
 			sourceTree = "<group>";
 		};
-		30DDD82D19B6077400C338AA /* Integration */ = {
+		305713611A9E1C46002AFA43 /* GZip */ = {
 			isa = PBXGroup;
 			children = (
-				30DDD83119B6077400C338AA /* Navigation */,
+				305712C41A9E12A6002AFA43 /* HKGZip.h */,
+				305712C51A9E12A6002AFA43 /* HKGZip.m */,
 			);
-			path = Integration;
+			name = GZip;
 			sourceTree = "<group>";
 		};
-		30DDD83119B6077400C338AA /* Navigation */ = {
+		305713621A9E1C64002AFA43 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				30DDD83219B6077400C338AA /* HKNavigation.h */,
-				30DDD83319B6077400C338AA /* HKNavigation.m */,
+				305712B91A9E12A6002AFA43 /* HKApp.h */,
+				305712BA1A9E12A6002AFA43 /* HKApp.m */,
 			);
-			path = Navigation;
+			name = App;
 			sourceTree = "<group>";
 		};
-		30DDD83419B6077400C338AA /* Model */ = {
+		305713631A9E1C6A002AFA43 /* Device */ = {
 			isa = PBXGroup;
 			children = (
-				3074E24919C73AC00000B2C3 /* Session */,
-				3074E24319C72E0D0000B2C3 /* Event */,
-				3074E23D19C6EB520000B2C3 /* HandlerBlock */,
-				30DDD83519B6077400C338AA /* App */,
-				30DDD83819B6077400C338AA /* Deeplink */,
-				30DDD83C19B6077400C338AA /* Device */,
-				30DDD83F19B6077400C338AA /* Error */,
-				307A051419B633100017AE8D /* NetworkOperation */,
-				30DDD84219B6077400C338AA /* Route */,
-				30DDD84519B6077400C338AA /* URL */,
-				30DDD84819B6077400C338AA /* User */,
+				305712BE1A9E12A6002AFA43 /* HKDevice.h */,
+				305712BF1A9E12A6002AFA43 /* HKDevice.m */,
 			);
-			path = Model;
+			name = Device;
 			sourceTree = "<group>";
 		};
-		30DDD83519B6077400C338AA /* App */ = {
+		305713641A9E1C70002AFA43 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				30DDD83619B6077400C338AA /* HKApp.h */,
-				30DDD83719B6077400C338AA /* HKApp.m */,
+				305712C01A9E12A6002AFA43 /* HKError.h */,
+				305712C11A9E12A6002AFA43 /* HKError.m */,
 			);
-			path = App;
+			name = Error;
 			sourceTree = "<group>";
 		};
-		30DDD83819B6077400C338AA /* Deeplink */ = {
+		305713651A9E1C75002AFA43 /* Logger */ = {
 			isa = PBXGroup;
 			children = (
-				30DDD83A19B6077400C338AA /* HKDeeplink.h */,
-				30DDD83B19B6077400C338AA /* HKDeeplink.m */,
-				30DDD83919B6077400C338AA /* HKDeeplink+Private.h */,
+				305712CC1A9E12A6002AFA43 /* HKLogger.h */,
+				305712CD1A9E12A6002AFA43 /* HKLogger.m */,
 			);
-			path = Deeplink;
+			name = Logger;
 			sourceTree = "<group>";
 		};
-		30DDD83C19B6077400C338AA /* Device */ = {
+		305713661A9E1C7A002AFA43 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				30DDD83D19B6077400C338AA /* HKDevice.h */,
-				30DDD83E19B6077400C338AA /* HKDevice.m */,
+				305712CE1A9E12A6002AFA43 /* HKNavigation.h */,
+				305712CF1A9E12A6002AFA43 /* HKNavigation.m */,
 			);
-			path = Device;
+			name = Navigation;
 			sourceTree = "<group>";
 		};
-		30DDD83F19B6077400C338AA /* Error */ = {
+		305713671A9E1C82002AFA43 /* Observer */ = {
 			isa = PBXGroup;
 			children = (
-				30DDD84019B6077400C338AA /* HKError.h */,
-				30DDD84119B6077400C338AA /* HKError.m */,
-			);
-			path = Error;
-			sourceTree = "<group>";
-		};
-		30DDD84219B6077400C338AA /* Route */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD84319B6077400C338AA /* HKRoute.h */,
-				30DDD84419B6077400C338AA /* HKRoute.m */,
-			);
-			path = Route;
-			sourceTree = "<group>";
-		};
-		30DDD84519B6077400C338AA /* URL */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD84619B6077400C338AA /* HKURL.h */,
-				30DDD84719B6077400C338AA /* HKURL.m */,
-			);
-			path = URL;
-			sourceTree = "<group>";
-		};
-		30DDD84819B6077400C338AA /* User */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD84919B6077400C338AA /* HKUser.h */,
-				30DDD84A19B6077400C338AA /* HKUser.m */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
-		30DDD84B19B6077400C338AA /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD84C19B6077400C338AA /* Analytics */,
-				30DDD84F19B6077400C338AA /* Deeplinking */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		30DDD84C19B6077400C338AA /* Analytics */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD84D19B6077400C338AA /* HokoAnalytics.h */,
-				30DDD84E19B6077400C338AA /* HokoAnalytics.m */,
-				30CCF91F19C32BB800F2682C /* HokoAnalytics+Private.h */,
-			);
-			path = Analytics;
-			sourceTree = "<group>";
-		};
-		30DDD84F19B6077400C338AA /* Deeplinking */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD85419B6077400C338AA /* HokoDeeplinking.h */,
-				30DDD85519B6077400C338AA /* HokoDeeplinking.m */,
-				30DDD85319B6077400C338AA /* HokoDeeplinking+Private.h */,
-				30DDD85019B6077400C338AA /* Handling */,
-				30DDD85619B6077400C338AA /* LinkGenerator */,
-				30DDD85919B6077400C338AA /* Routing */,
-			);
-			path = Deeplinking;
-			sourceTree = "<group>";
-		};
-		30DDD85019B6077400C338AA /* Handling */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD85119B6077400C338AA /* HKHandling.h */,
-				30DDD85219B6077400C338AA /* HKHandling.m */,
-			);
-			path = Handling;
-			sourceTree = "<group>";
-		};
-		30DDD85619B6077400C338AA /* LinkGenerator */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD85719B6077400C338AA /* HKLinkGenerator.h */,
-				30DDD85819B6077400C338AA /* HKLinkGenerator.m */,
-			);
-			path = LinkGenerator;
-			sourceTree = "<group>";
-		};
-		30DDD85919B6077400C338AA /* Routing */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD85A19B6077400C338AA /* HKRouting.h */,
-				30DDD85B19B6077400C338AA /* HKRouting.m */,
-			);
-			path = Routing;
-			sourceTree = "<group>";
-		};
-		30DDD86619B6077400C338AA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD86719B6077400C338AA /* Hoko-Prefix.pch */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		30DDD86819B6077400C338AA /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				30DDD86C19B6077400C338AA /* HKUtils.h */,
-				30DDD86D19B6077400C338AA /* HKUtils.m */,
-				3074B3511A714F6000BD12D9 /* VersionChecker */,
-				306C605F1A2CBE12004CE9EC /* GZip */,
-				3079FA4C19B720D1007596FA /* NetworkOperationQueue */,
-				30DDD86919B6077400C338AA /* Observer */,
-				30DDD86E19B6077400C338AA /* Logger */,
-				30DDD87119B6077400C338AA /* Networking */,
-				30DDD87419B6077400C338AA /* Swizzling */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		30DDD86919B6077400C338AA /* Observer */ = {
-			isa = PBXGroup;
-			children = (
-				307E81BF19B7566200935B2B /* Object */,
-				307E81BA19B7558100935B2B /* Notification */,
-				30A3A38819B7585E0049BC2A /* HKObserver.h */,
-				30A3A38919B7585E0049BC2A /* HKObserver.m */,
+				305713691A9E1C90002AFA43 /* NotificationObserver */,
+				305713681A9E1C89002AFA43 /* ObjectObserver */,
+				305712DB1A9E12A6002AFA43 /* HKObserver.h */,
+				305712DC1A9E12A6002AFA43 /* HKObserver.m */,
 			);
 			name = Observer;
-			path = ApplicationObserver;
 			sourceTree = "<group>";
 		};
-		30DDD86E19B6077400C338AA /* Logger */ = {
+		305713681A9E1C89002AFA43 /* ObjectObserver */ = {
 			isa = PBXGroup;
 			children = (
-				30DDD86F19B6077400C338AA /* HKLogger.h */,
-				30DDD87019B6077400C338AA /* HKLogger.m */,
+				305712D91A9E12A6002AFA43 /* HKObjectObserver.h */,
+				305712DA1A9E12A6002AFA43 /* HKObjectObserver.m */,
 			);
-			path = Logger;
+			name = ObjectObserver;
 			sourceTree = "<group>";
 		};
-		30DDD87119B6077400C338AA /* Networking */ = {
+		305713691A9E1C90002AFA43 /* NotificationObserver */ = {
 			isa = PBXGroup;
 			children = (
-				30DDD87219B6077400C338AA /* HKNetworking.h */,
-				30DDD87319B6077400C338AA /* HKNetworking.m */,
+				305712D71A9E12A6002AFA43 /* HKNotificationObserver.h */,
+				305712D81A9E12A6002AFA43 /* HKNotificationObserver.m */,
 			);
-			path = Networking;
+			name = NotificationObserver;
 			sourceTree = "<group>";
 		};
-		30DDD87419B6077400C338AA /* Swizzling */ = {
+		3057136A1A9E1C9B002AFA43 /* Swizzling */ = {
 			isa = PBXGroup;
 			children = (
-				30DDD87519B6077400C338AA /* HKSwizzling.h */,
-				30DDD87619B6077400C338AA /* HKSwizzling.m */,
+				305712E31A9E12A6002AFA43 /* HKSwizzling.h */,
+				305712E41A9E12A6002AFA43 /* HKSwizzling.m */,
 			);
-			path = Swizzling;
+			name = Swizzling;
+			sourceTree = "<group>";
+		};
+		3057136B1A9E1CA1002AFA43 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				305712E91A9E12A6002AFA43 /* HKUtils.h */,
+				305712EA1A9E12A6002AFA43 /* HKUtils.m */,
+				3057135D1A9E1BE0002AFA43 /* Networking */,
+				305713621A9E1C64002AFA43 /* App */,
+				305713631A9E1C6A002AFA43 /* Device */,
+				305713641A9E1C70002AFA43 /* Error */,
+				3057136C1A9E1CA5002AFA43 /* VersionChecker */,
+				305713651A9E1C75002AFA43 /* Logger */,
+				305713661A9E1C7A002AFA43 /* Navigation */,
+				305713671A9E1C82002AFA43 /* Observer */,
+				3057136A1A9E1C9B002AFA43 /* Swizzling */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		3057136C1A9E1CA5002AFA43 /* VersionChecker */ = {
+			isa = PBXGroup;
+			children = (
+				305712EB1A9E12A6002AFA43 /* HKVersionChecker.h */,
+				305712EC1A9E12A6002AFA43 /* HKVersionChecker.m */,
+			);
+			name = VersionChecker;
 			sourceTree = "<group>";
 		};
 		30E82865197FF9DA00CD4943 = {
@@ -601,14 +563,12 @@
 		30E82873197FF9DA00CD4943 /* Hoko */ = {
 			isa = PBXGroup;
 			children = (
-				30DDD82A19B6077400C338AA /* Hoko.h */,
-				30DDD82B19B6077400C338AA /* Hoko.m */,
-				30DDD82C19B6077400C338AA /* Hoko+Private.h */,
-				30DDD84B19B6077400C338AA /* Modules */,
-				30DDD83419B6077400C338AA /* Model */,
-				30DDD86819B6077400C338AA /* Utils */,
-				30DDD82D19B6077400C338AA /* Integration */,
-				30DDD86619B6077400C338AA /* Supporting Files */,
+				305712EE1A9E12A6002AFA43 /* Hoko.h */,
+				305712EF1A9E12A6002AFA43 /* Hoko.m */,
+				305712F01A9E12A6002AFA43 /* Hoko+Private.h */,
+				305713531A9E192B002AFA43 /* Deeplinking */,
+				305713521A9E15E3002AFA43 /* Analytics */,
+				3057136B1A9E1CA1002AFA43 /* Utils */,
 			);
 			path = Hoko;
 			sourceTree = "<group>";
@@ -649,40 +609,39 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30DDD89E19B6077400C338AA /* HokoDeeplinking.h in Headers */,
-				30DDD89719B6077400C338AA /* HokoAnalytics.h in Headers */,
-				30DDD87719B6077400C338AA /* Hoko.h in Headers */,
-				3074B3541A7150C500BD12D9 /* HKVersionChecker.h in Headers */,
-				30DDD88519B6077400C338AA /* HKDeeplink.h in Headers */,
-				30DDD87E19B6077400C338AA /* HKNavigation.h in Headers */,
-				30DDD89419B6077400C338AA /* HKUser.h in Headers */,
-				3074E24619C72E1D0000B2C3 /* HKEvent.h in Headers */,
-				30DDD8A119B6077400C338AA /* HKLinkGenerator.h in Headers */,
-				30DDD8B519B6077400C338AA /* HKUtils.h in Headers */,
-				30DDD89119B6077400C338AA /* HKURL.h in Headers */,
-				30DDD87A19B6077400C338AA /* Hoko+Private.h in Headers */,
-				30DDD88819B6077400C338AA /* HKDevice.h in Headers */,
-				30DDD8B119B6077400C338AA /* Hoko-Prefix.pch in Headers */,
-				30DDD89D19B6077400C338AA /* HokoDeeplinking+Private.h in Headers */,
-				30DDD88119B6077400C338AA /* HKApp.h in Headers */,
-				3074E24019C6EB880000B2C3 /* HKHandlerBlockWrapper.h in Headers */,
-				30DDD8BB19B6077400C338AA /* HKNetworking.h in Headers */,
-				3070533F19B899CB0008CD87 /* HKNetworkOperationQueue+Private.h in Headers */,
-				3079FA4F19B720F6007596FA /* HKNetworkOperationQueue.h in Headers */,
-				307E81BD19B755BA00935B2B /* HKNotificationObserver.h in Headers */,
-				307E81C219B7567F00935B2B /* HKObjectObserver.h in Headers */,
-				30A3A38A19B7585E0049BC2A /* HKObserver.h in Headers */,
-				30DDD88E19B6077400C338AA /* HKRoute.h in Headers */,
-				30DDD88B19B6077400C338AA /* HKError.h in Headers */,
-				306C60621A2CBE2F004CE9EC /* HKGZip.h in Headers */,
-				30DDD8BE19B6077400C338AA /* HKSwizzling.h in Headers */,
-				30DDD89A19B6077400C338AA /* HKHandling.h in Headers */,
-				307A051719B6332E0017AE8D /* HKNetworkOperation.h in Headers */,
-				30DDD8A419B6077400C338AA /* HKRouting.h in Headers */,
-				3074E24C19C73AD00000B2C3 /* HKSession.h in Headers */,
-				30DDD88419B6077400C338AA /* HKDeeplink+Private.h in Headers */,
-				30CCF92019C32C0300F2682C /* HokoAnalytics+Private.h in Headers */,
-				30DDD8B819B6077400C338AA /* HKLogger.h in Headers */,
+				305713491A9E12A6002AFA43 /* HKAnalytics.h in Headers */,
+				305713451A9E12A6002AFA43 /* Hoko.h in Headers */,
+				305713161A9E12A6002AFA43 /* HKNavigation.h in Headers */,
+				3057134D1A9E12A6002AFA43 /* HKDeeplinking.h in Headers */,
+				305712FA1A9E12A6002AFA43 /* HKDeeplink.h in Headers */,
+				305713221A9E12A6002AFA43 /* HKNetworkOperationQueue+Private.h in Headers */,
+				305713191A9E12A6002AFA43 /* HKNetworking.h in Headers */,
+				305713351A9E12A6002AFA43 /* HKSwizzling.h in Headers */,
+				305713481A9E12A6002AFA43 /* Hoko+Private.h in Headers */,
+				305713381A9E12A6002AFA43 /* HKURL.h in Headers */,
+				3057133B1A9E12A6002AFA43 /* HKUser.h in Headers */,
+				305713041A9E12A6002AFA43 /* HKEvent.h in Headers */,
+				3057131F1A9E12A6002AFA43 /* HKNetworkOperationQueue.h in Headers */,
+				305713131A9E12A6002AFA43 /* HKLogger.h in Headers */,
+				3057132C1A9E12A6002AFA43 /* HKRoute.h in Headers */,
+				305713501A9E12A6002AFA43 /* HKDeeplinking+Private.h in Headers */,
+				305712F71A9E12A6002AFA43 /* HKApp.h in Headers */,
+				3057134C1A9E12A6002AFA43 /* HKAnalytics+Private.h in Headers */,
+				3057130D1A9E12A6002AFA43 /* HKHandling.h in Headers */,
+				3057130A1A9E12A6002AFA43 /* HKHandlerBlockWrapper.h in Headers */,
+				3057131C1A9E12A6002AFA43 /* HKNetworkOperation.h in Headers */,
+				305713231A9E12A6002AFA43 /* HKNotificationObserver.h in Headers */,
+				305713261A9E12A6002AFA43 /* HKObjectObserver.h in Headers */,
+				305713291A9E12A6002AFA43 /* HKObserver.h in Headers */,
+				305713101A9E12A6002AFA43 /* HKLinkGenerator.h in Headers */,
+				3057133E1A9E12A6002AFA43 /* HKUtils.h in Headers */,
+				3057132F1A9E12A6002AFA43 /* HKRouting.h in Headers */,
+				305713011A9E12A6002AFA43 /* HKError.h in Headers */,
+				305713411A9E12A6002AFA43 /* HKVersionChecker.h in Headers */,
+				305712FD1A9E12A6002AFA43 /* HKDeeplink+Private.h in Headers */,
+				305713071A9E12A6002AFA43 /* HKGZip.h in Headers */,
+				305713321A9E12A6002AFA43 /* HKSession.h in Headers */,
+				305712FE1A9E12A6002AFA43 /* HKDevice.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,34 +791,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30DDD8B919B6077400C338AA /* HKLogger.m in Sources */,
-				30DDD8B619B6077400C338AA /* HKUtils.m in Sources */,
-				3074E24119C6EB880000B2C3 /* HKHandlerBlockWrapper.m in Sources */,
-				3074E24D19C73AD00000B2C3 /* HKSession.m in Sources */,
-				3074E24719C72E1D0000B2C3 /* HKEvent.m in Sources */,
-				3079FA5019B720F6007596FA /* HKNetworkOperationQueue.m in Sources */,
-				30DDD8BC19B6077400C338AA /* HKNetworking.m in Sources */,
-				30DDD8BF19B6077400C338AA /* HKSwizzling.m in Sources */,
-				30DDD88919B6077400C338AA /* HKDevice.m in Sources */,
-				30DDD88619B6077400C338AA /* HKDeeplink.m in Sources */,
-				30DDD8A219B6077400C338AA /* HKLinkGenerator.m in Sources */,
-				3074B3551A7150C500BD12D9 /* HKVersionChecker.m in Sources */,
-				30DDD88C19B6077400C338AA /* HKError.m in Sources */,
-				30DDD89B19B6077400C338AA /* HKHandling.m in Sources */,
-				30DDD89219B6077400C338AA /* HKURL.m in Sources */,
-				307A051819B6332E0017AE8D /* HKNetworkOperation.m in Sources */,
-				30DDD89819B6077400C338AA /* HokoAnalytics.m in Sources */,
-				307E81BE19B755BA00935B2B /* HKNotificationObserver.m in Sources */,
-				30DDD87819B6077400C338AA /* Hoko.m in Sources */,
-				30DDD89F19B6077400C338AA /* HokoDeeplinking.m in Sources */,
-				30DDD8A519B6077400C338AA /* HKRouting.m in Sources */,
-				306C60631A2CBE2F004CE9EC /* HKGZip.m in Sources */,
-				307E81C319B7567F00935B2B /* HKObjectObserver.m in Sources */,
-				30DDD88219B6077400C338AA /* HKApp.m in Sources */,
-				30DDD88F19B6077400C338AA /* HKRoute.m in Sources */,
-				30A3A38B19B7585E0049BC2A /* HKObserver.m in Sources */,
-				30DDD87F19B6077400C338AA /* HKNavigation.m in Sources */,
-				30DDD89519B6077400C338AA /* HKUser.m in Sources */,
+				305713461A9E12A6002AFA43 /* Hoko.m in Sources */,
+				3057133F1A9E12A6002AFA43 /* HKUtils.m in Sources */,
+				305712FF1A9E12A6002AFA43 /* HKDevice.m in Sources */,
+				305713201A9E12A6002AFA43 /* HKNetworkOperationQueue.m in Sources */,
+				305713021A9E12A6002AFA43 /* HKError.m in Sources */,
+				3057130B1A9E12A6002AFA43 /* HKHandlerBlockWrapper.m in Sources */,
+				3057132A1A9E12A6002AFA43 /* HKObserver.m in Sources */,
+				3057134A1A9E12A6002AFA43 /* HKAnalytics.m in Sources */,
+				305713111A9E12A6002AFA43 /* HKLinkGenerator.m in Sources */,
+				3057132D1A9E12A6002AFA43 /* HKRoute.m in Sources */,
+				3057131A1A9E12A6002AFA43 /* HKNetworking.m in Sources */,
+				3057134E1A9E12A6002AFA43 /* HKDeeplinking.m in Sources */,
+				305712FB1A9E12A6002AFA43 /* HKDeeplink.m in Sources */,
+				305713051A9E12A6002AFA43 /* HKEvent.m in Sources */,
+				305713081A9E12A6002AFA43 /* HKGZip.m in Sources */,
+				305713301A9E12A6002AFA43 /* HKRouting.m in Sources */,
+				305712F81A9E12A6002AFA43 /* HKApp.m in Sources */,
+				305713141A9E12A6002AFA43 /* HKLogger.m in Sources */,
+				305713241A9E12A6002AFA43 /* HKNotificationObserver.m in Sources */,
+				3057131D1A9E12A6002AFA43 /* HKNetworkOperation.m in Sources */,
+				305713421A9E12A6002AFA43 /* HKVersionChecker.m in Sources */,
+				305713171A9E12A6002AFA43 /* HKNavigation.m in Sources */,
+				305713361A9E12A6002AFA43 /* HKSwizzling.m in Sources */,
+				305713331A9E12A6002AFA43 /* HKSession.m in Sources */,
+				3057133C1A9E12A6002AFA43 /* HKUser.m in Sources */,
+				3057130E1A9E12A6002AFA43 /* HKHandling.m in Sources */,
+				305713391A9E12A6002AFA43 /* HKURL.m in Sources */,
+				305713271A9E12A6002AFA43 /* HKObjectObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -867,37 +826,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3074E24E19C73AD00000B2C3 /* HKSession.m in Sources */,
-				30DDD89019B6077400C338AA /* HKRoute.m in Sources */,
-				30DDD89C19B6077400C338AA /* HKHandling.m in Sources */,
-				30DDD89619B6077400C338AA /* HKUser.m in Sources */,
-				30DDD8BD19B6077400C338AA /* HKNetworking.m in Sources */,
-				30DDD88A19B6077400C338AA /* HKDevice.m in Sources */,
-				30DDD8A319B6077400C338AA /* HKLinkGenerator.m in Sources */,
-				30DDD88319B6077400C338AA /* HKApp.m in Sources */,
+				305713121A9E12A6002AFA43 /* HKLinkGenerator.m in Sources */,
+				305713281A9E12A6002AFA43 /* HKObjectObserver.m in Sources */,
+				305713001A9E12A6002AFA43 /* HKDevice.m in Sources */,
+				305713431A9E12A6002AFA43 /* HKVersionChecker.m in Sources */,
+				305713211A9E12A6002AFA43 /* HKNetworkOperationQueue.m in Sources */,
+				305713151A9E12A6002AFA43 /* HKLogger.m in Sources */,
+				305713311A9E12A6002AFA43 /* HKRouting.m in Sources */,
+				3057134B1A9E12A6002AFA43 /* HKAnalytics.m in Sources */,
+				305713061A9E12A6002AFA43 /* HKEvent.m in Sources */,
+				305713341A9E12A6002AFA43 /* HKSession.m in Sources */,
+				3057132B1A9E12A6002AFA43 /* HKObserver.m in Sources */,
+				305712FC1A9E12A6002AFA43 /* HKDeeplink.m in Sources */,
+				3057130C1A9E12A6002AFA43 /* HKHandlerBlockWrapper.m in Sources */,
+				3057134F1A9E12A6002AFA43 /* HKDeeplinking.m in Sources */,
+				3057130F1A9E12A6002AFA43 /* HKHandling.m in Sources */,
+				305713031A9E12A6002AFA43 /* HKError.m in Sources */,
 				30B206F61992483F00343860 /* HKLinkGeneratorTests.m in Sources */,
-				30A3A38C19B7585E0049BC2A /* HKObserver.m in Sources */,
-				30A3A38D19B759890049BC2A /* HKNotificationObserver.m in Sources */,
-				3074E24819C72E1D0000B2C3 /* HKEvent.m in Sources */,
-				30DDD88719B6077400C338AA /* HKDeeplink.m in Sources */,
-				3079FA5119B720F6007596FA /* HKNetworkOperationQueue.m in Sources */,
-				30DDD89919B6077400C338AA /* HokoAnalytics.m in Sources */,
-				3074E24219C6EB880000B2C3 /* HKHandlerBlockWrapper.m in Sources */,
-				30DDD8A019B6077400C338AA /* HokoDeeplinking.m in Sources */,
-				30DDD88019B6077400C338AA /* HKNavigation.m in Sources */,
-				30DDD88D19B6077400C338AA /* HKError.m in Sources */,
-				30C94E031A7689A10083BC30 /* HKGZip.m in Sources */,
-				30C94E021A76899C0083BC30 /* HKVersionChecker.m in Sources */,
-				30DDD8B719B6077400C338AA /* HKUtils.m in Sources */,
-				307A051919B6332E0017AE8D /* HKNetworkOperation.m in Sources */,
-				307E81C419B7567F00935B2B /* HKObjectObserver.m in Sources */,
 				30E8288E197FF9DA00CD4943 /* HokoTests.m in Sources */,
+				305713401A9E12A6002AFA43 /* HKUtils.m in Sources */,
+				305713251A9E12A6002AFA43 /* HKNotificationObserver.m in Sources */,
+				305713471A9E12A6002AFA43 /* Hoko.m in Sources */,
+				3057131B1A9E12A6002AFA43 /* HKNetworking.m in Sources */,
+				305713181A9E12A6002AFA43 /* HKNavigation.m in Sources */,
+				305712F91A9E12A6002AFA43 /* HKApp.m in Sources */,
+				3057131E1A9E12A6002AFA43 /* HKNetworkOperation.m in Sources */,
+				305713371A9E12A6002AFA43 /* HKSwizzling.m in Sources */,
+				3057133D1A9E12A6002AFA43 /* HKUser.m in Sources */,
+				3057133A1A9E12A6002AFA43 /* HKURL.m in Sources */,
+				3057132E1A9E12A6002AFA43 /* HKRoute.m in Sources */,
+				305713091A9E12A6002AFA43 /* HKGZip.m in Sources */,
 				3079FA5419B73AE7007596FA /* HKNetworkOperationTests.m in Sources */,
-				30DDD8C019B6077400C338AA /* HKSwizzling.m in Sources */,
-				30DDD8A619B6077400C338AA /* HKRouting.m in Sources */,
-				30DDD8BA19B6077400C338AA /* HKLogger.m in Sources */,
-				30DDD89319B6077400C338AA /* HKURL.m in Sources */,
-				30DDD87919B6077400C338AA /* Hoko.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1014,7 +973,7 @@
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/Hoko.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "Hoko/Supporting Files/Hoko-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1032,7 +991,7 @@
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/Hoko.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "Hoko/Supporting Files/Hoko-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1053,7 +1012,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Hoko/Supporting Files/Hoko-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1076,7 +1035,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Hoko/Supporting Files/Hoko-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "HokoTests/HokoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "17A0A321-E18E-491F-92A1-05C997DD8B36";
