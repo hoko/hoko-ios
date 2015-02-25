@@ -81,7 +81,7 @@ NSString *const HKServerWarningDomain = @"HokoServerWarning";
 
 + (NSError *)couldNotFindAppDelegateError
 {
-  return [self errorWithCode:12 description:@"Could not find the AppDelegate class. Please delegate the push notification and deeplinking methods to the corresponding Hoko modules."];
+  return [self errorWithCode:12 description:@"Could not find the AppDelegate class. Please delegate the deeplinking methods to the corresponding Hoko modules."];
 }
 
 + (NSError *)jsonParseError:(id)object

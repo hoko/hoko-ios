@@ -128,7 +128,7 @@ typedef NS_ENUM(NSInteger, HKUserGender) {
 /**
  *  trackKeyEvent: unlike common analytics events should be used only on conversion or key metrics
  *  (e.g. in-app purchase, retail sales, referrals, etc). This will lead to better conversion and
- *  engagement tracking of your users through the Push Notifications and Deeplinking campaigns.
+ *  engagement tracking of your users through Deeplinking campaigns.
  *
  *  <pre>
  *  [[Hoko analytics] trackKeyEvent:@"purchasedPremium"];
@@ -141,7 +141,7 @@ typedef NS_ENUM(NSInteger, HKUserGender) {
 /**
  *  trackKeyEvent: unlike common analytics events should be used only on conversion or key metrics
  *  (e.g. in-app purchase, retail sales, referrals, etc). This will lead to better conversion and
- *  engagement tracking of your users through the Push Notifications and Deeplinking campaigns.
+ *  engagement tracking of your users through Deeplinking campaigns.
  *
  *  <pre>
  *  [[Hoko analytics] trackKeyEvent:@"purchasedDress" amount:@(29.99)];

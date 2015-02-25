@@ -8,20 +8,18 @@
 
 #import "HokoAnalytics.h"
 #import "HokoDeeplinking.h"
-#import "HokoPushNotifications.h"
 
 #import "HKDeeplink.h"
 
 /**
- *  Hoko is an easy-to-use Framework to handle Deeplinking, Push Notifications and the Analytics around them.
+ *  Hoko is an easy-to-use Framework to handle Deeplinking and the Analytics around it.
  *
- *  This is a simple drop-in class for handling incoming deeplinks and push notifications containing deeplinks.
+ *  This is a simple drop-in class for handling incoming deeplinks.
  *  With the Hoko framework you can map routes to your view controllers, add handlers that trigger when
  *  deeplinks are the point of entry to your application.
  *
  *  Hoko includes three seperate modules:
  *  - HokoDeeplinking - handles every incoming deeplink, so long as it has been mapped
- *  - HokoPushNotifications - handles incoming notifications, so long as they contain a mapped deeplink
  *  - HokoAnalytics - handles the tracking of users and events to allow creation and evaluation of campaigns
  *  
  *  You should setup Hoko on your AppDelegate's application:didFinishLaunchingWithOptions:, by calling
@@ -68,15 +66,6 @@
  *  @return A reference to the HokoDeeplinking instance.
  */
 + (HokoDeeplinking *)deeplinking;
-
-/**
- *  The HokoPushNotifications module provides all the necessary APIs to manage push notifications generated
- *  by the Hoko service. It provides also an abstraction between iOS<8.0 and iOS>=8.0 notification APIs for
- *  easier integration.
- *
- *  @return A reference to the HokoPushNotifications instance.
- */
-+ (HokoPushNotifications *)pushNotifications;
 
 /**
  *  The HokoAnalytics module provides all the necessary APIs to manage user and application behavior.

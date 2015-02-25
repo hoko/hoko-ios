@@ -87,7 +87,9 @@
 }
 
 #pragma mark - Link Generation
-- (void)generateHokolinkForDeeplink:(HKDeeplink *)deeplink success:(void (^)(NSString *hokolink))success failure:(void (^)(NSError *))failure
+- (void)generateHokolinkForDeeplink:(HKDeeplink *)deeplink
+                            success:(void (^)(NSString *hokolink))success
+                            failure:(void (^)(NSError *))failure
 {
   [self.linkGenerator generateHokolinkForDeeplink:deeplink success:success failure:failure];
 }

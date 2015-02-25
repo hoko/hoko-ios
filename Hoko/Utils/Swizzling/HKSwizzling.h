@@ -14,7 +14,5 @@
 @interface HKSwizzling : NSObject
 
 + (void)swizzleHokoDeeplinking;
-+ (void)swizzleIOS8PushNotifications;
-+ (void)swizzleLegacyPushNotifications;
 
 @end

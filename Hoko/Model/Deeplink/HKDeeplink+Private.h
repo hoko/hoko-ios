@@ -37,7 +37,6 @@ typedef NS_ENUM(NSUInteger, HKDeeplinkStatus) {
 @property (nonatomic, strong, readonly) NSString *hokolinkIdentifier;
 @property (nonatomic, strong, readonly) NSString *openIdentifier;
 
-@property (nonatomic, readonly) BOOL isPushNotification;
 @property (nonatomic, readonly) BOOL isHokolink;
 
 @end
