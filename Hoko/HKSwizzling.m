@@ -27,7 +27,7 @@
  */
 + (NSString *)appDelegateClassName
 {
-  NSMutableArray *appDelegates = [@[] mutableCopy];
+  NSArray *appDelegates = @[];
   int numClasses;
   Class *classes = NULL;
   numClasses = objc_getClassList(NULL, 0);
@@ -39,7 +39,7 @@
       Class class = classes[i];
       // Avoiding StoreKit inner classes
       if (class_conformsToProtocol(class, @protocol(UIApplicationDelegate)) && [class isSubclassOfClass:[UIResponder class]] && ![class isSubclassOfClass:[UIApplication class]]) {
-        [appDelegates addObject:NSStringFromClass(classes[i])];
+        appDelegates = [appDelegates arrayByAddingObject:NSStringFromClass(classes[i])];
       }
       
     }

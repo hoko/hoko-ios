@@ -97,6 +97,10 @@
                                                                      withString:@""
                                                                         options:NSRegularExpressionSearch
                                                                           range:NSMakeRange(0, sanitizedURLString.length)];
+  sanitizedURLString = [sanitizedURLString stringByReplacingOccurrencesOfString:@"(?<!:)(/)+"
+                                                                     withString:@"/"
+                                                                        options:NSRegularExpressionSearch
+                                                                          range:NSMakeRange(0, sanitizedURLString.length)];
   return sanitizedURLString;
 }
 
@@ -142,7 +146,6 @@
     }
     
     urlScheme = [urlScheme stringByAppendingFormat:@"%c",character];
-    
     if (character == ':') {
       break;
     }

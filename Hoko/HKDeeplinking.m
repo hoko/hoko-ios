@@ -55,19 +55,9 @@
   return [self openURL:url sourceApplication:nil annotation:nil];
 }
 
-- (BOOL)handleOpenURLFromForeground:(NSURL *)url
-{
-  return [self openURL:url sourceApplication:nil annotation:nil fromForeground:YES];
-}
-
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  return [self openURL:url sourceApplication:sourceApplication annotation:annotation fromForeground:NO];
-}
-
-- (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation fromForeground:(BOOL)fromForeground
-{
-  return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation fromForeground:fromForeground];
+  return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 
 - (BOOL)canOpenURL:(NSURL *)url
@@ -89,7 +79,7 @@
 #pragma mark - Link Generation
 - (void)generateHokolinkForDeeplink:(HKDeeplink *)deeplink
                             success:(void (^)(NSString *hokolink))success
-                            failure:(void (^)(NSError *))failure
+                            failure:(void (^)(NSError *error))failure
 {
   [self.linkGenerator generateHokolinkForDeeplink:deeplink success:success failure:failure];
 }

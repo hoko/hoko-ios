@@ -35,7 +35,9 @@
 }
 
 #pragma mark - Hokolink Generation
-- (void)generateHokolinkForDeeplink:(HKDeeplink *)deeplink success:(void (^)(NSString *hokolink))success failure:(void (^)(NSError *error))failure
+- (void)generateHokolinkForDeeplink:(HKDeeplink *)deeplink
+                            success:(void (^)(NSString *hokolink))success
+                            failure:(void (^)(NSError *error))failure
 {
   if (!deeplink) {
     failure([HKError nilDeeplinkError]);
@@ -48,7 +50,9 @@
 
 
 #pragma mark - Networking
-- (void)requestForDeeplink:(HKDeeplink *)deeplink success:(void (^)(NSString *hokolink))success failure:(void (^)(NSError *error))failure
+- (void)requestForDeeplink:(HKDeeplink *)deeplink
+                   success:(void (^)(NSString *hokolink))success
+                   failure:(void (^)(NSError *error))failure
 {
   // TODO Change to hokolink
   [HKNetworking postToPath:[HKNetworkOperation urlFromPath:@"omnilinks"] parameters:deeplink.json token:self.token successBlock:^(id json) {

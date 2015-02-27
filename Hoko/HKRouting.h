@@ -13,7 +13,7 @@
 - (instancetype)initWithToken:(NSString *)token debugMode:(BOOL)debugMode;
 
 - (void)mapRoute:(NSString *)route toTarget:(HKDeeplinkTarget)target;
-- (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation fromForeground:(BOOL)fromForeground;
+- (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
 - (BOOL)canOpenURL:(NSURL *)url;
 - (BOOL)routeExists:(NSString *)route;
 

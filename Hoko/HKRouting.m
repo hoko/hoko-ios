@@ -58,10 +58,7 @@
 }
 
 #pragma mark - Open URL
-- (BOOL)openURL:(NSURL *)url
-sourceApplication:(NSString *)sourceApplication
-     annotation:(id)annotation
- fromForeground:(BOOL)fromForeground
+- (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
   HKURL *hkURL = [[HKURL alloc]initWithURL:url];
   NSDictionary *routeParameters;
@@ -74,18 +71,9 @@ sourceApplication:(NSString *)sourceApplication
                                                queryParameters:hkURL.queryParameters
                                              sourceApplication:sourceApplication];
       
-      // If deeplink comes from foreground (a.k.a. push notification while in the app) dont open it but rather
-      // warn the backend that it was received but won't ever be opened. Otherwise do the handling calls and
-      // call the target.
-      if (!fromForeground) {
-        [[Hoko deeplinking].handling handle:deeplink];
-        if(route.target)
-          route.target(deeplink);
-      } else {
-        [deeplink postWithToken:self.token
-                           user:[[Hoko analytics] currentUser]
-                     statusCode:HKDeeplinkStatusIgnored];
-      }
+      [[Hoko deeplinking].handling handle:deeplink];
+      if(route.target)
+        route.target(deeplink);
     }
   }
   
@@ -98,15 +86,8 @@ sourceApplication:(NSString *)sourceApplication
                                                queryParameters:hkURL.queryParameters
                                              sourceApplication:sourceApplication];
       
-      // Applies the same behavior as a common route.
-      if (!fromForeground) {
-        [[Hoko deeplinking].handling handle:deeplink];
-        self.defaultRoute.target(deeplink);
-      } else {
-        [deeplink postWithToken:self.token
-                           user:[[Hoko analytics] currentUser]
-                     statusCode:HKDeeplinkStatusIgnored];
-      }
+      [[Hoko deeplinking].handling handle:deeplink];
+      self.defaultRoute.target(deeplink);
     }
   }
   return [self canOpenURL:url];

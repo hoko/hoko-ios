@@ -137,5 +137,5 @@ alto
 @end
 
 #ifndef HokoDeeplinking
-  #define HokoDeeplinking [Hoko analytics]
+  #define HokoDeeplinking [Hoko deeplinking]
 #endif
