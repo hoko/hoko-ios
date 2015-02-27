@@ -94,9 +94,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		30DEC7DF1AA0934800C77005 /* Hoko Tests */ = {
+		30DEC7DF1AA0934800C77005 /* iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 30DEC7E71AA0934800C77005 /* Build configuration list for PBXNativeTarget "Hoko Tests" */;
+			buildConfigurationList = 30DEC7E71AA0934800C77005 /* Build configuration list for PBXNativeTarget "iOS Tests" */;
 			buildPhases = (
 				1D7D3F2BFD4EA54EA7F636DB /* Check Pods Manifest.lock */,
 				30DEC7DC1AA0934800C77005 /* Sources */,
@@ -108,7 +108,7 @@
 			);
 			dependencies = (
 			);
-			name = "Hoko Tests";
+			name = "iOS Tests";
 			productName = "HOKO Tests";
 			productReference = 30DEC7E01AA0934800C77005 /* Hoko Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -138,7 +138,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				30DEC7DF1AA0934800C77005 /* Hoko Tests */,
+				30DEC7DF1AA0934800C77005 /* iOS Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -316,7 +316,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		30DEC7E71AA0934800C77005 /* Build configuration list for PBXNativeTarget "Hoko Tests" */ = {
+		30DEC7E71AA0934800C77005 /* Build configuration list for PBXNativeTarget "iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30DEC7E81AA0934800C77005 /* Debug */,

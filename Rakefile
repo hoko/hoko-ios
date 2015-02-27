@@ -8,7 +8,7 @@ namespace :test do
 
   desc "Run the Hoko Tests"
   task :ios => :prepare do
-    run_tests('Hoko Tests', 'iphonesimulator')
+    run_tests('iOS Tests', 'iphonesimulator')
     tests_failed('iOS') unless $?.success?
   end
 end
