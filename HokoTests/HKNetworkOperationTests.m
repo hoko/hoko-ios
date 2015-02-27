@@ -76,7 +76,7 @@
 
 - (void)testQueueRetrying
 {
-  XCTestExpectation *expectation = [self expectationWithDescription:@"Operations discarded after 10 retries"];
+  XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"Operations discarded after %@ retries", @(HKNetworkOperationQueueMaxRetries)]];
   
   // Stub for failure
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {

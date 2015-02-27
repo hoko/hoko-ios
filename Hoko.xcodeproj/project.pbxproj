@@ -114,11 +114,10 @@
 		3079FA5419B73AE7007596FA /* HKNetworkOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3079FA5319B73AE7007596FA /* HKNetworkOperationTests.m */; };
 		30B206F61992483F00343860 /* HKLinkGeneratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B206F51992483F00343860 /* HKLinkGeneratorTests.m */; };
 		30C94E041A7689C90083BC30 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 306C605D1A2CBDF6004CE9EC /* libz.dylib */; };
+		30DD647C1A9E43750027A9B5 /* HKURLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DD647B1A9E43750027A9B5 /* HKURLTests.m */; };
 		30E82880197FF9DA00CD4943 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E8287F197FF9DA00CD4943 /* XCTest.framework */; };
 		30E82881197FF9DA00CD4943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E82871197FF9DA00CD4943 /* Foundation.framework */; };
 		30E82883197FF9DA00CD4943 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E82882197FF9DA00CD4943 /* UIKit.framework */; };
-		30E8288C197FF9DA00CD4943 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30E8288A197FF9DA00CD4943 /* InfoPlist.strings */; };
-		30E8288E197FF9DA00CD4943 /* HokoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E8288D197FF9DA00CD4943 /* HokoTests.m */; };
 		356444D09812440995E13A1B /* libPods-HokoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8011C8D15AEF489197AB6D8D /* libPods-HokoTests.a */; };
 /* End PBXBuildFile section */
 
@@ -218,14 +217,13 @@
 		3074B34F1A713C9000BD12D9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3079FA5319B73AE7007596FA /* HKNetworkOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKNetworkOperationTests.m; sourceTree = "<group>"; };
 		30B206F51992483F00343860 /* HKLinkGeneratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLinkGeneratorTests.m; sourceTree = "<group>"; };
+		30DD647B1A9E43750027A9B5 /* HKURLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKURLTests.m; sourceTree = "<group>"; };
 		30E8286E197FF9DA00CD4943 /* libHoko.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHoko.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30E82871197FF9DA00CD4943 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		30E8287E197FF9DA00CD4943 /* HokoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HokoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30E8287F197FF9DA00CD4943 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		30E82882197FF9DA00CD4943 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		30E82889197FF9DA00CD4943 /* HokoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HokoTests-Info.plist"; sourceTree = "<group>"; };
-		30E8288B197FF9DA00CD4943 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		30E8288D197FF9DA00CD4943 /* HokoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HokoTests.m; sourceTree = "<group>"; };
 		3232C71E9E4F22BE31197F32 /* Pods-HokoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HokoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HokoTests/Pods-HokoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8011C8D15AEF489197AB6D8D /* libPods-HokoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HokoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5D6D97C7008AB9FC2E17DFB /* Pods-HokoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HokoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HokoTests/Pods-HokoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -294,9 +292,9 @@
 		305713551A9E1991002AFA43 /* Handling */ = {
 			isa = PBXGroup;
 			children = (
-				305713561A9E1AC9002AFA43 /* HandlerBlockWrapper */,
 				305712C81A9E12A6002AFA43 /* HKHandling.h */,
 				305712C91A9E12A6002AFA43 /* HKHandling.m */,
+				305713561A9E1AC9002AFA43 /* HandlerBlockWrapper */,
 			);
 			name = Handling;
 			sourceTree = "<group>";
@@ -313,10 +311,10 @@
 		305713571A9E1AF7002AFA43 /* Routing */ = {
 			isa = PBXGroup;
 			children = (
-				305713601A9E1C28002AFA43 /* URL */,
-				305713581A9E1B04002AFA43 /* Route */,
 				305712DF1A9E12A6002AFA43 /* HKRouting.h */,
 				305712E01A9E12A6002AFA43 /* HKRouting.m */,
+				305713601A9E1C28002AFA43 /* URL */,
+				305713581A9E1B04002AFA43 /* Route */,
 			);
 			name = Routing;
 			sourceTree = "<group>";
@@ -576,9 +574,9 @@
 		30E82887197FF9DA00CD4943 /* HokoTests */ = {
 			isa = PBXGroup;
 			children = (
-				30E8288D197FF9DA00CD4943 /* HokoTests.m */,
 				30B206F51992483F00343860 /* HKLinkGeneratorTests.m */,
 				3079FA5319B73AE7007596FA /* HKNetworkOperationTests.m */,
+				30DD647B1A9E43750027A9B5 /* HKURLTests.m */,
 				30E82888197FF9DA00CD4943 /* Supporting Files */,
 			);
 			path = HokoTests;
@@ -588,7 +586,6 @@
 			isa = PBXGroup;
 			children = (
 				30E82889197FF9DA00CD4943 /* HokoTests-Info.plist */,
-				30E8288A197FF9DA00CD4943 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -721,7 +718,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30E8288C197FF9DA00CD4943 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +822,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30DD647C1A9E43750027A9B5 /* HKURLTests.m in Sources */,
 				305713121A9E12A6002AFA43 /* HKLinkGenerator.m in Sources */,
 				305713281A9E12A6002AFA43 /* HKObjectObserver.m in Sources */,
 				305713001A9E12A6002AFA43 /* HKDevice.m in Sources */,
@@ -843,7 +840,6 @@
 				3057130F1A9E12A6002AFA43 /* HKHandling.m in Sources */,
 				305713031A9E12A6002AFA43 /* HKError.m in Sources */,
 				30B206F61992483F00343860 /* HKLinkGeneratorTests.m in Sources */,
-				30E8288E197FF9DA00CD4943 /* HokoTests.m in Sources */,
 				305713401A9E12A6002AFA43 /* HKUtils.m in Sources */,
 				305713251A9E12A6002AFA43 /* HKNotificationObserver.m in Sources */,
 				305713471A9E12A6002AFA43 /* Hoko.m in Sources */,
@@ -874,17 +870,6 @@
 			targetProxy = 30E82884197FF9DA00CD4943 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		30E8288A197FF9DA00CD4943 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				30E8288B197FF9DA00CD4943 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3017CD521981444700703F0C /* Debug */ = {
@@ -970,34 +955,38 @@
 		30E82892197FF9DA00CD4943 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEAD_CODE_STRIPPING = NO;
+				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DSTROOT = /tmp/Hoko.dst;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SKIP_INSTALL = YES;
-				STRIP_STYLE = "non-global";
+				STRIP_STYLE = all;
 			};
 			name = Debug;
 		};
 		30E82893197FF9DA00CD4943 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = NO;
+				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DSTROOT = /tmp/Hoko.dst;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SKIP_INSTALL = YES;
-				STRIP_STYLE = "non-global";
+				STRIP_STYLE = all;
 			};
 			name = Release;
 		};
@@ -1011,6 +1000,8 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1034,6 +1025,7 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "HokoTests/HokoTests-Info.plist";

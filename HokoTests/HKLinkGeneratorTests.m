@@ -33,9 +33,10 @@
     NSDictionary *json = @{};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
   }];
-  id hkApp = OCMClassMock([HKApp class]);
-  [[[hkApp stub] andReturn:@[@"hoko"]] urlSchemes];
+  id appMock = OCMPartialMock([HKApp app]);
+  [[[appMock stub] andReturn:@[@"hoko"]] urlSchemes];
   [Hoko setupWithToken:@"1234"];
+  [Hoko setVerbose:NO];
   [[Hoko deeplinking] mapRoute:@"store/:language_code/product/:product_id" toTarget:nil];
   
 }
