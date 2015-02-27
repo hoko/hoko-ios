@@ -1,0 +1,22 @@
+PODS:
+  - Hoko (1.1.0)
+  - OCMock (3.1.2)
+  - OHHTTPStubs (3.1.10):
+    - OHHTTPStubs/Core (= 3.1.10)
+  - OHHTTPStubs/Core (3.1.10)
+
+DEPENDENCIES:
+  - Hoko (from `../`)
+  - OCMock (~> 3.1.2)
+  - OHHTTPStubs (~> 3.1.10)
+
+EXTERNAL SOURCES:
+  Hoko:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Hoko: a20e02c44fefc2b6b2760a24b328db09dfc7dfe0
+  OCMock: ecdd510b73ef397f2f97274785c1e87fd147c49f
+  OHHTTPStubs: 2038e929b6abb94881000524c1cb4aba0a1bb4a2
+
+COCOAPODS: 0.35.0

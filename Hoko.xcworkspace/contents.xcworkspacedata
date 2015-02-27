@@ -1,10 +1,305 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "container:"
+      name = "Hoko">
+      <Group
+         location = "container:"
+         name = "Analytics">
+         <Group
+            location = "container:"
+            name = "Session">
+            <FileRef
+               location = "group:Hoko/HKSession.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKSession.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "User">
+            <FileRef
+               location = "group:Hoko/HKUser.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKUser.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Event">
+            <FileRef
+               location = "group:Hoko/HKEvent.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKEvent.m">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:Hoko/HKAnalytics.h">
+         </FileRef>
+         <FileRef
+            location = "group:Hoko/HKAnalytics.m">
+         </FileRef>
+         <FileRef
+            location = "group:Hoko/HKAnalytics+Private.h">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:"
+         name = "Deeplinking">
+         <Group
+            location = "container:"
+            name = "Link Generation">
+            <FileRef
+               location = "group:Hoko/HKLinkGenerator.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKLinkGenerator.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Handling">
+            <Group
+               location = "container:"
+               name = "Handler Block Wrapper">
+               <FileRef
+                  location = "group:Hoko/HKHandlerBlockWrapper.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HKHandlerBlockWrapper.m">
+               </FileRef>
+            </Group>
+            <FileRef
+               location = "group:Hoko/HKHandling.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKHandling.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Routing">
+            <Group
+               location = "container:"
+               name = "URL">
+               <FileRef
+                  location = "group:Hoko/HKURL.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HKURL.m">
+               </FileRef>
+            </Group>
+            <Group
+               location = "container:"
+               name = "Route">
+               <FileRef
+                  location = "group:Hoko/HKRoute.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HKRoute.m">
+               </FileRef>
+            </Group>
+            <FileRef
+               location = "group:Hoko/HKRouting.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKRouting.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Deeplink">
+            <FileRef
+               location = "group:Hoko/HKDeeplink.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKDeeplink.m">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKDeeplink+Private.h">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:Hoko/HKDeeplinking.h">
+         </FileRef>
+         <FileRef
+            location = "group:Hoko/HKDeeplinking.m">
+         </FileRef>
+         <FileRef
+            location = "group:Hoko/HKDeeplinking+Private.h">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:"
+         name = "Utils">
+         <Group
+            location = "container:"
+            name = "App">
+            <FileRef
+               location = "group:Hoko/HKApp.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKApp.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Device">
+            <FileRef
+               location = "group:Hoko/HKDevice.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKDevice.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Error">
+            <FileRef
+               location = "group:Hoko/HKError.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKError.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Logger">
+            <FileRef
+               location = "group:Hoko/HKLogger.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKLogger.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Navigation">
+            <FileRef
+               location = "group:Hoko/HKNavigation.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKNavigation.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Networking">
+            <FileRef
+               location = "group:Hoko/HKNetworking.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKNetworking.m">
+            </FileRef>
+            <Group
+               location = "container:"
+               name = "GZip">
+               <FileRef
+                  location = "group:Hoko/HKGZip.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HKGZip.m">
+               </FileRef>
+            </Group>
+            <Group
+               location = "container:"
+               name = "NetworkOperation">
+               <FileRef
+                  location = "group:Hoko/HKNetworkOperation.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HKNetworkOperation.m">
+               </FileRef>
+            </Group>
+            <Group
+               location = "container:"
+               name = "Network Operation Queue">
+               <FileRef
+                  location = "group:Hoko/HKNetworkOperationQueue.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HKNetworkOperationQueue.m">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HKNetworkOperationQueue+Private.h">
+               </FileRef>
+            </Group>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Observer">
+            <Group
+               location = "container:"
+               name = "Notification Observer">
+               <FileRef
+                  location = "group:Hoko/HKNotificationObserver.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HKNotificationObserver.m">
+               </FileRef>
+            </Group>
+            <Group
+               location = "container:"
+               name = "Object Observer">
+               <FileRef
+                  location = "group:Hoko/HKObjectObserver.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HKObjectObserver.m">
+               </FileRef>
+            </Group>
+            <FileRef
+               location = "group:Hoko/HKObserver.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKObserver.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Swizzling">
+            <FileRef
+               location = "group:Hoko/HKSwizzling.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKSwizzling.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Version Checker">
+            <FileRef
+               location = "group:Hoko/HKVersionChecker.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKVersionChecker.m">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:Hoko/HKUtils.h">
+         </FileRef>
+         <FileRef
+            location = "group:Hoko/HKUtils.m">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:Hoko/Hoko.h">
+      </FileRef>
+      <FileRef
+         location = "group:Hoko/Hoko.m">
+      </FileRef>
+      <FileRef
+         location = "group:Hoko/Hoko+Private.h">
+      </FileRef>
+   </Group>
    <FileRef
-      location = "group:Hoko.xcodeproj">
+      location = "group:Tests/Hoko Tests.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "group:Tests/Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
