@@ -28,7 +28,7 @@ To integrate HOKO in your app, simply follow the 3 simple steps below after addi
 2. Open your Xcode project folder and create a file called `Podfile` with the following content:
 
     ```ruby
-    pod 'Hoko', '~> 1.0.2'
+    pod 'Hoko', '~> 1.1.1'
     ```
 
 3. Run `pod install` and wait for CocoaPod to install HOKO SDK. From this moment on, instead of using `.xcodeproj` file, you should start using `.xcworkspace`.
@@ -36,12 +36,14 @@ To integrate HOKO in your app, simply follow the 3 simple steps below after addi
 ### Framework
 
 1. Download the [Hoko SDK](https://github.com/hokolinks/hoko-ios/archive/master.zip).
-2. Drag the `Hoko.framework` file to your project's `Target Dependencies`.
+2. Drag the `Hoko` folder to your project.
 3. Be sure to also add `SystemConfiguration.framework` and `zlib.dylib` in case your project does not include it already.
 
 ## SDK Setup
 
 Add the following line to your `applicationDidFinishLaunching` method in your `AppDelegate` class.
+
+Objective-C
 
 ```objective-c
 #import <Hoko/Hoko.h>
@@ -53,6 +55,8 @@ Add the following line to your `applicationDidFinishLaunching` method in your `A
 }
 ```
 
+Swift
+
 ```swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 	Hoko.setupWithToken("YOUR-APP-TOKEN")
@@ -60,7 +64,7 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 }
 ```
 
-### 2. Add a URL Scheme to your App
+### 1. Add a URL Scheme to your App
 
 To register a URL scheme you should navigate to your project's application **target**, select the **info** tab, and under **URL Types** click the **plus** sign.
 Once there you should assign a custom (and unique) URL scheme. Following Apple's guidelines is should be in **reverse DNS notation** (e.g. *com.hoko.hokotestbed*).
@@ -71,43 +75,78 @@ Once there you should assign a custom (and unique) URL scheme. Following Apple's
 
 To map routes to your View Controllers all you have to do is map them in the **deeplinking** module on your `applicationDidFinishLaunching` method in your `AppDelegate` class. 
 
+Objective-C
+
 ```objective-c
-[[Hoko deeplinking] mapRoute:@"product/:product_id" toTarget:^(HKDeeplink *deeplink) {
-    HKTBDetailViewController *tableViewController = [[HKTBDetailViewController alloc]init];
-    tableViewController.productId = deeplink.routeParameters[@"product_id"];
-    tableViewController.productPrice = deeplink.queryParameters[@"product_price"];
-    [HKNavigation pushViewController:tableViewController animated:YES];
-  }];
+[HokoDeeplinking mapRoute:@"product/:product_id" toTarget:^(HKDeeplink *deeplink) {
+	BLKProductViewController *productViewController = [[BLKProductViewController alloc] initWithProductId:deeplink.routeParameters[@"product_id"]];
+	productViewController.referrer = deeplink.queryParameters[@"referrer"];
+	[HKNavigation pushViewController:productViewController animated:YES];
+}];
+```
+
+Swift
+
+```swift
+Hoko.deeplinking().mapRoute("product/:product_id", toTarget: { (deeplink: HKDeeplink!) -> Void in
+	let productViewController = BLKPRoductViewController(productId: deeplink.routeParameters["product_id"])
+	productViewController.referrer = deeplink.queryParameters["referrer"]
+	HKNavigation.pushViewController(productViewController, animated: true)
+})
+```
+
+In order to perform certain tasks whenever a deep link enters the application, a `Handler` may be added to the `Deeplinking` module. This makes it easier to track deep links to analytics platforms, log entries or update your database.
+
+Objective-C
+
+```objective-c
+[HokoDeeplinking addHandlerBlock:^(HKDeeplink *deeplink) {
+	[[Analytics sharedInstance] track:"deeplink" parameters:@{@"route": deeplink.route}];
+}];
+```
+
+Swift
+
+```swift
+Hoko.deeplinking().addHandlerBlock { (deeplink: HKDeeplink!) -> Void in
+	Analytics.sharedInstance().track("deeplink", parameters: ["route": deeplink.route])
+}
 ```
 
 
-### 3. Push Notifications
+### 3. Analytics
 
-To allow your app to receive push notifications, simply add the following piece of code to wherever you want to ask your user to allow push notifications. By default, added it to your `AppDelegate` as well.
+
+If your app identifies its users to the HOKO SDK, the HOKO platform will be able to provide you with better usage metrics and better user targeting when creating Hokolinks or push notification campaigns. To identify users the app needs to provide a few user details, namely an identifier, which can be an e-mail, an integer or even a username and the login methodology (e.g. Facebook, Twitter or GitHub login).
+
+Objective-C
 
 ```objective-c
-[[Hoko pushNotifications] registerForRemoteNotificationTypes:HKRemoteNotificationTypeAlert|HKRemoteNotificationTypeBadge|HKRemoteNotificationTypeSound];
+[[Hoko analytics] identifyUserWithIdentifier:@"johnappleseed"
+                                 accountType:HKUserAccountTypeGithub];
 ```
 
-### 4. Analytics
+Swift
 
-In order to provide metrics on push notifications and deeplinking campaigns, it is advised to delegate key events to the Analytics module (e.g. in-app purchases, referals, etc).
+```swift
+Hoko.analytics().identifyUserWithIdentifier("johnappleseed",
+    accountType: .Github)
+```
 
-All you have to do is:
+To complement the automatically gathered information from **sessions** the app should manually track the key events associated of which to measure the success or failure of a push notification campaign session. You can track events with or without associated monetary value.
+
+Objective-C
 
 ```objective-c
+[[Hoko analytics] trackKeyEvent:@"facebook_share"];
 [[Hoko analytics] trackKeyEvent:@"dress_purchase" amount:@(29.99)];
 ```
 
-You can also identify your users to create targeted campaigns on HOKO.
+Swift
 
-```objective-c
-[[Hoko analytics] identifyUserWithIdentifier:@"johndoe"
-                       accountType:HKUserAccountTypeGitHub
-                              name:@"John Doe"
-                             email:@"johndoe@hoko.com"
-                         birthDate:[NSDate date]
-                            gender:HKUserGenderMale];
+```swift
+Hoko.analytics().trackKeyEvent("facebook_share")
+Hoko.analytics().trackKeyEvent("dress_purchase", amount:29.99)
 ```
 
 ### Full documentation
