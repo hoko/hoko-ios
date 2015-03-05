@@ -39,7 +39,7 @@ NSString *const HKVersionCheckerGithubVersionName = @"tag_name";
         HKLog(@"[HOKO] A new version of HOKO is available at http://github.com/hokolinks/hoko-ios: %@",versionName);
       }
     } else {
-      HKErrorLog(@"Unexpected response from GITHUB.");
+      HKLog(@"Unexpected response from GITHUB.");
     }
   } failedBlock:^(NSError *error) {
     HKErrorLog(error);

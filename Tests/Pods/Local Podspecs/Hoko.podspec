@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/hokolinks/hoko-ios'
   s.social_media_url = 'https://twitter.com/hokolinks'
   s.authors  = { 
-  	'Ivan Bruel' => 'ibruel@faber-ventures.com',
+  	'Ivan Bruel' => 'ibruel@hokolinks.com',
   	'Hoko S.A.' => 'support@hokolinks.com'
   }
   s.source       = { :git => 'https://github.com/hokolinks/hoko-ios.git', :tag => "v#{s.version}"}

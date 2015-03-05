@@ -143,7 +143,6 @@ NSString *const HKNetworkOperationQueueOperationsKey = @"networkOperations";
   if (!self.networkOperations) {
     self.networkOperations = [@[] mutableCopy];
   }
-  NSLog(@"loading %@",@(self.networkOperations.count));
 }
 
 

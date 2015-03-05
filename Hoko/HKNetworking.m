@@ -261,7 +261,7 @@ NSString *const HKNetworkingFormat = @"json";
   id json = [NSJSONSerialization JSONObjectWithData:data
                                             options:NSJSONReadingMutableContainers
                                               error:&error];
-  
+  HKLog(@"Response for %@\n%@", connection.originalRequest.URL.absoluteString, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
   if(error && _responseData.length > 1)
   {
     if(_failedBlock != nil)
