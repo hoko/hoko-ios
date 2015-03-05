@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
+#import "HKStubbedTestCase.h"
+
 #import <Hoko/HKURL.h>
 
-@interface HKURLTests : XCTestCase
+@interface HKURLTests : HKStubbedTestCase
 
 @end
 
@@ -20,27 +22,23 @@
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown
 {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
 - (void)testSanitize
 {
   NSString *sanitizedURLString = [HKURL sanitizeURLString:@"hoko://///hoko/needs/testing////is/sanitization/ok///"];
-  NSLog(@"%@",sanitizedURLString);
-  XCTAssert([sanitizedURLString isEqualToString:@"hoko://hoko/needs/testing/is/sanitization/ok"], @"String should be sanitized");
+  expect(sanitizedURLString).to.equal(@"hoko://hoko/needs/testing/is/sanitization/ok");
 }
 
 - (void)testURL
 {
   HKURL *url = [[HKURL alloc] initWithURL:[NSURL URLWithString:@"hoko://param/1/other_param/2?test=1&q_param=2"]];
-  NSLog(@"%@",url.url.absoluteString);
-  XCTAssert([url.url isEqual:[NSURL URLWithString:@"hoko://param/1/other_param/2"]], @"URL should not have query parameters");
+  expect(url.url).to.equal([NSURL URLWithString:@"hoko://param/1/other_param/2"]);
 }
 
 

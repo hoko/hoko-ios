@@ -14,6 +14,8 @@
 
 + (instancetype)sharedQueue;
 
+- (void)setup;
+
 - (void)addOperation:(HKNetworkOperation *)networkOperation;
 - (void)finishedOperation:(HKNetworkOperation *)networkOperation;
 - (void)failedOperation:(HKNetworkOperation *)networkOperation;

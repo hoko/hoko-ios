@@ -40,19 +40,15 @@ NSString *const HKNetworkOperationQueueOperationsKey = @"networkOperations";
   return _sharedQueue;
 }
 
-#pragma mark - Initializer
-- (instancetype)init
+#pragma mark - Setup
+- (void)setup
 {
-  self = [super init];
-  if (self) {
-    _operationQueue = [NSOperationQueue new];
-    _operationQueue.name = NSStringFromClass([self class]);
-    _operationQueue.maxConcurrentOperationCount = 1;
-    [self loadNetworkOperations];
-    [self flush];
-    [self setupObservers];
-  }
-  return self;
+  _operationQueue = [NSOperationQueue new];
+  _operationQueue.name = NSStringFromClass([self class]);
+  _operationQueue.maxConcurrentOperationCount = 1;
+  [self loadNetworkOperations];
+  [self flush];
+  [self setupObservers];
 }
 
 #pragma mark - Operations
@@ -147,7 +143,9 @@ NSString *const HKNetworkOperationQueueOperationsKey = @"networkOperations";
   if (!self.networkOperations) {
     self.networkOperations = [@[] mutableCopy];
   }
+  NSLog(@"loading %@",@(self.networkOperations.count));
 }
+
 
 
 @end

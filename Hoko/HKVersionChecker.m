@@ -31,11 +31,15 @@ NSString *const HKVersionCheckerGithubVersionName = @"tag_name";
 - (void)checkForNewVersion:(NSString *)currentVersion
 {
   [HKNetworking requestToPath:HKVersionCheckerGitHubApi parameters:nil token:nil successBlock:^(id json) {
-    id firstJson = json[0];
-    NSString *versionName = firstJson[HKVersionCheckerGithubVersionName];
-    NSString *currentVersionName = [NSString stringWithFormat:@"v%@",currentVersion];
-    if ([versionName compare:currentVersionName options:NSNumericSearch] == NSOrderedDescending) {
-      NSLog(@"[HOKO] A new version of HOKO is available at http://github.com/hokolinks/hoko-ios: %@",versionName);
+    if ([json isKindOfClass:[NSArray class]]) {
+      id firstJson = json[0];
+      NSString *versionName = firstJson[HKVersionCheckerGithubVersionName];
+      NSString *currentVersionName = [NSString stringWithFormat:@"v%@",currentVersion];
+      if ([versionName compare:currentVersionName options:NSNumericSearch] == NSOrderedDescending) {
+        HKLog(@"[HOKO] A new version of HOKO is available at http://github.com/hokolinks/hoko-ios: %@",versionName);
+      }
+    } else {
+      HKErrorLog(@"Unexpected response from GITHUB.");
     }
   } failedBlock:^(NSError *error) {
     HKErrorLog(error);

@@ -26,7 +26,6 @@ NSString *const HokoVersion = @"1.1.0";
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) HKAnalytics *analytics;
 @property (nonatomic, strong) HKDeeplinking *deeplinking;
-@property (nonatomic, strong) HKNetworkOperationQueue *networkOperationQueue;
 
 @end
 
@@ -70,7 +69,7 @@ static Hoko *_sharedInstance = nil;
     [[HKDevice device] setupReachability];
     
     // Hoko Analytics implements the HKHandlerProtocol
-    _networkOperationQueue = [HKNetworkOperationQueue sharedQueue];
+    [[HKNetworkOperationQueue sharedQueue] setup];
     _analytics = [[HKAnalytics alloc] initWithToken:token];
     _deeplinking = [[HKDeeplinking alloc] initWithToken:token debugMode:debugMode];
     [_deeplinking addHandler:_analytics];

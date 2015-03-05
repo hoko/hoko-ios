@@ -8,8 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import <OCMock/OCMock.h>
-#import <OHHTTPStubs/OHHTTPStubs.h>
+#import "HKStubbedTestCase.h"
 
 #import <Hoko/Hoko+Private.h>
 
@@ -18,7 +17,7 @@
 #import <Hoko/HKLinkGenerator.h>
 #import <Hoko/HKDeeplinking+Private.h>
 
-@interface HKLinkGeneratorTests : XCTestCase
+@interface HKLinkGeneratorTests : HKStubbedTestCase
 
 @end
 
@@ -33,10 +32,15 @@
     NSDictionary *json = @{};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
   }];
-  id appMock = OCMPartialMock([HKApp app]);
-  [[[appMock stub] andReturn:@[@"hoko"]] urlSchemes];
-  [Hoko setupWithToken:@"1234"];
-  [Hoko setVerbose:NO];
+  
+  [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+    return [request.URL.host isEqualToString:@"api.hokolinks.com"];
+  } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+    //TODO change to hokolink
+    NSDictionary *json = @{@"omnilink":@"http://hoko.link/PRMLNK"};
+    return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
+  }];
+  
   [[Hoko deeplinking] mapRoute:@"store/:language_code/product/:product_id" toTarget:nil];
   
 }
@@ -44,77 +48,51 @@
 - (void)tearDown
 {
   [super tearDown];
-  [Hoko reset];
-  [OHHTTPStubs removeLastStub];
 }
 
 - (void)testBasicHokolink
 {
-  XCTestExpectation *expectation = [self expectationWithDescription:@"generate hokolink"];
+  __block NSString *blockHokolink = nil;
+  __block NSError *blockError = nil;
   
-  [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return [request.URL.host isEqualToString:@"api.hokolinks.com"];
-  } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
-    //TODO change to hokolink
-    NSDictionary *json = @{@"omnilink":@"http://hoko.com/PRMLNK"};
-    return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
-  }];
-  
-  [[Hoko deeplinking] generateHokolinkForDeeplink:[HKDeeplink deeplinkWithRoute:@"store/:language_code/product/:product_id" routeParameters:@{@"language_code":@"en-US",@"product_id":@1234} queryParameters:@{@"utm_source":@"test_case",@"timestamp":@1234324}] success:^(NSString *omnilink) {
-    XCTAssertEqualObjects(@"http://hoko.com/PRMLNK", omnilink);
-    [expectation fulfill];
+  [[Hoko deeplinking] generateHokolinkForDeeplink:[HKDeeplink deeplinkWithRoute:@"store/:language_code/product/:product_id" routeParameters:@{@"language_code":@"en-US",@"product_id":@1234} queryParameters:@{@"utm_source":@"test_case",@"timestamp":@1234324}] success:^(NSString *hokolink) {
+    blockHokolink = hokolink;
   } failure:^(NSError *error) {
-    XCTFail(@"returned an error %@",error.description);
-    [expectation fulfill];
+    blockError = error;
   }];
   
-  [self waitForExpectationsWithTimeout:3 handler:nil];
+  expect(blockHokolink).will.equal(@"http://hoko.link/PRMLNK");
+  expect(blockError).will.beNil();
 }
 
 - (void)testMissingRouteParameterHokolink
 {
-  
-  XCTestExpectation *expectation = [self expectationWithDescription:@"cant create deeplink"];
-  
-  [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return [request.URL.host isEqualToString:@"api.hokolinks.com"];
-  } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
-    NSDictionary *json = @{@"omnilink":@"http://hoko.com/PRMLNK"};
-    return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
-  }];
+  __block NSString *blockHokolink = nil;
+  __block NSError *blockError = nil;
   
   [[Hoko deeplinking] generateHokolinkForDeeplink:[HKDeeplink deeplinkWithRoute:@"/store/:language_code/product/:product_id" routeParameters:@{@"product_id":@1234} queryParameters:@{@"utm_source":@"test_case",@"timestamp":@1234324}] success:^(NSString *hokolink) {
-    XCTFail(@"Should not even call service");
-    [expectation fulfill];
+    blockHokolink = hokolink;
   } failure:^(NSError *error) {
-    XCTAssertEqualObjects(error, [HKError nilDeeplinkError]);
-    [expectation fulfill];
+    blockError = error;
   }];
   
-  [self waitForExpectationsWithTimeout:3 handler:nil];
+  expect(blockError).will.equal([HKError nilDeeplinkError]);
+  expect(blockHokolink).will.beNil();
 }
 
 - (void)testUnknownRouteOmnilink
 {
-  XCTestExpectation *expectation = [self expectationWithDescription:@"unknown route"];
-  
-  [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return [request.URL.host isEqualToString:@"api.hokolinks.com"];
-  } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
-    //TODO change to hokolink
-    NSDictionary *json = @{@"omnilink":@"http://hoko.com/PRMLNK"};
-    return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
-  }];
+  __block NSString *blockHokolink = nil;
+  __block NSError *blockError = nil;
   
   [[Hoko deeplinking] generateHokolinkForDeeplink:[HKDeeplink deeplinkWithRoute:@"/store/:language_code/collection/:collection_id" routeParameters:@{@"language_code": @"en-US", @"collection_id":@1234} queryParameters:@{@"utm_source":@"test_case",@"timestamp":@1234324}] success:^(NSString *hokolink) {
-    XCTFail(@"Should not even call service");
-    [expectation fulfill];
+    blockHokolink = hokolink;
   } failure:^(NSError *error) {
-    XCTAssertEqualObjects(error, [HKError routeNotMappedError]);
-    [expectation fulfill];
+    blockError = error;
   }];
   
-  [self waitForExpectationsWithTimeout:3 handler:nil];
+  expect(blockError).will.equal([HKError routeNotMappedError]);
+  expect(blockHokolink).will.beNil();
 }
 
 @end

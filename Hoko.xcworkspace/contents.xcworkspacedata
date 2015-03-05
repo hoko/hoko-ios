@@ -207,7 +207,7 @@
             </Group>
             <Group
                location = "container:"
-               name = "NetworkOperation">
+               name = "Network Operation">
                <FileRef
                   location = "group:Hoko/HKNetworkOperation.h">
                </FileRef>

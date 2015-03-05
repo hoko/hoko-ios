@@ -11,16 +11,19 @@
 		30DEC7ED1AA09BA800C77005 /* HKLinkGeneratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EA1AA09BA800C77005 /* HKLinkGeneratorTests.m */; };
 		30DEC7EE1AA09BA800C77005 /* HKNetworkOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EB1AA09BA800C77005 /* HKNetworkOperationTests.m */; };
 		30DEC7EF1AA09BA800C77005 /* HKURLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EC1AA09BA800C77005 /* HKURLTests.m */; };
+		30E2520C1AA86B9500D3D9CA /* HKStubbedTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2520B1AA86B9500D3D9CA /* HKStubbedTestCase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		04B1EC39993337A62E275698 /* Pods-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.release.xcconfig"; sourceTree = "<group>"; };
 		156BA7D99DDF339E686E13D8 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		30DEC7E01AA0934800C77005 /* Hoko Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hoko Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30DEC7E01AA0934800C77005 /* iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30DEC7E41AA0934800C77005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30DEC7EA1AA09BA800C77005 /* HKLinkGeneratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKLinkGeneratorTests.m; path = "Hoko Tests/HKLinkGeneratorTests.m"; sourceTree = SOURCE_ROOT; };
 		30DEC7EB1AA09BA800C77005 /* HKNetworkOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKNetworkOperationTests.m; path = "Hoko Tests/HKNetworkOperationTests.m"; sourceTree = SOURCE_ROOT; };
 		30DEC7EC1AA09BA800C77005 /* HKURLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKURLTests.m; path = "Hoko Tests/HKURLTests.m"; sourceTree = SOURCE_ROOT; };
+		30E2520B1AA86B9500D3D9CA /* HKStubbedTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKStubbedTestCase.m; path = "Hoko Tests/HKStubbedTestCase.m"; sourceTree = SOURCE_ROOT; };
+		30E2520D1AA86DA300D3D9CA /* HKStubbedTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HKStubbedTestCase.h; path = "Hoko Tests/HKStubbedTestCase.h"; sourceTree = SOURCE_ROOT; };
 		F62F52A3BBD6D18BB6AD40CB /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,12 +47,13 @@
 				67CB7AB141DD9F82B007FBF1 /* Pods */,
 				E98BF94405AAD063B3D6C50C /* Frameworks */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
 		};
 		30DEC7E11AA0934800C77005 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				30DEC7E01AA0934800C77005 /* Hoko Tests.xctest */,
+				30DEC7E01AA0934800C77005 /* iOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,6 +61,8 @@
 		30DEC7E21AA0934800C77005 /* Hoko Tests */ = {
 			isa = PBXGroup;
 			children = (
+				30E2520D1AA86DA300D3D9CA /* HKStubbedTestCase.h */,
+				30E2520B1AA86B9500D3D9CA /* HKStubbedTestCase.m */,
 				30DEC7EA1AA09BA800C77005 /* HKLinkGeneratorTests.m */,
 				30DEC7EB1AA09BA800C77005 /* HKNetworkOperationTests.m */,
 				30DEC7EC1AA09BA800C77005 /* HKURLTests.m */,
@@ -110,7 +116,7 @@
 			);
 			name = "iOS Tests";
 			productName = "HOKO Tests";
-			productReference = 30DEC7E01AA0934800C77005 /* Hoko Tests.xctest */;
+			productReference = 30DEC7E01AA0934800C77005 /* iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -193,6 +199,7 @@
 			files = (
 				30DEC7EF1AA09BA800C77005 /* HKURLTests.m in Sources */,
 				30DEC7ED1AA09BA800C77005 /* HKLinkGeneratorTests.m in Sources */,
+				30E2520C1AA86B9500D3D9CA /* HKStubbedTestCase.m in Sources */,
 				30DEC7EE1AA09BA800C77005 /* HKNetworkOperationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

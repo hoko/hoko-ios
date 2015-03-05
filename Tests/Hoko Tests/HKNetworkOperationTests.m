@@ -11,6 +11,8 @@
 #import <OCMock/OCMock.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
 
+#import "HKStubbedTestCase.h"
+
 #import <Hoko/HKApp.h>
 #import <Hoko/HKUser.h>
 #import <Hoko/HKUtils.h>
@@ -19,7 +21,7 @@
 #import <Hoko/HKNetworkOperationQueue.h>
 #import <Hoko/HKNetworkOperationQueue+Private.h>
 
-@interface HKNetworkOperationTests : XCTestCase
+@interface HKNetworkOperationTests : HKStubbedTestCase
 
 @end
 
@@ -28,28 +30,24 @@
 
 - (void)setUp
 {
+  id utilsMock = OCMClassMock([HKUtils class]);
+  OCMStub([utilsMock objectFromFile:@"networkOperations"]).andReturn(nil);
+
   [super setUp];
-  [HKUtils saveObject:nil toFile:@"networkOperations"];
-  id hkApp = OCMClassMock([HKApp class]);
-  [[[hkApp stub] andReturn:@[@"hoko"]] urlSchemes];
-  [Hoko setupWithToken:@"1234"];
 }
 
 - (void)tearDown
 {
   [super tearDown];
-  [OHHTTPStubs removeAllStubs];
-  [Hoko reset];
-  
 }
 
 - (void)testQueueFlushing
 {
-  XCTestExpectation *expectation = [self expectationWithDescription:@"Operations completed with success"];
+  __block BOOL lastOperationExecuted = NO;
   
   // Stubbing for success
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return YES;
+    return [request.URL.absoluteString rangeOfString:@"users"].location != NSNotFound;
   } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
     NSDictionary *json = @{};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
@@ -57,62 +55,50 @@
   
   HKUser *user = [[HKUser alloc] initWithIdentifier:@"testuser" accountType:HKUserAccountTypeGithub name:nil email:nil birthDate:nil gender:HKUserGenderUnknown previousIdentifier:nil];
   
-  [[HKNetworkOperationQueue sharedQueue] addOperation:[[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST path:@"user" token:@"1234" parameters:user.json]];
-  [[HKNetworkOperationQueue sharedQueue] addOperation:[[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST path:@"user" token:@"1234" parameters:user.json]];
+  [user postWithToken:@"1234"];
+  [user postWithToken:@"1234"];
   
   // Force flush for timer wait time
   [[HKNetworkOperationQueue sharedQueue] flush];
   
-  // Add a block after adding all the operations to detect the inner operation array
   [[HKNetworkOperationQueue sharedQueue].operationQueue addOperationWithBlock:^{
-    if ([HKNetworkOperationQueue sharedQueue].networkOperations.count != 0) {
-      XCTAssert(0, @"Queue should be empty after successful execution");
-    }
-   [expectation fulfill];
+    lastOperationExecuted = YES;
   }];
   
-  [self waitForExpectationsWithTimeout:30 handler:nil];
+  expect(lastOperationExecuted).will.beTruthy();
+  expect([HKNetworkOperationQueue sharedQueue].networkOperations.count).will.equal(0);
 }
 
 - (void)testQueueRetrying
 {
-  XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"Operations discarded after %@ retries", @(HKNetworkOperationQueueMaxRetries)]];
+  __block NSInteger retryCount = 0;
   
   // Stub for failure
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return YES;
+    return [request.URL.path rangeOfString:@"user"].location != NSNotFound;
   } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
     NSDictionary *json = @{};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:500 headers:nil];
   }];
   
   HKUser *user = [[HKUser alloc] initWithIdentifier:@"testuser" accountType:HKUserAccountTypeGithub name:nil email:nil birthDate:nil gender:HKUserGenderUnknown previousIdentifier:nil];
-  HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST path:@"user" token:@"1234" parameters:user.json];
-  [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
+  [user postWithToken:@"1234"];
   [[HKNetworkOperationQueue sharedQueue] flush];
   
   // Check inner operation array after the end of each flush, give up on 10th try
-  __block NSInteger tries = 1;
   __block void (^wRetryBlock)();
   void (^retryBlock)();
   wRetryBlock = retryBlock = ^{
     if ([HKNetworkOperationQueue sharedQueue].networkOperations.count != 0) {
-      tries ++;
-      [[HKNetworkOperationQueue sharedQueue] flush];
+      retryCount ++;
       [[HKNetworkOperationQueue sharedQueue].operationQueue addOperationWithBlock:wRetryBlock];
-    }
-    else if (tries == HKNetworkOperationQueueMaxRetries) {
-      [expectation fulfill];
-    } else {
-      XCTAssert(0,"Queue should not be empty before retry #%@",@(HKNetworkOperationQueueMaxRetries));
-      [expectation fulfill];
+      [[HKNetworkOperationQueue sharedQueue] flush];
     }
   };
   
   [[HKNetworkOperationQueue sharedQueue].operationQueue addOperationWithBlock:retryBlock];
   
-  [self waitForExpectationsWithTimeout:30 handler:nil];
-  
+  expect(retryCount).will.equal(HKNetworkOperationQueueMaxRetries);
 }
 
 @end
