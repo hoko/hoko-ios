@@ -14,6 +14,7 @@
 #import "HKNetworkOperationQueue.h"
 
 NSString *const HKUserCurrentUserKey = @"currentUser";
+NSString *const HKUserPath = @"users";
 
 @implementation HKUser
 
@@ -101,7 +102,7 @@ NSString *const HKUserCurrentUserKey = @"currentUser";
 - (void)postWithToken:(NSString *)token
 {
   HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
-                                                                                      path:@"users"
+                                                                                      path:HKUserPath
                                                                                      token:token
                                                                                 parameters:self.json];
   [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];

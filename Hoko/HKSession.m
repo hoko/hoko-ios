@@ -12,6 +12,8 @@
 #import "HKDeeplink+Private.h"
 #import "HKNetworkOperationQueue.h"
 
+NSString *const HKSessionPath = @"sessions";
+
 @interface HKSession ()
 
 @property (nonatomic, strong) HKDeeplink *deeplink;
@@ -60,7 +62,7 @@
 - (void)postWithToken:(NSString *)token
 {
   HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc]initWithOperationType:HKNetworkOperationTypePOST
-                                                                                     path:@"sessions"
+                                                                                     path:HKSessionPath
                                                                                     token:token
                                                                                parameters:self.json];
   [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];

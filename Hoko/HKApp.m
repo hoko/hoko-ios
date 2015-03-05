@@ -16,6 +16,8 @@ NSString *const HKAppUnknownBuild = @"Unknown Build";
 NSString *const HKAppUnknownVersion = @"Unknown Version";
 NSString *const HKAppIconKey = @"HKAppIconKey";
 
+NSString *const HKAppIconPath = @"icons";
+
 @implementation HKApp
 
 #pragma mark - Shared Instance
@@ -146,7 +148,7 @@ NSString *const HKAppIconKey = @"HKAppIconKey";
   if (!previousAppIconMD5 || [previousAppIconMD5 compare:iconJSONMD5] != NSOrderedSame) {
     [HKUtils saveObject:iconJSONMD5 key:HKAppIconKey];
     HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
-                                                                                      path:@"icons"
+                                                                                      path:HKAppIconPath
                                                                                      token:token
                                                                                 parameters:iconJSON];
     [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];

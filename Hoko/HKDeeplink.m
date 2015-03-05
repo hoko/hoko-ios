@@ -18,6 +18,8 @@
 NSString *const HKDeeplinkHokolinkIdentifierKey = @"hk_oid";
 NSString *const HKDeeplinkOpenIdentifierKey = @"hk_id";
 
+NSString *const HKDeeplinkOpenPath = @"omnilinks/%@/open";
+
 //NSString *const HKDeeplinkHokolinkIdentifierKey = @"__hkid"; //TODO change to this
 //NSString *const HKDeeplinkOpenIdentifierKey = @"__openid";
 
@@ -113,7 +115,7 @@ NSString *const HKDeeplinkOpenIdentifierKey = @"hk_id";
   if (self.isHokolink) {
     // TODO change to hokolinks/
     HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
-                                                                                        path:[NSString stringWithFormat:@"omnilinks/%@/open", self.hokolinkIdentifier]
+                                                                                        path:[NSString stringWithFormat:HKDeeplinkOpenPath, self.hokolinkIdentifier]
                                                                                        token:token
                                                                                   parameters:[self hokolinkJSONWithUser:user]];
     [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];

@@ -13,6 +13,8 @@
 #import "HKDevice.h"
 #import "HKNetworkOperationQueue.h"
 
+NSString *const HKRoutePath = @"routes";
+
 @implementation HKRoute
 
 #pragma mark - Initializer
@@ -40,7 +42,7 @@
 - (void)postWithToken:(NSString *)token
 {
   HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
-                                                                                      path:@"routes"
+                                                                                      path:HKRoutePath
                                                                                      token:token
                                                                                 parameters:self.json];
   [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
