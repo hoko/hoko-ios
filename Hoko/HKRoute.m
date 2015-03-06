@@ -29,7 +29,7 @@ NSString *const HKRoutePath = @"routes";
 
 #pragma mark - Public Static Initializer
 + (instancetype)routeWithRoute:(NSString *)route target:(HKDeeplinkTarget)target{
-  return [[HKRoute alloc]initWithRoute:route target:target];
+  return [[HKRoute alloc] initWithRoute:route target:target];
 }
 
 #pragma mark - Helper

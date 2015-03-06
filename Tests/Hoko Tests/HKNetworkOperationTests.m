@@ -53,7 +53,7 @@
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
   }];
   
-  HKUser *user = [[HKUser alloc] initWithIdentifier:@"testuser" accountType:HKUserAccountTypeGithub name:nil email:nil birthDate:nil gender:HKUserGenderUnknown previousIdentifier:nil];
+  HKUser *user = [[HKUser alloc] initWithIdentifier:@"testQueueFlushing" accountType:HKUserAccountTypeGithub name:nil email:nil birthDate:nil gender:HKUserGenderUnknown previousIdentifier:nil];
   
   [user postWithToken:@"1234"];
   [user postWithToken:@"1234"];
@@ -81,7 +81,7 @@
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:500 headers:nil];
   }];
   
-  HKUser *user = [[HKUser alloc] initWithIdentifier:@"testuser" accountType:HKUserAccountTypeGithub name:nil email:nil birthDate:nil gender:HKUserGenderUnknown previousIdentifier:nil];
+  HKUser *user = [[HKUser alloc] initWithIdentifier:@"testQueueRetrying" accountType:HKUserAccountTypeGithub name:nil email:nil birthDate:nil gender:HKUserGenderUnknown previousIdentifier:nil];
   [user postWithToken:@"1234"];
   [[HKNetworkOperationQueue sharedQueue] flush];
   

@@ -81,6 +81,7 @@ NSString *const HKNetworkOperationQueueOperationsKey = @"networkOperations";
 - (void)finishedOperation:(HKNetworkOperation *)networkOperation
 {
   [self.networkOperations removeObject:networkOperation];
+  NSLog(@"Finished %@\n%@", networkOperation.path, networkOperation.parameters);
   [self saveNetworkOperations];
 }
 
@@ -94,7 +95,7 @@ NSString *const HKNetworkOperationQueueOperationsKey = @"networkOperations";
 - (void)startFlushTimer
 {
   if (!self.flushTimer && [HKDevice device].hasInternetConnection) {
-    self.flushTimer = [NSTimer scheduledTimerWithTimeInterval:HKNetworkOperationQueueFlushInterval 
+    self.flushTimer = [NSTimer scheduledTimerWithTimeInterval:HKNetworkOperationQueueFlushInterval
                                                        target:self
                                                      selector:@selector(flush)
                                                      userInfo:nil

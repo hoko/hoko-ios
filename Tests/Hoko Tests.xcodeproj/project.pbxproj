@@ -12,6 +12,7 @@
 		30DEC7EE1AA09BA800C77005 /* HKNetworkOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EB1AA09BA800C77005 /* HKNetworkOperationTests.m */; };
 		30DEC7EF1AA09BA800C77005 /* HKURLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EC1AA09BA800C77005 /* HKURLTests.m */; };
 		30E2520C1AA86B9500D3D9CA /* HKStubbedTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2520B1AA86B9500D3D9CA /* HKStubbedTestCase.m */; };
+		30E2520F1AA9C2E600D3D9CA /* HKRouteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2520E1AA9C2E600D3D9CA /* HKRouteTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		30DEC7EC1AA09BA800C77005 /* HKURLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKURLTests.m; path = "Hoko Tests/HKURLTests.m"; sourceTree = SOURCE_ROOT; };
 		30E2520B1AA86B9500D3D9CA /* HKStubbedTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKStubbedTestCase.m; path = "Hoko Tests/HKStubbedTestCase.m"; sourceTree = SOURCE_ROOT; };
 		30E2520D1AA86DA300D3D9CA /* HKStubbedTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HKStubbedTestCase.h; path = "Hoko Tests/HKStubbedTestCase.h"; sourceTree = SOURCE_ROOT; };
+		30E2520E1AA9C2E600D3D9CA /* HKRouteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKRouteTests.m; path = "Hoko Tests/HKRouteTests.m"; sourceTree = SOURCE_ROOT; };
 		F62F52A3BBD6D18BB6AD40CB /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +68,7 @@
 				30DEC7EA1AA09BA800C77005 /* HKLinkGeneratorTests.m */,
 				30DEC7EB1AA09BA800C77005 /* HKNetworkOperationTests.m */,
 				30DEC7EC1AA09BA800C77005 /* HKURLTests.m */,
+				30E2520E1AA9C2E600D3D9CA /* HKRouteTests.m */,
 				30DEC7E31AA0934800C77005 /* Supporting Files */,
 			);
 			name = "Hoko Tests";
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30DEC7EF1AA09BA800C77005 /* HKURLTests.m in Sources */,
+				30E2520F1AA9C2E600D3D9CA /* HKRouteTests.m in Sources */,
 				30DEC7ED1AA09BA800C77005 /* HKLinkGeneratorTests.m in Sources */,
 				30E2520C1AA86B9500D3D9CA /* HKStubbedTestCase.m in Sources */,
 				30DEC7EE1AA09BA800C77005 /* HKNetworkOperationTests.m in Sources */,

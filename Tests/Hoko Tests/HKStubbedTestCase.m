@@ -21,7 +21,8 @@
 
 @implementation HKStubbedTestCase
 
-- (void)setUp {
+- (void)setUp
+{
   [super setUp];
   id appMock = OCMPartialMock([HKApp app]);
   [[[appMock stub] andReturn:@[@"hoko"]] urlSchemes];
@@ -30,7 +31,8 @@
   
 }
 
-- (void)tearDown {
+- (void)tearDown
+{
   [super tearDown];
   [OHHTTPStubs removeAllStubs];
   [Hoko reset];

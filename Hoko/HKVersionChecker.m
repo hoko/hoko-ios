@@ -36,7 +36,7 @@ NSString *const HKVersionCheckerGithubVersionName = @"tag_name";
       NSString *versionName = firstJson[HKVersionCheckerGithubVersionName];
       NSString *currentVersionName = [NSString stringWithFormat:@"v%@",currentVersion];
       if ([versionName compare:currentVersionName options:NSNumericSearch] == NSOrderedDescending) {
-        HKLog(@"[HOKO] A new version of HOKO is available at http://github.com/hokolinks/hoko-ios: %@",versionName);
+        HKLog(@"A new version of HOKO is available at http://github.com/hokolinks/hoko-ios: %@",versionName);
       }
     } else {
       HKLog(@"Unexpected response from GITHUB.");
