@@ -40,6 +40,15 @@ NSString *const HKNetworkOperationQueueOperationsKey = @"networkOperations";
   return _sharedQueue;
 }
 
+#pragma mark - Initialization
+- (instancetype)init
+{
+  if (self = [super init]) {
+    [self setupObservers];
+  }
+  return self;
+}
+
 #pragma mark - Setup
 - (void)setup
 {
@@ -48,7 +57,6 @@ NSString *const HKNetworkOperationQueueOperationsKey = @"networkOperations";
   _operationQueue.maxConcurrentOperationCount = 1;
   [self loadNetworkOperations];
   [self flush];
-  [self setupObservers];
 }
 
 #pragma mark - Operations
@@ -56,7 +64,7 @@ NSString *const HKNetworkOperationQueueOperationsKey = @"networkOperations";
 {
   if (self.networkOperations.count > 0 && [HKDevice device].hasInternetConnection) {
     [self stopFlushTimer];
-    for (HKNetworkOperation *operation in self.networkOperations) {
+    for (HKNetworkOperation *operation in [self.networkOperations copy]) {
       if (operation.isFinished || operation.isCancelled || operation.isExecuting || [self.operationQueue.operations containsObject:operation])
         continue;
       [self.operationQueue addOperation:operation];
@@ -81,7 +89,6 @@ NSString *const HKNetworkOperationQueueOperationsKey = @"networkOperations";
 - (void)finishedOperation:(HKNetworkOperation *)networkOperation
 {
   [self.networkOperations removeObject:networkOperation];
-  NSLog(@"Finished %@\n%@", networkOperation.path, networkOperation.parameters);
   [self saveNetworkOperations];
 }
 

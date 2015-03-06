@@ -48,7 +48,7 @@
  *  @param route  The route format string (e.g. "product/:product_id").
  *  @param target The target block in which you should construct your navigation.
  */
-- (void)mapRoute:(NSString *)route toTarget:(HKDeeplinkTarget)target;
+- (void)mapRoute:(NSString *)route toTarget:(void (^)(HKDeeplink *deeplink))target;
 /**
  *  mapDefaultRouteToTarget: allows any deeplink that does not apply to a mapped route to be sent
  *  to this default target. Most common usage should be to send the user to your application's main
@@ -63,7 +63,7 @@
  *
  *  @param target The target block in which you should construct your navigation
  */
-- (void)mapDefaultRouteToTarget:(HKDeeplinkTarget)target;
+- (void)mapDefaultRouteToTarget:(void (^)(HKDeeplink *deeplink))target;
 
 /**
  *  With addHandler: you can add an object which implements the HKHandlerProtocol to be called everytime

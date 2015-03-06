@@ -10,8 +10,6 @@
 
 @interface HKDeeplink : NSObject
 
-typedef void (^HKDeeplinkTarget)(HKDeeplink *deeplink);
-
 + (instancetype)deeplinkWithRoute:(NSString *)route
                   routeParameters:(NSDictionary *)routeParameters
                   queryParameters:(NSDictionary *)queryParameters;

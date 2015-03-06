@@ -42,7 +42,7 @@
 
 - (void)testTarget
 {
-  HKDeeplinkTarget target = ^(HKDeeplink *deeplink){
+  void (^target)(HKDeeplink *deeplink) = ^(HKDeeplink *deeplink){
     
   };
   HKRoute *route = [HKRoute routeWithRoute:@"product/:product_id/price/:price/open" target:target];

@@ -18,7 +18,7 @@ NSString *const HKRoutePath = @"routes";
 @implementation HKRoute
 
 #pragma mark - Initializer
-- (instancetype)initWithRoute:(NSString *)route target:(HKDeeplinkTarget)target {
+- (instancetype)initWithRoute:(NSString *)route target:(void (^)(HKDeeplink *deeplink))target {
   self = [super init];
   if (self) {
     _route = route;
@@ -28,7 +28,7 @@ NSString *const HKRoutePath = @"routes";
 }
 
 #pragma mark - Public Static Initializer
-+ (instancetype)routeWithRoute:(NSString *)route target:(HKDeeplinkTarget)target{
++ (instancetype)routeWithRoute:(NSString *)route target:(void (^)(HKDeeplink *deeplink))target{
   return [[HKRoute alloc] initWithRoute:route target:target];
 }
 

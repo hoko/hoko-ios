@@ -47,7 +47,7 @@
 
 #pragma mark - Route mapping
 - (void)mapRoute:(NSString *)route
-        toTarget:(HKDeeplinkTarget)target
+        toTarget:(void (^)(HKDeeplink *deeplink))target
 {
   if([self routeExists:route])
     HKErrorLog([HKError duplicateRouteError:route]);
@@ -72,46 +72,34 @@
                                              sourceApplication:sourceApplication];
       
       [[Hoko deeplinking].handling handle:deeplink];
-      if(route.target)
+      
+      if(route.target) {
         route.target(deeplink);
+      }
+      
+      return YES;
     }
   }
   
   // Default Route
   if(self.defaultRoute) {
+    HKDeeplink *deeplink = [HKDeeplink deeplinkWithURLScheme:hkURL.scheme
+                                                       route:nil
+                                             routeParameters:nil
+                                             queryParameters:hkURL.queryParameters
+                                           sourceApplication:sourceApplication];
+    
+    [[Hoko deeplinking].handling handle:deeplink];
+    
     if(self.defaultRoute.target) {
-      HKDeeplink *deeplink = [HKDeeplink deeplinkWithURLScheme:hkURL.scheme
-                                                         route:nil
-                                               routeParameters:nil
-                                               queryParameters:hkURL.queryParameters
-                                             sourceApplication:sourceApplication];
-      
-      [[Hoko deeplinking].handling handle:deeplink];
       self.defaultRoute.target(deeplink);
     }
-  }
-  return [self canOpenURL:url];
-}
-
-- (BOOL)canOpenURL:(NSURL *)url
-{
-  // If a default route exists it can always open the URL
-  if(self.defaultRoute) {
+    
     return YES;
   }
-  
-  // Look for a matching route for this URL
-  HKURL *hkURL = [[HKURL alloc] initWithURL:url];
-  
-  // Search for a match with any given route
-  for (HKRoute *route in self.routes) {
-    if([hkURL matchesWithRoute:route routeParameters:nil]) {
-      return YES;
-    }
-  }
-  
   return NO;
 }
+
 
 #pragma mark - Add Route
 - (void)addNewRoute:(HKRoute *)route

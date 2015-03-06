@@ -6,18 +6,10 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
+#import "HKStubbedTestCase.h"
 
-#import <OCMock/OCMock.h>
-#import <OHHTTPStubs/OHHTTPStubs.h>
-
-#import <Hoko/Hoko+Private.h>
 #import <Hoko/HKApp.h>
-
-@interface HKStubbedTestCase : XCTestCase
-
-@end
+#import <Hoko/HKNetworkOperationQueue+Private.h>
 
 @implementation HKStubbedTestCase
 
@@ -26,8 +18,13 @@
   [super setUp];
   id appMock = OCMPartialMock([HKApp app]);
   [[[appMock stub] andReturn:@[@"hoko"]] urlSchemes];
+  
+  id networkOperationQueueMock = OCMPartialMock([HKNetworkOperationQueue sharedQueue]);
+  [[[networkOperationQueueMock stub] andDo:nil] saveNetworkOperations];
+  
   [Hoko setVerbose:NO];
   [Hoko setupWithToken:@"1234"];
+  
   
 }
 

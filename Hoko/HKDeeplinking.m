@@ -39,12 +39,12 @@
 }
 
 #pragma mark - Map Routes
-- (void)mapRoute:(NSString *)route toTarget:(HKDeeplinkTarget)target
+- (void)mapRoute:(NSString *)route toTarget:(void (^)(HKDeeplink *deeplink))target
 {
   [self.routing mapRoute:route toTarget:target];
 }
 
-- (void)mapDefaultRouteToTarget:(HKDeeplinkTarget)target
+- (void)mapDefaultRouteToTarget:(void (^)(HKDeeplink *deeplink))target
 {
   [self mapRoute:nil toTarget:target];
 }
@@ -58,11 +58,6 @@
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
   return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation];
-}
-
-- (BOOL)canOpenURL:(NSURL *)url
-{
-  return [self.routing canOpenURL:url];
 }
 
 #pragma mark - Handlers

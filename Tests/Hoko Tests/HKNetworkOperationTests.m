@@ -65,8 +65,8 @@
     lastOperationExecuted = YES;
   }];
   
-  expect(lastOperationExecuted).will.beTruthy();
   expect([HKNetworkOperationQueue sharedQueue].networkOperations.count).will.equal(0);
+  expect(lastOperationExecuted).will.beTruthy();
 }
 
 - (void)testQueueRetrying
@@ -75,7 +75,7 @@
   
   // Stub for failure
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return [request.URL.path rangeOfString:@"user"].location != NSNotFound;
+    return [request.URL.path rangeOfString:@"users"].location != NSNotFound;
   } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
     NSDictionary *json = @{};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:500 headers:nil];
@@ -89,10 +89,10 @@
   __block void (^wRetryBlock)();
   void (^retryBlock)();
   wRetryBlock = retryBlock = ^{
+    retryCount ++;
     if ([HKNetworkOperationQueue sharedQueue].networkOperations.count != 0) {
-      retryCount ++;
-      [[HKNetworkOperationQueue sharedQueue].operationQueue addOperationWithBlock:wRetryBlock];
       [[HKNetworkOperationQueue sharedQueue] flush];
+      [[HKNetworkOperationQueue sharedQueue].operationQueue addOperationWithBlock:wRetryBlock];
     }
   };
   

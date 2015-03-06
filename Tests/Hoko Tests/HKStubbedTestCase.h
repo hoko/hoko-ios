@@ -13,6 +13,7 @@
 #import <Expecta/Expecta.h>
 #import <OCMock/OCMock.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
+#import <Hoko/Hoko+Private.h>
 
 @interface HKStubbedTestCase : XCTestCase
 

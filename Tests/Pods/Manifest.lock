@@ -1,6 +1,6 @@
 PODS:
   - Expecta (0.3.2)
-  - Hoko (1.1.1)
+  - Hoko (1.1.2)
   - OCMock (3.1.2)
   - OHHTTPStubs (3.1.10):
     - OHHTTPStubs/Core (= 3.1.10)
@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Expecta: ee641011fe10aa1855d487b40e4976dac50ec342
-  Hoko: 33f0eeb9d3e7ea74932791dfdd83ee9fb56e5552
+  Hoko: f70e75010d60624313877785feb2a5eec23f483e
   OCMock: ecdd510b73ef397f2f97274785c1e87fd147c49f
   OHHTTPStubs: 2038e929b6abb94881000524c1cb4aba0a1bb4a2
 
