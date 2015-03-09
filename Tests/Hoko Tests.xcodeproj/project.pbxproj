@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		030444A80E6904820AA0BBBA /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 156BA7D99DDF339E686E13D8 /* libPods-ios.a */; };
+		306F65E21AAC99E500F36B05 /* HKHandlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306F65E11AAC99E500F36B05 /* HKHandlingTests.m */; };
 		30DEC7ED1AA09BA800C77005 /* HKLinkGeneratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EA1AA09BA800C77005 /* HKLinkGeneratorTests.m */; };
 		30DEC7EE1AA09BA800C77005 /* HKNetworkOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EB1AA09BA800C77005 /* HKNetworkOperationTests.m */; };
 		30DEC7EF1AA09BA800C77005 /* HKURLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EC1AA09BA800C77005 /* HKURLTests.m */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		04B1EC39993337A62E275698 /* Pods-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.release.xcconfig"; sourceTree = "<group>"; };
 		156BA7D99DDF339E686E13D8 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		306F65E11AAC99E500F36B05 /* HKHandlingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKHandlingTests.m; path = "Hoko Tests/HKHandlingTests.m"; sourceTree = SOURCE_ROOT; };
 		30DEC7E01AA0934800C77005 /* iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30DEC7E41AA0934800C77005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30DEC7EA1AA09BA800C77005 /* HKLinkGeneratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKLinkGeneratorTests.m; path = "Hoko Tests/HKLinkGeneratorTests.m"; sourceTree = SOURCE_ROOT; };
@@ -72,6 +74,7 @@
 				30DEC7EC1AA09BA800C77005 /* HKURLTests.m */,
 				30E2520E1AA9C2E600D3D9CA /* HKRouteTests.m */,
 				30E252101AA9C78300D3D9CA /* HKRoutingTests.m */,
+				306F65E11AAC99E500F36B05 /* HKHandlingTests.m */,
 				30DEC7E31AA0934800C77005 /* Supporting Files */,
 			);
 			name = "Hoko Tests";
@@ -208,6 +211,7 @@
 				30E2520F1AA9C2E600D3D9CA /* HKRouteTests.m in Sources */,
 				30DEC7ED1AA09BA800C77005 /* HKLinkGeneratorTests.m in Sources */,
 				30E2520C1AA86B9500D3D9CA /* HKStubbedTestCase.m in Sources */,
+				306F65E21AAC99E500F36B05 /* HKHandlingTests.m in Sources */,
 				30DEC7EE1AA09BA800C77005 /* HKNetworkOperationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

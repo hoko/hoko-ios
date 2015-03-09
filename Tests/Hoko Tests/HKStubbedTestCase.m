@@ -24,8 +24,6 @@
   
   [Hoko setVerbose:NO];
   [Hoko setupWithToken:@"1234"];
-  
-  
 }
 
 - (void)tearDown
