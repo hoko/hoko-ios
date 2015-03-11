@@ -6,6 +6,39 @@
       name = "Hoko">
       <Group
          location = "container:"
+         name = "Push Notifications">
+         <FileRef
+            location = "group:Hoko/HKPushNotifications.h">
+         </FileRef>
+         <FileRef
+            location = "group:Hoko/HKPushNotifications.m">
+         </FileRef>
+         <FileRef
+            location = "group:Hoko/HKPushNotifications+Private.h">
+         </FileRef>
+         <Group
+            location = "container:"
+            name = "iOS 8">
+            <FileRef
+               location = "group:Hoko/HKIOS8PushNotifications.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKIOS8PushNotifications.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
+            name = "Legacy">
+            <FileRef
+               location = "group:Hoko/HKLegacyPushNotifications.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKLegacyPushNotifications.m">
+            </FileRef>
+         </Group>
+      </Group>
+      <Group
+         location = "container:"
          name = "Analytics">
          <Group
             location = "container:"

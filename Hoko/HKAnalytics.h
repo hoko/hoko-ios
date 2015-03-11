@@ -154,6 +154,6 @@ typedef NS_ENUM(NSInteger, HKUserGender) {
 
 @end
 
-#ifndef HKAnalytics
+#ifndef HokoAnalytics
   #define HokoAnalytics [Hoko analytics]
 #endif

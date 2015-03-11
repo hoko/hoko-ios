@@ -13,6 +13,10 @@
 
 - (instancetype)initWithToken:(NSString *)token debugMode:(BOOL)debugMode;
 
+- (BOOL)canOpenURL:(NSURL *)url;
+
+- (BOOL)handleOpenURLFromForeground:(NSURL *)url;
+
 @property (nonatomic, strong) HKRouting *routing;
 @property (nonatomic, strong) HKHandling *handling;
 

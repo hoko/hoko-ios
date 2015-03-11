@@ -15,6 +15,7 @@ extern NSString *const HKDeeplinkOpenIdentifierKey;
 
 typedef NS_ENUM(NSUInteger, HKDeeplinkStatus) {
     HKDeeplinkStatusOpened = 3,
+    HKDeeplinkStatusIgnored = 4
 };
 
 @interface HKDeeplink (Private)

@@ -60,46 +60,85 @@
 #pragma mark - Open URL
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  HKURL *hkURL = [[HKURL alloc]initWithURL:url];
-  NSDictionary *routeParameters;
-  // Search for a match with any given route
-  for (HKRoute *route in self.routes) {
-    if([hkURL matchesWithRoute:route routeParameters:&routeParameters]) {
-      HKDeeplink *deeplink = [HKDeeplink deeplinkWithURLScheme:hkURL.scheme
-                                                         route:route.route
-                                               routeParameters:routeParameters
-                                               queryParameters:hkURL.queryParameters
-                                             sourceApplication:sourceApplication];
-      
-      [[Hoko deeplinking].handling handle:deeplink];
-      
-      if(route.target) {
-        route.target(deeplink);
-      }
-      
-      return YES;
-    }
-  }
-  
-  // Default Route
-  if(self.defaultRoute) {
-    HKDeeplink *deeplink = [HKDeeplink deeplinkWithURLScheme:hkURL.scheme
-                                                       route:nil
-                                             routeParameters:nil
-                                             queryParameters:hkURL.queryParameters
-                                           sourceApplication:sourceApplication];
-    
-    [[Hoko deeplinking].handling handle:deeplink];
-    
-    if(self.defaultRoute.target) {
-      self.defaultRoute.target(deeplink);
-    }
-    
-    return YES;
-  }
-  return NO;
+    return [self openURL:url
+       sourceApplication:sourceApplication
+              annotation:annotation
+          fromForeground:NO];
 }
 
+- (BOOL)openURL:(NSURL *)url
+sourceApplication:(NSString *)sourceApplication
+     annotation:(id)annotation
+ fromForeground:(BOOL)fromForeground
+{
+    HKURL *hkURL = [[HKURL alloc]initWithURL:url];
+    NSDictionary *routeParameters;
+    // Search for a match with any given route
+    for (HKRoute *route in self.routes) {
+        if([hkURL matchesWithRoute:route routeParameters:&routeParameters]) {
+            HKDeeplink *deeplink = [HKDeeplink deeplinkWithURLScheme:hkURL.scheme
+                                                               route:route.route
+                                                     routeParameters:routeParameters
+                                                     queryParameters:hkURL.queryParameters
+                                                   sourceApplication:sourceApplication];
+            
+            // If deeplink comes from foreground (a.k.a. push notification while in the app) dont open it but rather
+            // warn the backend that it was received but won't ever be opened. Otherwise do the handling calls and
+            // call the target.
+            if (!fromForeground) {
+                [[Hoko deeplinking].handling handle:deeplink];
+                if(route.target)
+                    route.target(deeplink);
+            } else {
+                [deeplink postWithToken:self.token
+                                   user:[[Hoko analytics] currentUser]
+                             statusCode:HKDeeplinkStatusIgnored];
+            }
+        }
+    }
+    
+    // Default Route
+    if(self.defaultRoute) {
+        if(self.defaultRoute.target) {
+            HKDeeplink *deeplink = [HKDeeplink deeplinkWithURLScheme:hkURL.scheme
+                                                               route:nil
+                                                     routeParameters:nil
+                                                     queryParameters:hkURL.queryParameters
+                                                   sourceApplication:sourceApplication];
+            
+            // Applies the same behavior as a common route.
+            if (!fromForeground) {
+                [[Hoko deeplinking].handling handle:deeplink];
+                self.defaultRoute.target(deeplink);
+            } else {
+                [deeplink postWithToken:self.token
+                                   user:[[Hoko analytics] currentUser]
+                             statusCode:HKDeeplinkStatusIgnored];
+            }
+        }
+    }
+    return [self canOpenURL:url];
+}
+
+- (BOOL)canOpenURL:(NSURL *)url
+{
+    // If a default route exists it can always open the URL
+    if(self.defaultRoute) {
+        return YES;
+    }
+    
+    // Look for a matching route for this URL
+    HKURL *hkURL = [[HKURL alloc] initWithURL:url];
+    
+    // Search for a match with any given route
+    for (HKRoute *route in self.routes) {
+        if([hkURL matchesWithRoute:route routeParameters:nil]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
 #pragma mark - Add Route
 - (void)addNewRoute:(HKRoute *)route

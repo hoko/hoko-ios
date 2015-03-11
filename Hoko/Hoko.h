@@ -8,6 +8,7 @@
 
 #import "HKAnalytics.h"
 #import "HKDeeplinking.h"
+#import "HKPushNotifications.h"
 
 #import "HKDeeplink.h"
 
@@ -75,6 +76,15 @@
  *  @return A reference to the HKAnalytics instance.
  */
 + (HKAnalytics *)analytics;
+
+/**
+ *  The HKPushNotifications module provides all the necessary APIs to manage push notifications generated
+ *  by the Hoko service. It provides also an abstraction between iOS<8.0 and iOS>=8.0 notification APIs for
+ *  easier integration.
+ *
+ *  @return A reference to the HKPushNotifications instance.
+ */
++ (HKPushNotifications *)pushNotifications;
 
 /**
  *  Use this function to enable or disable logging from the Hoko SDK
