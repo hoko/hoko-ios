@@ -19,6 +19,7 @@ NSString *const HKDeeplinkHokolinkIdentifierKey = @"hk_oid";
 NSString *const HKDeeplinkOpenIdentifierKey = @"hk_id";
 
 NSString *const HKDeeplinkOpenPath = @"omnilinks/%@/open";
+NSString *const HKDeeplinkPushNotificationPath = @"notifications/%@/open";
 
 //NSString *const HKDeeplinkHokolinkIdentifierKey = @"__hkid"; //TODO change to this
 //NSString *const HKDeeplinkOpenIdentifierKey = @"__openid";
@@ -109,10 +110,21 @@ NSString *const HKDeeplinkOpenPath = @"omnilinks/%@/open";
   return self.hokolinkIdentifier != nil;
 }
 
+- (BOOL)isPushNotification
+{
+    return !self.hokolinkIdentifier && self.openIdentifier;
+}
+
 #pragma mark - Networking
 - (void)postWithToken:(NSString *)token user:(HKUser *)user statusCode:(HKDeeplinkStatus)statusCode
 {
-  if (self.isHokolink) {
+    if (self.isPushNotification) {
+        HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
+                                                                                            path:[NSString stringWithFormat:HKDeeplinkPushNotificationPath, self.openIdentifier]
+                                                                                           token:token
+                                                                                      parameters:[self notificationJSONWithStatusCode:statusCode]];
+        [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
+    } else if (self.isHokolink) {
     // TODO change to hokolinks/
     HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
                                                                                         path:[NSString stringWithFormat:HKDeeplinkOpenPath, self.hokolinkIdentifier]
