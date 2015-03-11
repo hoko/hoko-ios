@@ -115,9 +115,9 @@
   NSString *urlScheme = [self urlSchemeFromURLString:urlString];
   
   // Remove URL Scheme from url
-  NSString *path = [self pathForURLString:urlString urlScheme:urlScheme];
+  NSString *path = [self pathForURLString:urlString urlScheme:[NSString stringWithFormat:@"%@:",urlScheme]];
   
-  NSString *sanitizedURLString = [NSString stringWithFormat:@"%@//%@",
+  NSString *sanitizedURLString = [NSString stringWithFormat:@"%@://%@",
                                   urlScheme,
                                   path];
   return [NSURL URLWithString:sanitizedURLString];
@@ -145,10 +145,10 @@
       break;
     }
     
-    urlScheme = [urlScheme stringByAppendingFormat:@"%c",character];
     if (character == ':') {
       break;
     }
+    urlScheme = [urlScheme stringByAppendingFormat:@"%c",character];
   }
   return urlScheme;
 }

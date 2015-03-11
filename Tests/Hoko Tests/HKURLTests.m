@@ -58,7 +58,7 @@
 - (void)testScheme
 {
   HKURL *url = [[HKURL alloc] initWithURL:[NSURL URLWithString:@"hoko://param/1/other_param/2?test=1&q_param=2&string=hi+there"]];
-  expect(url.scheme).to.equal(@"hoko:");
+  expect(url.scheme).to.equal(@"hoko");
 }
 
 - (void)testRouteMatched

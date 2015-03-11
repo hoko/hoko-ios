@@ -49,7 +49,7 @@
   }];
   BOOL canOpenURL = [HokoDeeplinking.routing openURL:[NSURL URLWithString:@"hoko://product/2?query=hi+there"] sourceApplication:@"com.hoko.black" annotation:nil];
   expect(canOpenURL).to.beTruthy();
-  expect(blockDeeplink.urlScheme).will.equal(@"hoko:");
+  expect(blockDeeplink.urlScheme).will.equal(@"hoko");
   expect(blockDeeplink.route).will.equal(@"product/:product_id");
   expect(blockDeeplink.routeParameters).will.equal(@{@"product_id":@"2"});
   expect(blockDeeplink.queryParameters).will.equal(@{@"query": @"hi there"});
@@ -75,7 +75,7 @@
   }];
   BOOL canOpenURL = [HokoDeeplinking.routing openURL:[NSURL URLWithString:@"hoko://product?query=hi+there"] sourceApplication:@"com.hoko.black" annotation:nil];
   expect(canOpenURL).to.beTruthy();
-  expect(blockDeeplink.urlScheme).will.equal(@"hoko:");
+  expect(blockDeeplink.urlScheme).will.equal(@"hoko");
   expect(blockDeeplink.route).will.beNil();
   expect(blockDeeplink.routeParameters).will.beNil();
   expect(blockDeeplink.queryParameters).will.equal(@{@"query": @"hi there"});
