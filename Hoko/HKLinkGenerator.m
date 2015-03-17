@@ -55,7 +55,7 @@
                    failure:(void (^)(NSError *error))failure
 {
   // TODO Change to hokolink
-  [HKNetworking postToPath:[HKNetworkOperation urlFromPath:@"omnilinks"] parameters:deeplink.json token:self.token successBlock:^(id json) {
+  [HKNetworking postToPath:[HKNetworkOperation urlFromPath:@"smartlinks"] parameters:deeplink.json token:self.token successBlock:^(id json) {
     if(json[@"omnilink"])
       success(json[@"omnilink"]);
     else

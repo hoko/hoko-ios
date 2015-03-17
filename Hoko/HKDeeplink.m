@@ -11,6 +11,7 @@
 #import "HKURL.h"
 #import "HKUser.h"
 #import "HKUtils.h"
+#import "HKDevice.h"
 #import "HKRouting.h"
 #import "HKDeeplink+Private.h"
 #import "HKNetworkOperationQueue.h"
@@ -95,13 +96,13 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
   NSString *path = self.route;
   for (NSString *routeParameterKey in self.routeParameters.allKeys) {
     path = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@":%@",routeParameterKey]
-                                           withString:self.routeParameters[routeParameterKey]];
+                                           withString:[NSString stringWithFormat:@"%@",self.routeParameters[routeParameterKey]]];
   }
   
   if (self.queryParameters.count > 0) {
     path = [path stringByAppendingString:@"?"];
     for (NSString *queryParameterKey in self.queryParameters.allKeys) {
-      path = [path stringByAppendingFormat:@"%@=%@&", queryParameterKey, self.queryParameters[queryParameterKey]];
+      path = [path stringByAppendingFormat:@"%@=%@&", queryParameterKey, [NSString stringWithFormat:@"%@",self.queryParameters[queryParameterKey]]];
     }
     path = [path substringToIndex:path.length - 1];
   }
@@ -140,7 +141,7 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 #pragma mark - Serialization
 - (id)json
 {
-  return @{@"path": [HKUtils jsonValue:self.path]};
+    return @{@"routes": @{[[HKDevice device] platform].lowercaseString: [HKUtils jsonValue:self.path]}};
   
 }
 

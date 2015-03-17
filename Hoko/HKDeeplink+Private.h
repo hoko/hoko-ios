@@ -10,7 +10,7 @@
 
 @class HKUser;
 
-extern NSString *const HKDeeplinkHokolinkIdentifierKey;
+extern NSString *const HKDeeplinkSmartlinkIdentifierKey;
 extern NSString *const HKDeeplinkOpenIdentifierKey;
 
 typedef NS_ENUM(NSUInteger, HKDeeplinkStatus) {
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSUInteger, HKDeeplinkStatus) {
 @property (nonatomic, strong, readonly) NSString *sourceApplication;
 @property (nonatomic, strong, readonly) id json;
 
-@property (nonatomic, strong, readonly) NSString *hokolinkIdentifier;
+@property (nonatomic, strong, readonly) NSString *smartlinkIdentifier;
 @property (nonatomic, strong, readonly) NSString *openIdentifier;
 
 @property (nonatomic, readonly) BOOL isHokolink;

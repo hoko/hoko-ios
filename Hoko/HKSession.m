@@ -76,7 +76,7 @@ NSString *const HKSessionPath = @"sessions";
                          @"user": [HKUtils jsonValue:self.user.json[@"user"]],
                          @"key_events": [HKUtils jsonValue:[self eventsJSON]],
                          HKDeeplinkOpenIdentifierKey: [HKUtils jsonValue:self.deeplink.openIdentifier],
-                         HKDeeplinkHokolinkIdentifierKey: [HKUtils jsonValue:self.deeplink.hokolinkIdentifier]}};
+                         HKDeeplinkSmartlinkIdentifierKey: [HKUtils jsonValue:self.deeplink.smartlinkIdentifier]}};
 }
 
 - (id)eventsJSON
