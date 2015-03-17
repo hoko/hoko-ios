@@ -16,8 +16,8 @@
 #import "HKDeeplink+Private.h"
 #import "HKNetworkOperationQueue.h"
 
-NSString *const HKDeeplinkSmartlinkIdentifierKey = @"hk_sid";
-NSString *const HKDeeplinkOpenIdentifierKey = @"hk_oid";
+NSString *const HKDeeplinkSmartlinkIdentifierKey = @"_hk_sid";
+NSString *const HKDeeplinkOpenIdentifierKey = @"_hk_oid";
 
 NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 
@@ -26,6 +26,7 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 @property (nonatomic, strong, readonly) NSString *urlScheme;
 @property (nonatomic, strong, readonly) NSDictionary *json;
 @property (nonatomic, strong, readonly) NSString *sourceApplication;
+@property (nonatomic, strong) NSMutableDictionary *urls;
 
 @end
 
@@ -86,27 +87,61 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
     _routeParameters = routeParameters;
     _queryParameters = queryParameters;
     _sourceApplication = sourceApplication;
+    _urls = [@{} mutableCopy];
   }
   
   return self;
 }
 
-- (NSString *)path
+- (NSString *)url
 {
-  NSString *path = self.route;
+  NSString *url = self.route;
   for (NSString *routeParameterKey in self.routeParameters.allKeys) {
-    path = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@":%@",routeParameterKey]
-                                           withString:[NSString stringWithFormat:@"%@",self.routeParameters[routeParameterKey]]];
+    url = [url stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@":%@",routeParameterKey]
+                                         withString:[NSString stringWithFormat:@"%@",self.routeParameters[routeParameterKey]]];
   }
   
   if (self.queryParameters.count > 0) {
-    path = [path stringByAppendingString:@"?"];
+    url = [url stringByAppendingString:@"?"];
     for (NSString *queryParameterKey in self.queryParameters.allKeys) {
-      path = [path stringByAppendingFormat:@"%@=%@&", queryParameterKey, [NSString stringWithFormat:@"%@",self.queryParameters[queryParameterKey]]];
+      url = [url stringByAppendingFormat:@"%@=%@&", queryParameterKey, [NSString stringWithFormat:@"%@",self.queryParameters[queryParameterKey]]];
     }
-    path = [path substringToIndex:path.length - 1];
+    url = [url substringToIndex:url.length - 1];
   }
-  return path;
+  return url;
+}
+
+#pragma mark - Linking
+- (void)addURL:(NSString *)url forPlatform:(HKDeeplinkPlatform)platform
+{
+  NSString *urlString = url;
+  if ([url isKindOfClass:[NSURL class]]) {
+    urlString = [(NSURL *)url absoluteString];
+  }
+  self.urls[[self stringForPlatform:platform]] = @{@"link": urlString};
+}
+
+- (NSString *)stringForPlatform:(HKDeeplinkPlatform)platform
+{
+  switch (platform) {
+    case HKDeeplinkPlatformiPhone:
+      return @"iphone";
+    case HKDeeplinkPlatformiPad:
+      return @"ipad";
+    case HKDeeplinkPlatformiOSUniversal:
+      return @"ios";
+    case HKDeeplinkPlatformAndroid:
+      return @"android";
+    case HKDeeplinkPlatformWeb:
+      return @"web";
+    default:
+      return nil;
+  }
+}
+
+- (BOOL)hasURLs
+{
+  return self.urls.count > 0;
 }
 
 #pragma mark - Campaign Identifiers
@@ -141,15 +176,20 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 #pragma mark - Serialization
 - (id)json
 {
-    return @{@"routes": @{[[HKDevice device] platform].lowercaseString: [HKUtils jsonValue:self.path]}};
+  if (!self.hasURLs) {
+    return @{@"original_url": [HKUtils jsonValue:self.url]};
+  } else {
+    return @{@"original_url": [HKUtils jsonValue:self.url],
+             @"routes": self.urls};
+  }
   
 }
 
 - (id)smartlinkJSONWithUser:(HKUser *)user
 {
-  return @{@"smartlink": @{@"smartlink_open_id": [HKUtils jsonValue:self.openIdentifier],
-                          @"opened_at": [HKUtils stringFromDate:[NSDate date]],
-                          @"user": user.baseJSON}};
+  return @{@"smartlink": @{HKDeeplinkOpenIdentifierKey: [HKUtils jsonValue:self.openIdentifier],
+                           @"opened_at": [HKUtils stringFromDate:[NSDate date]],
+                           @"user": user.baseJSON}};
 }
 
 #pragma mark - Description

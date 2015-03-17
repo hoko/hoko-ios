@@ -121,18 +121,17 @@
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation NS_AVAILABLE_IOS(4_2);
 
 /**
- *  generateHokolinkForDeeplink:success:failure allows the app to generate Hokolinks for the
+ *  generateSmartlinkForDeeplink:success:failure allows the app to generate Smartlinks for the
  *  user to share with other users, independent of the platform, users will be redirected to the
  *  corresponding view. A user generated HKDeeplink object may be passed along to generate the
  *  deeplinks for all available platforms. In case the request is succesful, the success block will
- *  receive an hokolink (e.g. http://hoko.link/XmPle). Otherwise it will return the cause of failure in
+ *  receive an Smartlink (e.g. http://hoko.link/XmPle). Otherwise it will return the cause of failure in
  *  the failure block.
  *
-alto
- *  @param success      The block called in case of success, will have an hokolink as a parameter.
+ *  @param success      The block called in case of success, will have an Smartlink as a parameter.
  *  @param failure      The block called in case of failure, will have an NSError as a parameter.
  */
-- (void)generateHokolinkForDeeplink:(HKDeeplink *)deeplink success:(void(^)(NSString *hokolink))success failure:(void(^)(NSError *error))failure;
+- (void)generateSmartlinkForDeeplink:(HKDeeplink *)deeplink success:(void(^)(NSString *smartlink))success failure:(void(^)(NSError *error))failure;
 
 @end
 

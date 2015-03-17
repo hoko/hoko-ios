@@ -72,11 +72,11 @@
 }
 
 #pragma mark - Link Generation
-- (void)generateHokolinkForDeeplink:(HKDeeplink *)deeplink
-                            success:(void (^)(NSString *hokolink))success
-                            failure:(void (^)(NSError *error))failure
+- (void)generateSmartlinkForDeeplink:(HKDeeplink *)deeplink
+                             success:(void (^)(NSString *martlink))success
+                             failure:(void (^)(NSError *error))failure
 {
-  [self.linkGenerator generateHokolinkForDeeplink:deeplink success:success failure:failure];
+  [self.linkGenerator generateSmartlinkForDeeplink:deeplink success:success failure:failure];
 }
 
 #pragma mark - Swizzling

@@ -14,8 +14,8 @@
 
 - (instancetype)initWithToken:(NSString *)token;
 
-- (void)generateHokolinkForDeeplink:(HKDeeplink *)deeplink
-                            success:(void (^)(NSString *hokolink))success
+- (void)generateSmartlinkForDeeplink:(HKDeeplink *)deeplink
+                            success:(void (^)(NSString *smartlink))success
                             failure:(void (^)(NSError *error))failure;
 
 @end

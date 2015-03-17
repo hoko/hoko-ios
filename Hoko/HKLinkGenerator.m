@@ -34,32 +34,31 @@
   return self;
 }
 
-#pragma mark - Hokolink Generation
-- (void)generateHokolinkForDeeplink:(HKDeeplink *)deeplink
-                            success:(void (^)(NSString *hokolink))success
-                            failure:(void (^)(NSError *error))failure
+#pragma mark - Smartlink Generation
+- (void)generateSmartlinkForDeeplink:(HKDeeplink *)deeplink
+                             success:(void (^)(NSString *smartlink))success
+                             failure:(void (^)(NSError *error))failure
 {
   if (!deeplink) {
     failure([HKError nilDeeplinkError]);
   } else if (![[Hoko deeplinking].routing routeExists:deeplink.route]) {
     failure([HKError routeNotMappedError]);
   }else {
-    [self requestForDeeplink:deeplink success:success failure:failure];
+    [self requestForSmartlinkWithDeeplink:deeplink success:success failure:failure];
   }
 }
 
-
 #pragma mark - Networking
-- (void)requestForDeeplink:(HKDeeplink *)deeplink
-                   success:(void (^)(NSString *hokolink))success
-                   failure:(void (^)(NSError *error))failure
+- (void)requestForSmartlinkWithDeeplink:(HKDeeplink *)deeplink
+                                success:(void (^)(NSString *smartlink))success
+                                failure:(void (^)(NSError *error))failure
 {
-  // TODO Change to hokolink
-  [HKNetworking postToPath:[HKNetworkOperation urlFromPath:@"smartlinks"] parameters:deeplink.json token:self.token successBlock:^(id json) {
-    if(json[@"omnilink"])
-      success(json[@"omnilink"]);
+  NSString *path = deeplink.hasURLs ? @"smartlinks/create_custom" : @"smartlinks/create_with_template";
+  [HKNetworking postToPath:[HKNetworkOperation urlFromPath:path] parameters:deeplink.json token:self.token successBlock:^(id json) {
+    if(json[@"smartlink"])
+      success(json[@"smartlink"]);
     else
-      failure([HKError hokolinkGenerationError]);
+      failure([HKError smartlinkGenerationError]);
   } failedBlock:^(id error) {
     HKErrorLog([HKError serverErrorFromJSON:error]);
     failure([HKError serverErrorFromJSON:error]);

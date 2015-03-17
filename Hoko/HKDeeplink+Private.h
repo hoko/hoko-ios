@@ -36,6 +36,7 @@ typedef NS_ENUM(NSUInteger, HKDeeplinkStatus) {
 @property (nonatomic, strong, readonly) NSString *smartlinkIdentifier;
 @property (nonatomic, strong, readonly) NSString *openIdentifier;
 
-@property (nonatomic, readonly) BOOL isHokolink;
+@property (nonatomic, readonly) BOOL isSmartlink;
+@property (nonatomic, readonly) BOOL hasURLs;
 
 @end
