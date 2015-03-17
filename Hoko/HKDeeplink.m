@@ -15,13 +15,10 @@
 #import "HKDeeplink+Private.h"
 #import "HKNetworkOperationQueue.h"
 
-NSString *const HKDeeplinkHokolinkIdentifierKey = @"hk_oid";
-NSString *const HKDeeplinkOpenIdentifierKey = @"hk_id";
+NSString *const HKDeeplinkSmartlinkIdentifierKey = @"hk_sid";
+NSString *const HKDeeplinkOpenIdentifierKey = @"hk_oid";
 
-NSString *const HKDeeplinkOpenPath = @"omnilinks/%@/open";
-
-//NSString *const HKDeeplinkHokolinkIdentifierKey = @"__hkid"; //TODO change to this
-//NSString *const HKDeeplinkOpenIdentifierKey = @"__openid";
+NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 
 @interface HKDeeplink ()
 
@@ -93,54 +90,63 @@ NSString *const HKDeeplinkOpenPath = @"omnilinks/%@/open";
   return self;
 }
 
+- (NSString *)path
+{
+  NSString *path = self.route;
+  for (NSString *routeParameterKey in self.routeParameters.allKeys) {
+    path = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@":%@",routeParameterKey]
+                                           withString:self.routeParameters[routeParameterKey]];
+  }
+  
+  if (self.queryParameters.count > 0) {
+    path = [path stringByAppendingString:@"?"];
+    for (NSString *queryParameterKey in self.queryParameters.allKeys) {
+      path = [path stringByAppendingFormat:@"%@=%@&", queryParameterKey, self.queryParameters[queryParameterKey]];
+    }
+    path = [path substringToIndex:path.length - 1];
+  }
+  return path;
+}
+
 #pragma mark - Campaign Identifiers
 - (NSString *)openIdentifier
 {
   return self.queryParameters[HKDeeplinkOpenIdentifierKey];
 }
 
-- (NSString *)hokolinkIdentifier
+- (NSString *)smartlinkIdentifier
 {
-  return self.queryParameters[HKDeeplinkHokolinkIdentifierKey];
+  return self.queryParameters[HKDeeplinkSmartlinkIdentifierKey];
 }
 
-- (BOOL)isHokolink
+- (BOOL)isSmartlink
 {
-  return self.hokolinkIdentifier != nil;
+  return self.smartlinkIdentifier != nil;
 }
 
 #pragma mark - Networking
 - (void)postWithToken:(NSString *)token user:(HKUser *)user statusCode:(HKDeeplinkStatus)statusCode
 {
-  if (self.isHokolink) {
-    // TODO change to hokolinks/
+  if (self.isSmartlink) {
     HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
-                                                                                        path:[NSString stringWithFormat:HKDeeplinkOpenPath, self.hokolinkIdentifier]
+                                                                                        path:[NSString stringWithFormat:HKDeeplinkOpenPath, self.smartlinkIdentifier]
                                                                                        token:token
-                                                                                  parameters:[self hokolinkJSONWithUser:user]];
+                                                                                  parameters:[self smartlinkJSONWithUser:user]];
     [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
-
+    
   }
 }
 
 #pragma mark - Serialization
 - (id)json
 {
-  return @{@"route":@{@"path": [HKUtils jsonValue:self.route],
-                      @"parameters": [HKUtils jsonValue:self.routeParameters],
-                      @"query": [HKUtils jsonValue:self.queryParameters]}};
+  return @{@"path": [HKUtils jsonValue:self.path]};
+  
 }
 
-- (id)notificationJSONWithStatusCode:(HKDeeplinkStatus)statusCode
+- (id)smartlinkJSONWithUser:(HKUser *)user
 {
-  return @{@"notification": @{@"opened_at": [HKUtils stringFromDate:[NSDate date]],
-                              @"status_code": @(statusCode)}};
-}
-
-- (id)hokolinkJSONWithUser:(HKUser *)user
-{
-  // TODO change to hokolink
-  return @{@"omnilink": @{@"omnilink_open_id": [HKUtils jsonValue:self.openIdentifier],
+  return @{@"smartlink": @{@"smartlink_open_id": [HKUtils jsonValue:self.openIdentifier],
                           @"opened_at": [HKUtils stringFromDate:[NSDate date]],
                           @"user": user.baseJSON}};
 }
