@@ -29,7 +29,7 @@
 }
 
 #pragma mark - Observe
-- (void)registerForNotification:(NSString *)name triggered:(HKNotificationTriggeredBlock)triggered
+- (HKNotificationObserver *)registerForNotification:(NSString *)name triggered:(HKNotificationTriggeredBlock)triggered
 {
   HKNotificationObserver *notificationObserver = [[HKNotificationObserver alloc] initWithNotification:name triggered:triggered];
   [self.observers addObject:notificationObserver];

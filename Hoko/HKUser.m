@@ -59,16 +59,10 @@ NSString *const HKUserPath = @"users";
       _identifier = [HKUtils generateUUID];
       _anonymous = YES;
     }
-    _timezoneOffset = [HKUser currentTimezoneOffset];
+    _timezoneOffset = [HKDevice device].timezoneOffset;
     [self saveUser];
   }
   return self;
-}
-
-#pragma mark - Timezone
-+ (NSString *)currentTimezoneOffset
-{
-  return [NSString stringWithFormat:@"%@",@([[NSTimeZone localTimeZone] secondsFromGMT] / ( 60.0f * 60.0f))];
 }
 
 #pragma mark - Serialization

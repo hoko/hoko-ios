@@ -24,6 +24,7 @@
 @property (nonatomic, strong, readonly) NSString *screenSize;
 @property (nonatomic, strong, readonly) NSString *carrier;
 @property (nonatomic, strong, readonly) NSString *uid;
+@property (nonatomic, strong, readonly) NSString *timezoneOffset;
 @property (nonatomic, strong) NSString *apnsToken;
 @property (nonatomic, readonly) BOOL hasInternetConnection;
 @property (nonatomic, readonly) BOOL isSimulator;

@@ -10,9 +10,11 @@
 
 #import "HKError.h"
 #import "HKRouting.h"
+#import "HKObserver.h"
 #import "HKHandling.h"
 #import "HKSwizzling.h"
 #import "HKLinkGenerator.h"
+#import "HKDeferredDeeplinking.h"
 #import "HKDeeplinking+Private.h"
 
 @interface HKDeeplinking ()
@@ -20,6 +22,7 @@
 @property (nonatomic, strong) HKRouting *routing;
 @property (nonatomic, strong) HKHandling *handling;
 @property (nonatomic, strong) HKLinkGenerator *linkGenerator;
+@property (nonatomic, strong) HKDeferredDeeplinking *deferredDeeplinking;
 
 @end
 
@@ -28,47 +31,55 @@
 #pragma mark - Initialization
 - (instancetype)initWithToken:(NSString *)token debugMode:(BOOL)debugMode
 {
-  self = [super init];
-  if (self) {
-    _routing = [[HKRouting alloc] initWithToken:token
-                                      debugMode:debugMode];
-    _handling = [HKHandling new];
-    _linkGenerator = [[HKLinkGenerator alloc] initWithToken:token];
-  }
-  return self;
+    self = [super init];
+    if (self) {
+        _routing = [[HKRouting alloc] initWithToken:token
+                                          debugMode:debugMode];
+        _handling = [HKHandling new];
+        _linkGenerator = [[HKLinkGenerator alloc] initWithToken:token];
+        _deferredDeeplinking = [[HKDeferredDeeplinking alloc] initWithToken:token];
+        __block typeof(self) wself = self;
+        __block HKNotificationObserver *notificationObserver = [[HKObserver observer] registerForNotification:UIApplicationDidBecomeActiveNotification triggered:^(NSNotification *notification) {
+            [wself.deferredDeeplinking requestDeferredDeeplink:^(NSString *deeplink) {
+                [wself handleOpenURL:[NSURL URLWithString:deeplink]];
+            }];
+            [[HKObserver observer] removeObserver:notificationObserver];
+        }];
+    }
+    return self;
 }
 
 #pragma mark - Map Routes
 - (void)mapRoute:(NSString *)route toTarget:(void (^)(HKDeeplink *deeplink))target
 {
-  [self.routing mapRoute:route toTarget:target];
+    [self.routing mapRoute:route toTarget:target];
 }
 
 - (void)mapDefaultRouteToTarget:(void (^)(HKDeeplink *deeplink))target
 {
-  [self mapRoute:nil toTarget:target];
+    [self mapRoute:nil toTarget:target];
 }
 
 #pragma mark - Open URL
 - (BOOL)handleOpenURL:(NSURL *)url
 {
-  return [self openURL:url sourceApplication:nil annotation:nil];
+    return [self openURL:url sourceApplication:nil annotation:nil];
 }
 
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation];
+    return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 
 #pragma mark - Handlers
 - (void)addHandler:(id<HKHandlerProcotol>)handler
 {
-  [self.handling addHandler:handler];
+    [self.handling addHandler:handler];
 }
 
 - (void)addHandlerBlock:(void (^)(HKDeeplink *deeplink))handlerBlock
 {
-  [self.handling addHandlerBlock:handlerBlock];
+    [self.handling addHandlerBlock:handlerBlock];
 }
 
 #pragma mark - Link Generation
@@ -76,13 +87,13 @@
                              success:(void (^)(NSString *martlink))success
                              failure:(void (^)(NSError *error))failure
 {
-  [self.linkGenerator generateSmartlinkForDeeplink:deeplink success:success failure:failure];
+    [self.linkGenerator generateSmartlinkForDeeplink:deeplink success:success failure:failure];
 }
 
 #pragma mark - Swizzling
 + (void)load
 {
-  [HKSwizzling swizzleHKDeeplinking];
+    [HKSwizzling swizzleHKDeeplinking];
 }
 
 @end

@@ -13,7 +13,7 @@
 
 + (instancetype)observer;
 
-- (void)registerForNotification:(NSString *)name triggered:(HKNotificationTriggeredBlock)triggered;
+- (HKNotificationObserver *)registerForNotification:(NSString *)name triggered:(HKNotificationTriggeredBlock)triggered;
 - (void)observe:(id)object keyPath:(NSString *)keyPath triggered:(HKObjectObserverTriggered)triggered;
 
 - (void)removeObserver:(id)observer;

@@ -52,6 +52,16 @@
          name = "Deeplinking">
          <Group
             location = "container:"
+            name = "Deferred">
+            <FileRef
+               location = "group:Hoko/HKDeferredDeeplinking.h">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HKDeferredDeeplinking.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
             name = "Link Generation">
             <FileRef
                location = "group:Hoko/HKLinkGenerator.h">
