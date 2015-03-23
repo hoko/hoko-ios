@@ -59,9 +59,9 @@ NSString *const HKServerWarningDomain = @"HokoServerWarning";
   return [self errorWithCode:7 description:@"Object does not implement the 'deeplinkOpened:' method of the HKDeeplinkable Protocol."];
 }
 
-+ (NSError *)hokolinkGenerationError
++ (NSError *)smartlinkGenerationError
 {
-  return [self errorWithCode:8 description:@"Could not generate Hokolink. Please try again later."];
+  return [self errorWithCode:8 description:@"Could not generate Smartlink. Please try again later."];
 }
 
 + (NSError *)genericServerError
@@ -71,7 +71,7 @@ NSString *const HKServerWarningDomain = @"HokoServerWarning";
 
 + (NSError *)routeNotMappedError
 {
-  return [self errorWithCode:10 description:@"The route is not mapped. Please map it in the AppDelegate before trying to generate an Hokolink."];
+  return [self errorWithCode:10 description:@"The route is not mapped. Please map it in the AppDelegate before trying to generate a Smartlink."];
 }
 
 + (NSError *)nilDeeplinkError

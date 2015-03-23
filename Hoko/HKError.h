@@ -17,7 +17,7 @@
 + (NSError *)notDeeplinkableError:(id)object;
 + (NSError *)noDeeplinkMethodError:(id)object;
 + (NSError *)noDeeplinkOpenedMethodError:(id)object;
-+ (NSError *)hokolinkGenerationError;
++ (NSError *)smartlinkGenerationError;
 + (NSError *)genericServerError;
 + (NSError *)routeNotMappedError;
 + (NSError *)nilDeeplinkError;

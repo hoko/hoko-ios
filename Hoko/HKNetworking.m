@@ -130,8 +130,9 @@ NSString *const HKNetworkingFormat = @"json";
                                                      timeoutInterval:HKNetworkingRequestTimeout];
   [request setHTTPMethod:@"GET"];
   
-  [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+  [request setValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
   [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+
   if (token) {
     [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
     [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
@@ -154,7 +155,6 @@ NSString *const HKNetworkingFormat = @"json";
                                                      options:NSJSONWritingPrettyPrinted
                                                        error:&error];
   HKLog(@"POST to %@\n%@", url, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
-  jsonData = [HKGZip gzippedData:jsonData];
   if(error != nil)
   {
     HKErrorLog([HKError jsonParseError:parameters]);
@@ -167,9 +167,9 @@ NSString *const HKNetworkingFormat = @"json";
   
   [request setHTTPMethod:@"POST"];
   
-  [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+  [request setValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
   [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-  [request setValue:@"gzip/json" forHTTPHeaderField:@"Content-Type"];
+  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   if (token) {
     [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
     [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
@@ -189,11 +189,10 @@ NSString *const HKNetworkingFormat = @"json";
   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters
                                                      options:NSJSONWritingPrettyPrinted
                                                        error:&error];
-  //HKLog(@"Putting %@",[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
-  jsonData = [HKGZip gzippedData:jsonData];
+  HKLog(@"Putting %@",[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
   if(error != nil)
   {
-    //HKErrorLog([HKError jsonParseError:parameters]);
+    HKErrorLog([HKError jsonParseError:parameters]);
     jsonData = nil;
   }
   
@@ -203,9 +202,11 @@ NSString *const HKNetworkingFormat = @"json";
   
   HKLog(@"PUT to %@\n%@", url, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
   
-  [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+  [request setValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
   [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-  [request setValue:@"gzip/json" forHTTPHeaderField:@"Content-Type"];
+  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+  
   if (token) {
     [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
     [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];

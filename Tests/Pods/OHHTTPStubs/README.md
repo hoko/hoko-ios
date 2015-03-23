@@ -48,14 +48,38 @@ The wiki also contain [some articles that can help you get started](https://gith
 
 `OHHTTPStubs` also works with iOS7's and OSX 10.9's `NSURLSession` mechanism.
 
+`OHHTTPStubs` is **Swift-compatible** and can be used from Swift easily. When using with CocoaPods 0.36+, simply add `use_frameworks!` to your `Podfile`. See "Installing in your projects" below for more details.
+
+# Installing in your projects
+
+## Cocoapods
+
+Simply add `pod 'OHHTTPStubs'` to your `Podfile` then run `pod install` and you are ready to use it.
+
+If you want to use `OHHTTPStubs` from Swift:
+
+* With CocoaPods 0.36+, simply add `use_frameworks!` to your Podfile to use dynamic frameworks. Then use `import OHHTTPStubs` in your Swift source.
+* With CocoaPods 0.35, you have to have and Obj-C/Swift bridging file. As the import is done in briding-header, no import is needed in you Swift code.
+
+## Carthage
+
+Simply add `github AliSoftware/OHHTTPStubs` to your `Cartfile` then run `carthage update`.
+
+## Manual integration
+
+In case you don't want to use `CocoaPods` nor `Carthage`, the `OHHTTPStubs` project is provided as a Xcode project that generates a static library, so you can simply add its xcodeproj to your workspace and link your app against the `libOHHTTPStubs.a` library. 
+
+This requires a little more manual work. See [here](https://github.com/AliSoftware/OHHTTPStubs/wiki/Detailed-Library-Integration-instructions) for detailed instructions.
+
+
 # Special Considerations
 
 ## Using OHHTTPStubs in your Unit Tests
 
 `OHHTTPStubs` is ideal to write Unit Tests that normally would perform network requests. But if you use it in your Unit Tests, don't forget to:
 
-* remove any stubs you installed after each test — to avoid those stubs to still be installed when executing the next Test Case — by calling `[OHHTTPStubs removeAllStubs]` in you `tearDown` method. [see this wiki page for more info](https://github.com/AliSoftware/OHHTTPStubs/wiki/Remove-stubs-after-each-test)
-* be sure to wait until the request has received its response before doing your assertions and letting the test case to finish (like for any asynchronous test). [see this wiki page for more info](https://github.com/AliSoftware/OHHTTPStubs/wiki/OHHTTPStubs-and-asynchronous-tests)
+* remove any stubs you installed after each test — to avoid those stubs to still be installed when executing the next Test Case — by calling `[OHHTTPStubs removeAllStubs]` in your `tearDown` method. [see this wiki page for more info](https://github.com/AliSoftware/OHHTTPStubs/wiki/Remove-stubs-after-each-test)
+* be sure to wait until the request has received its response before doing your assertions and letting the test case finish (like for any asynchronous test). [see this wiki page for more info](https://github.com/AliSoftware/OHHTTPStubs/wiki/OHHTTPStubs-and-asynchronous-tests)
 
 ### XCTestExpectation & Xcode 5
 
@@ -89,27 +113,11 @@ _In practice, there is no need to ever explicitly call `setEnabled:` or `setEnab
 _As far as I know, there's nothing we can do about those two limitations. Please let me know if you know a solution that would make that possible anyway._
 
 
-# Installing in your projects
+## Submitting to the AppStore
 
-**The recommanded way to use `OHHTTPStubs` is via [CocoaPods](http://cocoapods.org/)**.
-Simply add `pod 'OHHTTPStubs'` to your `Podfile` then run `pod install` and you are ready to use it.
+`OHHTTPStubs` can be used on apps subbmiting on the AppStore. It does not use any private API and nothing prevents you from shipping it.
 
-_Note: `OHHTTPStubs` requires iOS5 minimum._
-
-> **Warning: Be careful anyway to include `OHHTTPStubs` only in your test targets, or only use it in `#if DEBUG` portions, if you don't want your stubs to still be included in your release for the AppStore!**
-
-In case you don't want to use CocoaPods (but you should!!!), the `OHHTTPStubs` project is provided as a Xcode project that generates a static library, so simply add its xcodeproj to your workspace and link your app against the `libOHHTTPStubs.a` library. See [here](https://github.com/AliSoftware/OHHTTPStubs/wiki/Detailed-Library-Integration-instructions) for detailed instructions.
-
-
----
-
-### About OHHTTPStubs own Unit Tests
-
-If you want to be able to run `OHHTTPStubs`' Unit Tests, be sure you cloned the [`AFNetworking`](https://github.com/AFNetworking/AFNetworking/) submodule (by using the `--recursive` option when cloning your repo, or using `git submodule init` and `git submodule update`) as it is used by some of `OHHTTPStubs` unit tests.
-
-This submodule is only useful for `OHHTTPStubs`' own Unit Tests, that are testing its usage with `AFNetworking`: **you don't need the submodule to use `OHHTTPStubs`** and `OHHTTPStubs` has no dependency on `AFNetworking` itself.
-
-**Every contribution to add more unit tests is welcome!**
+But you generally only use stubs during the development phase and want to remove your stubs when submitting to the AppStore. So be careful to only include `OHHTTPStubs` in your test targets, or only use it in `#if DEBUG` portions, to avoid forgetting to remove it when the time comes that you release for the AppStore!
 
 
 
