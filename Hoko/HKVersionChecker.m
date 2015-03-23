@@ -13,6 +13,7 @@
 
 NSString *const HKVersionCheckerGitHubApi = @"https://api.github.com/repos/hokolinks/hoko-ios/releases?per_page=1";
 NSString *const HKVersionCheckerGithubVersionName = @"tag_name";
+NSString *const HKVersionCheckerGithubPrerelease = @"prerelease";
 
 @implementation HKVersionChecker
 
@@ -35,7 +36,8 @@ NSString *const HKVersionCheckerGithubVersionName = @"tag_name";
       id firstJson = json[0];
       NSString *versionName = firstJson[HKVersionCheckerGithubVersionName];
       NSString *currentVersionName = [NSString stringWithFormat:@"v%@",currentVersion];
-      if ([versionName compare:currentVersionName options:NSNumericSearch] == NSOrderedDescending) {
+      BOOL isPrerelease = [firstJson[HKVersionCheckerGithubPrerelease] boolValue];
+      if ([versionName compare:currentVersionName options:NSNumericSearch] == NSOrderedDescending && !isPrerelease) {
         HKLog(@"A new version of HOKO is available at http://github.com/hokolinks/hoko-ios: %@",versionName);
       }
     } else {

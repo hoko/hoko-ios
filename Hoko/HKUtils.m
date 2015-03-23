@@ -125,6 +125,7 @@ NSString *const HKDateFormatDateOnly = @"yyyy-MM-dd";
   [formatter setDateFormat:format];
   [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
   [formatter setCalendar:gregorianCalendar];
+  [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
   return formatter;
 }
 

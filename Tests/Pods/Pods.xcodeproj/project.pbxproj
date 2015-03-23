@@ -283,7 +283,7 @@
 		10478CB698C5A40A0F91670A /* EXPMatchers+raise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+raise.m"; path = "Expecta/Matchers/EXPMatchers+raise.m"; sourceTree = "<group>"; };
 		10BA1EDC5B13651CEB2D0298 /* HKUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HKUtils.h; sourceTree = "<group>"; };
 		11167B9C4504BFA91CFF01DC /* OCMInvocationExpectation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMInvocationExpectation.m; path = Source/OCMock/OCMInvocationExpectation.m; sourceTree = "<group>"; };
-		113B15F7D767FEE6D14F9C54 /* HKUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HKUtils.m; sourceTree = "<group>"; };
+		113B15F7D767FEE6D14F9C54 /* HKUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = HKUtils.m; sourceTree = "<group>"; };
 		13B8B53E4BB920929CE6E882 /* HKRouting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HKRouting.h; sourceTree = "<group>"; };
 		1642AF94B6816C08536E98BF /* EXPMatchers+beKindOf.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beKindOf.m"; path = "Expecta/Matchers/EXPMatchers+beKindOf.m"; sourceTree = "<group>"; };
 		17523927142F1BAB7031FE30 /* Expecta.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Expecta.h; path = Expecta/Expecta.h; sourceTree = "<group>"; };
@@ -406,7 +406,7 @@
 		9E18E766CCED245861A6EFF0 /* HKURL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HKURL.h; sourceTree = "<group>"; };
 		9F348213AB6F81210FF84F08 /* Pods-ios-Hoko-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ios-Hoko-Private.xcconfig"; sourceTree = "<group>"; };
 		9F67B65EBCAF73DFC2335EA9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		9F6F9DB13BB85C13DAA5B4B9 /* HKVersionChecker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HKVersionChecker.m; sourceTree = "<group>"; };
+		9F6F9DB13BB85C13DAA5B4B9 /* HKVersionChecker.m */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = HKVersionChecker.m; sourceTree = "<group>"; };
 		A0CF9E821C8DE5672586865C /* Pods-ios-OHHTTPStubs-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ios-OHHTTPStubs-Private.xcconfig"; sourceTree = "<group>"; };
 		A29C7A0BAC906286284C690D /* OCMVerifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMVerifier.h; path = Source/OCMock/OCMVerifier.h; sourceTree = "<group>"; };
 		A43A4B56A79E04C92823FDC3 /* HKUser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HKUser.m; sourceTree = "<group>"; };
