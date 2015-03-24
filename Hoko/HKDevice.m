@@ -169,7 +169,7 @@ NSString *const HKDeviceIPadSimulator = @"iPad Simulator";
   return [self.name compare:HKDeviceIPhoneSimulator] == NSOrderedSame || [self.name compare:HKDeviceIPadSimulator] == NSOrderedSame;
 }
 
-+ (NSString *)timezoneOffset
+- (NSString *)timezoneOffset
 {
     return [NSString stringWithFormat:@"%@",@([[NSTimeZone localTimeZone] secondsFromGMT] / ( 60.0f * 60.0f))];
 }

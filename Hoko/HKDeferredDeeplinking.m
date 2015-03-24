@@ -1,9 +1,9 @@
 //
 //  HKDeferredDeeplinking.m
-//  
+//  Hoko
 //
-//  Created by Ivan Bruel on 23/03/15.
-//
+//  Created by Hoko, S.A. on 23/07/14.
+//  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
 #import "HKDeferredDeeplinking.h"
@@ -12,9 +12,10 @@
 #import "HKLogger.h"
 #import "HKDevice.h"
 #import "HKNetworking.h"
+#import "HKNetworkOperation.h"
 
 NSString *const HKDeferredDeeplinkingNotFirstRun = @"isNotFirstRun";
-NSString *const HKDeferredDeeplinkingPath = @"deferred_deeplinking";
+NSString *const HKDeferredDeeplinkingPath = @"deferred/lookup";
 
 @interface HKDeferredDeeplinking ()
 
@@ -38,9 +39,9 @@ NSString *const HKDeferredDeeplinkingPath = @"deferred_deeplinking";
     BOOL isFirstRun = ![[HKUtils objectForKey:HKDeferredDeeplinkingNotFirstRun] boolValue];
     if (isFirstRun) {
         [HKUtils saveObject:@YES key:HKDeferredDeeplinkingNotFirstRun];
-        [HKNetworking postToPath:HKDeferredDeeplinkingPath parameters:self.json token:self.token successBlock:^(id json) {
+        [HKNetworking postToPath:[HKNetworkOperation urlFromPath:HKDeferredDeeplinkingPath] parameters:self.json token:self.token successBlock:^(id json) {
             NSString *deeplink = json[@"deeplink"];
-            if (deeplink && handler) {
+            if (deeplink && [deeplink isKindOfClass:[NSString class]] && handler) {
                 handler(deeplink);
             }
         } failedBlock:^(NSError *error) {
