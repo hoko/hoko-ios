@@ -89,6 +89,18 @@ typedef NS_ENUM(NSInteger, HKUserGender) {
 - (void)identifyUser;
 
 /**
+ *  identifyUserWithIdentifier: should be called when you can identify the user with a
+ *  unique identifier and a given account type.
+ *
+ *  <pre>
+ *  [[Hoko analytics] identifyUserWithIdentifier:@"john.doe@email.com" ];
+ *  </pre>
+ *
+ *  @param identifier   A unique identifier for the user in the scope of your application.
+ */
+- (void)identifyUserWithIdentifier:(NSString *)identifier;
+
+/**
  *  identifyUserWithIdentifier:accountType: should be called when you can identify the user with a 
  *  unique identifier and a given account type. 
  *

@@ -14,6 +14,7 @@
 #import "HKHandling.h"
 #import "HKSwizzling.h"
 #import "HKLinkGenerator.h"
+#import "HKRouting.h"
 #import "HKDeferredDeeplinking.h"
 #import "HKDeeplinking+Private.h"
 
@@ -66,9 +67,24 @@
     return [self openURL:url sourceApplication:nil annotation:nil];
 }
 
+- (BOOL)handleOpenURLFromForeground:(NSURL *)url
+{
+    return [self openURL:url sourceApplication:nil annotation:nil fromForeground:YES];
+}
+
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation];
+    return [self openURL:url sourceApplication:sourceApplication annotation:annotation fromForeground:NO];
+}
+
+- (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation fromForeground:(BOOL)fromForeground
+{
+    return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation fromForeground:fromForeground];
+}
+
+- (BOOL)canOpenURL:(NSURL *)url
+{
+    return [self.routing canOpenURL:url];
 }
 
 #pragma mark - Handlers

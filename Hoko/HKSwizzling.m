@@ -145,4 +145,50 @@
   }];
 }
 
+#pragma mark - Swizzle Push Notifications
++ (void)swizzleIOS8PushNotifications
+{
+    NSString *appDelegateClassName = [self appDelegateClassName];
+    if (appDelegateClassName) {
+        [self swizzleDidReceiveRemoteNotificationWithAppDelegateClassName:appDelegateClassName];
+        [self swizzleDidRegisterForRemoteNotificationsWithDeviceTokenWithAppDelegateClassName:appDelegateClassName];
+    } else {
+        //NSLog(@"Could not Swizzle AppDelegate, please delegate all the push notification methods to [Hoko pushNotifications]");
+    }
+}
+
++ (void)swizzleLegacyPushNotifications
+{
+    NSString *appDelegateClassName = [self appDelegateClassName];
+    if (appDelegateClassName) {
+        [self swizzleDidReceiveRemoteNotificationWithAppDelegateClassName:appDelegateClassName];
+        [self swizzleDidRegisterForRemoteNotificationsWithDeviceTokenWithAppDelegateClassName:appDelegateClassName];
+    } else {
+        //NSLog(@"Could not Swizzle AppDelegate, please delegate all the push notification methods to [Hoko pushNotifications]");
+    }
+}
+
++ (void)swizzleDidReceiveRemoteNotificationWithAppDelegateClassName:(NSString *)appDelegateClassName
+{
+    __block IMP implementation = [HKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:didReceiveRemoteNotification:) block:^void(id blockSelf, UIApplication *application, NSDictionary *userInfo){
+        BOOL handledNotification = [[Hoko pushNotifications] applicationDidReceiveRemoteNotification:userInfo];
+        if (implementation && !handledNotification) {
+            void (*func)() = (void *)implementation;
+            func(blockSelf, @selector(application:didReceiveRemoteNotification:), application, userInfo);
+        }
+    }];
+}
+
++ (void)swizzleDidRegisterForRemoteNotificationsWithDeviceTokenWithAppDelegateClassName:(NSString *)appDelegateClassName
+{
+    __block IMP implementation = [HKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:didRegisterForRemoteNotificationsWithDeviceToken:) block:^void(id blockSelf, UIApplication *application, NSData *deviceToken){
+        [[Hoko pushNotifications] applicationDidRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+        if (implementation) {
+            void (*func)() = (void *)implementation;
+            func(blockSelf, @selector(application:didRegisterForRemoteNotificationsWithDeviceToken:), application, deviceToken);
+        }
+    }];
+}
+
+
 @end
