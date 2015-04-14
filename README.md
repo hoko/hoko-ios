@@ -153,12 +153,3 @@ Hoko.analytics().trackKeyEvent("dress_purchase", amount:29.99)
 
 We recommend you to read the full documentation at [http://hokolinks.com/documentation#ios](http://support.hokolinks.com/ios/ios-setup/).
 
-
-# Author
-
-HOKO, S.A.
-
-# License
-
-HOKO is available under the Apache license. See the LICENSE file for more info.
-
