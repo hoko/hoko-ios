@@ -16,6 +16,9 @@ NSString *const HKAppUnknownBuild = @"Unknown Build";
 NSString *const HKAppUnknownVersion = @"Unknown Version";
 NSString *const HKAppIconKey = @"HKAppIconKey";
 
+NSString *const HKAppEnvironmentDebug = @"debug";
+NSString *const HKAppEnvironmentRelease = @"release";
+
 NSString *const HKAppIconPath = @"icons";
 
 @implementation HKApp
@@ -105,6 +108,11 @@ NSString *const HKAppIconPath = @"icons";
     }
   });
   return isDebugBuild;
+}
+
+- (NSString *)environment
+{
+    return self.isDebugBuild ? HKAppEnvironmentDebug : HKAppEnvironmentRelease;
 }
 
 // TODO test this in iOS < 8 and other types of projects

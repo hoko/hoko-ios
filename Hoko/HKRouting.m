@@ -36,40 +36,29 @@
 - (instancetype)initWithToken:(NSString *)token
                     debugMode:(BOOL)debugMode
 {
-  self = [super init];
-  if (self) {
-    _debugMode = debugMode;
-    _token = token;
-    _routes = @[];
-  }
-  return self;
+    self = [super init];
+    if (self) {
+        _debugMode = debugMode;
+        _token = token;
+        _routes = @[];
+    }
+    return self;
 }
 
 #pragma mark - Route mapping
 - (void)mapRoute:(NSString *)route
         toTarget:(void (^)(HKDeeplink *deeplink))target
 {
-  if([self routeExists:route])
-    HKErrorLog([HKError duplicateRouteError:route]);
-  else if ([HKApp app].hasURLSchemes)
-    [self addNewRoute:[HKRoute routeWithRoute:[HKURL sanitizeURLString:route] target:target]];
-  else
-    HKErrorLog([HKError noURLSchemesError]);
+    if([self routeExists:route])
+        HKErrorLog([HKError duplicateRouteError:route]);
+    else if ([HKApp app].hasURLSchemes)
+        [self addNewRoute:[HKRoute routeWithRoute:[HKURL sanitizeURLString:route] target:target]];
+    else
+        HKErrorLog([HKError noURLSchemesError]);
 }
 
 #pragma mark - Open URL
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    return [self openURL:url
-       sourceApplication:sourceApplication
-              annotation:annotation
-          fromForeground:NO];
-}
-
-- (BOOL)openURL:(NSURL *)url
-sourceApplication:(NSString *)sourceApplication
-     annotation:(id)annotation
- fromForeground:(BOOL)fromForeground
 {
     HKURL *hkURL = [[HKURL alloc]initWithURL:url];
     NSDictionary *routeParameters;
@@ -82,18 +71,10 @@ sourceApplication:(NSString *)sourceApplication
                                                      queryParameters:hkURL.queryParameters
                                                    sourceApplication:sourceApplication];
             
-            // If deeplink comes from foreground (a.k.a. push notification while in the app) dont open it but rather
-            // warn the backend that it was received but won't ever be opened. Otherwise do the handling calls and
-            // call the target.
-            if (!fromForeground) {
-                [[Hoko deeplinking].handling handle:deeplink];
-                if(route.target)
-                    route.target(deeplink);
-            } else {
-                [deeplink postWithToken:self.token
-                                   user:[[Hoko analytics] currentUser]
-                             statusCode:HKDeeplinkStatusIgnored];
-            }
+            [[Hoko deeplinking].handling handle:deeplink];
+            if(route.target)
+                route.target(deeplink);
+            
         }
     }
     
@@ -106,15 +87,9 @@ sourceApplication:(NSString *)sourceApplication
                                                      queryParameters:hkURL.queryParameters
                                                    sourceApplication:sourceApplication];
             
-            // Applies the same behavior as a common route.
-            if (!fromForeground) {
-                [[Hoko deeplinking].handling handle:deeplink];
-                self.defaultRoute.target(deeplink);
-            } else {
-                [deeplink postWithToken:self.token
-                                   user:[[Hoko analytics] currentUser]
-                             statusCode:HKDeeplinkStatusIgnored];
-            }
+            [[Hoko deeplinking].handling handle:deeplink];
+            self.defaultRoute.target(deeplink);
+            
         }
     }
     return [self canOpenURL:url];
@@ -144,27 +119,27 @@ sourceApplication:(NSString *)sourceApplication
 #pragma mark - Add Route
 - (void)addNewRoute:(HKRoute *)route
 {
-  if (!route.route) {
-    self.defaultRoute = route;
-    return;
-  }
-  
-  self.routes = [self.routes arrayByAddingObject:route];
-  
-  // POST routes to the backend only in debug mode
-  if (self.debugMode)
-    [route postWithToken:self.token];
+    if (!route.route) {
+        self.defaultRoute = route;
+        return;
+    }
+    
+    self.routes = [self.routes arrayByAddingObject:route];
+    
+    // POST routes to the backend only in debug mode
+    if (self.debugMode)
+        [route postWithToken:self.token];
 }
 
 #pragma mark - Validations
 - (BOOL)routeExists:(NSString *)route
 {
-  for (HKRoute *routeObj in self.routes) {
-    if([routeObj.route isEqualToString:[HKURL sanitizeURLString:route]])
-      return YES;
-  }
-  
-  return NO;
+    for (HKRoute *routeObj in self.routes) {
+        if([routeObj.route isEqualToString:[HKURL sanitizeURLString:route]])
+            return YES;
+    }
+    
+    return NO;
 }
 
 

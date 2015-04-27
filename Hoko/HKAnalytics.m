@@ -8,8 +8,6 @@
 
 #import "HKAnalytics.h"
 
-#import "HKUser.h"
-#import "HKEvent.h"
 #import "HKError.h"
 #import "HKUtils.h"
 #import "HKLogger.h"
@@ -22,7 +20,6 @@
 
 @interface HKAnalytics ()
 
-@property (nonatomic, strong) HKUser *user;
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) HKSession *session;
 
@@ -39,99 +36,9 @@
         self.session = nil;
         
         // Load user from Storage if possible otherwise create new anonymous user
-        self.user = [HKUser currentUser];
-        if (!self.user) {
-            [self identifyUser];
-        } else {
-            [self.user postWithToken:self.token];
-        }
-        
         [self observeApplicationLifecycle];
     }
     return self;
-}
-
-#pragma mark - Private accessors
-- (HKUser *)currentUser
-{
-    return self.user;
-}
-
-#pragma mark - User Identification
-- (void)identifyUser
-{
-    // Don't identify another anonymous user when current user is already anonymous
-    if (!self.user.anonymous) {
-        [self endCurrentSession];
-        self.user = [HKUser new];
-        [self.user postWithToken:self.token];
-    }
-}
-
-- (void)identifyUserWithIdentifier:(NSString *)identifier
-{
-    [self identifyUserWithIdentifier:identifier accountType:HKUserAccountTypeDefault];
-}
-
-- (void)identifyUserWithIdentifier:(NSString *)identifier
-                       accountType:(HKUserAccountType)accountType
-{
-    [self identifyUserWithIdentifier:identifier
-                         accountType:accountType
-                                name:nil
-                               email:nil
-                           birthDate:nil
-                              gender:HKUserGenderUnknown];
-}
-
-- (void)identifyUserWithIdentifier:(NSString *)identifier
-                       accountType:(HKUserAccountType)accountType
-                              name:(NSString *)name
-                             email:(NSString *)email
-                         birthDate:(NSDate *)birthDate
-                            gender:(HKUserGender)gender
-{
-    // Ignore equal users (by comparing identifiers)
-    if (!self.user || ![identifier isEqualToString:self.user.identifier]) {
-        NSString *previousIdentifier = self.user.anonymous ? self.user.identifier : nil;
-        self.user = [[HKUser alloc] initWithIdentifier:identifier
-                                           accountType:accountType
-                                                  name:name
-                                                 email:email
-                                             birthDate:birthDate
-                                                gender:gender
-                                    previousIdentifier:previousIdentifier];
-        [self.user postWithToken:self.token];
-        
-        // end session if not merging users or update session's user otherwise (in case he session exists)
-        if (!previousIdentifier) {
-            [self endCurrentSession];
-        } else if(self.session) {
-            self.session.user = self.user;
-        }
-    }
-}
-
-- (void)postCurrentUser
-{
-    [self.user postWithToken:self.token];
-}
-
-#pragma mark - Event Tracking
-- (void)trackKeyEvent:(NSString *)eventName
-{
-    [self trackKeyEvent:eventName amount:nil];
-}
-
-- (void)trackKeyEvent:(NSString *)eventName
-               amount:(NSNumber *)amount
-{
-    HKEvent *event = [[HKEvent alloc] initWithName:eventName amount:amount];
-    if (self.session) {
-        [self.session trackKeyEvent:event];
-    } else {
-        HKErrorLog([HKError ignoringKeyEventError:event]);
-    }
 }
 
 #pragma mark - Sessions
@@ -147,8 +54,8 @@
 - (void)handleDeeplink:(HKDeeplink *)deeplink
 {
     [self endCurrentSession];
-    self.session = [[HKSession alloc] initWithUser:self.user deeplink:deeplink];
-    [deeplink postWithToken:self.token user:self.user statusCode:HKDeeplinkStatusOpened];
+    self.session = [[HKSession alloc] initWithDeeplink:deeplink];
+    [deeplink postWithToken:self.token statusCode:HKDeeplinkStatusOpened];
 }
 
 #pragma mark - Observers

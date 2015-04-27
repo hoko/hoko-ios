@@ -158,22 +158,22 @@
 {
   self = [super init];
   if (self) {
-    _operationType = [aDecoder decodeIntegerForKey:NSStringFromSelector(@selector(operationType))];
+    _operationType = [[aDecoder decodeObjectForKey:NSStringFromSelector(@selector(operationType))]integerValue];
     _path = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(path))];
     _token = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(token))];
     _parameters = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(parameters))];
-    _numberOfRetries = [aDecoder decodeIntegerForKey:NSStringFromSelector(@selector(numberOfRetries))];
+    _numberOfRetries = [[aDecoder decodeObjectForKey:NSStringFromSelector(@selector(numberOfRetries))]integerValue];
   }
   return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-  [aCoder encodeInteger:self.operationType forKey:NSStringFromSelector(@selector(operationType))];
+  [aCoder encodeObject:@(self.operationType) forKey:NSStringFromSelector(@selector(operationType))];
   [aCoder encodeObject:self.path forKey:NSStringFromSelector(@selector(path))];
   [aCoder encodeObject:self.token forKey:NSStringFromSelector(@selector(token))];
   [aCoder encodeObject:self.parameters forKey:NSStringFromSelector(@selector(parameters))];
-  [aCoder encodeInteger:self.numberOfRetries forKey:NSStringFromSelector(@selector(numberOfRetries))];
+  [aCoder encodeObject:@(self.numberOfRetries) forKey:NSStringFromSelector(@selector(numberOfRetries))];
 }
 
 

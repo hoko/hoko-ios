@@ -6,13 +6,10 @@
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
-@class HKUser;
+#import "HKAnalytics.h"
 
 @interface HKAnalytics (Private)
 
 - (instancetype)initWithToken:(NSString *)token;
-
-- (void)postCurrentUser;
-- (HKUser *)currentUser;
 
 @end

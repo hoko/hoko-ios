@@ -13,8 +13,8 @@
 
 #import "HKStubbedTestCase.h"
 
+#import <Hoko/HKSession.h>
 #import <Hoko/HKApp.h>
-#import <Hoko/HKUser.h>
 #import <Hoko/HKUtils.h>
 #import <Hoko/HKObserver.h>
 #import <Hoko/Hoko+Private.h>
@@ -47,16 +47,16 @@
   
   // Stubbing for success
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return [request.URL.absoluteString rangeOfString:@"users"].location != NSNotFound;
+    return [request.URL.absoluteString rangeOfString:@"session"].location != NSNotFound;
   } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
     NSDictionary *json = @{};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
   }];
   
-  HKUser *user = [[HKUser alloc] initWithIdentifier:@"testQueueFlushing" accountType:HKUserAccountTypeGithub name:nil email:nil birthDate:nil gender:HKUserGenderUnknown previousIdentifier:nil];
+  HKSession *session = [[HKSession alloc] initWithDeeplink:[HKDeeplink deeplinkWithRoute:@"route" routeParameters:nil queryParameters:nil]];
   
-  [user postWithToken:@"1234"];
-  [user postWithToken:@"1234"];
+  [session postWithToken:@"1234"];
+  [session postWithToken:@"1234"];
   
   // Force flush for timer wait time
   [[HKNetworkOperationQueue sharedQueue] flush];
@@ -75,14 +75,15 @@
   
   // Stub for failure
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return [request.URL.path rangeOfString:@"users"].location != NSNotFound;
+    return [request.URL.path rangeOfString:@"session"].location != NSNotFound;
   } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
     NSDictionary *json = @{};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:500 headers:nil];
   }];
   
-  HKUser *user = [[HKUser alloc] initWithIdentifier:@"testQueueRetrying" accountType:HKUserAccountTypeGithub name:nil email:nil birthDate:nil gender:HKUserGenderUnknown previousIdentifier:nil];
-  [user postWithToken:@"1234"];
+  HKSession *session = [[HKSession alloc] initWithDeeplink:[HKDeeplink deeplinkWithRoute:@"route" routeParameters:nil queryParameters:nil]];
+  
+  [session postWithToken:@"1234"];
   [[HKNetworkOperationQueue sharedQueue] flush];
   
   // Check inner operation array after the end of each flush, give up on 10th try

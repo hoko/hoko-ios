@@ -102,39 +102,6 @@
       </Group>
       <Group
          location = "container:"
-         name = "Push Notifications">
-         <Group
-            location = "container:"
-            name = "iOS 8">
-            <FileRef
-               location = "group:Hoko/HKIOS8PushNotifications.h">
-            </FileRef>
-            <FileRef
-               location = "group:Hoko/HKIOS8PushNotifications.m">
-            </FileRef>
-         </Group>
-         <Group
-            location = "container:"
-            name = "Legacy">
-            <FileRef
-               location = "group:Hoko/HKLegacyPushNotifications.h">
-            </FileRef>
-            <FileRef
-               location = "group:Hoko/HKLegacyPushNotifications.m">
-            </FileRef>
-         </Group>
-         <FileRef
-            location = "group:Hoko/HKPushNotifications.h">
-         </FileRef>
-         <FileRef
-            location = "group:Hoko/HKPushNotifications.m">
-         </FileRef>
-         <FileRef
-            location = "group:Hoko/HKPushNotifications+Private.h">
-         </FileRef>
-      </Group>
-      <Group
-         location = "container:"
          name = "Analytics">
          <Group
             location = "container:"
@@ -144,26 +111,6 @@
             </FileRef>
             <FileRef
                location = "group:Hoko/HKSession.m">
-            </FileRef>
-         </Group>
-         <Group
-            location = "container:"
-            name = "User">
-            <FileRef
-               location = "group:Hoko/HKUser.h">
-            </FileRef>
-            <FileRef
-               location = "group:Hoko/HKUser.m">
-            </FileRef>
-         </Group>
-         <Group
-            location = "container:"
-            name = "Event">
-            <FileRef
-               location = "group:Hoko/HKEvent.h">
-            </FileRef>
-            <FileRef
-               location = "group:Hoko/HKEvent.m">
             </FileRef>
          </Group>
          <FileRef

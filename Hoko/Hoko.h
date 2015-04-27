@@ -6,9 +6,7 @@
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
-#import "HKAnalytics.h"
 #import "HKDeeplinking.h"
-#import "HKPushNotifications.h"
 
 #import "HKDeeplink.h"
 
@@ -68,23 +66,6 @@
  */
 + (HKDeeplinking *)deeplinking;
 
-/**
- *  The HKAnalytics module provides all the necessary APIs to manage user and application behavior.
- *  Users should be identified to this module, as well as key events (e.g. sales, referrals, etc) in order
- *  to track campaign value and allow user segmentation.
- *
- *  @return A reference to the HKAnalytics instance.
- */
-+ (HKAnalytics *)analytics;
-
-/**
- *  The HKPushNotifications module provides all the necessary APIs to manage push notifications generated
- *  by the Hoko service. It provides also an abstraction between iOS<8.0 and iOS>=8.0 notification APIs for
- *  easier integration.
- *
- *  @return A reference to the HKPushNotifications instance.
- */
-+ (HKPushNotifications *)pushNotifications;
 
 /**
  *  Use this function to enable or disable logging from the Hoko SDK

@@ -17,7 +17,6 @@
 #import "HKAnalytics+Private.h"
 #import "HKDeeplinking+Private.h"
 #import "HKNetworkOperationQueue.h"
-#import "HKPushNotifications+Private.h"
 
 NSString *const HokoVersion = @"1.2";
 
@@ -27,7 +26,6 @@ NSString *const HokoVersion = @"1.2";
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) HKAnalytics *analytics;
 @property (nonatomic, strong) HKDeeplinking *deeplinking;
-@property (nonatomic, strong) HKPushNotifications *pushNotifications;
 
 
 @end
@@ -77,8 +75,6 @@ static Hoko *_sharedInstance = nil;
         _deeplinking = [[HKDeeplinking alloc] initWithToken:token debugMode:debugMode];
         [_deeplinking addHandler:_analytics];
         
-        _pushNotifications = [HKPushNotifications pushNotificationsWithToken:token];
-        
         // Only posting when in debug mode to avoid spaming the service
         // Also checking for new version on github public repo
         if (debugMode) {
@@ -109,13 +105,6 @@ static Hoko *_sharedInstance = nil;
     return [Hoko hoko].deeplinking;
 }
 
-+ (HKPushNotifications *)pushNotifications
-{
-    if (![Hoko hoko].pushNotifications) {
-        HKErrorLog([HKError setupNotCalledYetError]);
-    }
-    return [Hoko hoko].pushNotifications;
-}
 
 #pragma mark - Logging
 + (void)setVerbose:(BOOL)verbose {

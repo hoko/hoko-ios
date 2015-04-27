@@ -26,9 +26,7 @@ typedef NS_ENUM(NSUInteger, HKDeeplinkStatus) {
                       queryParameters:(NSDictionary *)queryParameters
                     sourceApplication:(NSString *)sourceApplication;
 
-- (void)postWithToken:(NSString *)token user:(HKUser *)user statusCode:(HKDeeplinkStatus)statusCode;
-
-- (NSDictionary *)notificationJSONWithUser:(HKUser *)user;
+- (void)postWithToken:(NSString *)token statusCode:(HKDeeplinkStatus)statusCode;
 
 @property (nonatomic, strong, readonly) NSString *urlScheme;
 @property (nonatomic, strong, readonly) NSString *sourceApplication;

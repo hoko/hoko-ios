@@ -19,21 +19,18 @@ NSString *const HKSessionPath = @"sessions";
 @property (nonatomic, strong) HKDeeplink *deeplink;
 @property (nonatomic, strong) NSDate *startedAt;
 @property (nonatomic, strong) NSDate *endedAt;
-@property (nonatomic, strong) NSArray *keyEvents;
 
 @end
 
 @implementation HKSession
 
 #pragma mark - Initializer
-- (instancetype)initWithUser:(HKUser *)user deeplink:(HKDeeplink *)deeplink
+- (instancetype)initWithDeeplink:(HKDeeplink *)deeplink
 {
   self = [super init];
   if (self) {
-    _user = user;
     _deeplink = deeplink;
     _startedAt = [NSDate date];
-    _keyEvents = @[];
     _endedAt = nil;
   }
   return self;
@@ -44,12 +41,6 @@ NSString *const HKSessionPath = @"sessions";
 - (NSNumber *)duration
 {
   return @(round([self.endedAt timeIntervalSinceDate:self.startedAt]));
-}
-
-#pragma mark - Events
-- (void)trackKeyEvent:(HKEvent *)event
-{
-  self.keyEvents = [self.keyEvents arrayByAddingObject:event];
 }
 
 #pragma mark - End Session
@@ -73,18 +64,8 @@ NSString *const HKSessionPath = @"sessions";
 {
   return @{@"session": @{@"started_at": [HKUtils jsonValue:[HKUtils stringFromDate:self.startedAt]],
                          @"duration": [HKUtils jsonValue:self.duration],
-                         @"user": [HKUtils jsonValue:self.user.json[@"user"]],
-                         @"key_events": [HKUtils jsonValue:[self eventsJSON]],
                          HKDeeplinkOpenIdentifierKey: [HKUtils jsonValue:self.deeplink.openIdentifier],
                          HKDeeplinkSmartlinkIdentifierKey: [HKUtils jsonValue:self.deeplink.smartlinkIdentifier]}};
-}
-
-- (id)eventsJSON
-{
-  NSArray *eventsJSON = @[];
-  for (HKEvent *event in self.keyEvents)
-    eventsJSON = [eventsJSON arrayByAddingObject:event.json];
-  return eventsJSON;
 }
 
 @end

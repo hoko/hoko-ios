@@ -9,7 +9,6 @@
 #import "HKDeeplink.h"
 
 #import "HKURL.h"
-#import "HKUser.h"
 #import "HKUtils.h"
 #import "HKDevice.h"
 #import "HKRouting.h"
@@ -20,7 +19,6 @@ NSString *const HKDeeplinkSmartlinkIdentifierKey = @"_hk_sid";
 NSString *const HKDeeplinkOpenIdentifierKey = @"_hk_oid";
 
 NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
-NSString *const HKDeeplinkPushNotificationPath = @"notifications/%@/open";
 
 
 @interface HKDeeplink ()
@@ -162,26 +160,14 @@ NSString *const HKDeeplinkPushNotificationPath = @"notifications/%@/open";
     return self.smartlinkIdentifier != nil;
 }
 
-- (BOOL)isPushNotification
-{
-    return !self.smartlinkIdentifier && self.openIdentifier;
-}
-
-
 #pragma mark - Networking
-- (void)postWithToken:(NSString *)token user:(HKUser *)user statusCode:(HKDeeplinkStatus)statusCode
+- (void)postWithToken:(NSString *)token statusCode:(HKDeeplinkStatus)statusCode
 {
-    if (self.isPushNotification) {
-        HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
-                                                                                            path:[NSString stringWithFormat:HKDeeplinkPushNotificationPath, self.openIdentifier]
-                                                                                           token:token
-                                                                                      parameters:[self notificationJSONWithStatusCode:statusCode]];
-        [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
-    } else if (self.isSmartlink) {
+    if (self.isSmartlink) {
         HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
                                                                                             path:[NSString stringWithFormat:HKDeeplinkOpenPath, self.smartlinkIdentifier]
                                                                                            token:token
-                                                                                      parameters:[self smartlinkJSONWithUser:user]];
+                                                                                      parameters:[self smartlinkJSON]];
         [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
         
     }
@@ -199,17 +185,12 @@ NSString *const HKDeeplinkPushNotificationPath = @"notifications/%@/open";
     
 }
 
-- (id)notificationJSONWithStatusCode:(HKDeeplinkStatus)statusCode
-{
-    return @{@"notification": @{@"opened_at": [HKUtils stringFromDate:[NSDate date]],
-                                @"status_code": @(statusCode)}};
-}
 
-- (id)smartlinkJSONWithUser:(HKUser *)user
+- (id)smartlinkJSON
 {
     return @{@"smartlink": @{HKDeeplinkOpenIdentifierKey: [HKUtils jsonValue:self.openIdentifier],
                              @"opened_at": [HKUtils stringFromDate:[NSDate date]],
-                             @"user": user.baseJSON}};
+                             @"device": [HKDevice device].json}};
 }
 
 #pragma mark - Description

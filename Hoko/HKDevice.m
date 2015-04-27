@@ -154,7 +154,7 @@ NSString *const HKDeviceIPadSimulator = @"iPad Simulator";
   return [HKUtils objectForKey:HKDeviceAPNSTokenKey];
 }
 
-- (void)setAPNSToken:(NSString *)apnsToken
+- (void)setApnsToken:(NSString *)apnsToken
 {
   [HKUtils saveObject:apnsToken key:HKDeviceAPNSTokenKey];
 }

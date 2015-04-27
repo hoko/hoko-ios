@@ -15,7 +15,7 @@
 #import "HKNetworkOperation.h"
 
 NSString *const HKDeferredDeeplinkingNotFirstRun = @"isNotFirstRun";
-NSString *const HKDeferredDeeplinkingPath = @"deferred/lookup";
+NSString *const HKDeferredDeeplinkingPath = @"apps/install";
 
 @interface HKDeferredDeeplinking ()
 
@@ -55,8 +55,7 @@ NSString *const HKDeferredDeeplinkingPath = @"deferred/lookup";
     return @{@"os_version": [HKDevice device].systemVersion,
              @"device_type": [HKDevice device].platform,
              @"language": [HKDevice device].systemLanguage.lowercaseString,
-             @"screen_size": [HKDevice device].screenSize,
-             @"timezone_offset": [HKDevice device].timezoneOffset};
+             @"screen_size": [HKDevice device].screenSize};
 }
 
 @end
