@@ -11,9 +11,7 @@
 #import "HKDeeplinking.h"
 
 /**
- *  The HKAnalytics module provides all the necessary APIs to manage user and application behavior.
- *  Users should be identified to this module, as well as key events (e.g. sales, referrals, etc) in order
- *  to track campaign value and allow user segmentation.
+ *  The HKAnalytics module provides all the necessary APIs to manage session behavior.
  */
 @interface HKAnalytics : NSObject <HKHandlerProcotol>
 
