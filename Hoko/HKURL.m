@@ -70,11 +70,11 @@
     NSRange equalsLocation = [component rangeOfString:@"="];
     if (equalsLocation.location == NSNotFound) {
       // There's no equals, so associate the key with NSNull
-      parameters[[HKURL decodeURLString:component]] = [NSNull null];
+      [parameters setValue:[NSNull null] forKey:[HKURL decodeURLString:component]];
     } else {
       NSString *key = [HKURL decodeURLString:[component substringToIndex:equalsLocation.location]];
       NSString *value = [HKURL decodeURLString:[component substringFromIndex:equalsLocation.location + 1]];
-      parameters[key] = value;
+      [parameters setObject:value forKey:key];
     }
   }
   return [NSDictionary dictionaryWithDictionary:parameters];

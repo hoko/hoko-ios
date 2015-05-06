@@ -33,7 +33,7 @@ NSString *const HKVersionCheckerGithubPrerelease = @"prerelease";
 {
   [HKNetworking requestToPath:HKVersionCheckerGitHubApi parameters:nil token:nil successBlock:^(id json) {
     if ([json isKindOfClass:[NSArray class]]) {
-      id firstJson = json[0];
+      id firstJson = [json objectAtIndex:0];
       NSString *versionName = firstJson[HKVersionCheckerGithubVersionName];
       NSString *currentVersionName = [NSString stringWithFormat:@"v%@",currentVersion];
       BOOL isPrerelease = [firstJson[HKVersionCheckerGithubPrerelease] boolValue];

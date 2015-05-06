@@ -124,7 +124,7 @@ NSString *const HKServerWarningDomain = @"HokoServerWarning";
 
 + (NSError *)serverError:(NSDictionary *)errorJSON
 {
-  return [self serverError:errorJSON[@"error"] code:errorJSON[@"status"]];
+  return [self serverError:[errorJSON objectForKey:@"error"] code:[errorJSON objectForKey:@"status"]];
 }
 
 + (NSError *)serverError:(NSString *)error code:(NSNumber *)code
@@ -134,8 +134,8 @@ NSString *const HKServerWarningDomain = @"HokoServerWarning";
 
 + (NSError *)serverWarning:(NSDictionary *)warningJSON
 {
-  if (warningJSON[@"warning"] && warningJSON[@"status"])
-    return [self serverWarning:warningJSON[@"warning"] code:warningJSON[@"status"]];
+  if ([warningJSON objectForKey:@"warning"] && [warningJSON objectForKey:@"status"])
+    return [self serverWarning:[warningJSON objectForKey:@"warning"] code:[warningJSON objectForKey:@"status"]];
   return nil;
 }
 

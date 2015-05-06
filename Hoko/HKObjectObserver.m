@@ -34,7 +34,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
   if ([keyPath isEqualToString:self.keyPath]) {
-    if (self.triggered(object, change[NSKeyValueChangeOldKey], change[NSKeyValueChangeNewKey])) {
+    if (self.triggered(object, [change objectForKey:NSKeyValueChangeOldKey], [change objectForKey:NSKeyValueChangeNewKey])) {
       [self.object removeObserver:self forKeyPath:self.keyPath context:NULL];
       [[HKObserver observer] removeObserver:self];
     }

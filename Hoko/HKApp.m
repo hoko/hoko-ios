@@ -122,7 +122,13 @@ NSString *const HKAppIconPath = @"icons";
 
 - (NSString *)base64Icon
 {
-  NSString *base64Icon = [UIImagePNGRepresentation([self icon]) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  NSString *base64Icon;
+  NSData *baseIcon = UIImagePNGRepresentation([self icon]);
+  if ([baseIcon respondsToSelector:@selector(base64EncodedStringWithOptions:)]) {
+    base64Icon = [baseIcon base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]; // iOS 7+
+  } else {
+    base64Icon = [baseIcon base64Encoding]; // pre iOS7
+  }
   return base64Icon ? base64Icon : @"";
 }
 
