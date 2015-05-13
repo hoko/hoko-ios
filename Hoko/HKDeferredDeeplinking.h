@@ -12,6 +12,7 @@
 
 - (instancetype)initWithToken:(NSString *)token;
 
+- (void)ignoreFirstRun;
 - (void)requestDeferredDeeplink:(void(^)(NSString *deeplink))handler;
 
 @end

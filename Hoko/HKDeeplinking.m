@@ -40,11 +40,15 @@
         _linkGenerator = [[HKLinkGenerator alloc] initWithToken:token];
         _deferredDeeplinking = [[HKDeferredDeeplinking alloc] initWithToken:token];
         __block typeof(self) wself = self;
-        __block HKNotificationObserver *notificationObserver = [[HKObserver observer] registerForNotification:UIApplicationDidBecomeActiveNotification triggered:^(NSNotification *notification) {
-            [wself.deferredDeeplinking requestDeferredDeeplink:^(NSString *deeplink) {
-                [wself handleOpenURL:[NSURL URLWithString:deeplink]];
-            }];
-            [[HKObserver observer] removeObserver:notificationObserver];
+        __block HKNotificationObserver *didFinishLaunchingNotificationObserver = [[HKObserver observer] registerForNotification:UIApplicationDidFinishLaunchingNotification triggered:^(NSNotification *notification) {
+            if (!notification.userInfo[UIApplicationLaunchOptionsURLKey]) {
+                [wself.deferredDeeplinking requestDeferredDeeplink:^(NSString *deeplink) {
+                    [wself handleOpenURL:[NSURL URLWithString:deeplink]];
+                }];
+            } else {
+                [wself.deferredDeeplinking ignoreFirstRun];
+            }
+            [[HKObserver observer] removeObserver:didFinishLaunchingNotificationObserver];
         }];
     }
     return self;

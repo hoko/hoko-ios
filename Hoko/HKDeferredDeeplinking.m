@@ -34,6 +34,11 @@ NSString *const HKDeferredDeeplinkingPath = @"apps/install";
     return self;
 }
 
+- (void)ignoreFirstRun
+{
+    [HKUtils saveObject:@YES key:HKDeferredDeeplinkingNotFirstRun];
+}
+
 - (void)requestDeferredDeeplink:(void (^)(NSString *))handler
 {
     BOOL isFirstRun = ![[HKUtils objectForKey:HKDeferredDeeplinkingNotFirstRun] boolValue];
