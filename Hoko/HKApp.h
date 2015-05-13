@@ -20,9 +20,7 @@
 @property (nonatomic, readonly) BOOL hasURLSchemes;
 @property (nonatomic, readonly) BOOL isDebugBuild;
 @property (nonatomic, strong, readonly) NSString *environment;
-@property (nonatomic, strong, readonly) UIImage *icon;
 @property (nonatomic, strong, readonly) id json;
 
-- (void)postIconWithToken:(NSString *)token;
 
 @end

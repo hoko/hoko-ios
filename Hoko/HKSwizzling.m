@@ -46,7 +46,7 @@
     free(classes);
   }
   if (appDelegates.count == 1)
-    return appDelegates[0];
+    return appDelegates.firstObject;
   return nil;
 }
 

@@ -18,7 +18,7 @@
 #import "HKDeeplinking+Private.h"
 #import "HKNetworkOperationQueue.h"
 
-NSString *const HokoVersion = @"1.2";
+NSString *const HokoVersion = @"2.0";
 
 @interface Hoko ()
 
@@ -78,7 +78,6 @@ static Hoko *_sharedInstance = nil;
         // Only posting when in debug mode to avoid spaming the service
         // Also checking for new version on github public repo
         if (debugMode) {
-            [[HKApp app] postIconWithToken:_token];
             [[HKVersionChecker versionChecker] checkForNewVersion:HokoVersion];
         }
         

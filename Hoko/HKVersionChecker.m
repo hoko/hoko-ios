@@ -20,32 +20,32 @@ NSString *const HKVersionCheckerGithubPrerelease = @"prerelease";
 #pragma mark - Static Instance
 + (instancetype)versionChecker
 {
-  static HKVersionChecker *_sharedInstance = nil;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    _sharedInstance = [HKVersionChecker new];
-  });
-  return _sharedInstance;
+    static HKVersionChecker *_sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedInstance = [HKVersionChecker new];
+    });
+    return _sharedInstance;
 }
 
 #pragma mark - Class Methods
 - (void)checkForNewVersion:(NSString *)currentVersion
 {
-  [HKNetworking requestToPath:HKVersionCheckerGitHubApi parameters:nil token:nil successBlock:^(id json) {
-    if ([json isKindOfClass:[NSArray class]]) {
-      id firstJson = json[0];
-      NSString *versionName = firstJson[HKVersionCheckerGithubVersionName];
-      NSString *currentVersionName = [NSString stringWithFormat:@"v%@",currentVersion];
-      BOOL isPrerelease = [firstJson[HKVersionCheckerGithubPrerelease] boolValue];
-      if ([versionName compare:currentVersionName options:NSNumericSearch] == NSOrderedDescending && !isPrerelease) {
-        HKLog(@"A new version of HOKO is available at http://github.com/hokolinks/hoko-ios: %@",versionName);
-      }
-    } else {
-      HKLog(@"Unexpected response from GITHUB.");
-    }
-  } failedBlock:^(NSError *error) {
-    HKErrorLog(error);
-  }];
+    [HKNetworking requestToPath:HKVersionCheckerGitHubApi parameters:nil token:nil successBlock:^(id json) {
+        if ([json isKindOfClass:[NSArray class]]) {
+            id firstJson = [json objectAtIndex:0];
+            NSString *versionName = [firstJson objectForKey:HKVersionCheckerGithubVersionName];
+            NSString *currentVersionName = [NSString stringWithFormat:@"v%@",currentVersion];
+            BOOL isPrerelease = [[firstJson objectForKey:HKVersionCheckerGithubPrerelease] boolValue];
+            if ([versionName compare:currentVersionName options:NSNumericSearch] == NSOrderedDescending && !isPrerelease) {
+                HKLog(@"A new version of HOKO is available at http://github.com/hokolinks/hoko-ios: %@",versionName);
+            }
+        } else {
+            HKLog(@"Unexpected response from GITHUB.");
+        }
+    } failedBlock:^(NSError *error) {
+        HKErrorLog(error);
+    }];
 }
 
 

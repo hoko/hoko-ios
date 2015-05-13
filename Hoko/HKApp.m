@@ -19,8 +19,6 @@ NSString *const HKAppIconKey = @"HKAppIconKey";
 NSString *const HKAppEnvironmentDebug = @"debug";
 NSString *const HKAppEnvironmentRelease = @"release";
 
-NSString *const HKAppIconPath = @"icons";
-
 @implementation HKApp
 
 #pragma mark - Shared Instance
@@ -37,7 +35,7 @@ NSString *const HKAppIconPath = @"icons";
 #pragma mark - Methods
 - (NSString *)name
 {
-  return [NSBundle mainBundle].infoDictionary[(NSString *)kCFBundleNameKey];
+  return [[NSBundle mainBundle].infoDictionary objectForKey:(NSString *)kCFBundleNameKey];
 }
 
 - (NSString *)bundle
@@ -47,13 +45,13 @@ NSString *const HKAppIconPath = @"icons";
 
 - (NSString *)version
 {
-  NSString *version = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+  NSString *version = [[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleShortVersionString"];
   return version ? version : HKAppUnknownVersion;
 }
 
 - (NSString *)build
 {
-  NSString *build = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
+  NSString *build = [[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleVersion"];
   return build ? build : HKAppUnknownBuild;
 }
 
@@ -65,10 +63,10 @@ NSString *const HKAppIconPath = @"icons";
   
   dispatch_once(&onceToken, ^{
     _urlSchemes = @[];
-    id urlTypes = [NSBundle mainBundle].infoDictionary[@"CFBundleURLTypes"];
+    id urlTypes = [[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleURLTypes"];
     if (urlTypes && [urlTypes isKindOfClass:[NSArray class]]) {
       for (id urlType in urlTypes) {
-        id urlSchemes = urlType[@"CFBundleURLSchemes"];
+        id urlSchemes = [urlType objectForKey:@"CFBundleURLSchemes"];
         if (urlSchemes && [urlSchemes isKindOfClass:[NSArray class]]) {
           for (id urlScheme in urlSchemes) {
             _urlSchemes = [_urlSchemes arrayByAddingObject:urlScheme];
@@ -115,25 +113,6 @@ NSString *const HKAppIconPath = @"icons";
     return self.isDebugBuild ? HKAppEnvironmentDebug : HKAppEnvironmentRelease;
 }
 
-// TODO test this in iOS < 8 and other types of projects
-- (UIImage *)icon
-{
-  // Look for icon in the best resolution possible
-  NSString *iconName = [[NSBundle mainBundle].infoDictionary[@"CFBundleIcons"][@"CFBundlePrimaryIcon"][@"CFBundleIconFiles"] lastObject];
-  UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@@3x",iconName]];
-  if (!image)
-    image = [UIImage imageNamed:[NSString stringWithFormat:@"%@@2x",iconName]];
-  if (!image)
-    image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",iconName]];
-  return image;
-}
-
-- (NSString *)base64Icon
-{
-  NSString *base64Icon = [UIImagePNGRepresentation([self icon]) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-  return base64Icon ? base64Icon : @"";
-}
-
 #pragma mark - Serializer
 - (id)json
 {
@@ -143,24 +122,5 @@ NSString *const HKAppIconPath = @"icons";
            @"build": [HKUtils jsonValue:self.build]};
 }
 
-- (id)iconJSON
-{
-  return @{@"icon": self.base64Icon};
-}
-
-- (void)postIconWithToken:(NSString *)token
-{
-  NSString *previousAppIconMD5 = [HKUtils objectForKey:HKAppIconKey];
-  id iconJSON = [self iconJSON];
-  NSString *iconJSONMD5 = [HKUtils md5FromString:[iconJSON description]];
-  if (!previousAppIconMD5 || [previousAppIconMD5 compare:iconJSONMD5] != NSOrderedSame) {
-    [HKUtils saveObject:iconJSONMD5 key:HKAppIconKey];
-    HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
-                                                                                      path:HKAppIconPath
-                                                                                     token:token
-                                                                                parameters:iconJSON];
-    [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
-  }
-}
 
 @end

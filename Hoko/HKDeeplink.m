@@ -98,13 +98,13 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
     NSString *url = self.route;
     for (NSString *routeParameterKey in self.routeParameters.allKeys) {
         url = [url stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@":%@",routeParameterKey]
-                                             withString:[NSString stringWithFormat:@"%@",self.routeParameters[routeParameterKey]]];
+                                             withString:[NSString stringWithFormat:@"%@",[self.routeParameters objectForKey:routeParameterKey]]];
     }
     
     if (self.queryParameters.count > 0) {
         url = [url stringByAppendingString:@"?"];
         for (NSString *queryParameterKey in self.queryParameters.allKeys) {
-            url = [url stringByAppendingFormat:@"%@=%@&", queryParameterKey, [NSString stringWithFormat:@"%@",self.queryParameters[queryParameterKey]]];
+            url = [url stringByAppendingFormat:@"%@=%@&", queryParameterKey, [NSString stringWithFormat:@"%@", [self.queryParameters objectForKey:queryParameterKey]]];
         }
         url = [url substringToIndex:url.length - 1];
     }
@@ -118,7 +118,7 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
     if ([url isKindOfClass:[NSURL class]]) {
         urlString = [(NSURL *)url absoluteString];
     }
-    self.urls[[self stringForPlatform:platform]] = @{@"link": urlString};
+    [self.urls setObject:@{@"link": urlString} forKey:[self stringForPlatform:platform]];
 }
 
 - (NSString *)stringForPlatform:(HKDeeplinkPlatform)platform
@@ -147,12 +147,12 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 #pragma mark - Campaign Identifiers
 - (NSString *)openIdentifier
 {
-    return self.queryParameters[HKDeeplinkOpenIdentifierKey];
+    return [self.queryParameters objectForKey:HKDeeplinkOpenIdentifierKey];
 }
 
 - (NSString *)smartlinkIdentifier
 {
-    return self.queryParameters[HKDeeplinkSmartlinkIdentifierKey];
+    return [self.queryParameters objectForKey:HKDeeplinkSmartlinkIdentifierKey];
 }
 
 - (BOOL)isSmartlink
@@ -206,11 +206,11 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
     // then check if they match with the routeParameters
     NSArray *routeComponents = [route componentsSeparatedByString:@"/"];
     for (NSInteger index = 0; index < routeComponents.count; index++) {
-        NSString *routeComponent = routeComponents[index];
+        NSString *routeComponent = [routeComponents objectAtIndex:index];
         
         if ([routeComponent hasPrefix:@":"] && [routeComponent length] > 2) {
             NSString *token = [routeComponent substringFromIndex:1];
-            if (!routeParameters[token])
+            if (![routeParameters objectForKey:token])
                 return NO;
         }
     }

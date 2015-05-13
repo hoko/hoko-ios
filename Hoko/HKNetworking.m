@@ -18,8 +18,8 @@
 double const HKNetworkingRequestTimeout = 15.0f;
 
 NSString *const HKNetworkingEndpoint = @"https://api.hokolinks.com";
-//NSString *const HKNetworkingEndpoint = @"http://5db55475.ngrok.com";
-NSString *const HKNetworkingVersion = @"v1";
+//NSString *const HKNetworkingEndpoint = @"http://64db36b9.ngrok.com";
+NSString *const HKNetworkingVersion = @"v2";
 NSString *const HKNetworkingFormat = @"json";
 
 @interface HKNetworking () <NSURLConnectionDataDelegate>
@@ -303,7 +303,7 @@ NSString *const HKNetworkingFormat = @"json";
     
     for(NSString *key in [parameters allKeys])
     {
-        NSString *value = [parameters[key] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *value = [[parameters objectForKey:key] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         encodedParameters = [encodedParameters stringByAppendingFormat:@"%@=%@&", key, value];
     }
     

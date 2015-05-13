@@ -70,7 +70,7 @@
 
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return [self openURL:url sourceApplication:sourceApplication annotation:annotation];
+    return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 
 - (BOOL)canOpenURL:(NSURL *)url

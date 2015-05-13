@@ -40,7 +40,7 @@ NSString *const HKDeferredDeeplinkingPath = @"apps/install";
     if (isFirstRun) {
         [HKUtils saveObject:@YES key:HKDeferredDeeplinkingNotFirstRun];
         [HKNetworking postToPath:[HKNetworkOperation urlFromPath:HKDeferredDeeplinkingPath] parameters:self.json token:self.token successBlock:^(id json) {
-            NSString *deeplink = json[@"deeplink"];
+            NSString *deeplink = [json objectForKey:@"deeplink"];
             if (deeplink && [deeplink isKindOfClass:[NSString class]] && handler) {
                 handler(deeplink);
             }

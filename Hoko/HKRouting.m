@@ -72,9 +72,10 @@
                                                    sourceApplication:sourceApplication];
             
             [[Hoko deeplinking].handling handle:deeplink];
-            if(route.target)
+            if(route.target) {
                 route.target(deeplink);
-            
+                return YES;
+            }
         }
     }
     
@@ -89,10 +90,11 @@
             
             [[Hoko deeplinking].handling handle:deeplink];
             self.defaultRoute.target(deeplink);
+            return YES;
             
         }
     }
-    return [self canOpenURL:url];
+    return NO;
 }
 
 - (BOOL)canOpenURL:(NSURL *)url
