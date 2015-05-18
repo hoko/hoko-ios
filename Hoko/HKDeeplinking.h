@@ -121,6 +121,13 @@
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation NS_AVAILABLE_IOS(4_2);
 
 /**
+ *  openSmartlink: serves the purpose of handling the open of a Smartlink, by resolving it through
+ *  HOKO's backend, opening the resolved deeplink and calling the mapped route's target block.
+ *
+ *  @param smartlink A Smartlink.
+ */
+- (void)openSmartlink:(NSString *)smartlink;
+/**
  *  generateSmartlinkForDeeplink:success:failure allows the app to generate Smartlinks for the
  *  user to share with other users, independent of the platform, users will be redirected to the
  *  corresponding view. A user generated HKDeeplink object may be passed along to generate the

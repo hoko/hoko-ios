@@ -52,6 +52,16 @@
             name = "Routing">
             <Group
                location = "container:"
+               name = "Resolver">
+               <FileRef
+                  location = "group:Hoko/HKResolver.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HKResolver.m">
+               </FileRef>
+            </Group>
+            <Group
+               location = "container:"
                name = "URL">
                <FileRef
                   location = "group:Hoko/HKURL.h">

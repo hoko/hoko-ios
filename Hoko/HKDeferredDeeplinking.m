@@ -13,6 +13,8 @@
 #import "HKDevice.h"
 #import "HKNetworking.h"
 #import "HKNetworkOperation.h"
+#import "HKNotificationObserver.h"
+#import "HKObserver.h"
 
 NSString *const HKDeferredDeeplinkingNotFirstRun = @"isNotFirstRun";
 NSString *const HKDeferredDeeplinkingPath = @"apps/install";
@@ -32,11 +34,6 @@ NSString *const HKDeferredDeeplinkingPath = @"apps/install";
         _token = token;
     }
     return self;
-}
-
-- (void)ignoreFirstRun
-{
-    [HKUtils saveObject:@YES key:HKDeferredDeeplinkingNotFirstRun];
 }
 
 - (void)requestDeferredDeeplink:(void (^)(NSString *))handler

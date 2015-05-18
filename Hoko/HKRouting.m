@@ -74,26 +74,24 @@
             [[Hoko deeplinking].handling handle:deeplink];
             if(route.target) {
                 route.target(deeplink);
-                return YES;
             }
+            return YES;
         }
     }
     
     // Default Route
-    if(self.defaultRoute) {
-        if(self.defaultRoute.target) {
-            HKDeeplink *deeplink = [HKDeeplink deeplinkWithURLScheme:hkURL.scheme
-                                                               route:nil
-                                                     routeParameters:nil
-                                                     queryParameters:hkURL.queryParameters
-                                                   sourceApplication:sourceApplication];
-            
-            [[Hoko deeplinking].handling handle:deeplink];
-            self.defaultRoute.target(deeplink);
-            return YES;
-            
-        }
+    HKDeeplink *deeplink = [HKDeeplink deeplinkWithURLScheme:hkURL.scheme
+                                                       route:nil
+                                             routeParameters:nil
+                                             queryParameters:hkURL.queryParameters
+                                           sourceApplication:sourceApplication];
+    
+    [[Hoko deeplinking].handling handle:deeplink];
+    if(self.defaultRoute && self.defaultRoute.target) {
+        self.defaultRoute.target(deeplink);
+        return YES;
     }
+    
     return NO;
 }
 

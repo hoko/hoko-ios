@@ -15,11 +15,13 @@
 #import "HKSwizzling.h"
 #import "HKLinkGenerator.h"
 #import "HKRouting.h"
+#import "HKResolver.h"
 #import "HKDeferredDeeplinking.h"
 #import "HKDeeplinking+Private.h"
 
 @interface HKDeeplinking ()
 
+@property (nonatomic, strong) HKResolver *resolver;
 @property (nonatomic, strong) HKRouting *routing;
 @property (nonatomic, strong) HKHandling *handling;
 @property (nonatomic, strong) HKLinkGenerator *linkGenerator;
@@ -39,17 +41,8 @@
         _handling = [HKHandling new];
         _linkGenerator = [[HKLinkGenerator alloc] initWithToken:token];
         _deferredDeeplinking = [[HKDeferredDeeplinking alloc] initWithToken:token];
-        __block typeof(self) wself = self;
-        __block HKNotificationObserver *didFinishLaunchingNotificationObserver = [[HKObserver observer] registerForNotification:UIApplicationDidFinishLaunchingNotification triggered:^(NSNotification *notification) {
-            if (!notification.userInfo[UIApplicationLaunchOptionsURLKey]) {
-                [wself.deferredDeeplinking requestDeferredDeeplink:^(NSString *deeplink) {
-                    [wself handleOpenURL:[NSURL URLWithString:deeplink]];
-                }];
-            } else {
-                [wself.deferredDeeplinking ignoreFirstRun];
-            }
-            [[HKObserver observer] removeObserver:didFinishLaunchingNotificationObserver];
-        }];
+        _resolver = [[HKResolver alloc] initWithToken:token];
+        [self triggerDeferredDeeplinking];
     }
     return self;
 }
@@ -82,6 +75,14 @@
     return [self.routing canOpenURL:url];
 }
 
+- (void)openSmartlink:(NSString *)smartlink
+{
+    [self.resolver resolveSmartlink:smartlink completion:^(NSURL *deeplink, NSError *error) {
+        if (deeplink)
+            [self handleOpenURL:deeplink];
+    }];
+}
+
 #pragma mark - Handlers
 - (void)addHandler:(id<HKHandlerProcotol>)handler
 {
@@ -100,6 +101,21 @@
 {
     [self.linkGenerator generateSmartlinkForDeeplink:deeplink success:success failure:failure];
 }
+
+#pragma mark - Deferred Deeplinking
+- (void)triggerDeferredDeeplinking
+{
+    __block typeof(self) wself = self;
+    __block HKNotificationObserver *didFinishLaunchingNotificationObserver = [[HKObserver observer] registerForNotification:UIApplicationDidFinishLaunchingNotification triggered:^(NSNotification *notification) {
+        [wself.deferredDeeplinking requestDeferredDeeplink:^(NSString *deeplink) {
+            if (!notification.userInfo[UIApplicationLaunchOptionsURLKey]) {
+                [wself handleOpenURL:[NSURL URLWithString:deeplink]];
+            }
+        }];
+        [[HKObserver observer] removeObserver:didFinishLaunchingNotificationObserver];
+    }];
+}
+
 
 #pragma mark - Swizzling
 + (void)load
