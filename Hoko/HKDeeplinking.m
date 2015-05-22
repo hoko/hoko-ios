@@ -64,7 +64,6 @@
     return [self openURL:url sourceApplication:nil annotation:nil];
 }
 
-
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation];
