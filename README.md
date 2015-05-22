@@ -16,7 +16,7 @@ your.app.scheme://<mapped_route>/<route_param>?<query_params>
 
 # Quick Start - HOKO framework for iOS
 
-This document is a quick start introduction to the HOKO framework for iOS. You can read the full documentation at [http://hokolinks.com/documentation#ios](http://hokolinks.com/documentation#ios).
+This document is a quick start introduction to the HOKO framework for iOS. You can read the full documentation at [http://hokolinks.com/documentation#ios](http://support.hokolinks.com/ios/ios-setup/).
 
 To integrate HOKO in your app, simply follow the 3 simple steps below after adding it to your project.
 
@@ -151,14 +151,5 @@ Hoko.analytics().trackKeyEvent("dress_purchase", amount:29.99)
 
 ### Full documentation
 
-We recommend you to read the full documentation at [http://hokolinks.com/documentation#ios](http://hokolinks.com/documentation#ios).
-
-
-# Author
-
-HOKO, S.A.
-
-# License
-
-HOKO is available under the Apache license. See the LICENSE file for more info.
+We recommend you to read the full documentation at [http://hokolinks.com/documentation#ios](http://support.hokolinks.com/ios/ios-setup/).
 
