@@ -19,7 +19,7 @@
 #import "HKNetworkOperationQueue.h"
 #import "HKPushNotifications+Private.h"
 
-NSString *const HokoVersion = @"1.2";
+NSString *const HokoVersion = @"1.2.1";
 
 @interface Hoko ()
 

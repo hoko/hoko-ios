@@ -89,6 +89,7 @@ sourceApplication:(NSString *)sourceApplication
                 [[Hoko deeplinking].handling handle:deeplink];
                 if(route.target)
                     route.target(deeplink);
+                return YES;
             } else {
                 [deeplink postWithToken:self.token
                                    user:[[Hoko analytics] currentUser]
@@ -97,18 +98,19 @@ sourceApplication:(NSString *)sourceApplication
         }
     }
     
+    HKDeeplink *deeplink = [HKDeeplink deeplinkWithURLScheme:hkURL.scheme
+                                                       route:nil
+                                             routeParameters:nil
+                                             queryParameters:hkURL.queryParameters
+                                           sourceApplication:sourceApplication];
+    if (!fromForeground)
+        [[Hoko deeplinking].handling handle:deeplink];
+    
     // Default Route
     if(self.defaultRoute) {
         if(self.defaultRoute.target) {
-            HKDeeplink *deeplink = [HKDeeplink deeplinkWithURLScheme:hkURL.scheme
-                                                               route:nil
-                                                     routeParameters:nil
-                                                     queryParameters:hkURL.queryParameters
-                                                   sourceApplication:sourceApplication];
-            
             // Applies the same behavior as a common route.
             if (!fromForeground) {
-                [[Hoko deeplinking].handling handle:deeplink];
                 self.defaultRoute.target(deeplink);
             } else {
                 [deeplink postWithToken:self.token
