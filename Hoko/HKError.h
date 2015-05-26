@@ -24,7 +24,6 @@
 + (NSError *)jsonParseError:(id)object;
 + (NSError *)networkingError:(NSError *)error;
 + (NSError *)couldNotFindAppDelegateError;
-+ (NSError *)ignoringKeyEventError:(id)event;
 + (NSError *)handlerAlreadyExistsError;
 + (NSError *)unknownError;
 + (NSError *)serverErrorFromJSON:(id)json;

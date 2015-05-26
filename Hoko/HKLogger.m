@@ -22,7 +22,6 @@
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     _sharedInstance = [HKLogger new];
-    _sharedInstance.verbose = [HKApp app].isDebugBuild;
   });
   
   return _sharedInstance;

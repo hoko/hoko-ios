@@ -19,13 +19,8 @@
 @property (nonatomic, strong, readonly) NSString *model;
 @property (nonatomic, strong, readonly) NSString *systemVersion;
 @property (nonatomic, strong, readonly) NSString *systemLanguage;
-@property (nonatomic, strong, readonly) NSString *locale;
-@property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong, readonly) NSString *screenSize;
-@property (nonatomic, strong, readonly) NSString *carrier;
 @property (nonatomic, strong, readonly) NSString *uid;
-@property (nonatomic, strong, readonly) NSString *timezoneOffset;
-@property (nonatomic, strong) NSString *apnsToken;
 @property (nonatomic, readonly) BOOL hasInternetConnection;
 @property (nonatomic, readonly) BOOL isSimulator;
 @property (nonatomic, strong, readonly) id json;

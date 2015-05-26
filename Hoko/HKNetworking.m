@@ -18,7 +18,6 @@
 double const HKNetworkingRequestTimeout = 15.0f;
 
 NSString *const HKNetworkingEndpoint = @"https://api.hokolinks.com";
-//NSString *const HKNetworkingEndpoint = @"http://64db36b9.ngrok.com";
 NSString *const HKNetworkingVersion = @"v2";
 NSString *const HKNetworkingFormat = @"json";
 

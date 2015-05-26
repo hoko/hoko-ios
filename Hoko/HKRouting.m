@@ -19,7 +19,6 @@
 #import "HKNetworkOperationQueue.h"
 #import "HKDeeplinking+Private.h"
 #import "HKDeeplink+Private.h"
-#import "HKAnalytics+Private.h"
 
 @interface HKRouting ()
 
@@ -70,7 +69,7 @@
                                                      routeParameters:routeParameters
                                                      queryParameters:hkURL.queryParameters
                                                    sourceApplication:sourceApplication];
-            
+            [deeplink postWithToken:self.token];
             [[Hoko deeplinking].handling handle:deeplink];
             if(route.target) {
                 route.target(deeplink);
@@ -85,7 +84,7 @@
                                              routeParameters:nil
                                              queryParameters:hkURL.queryParameters
                                            sourceApplication:sourceApplication];
-    
+    [deeplink postWithToken:self.token];
     [[Hoko deeplinking].handling handle:deeplink];
     if(self.defaultRoute && self.defaultRoute.target) {
         self.defaultRoute.target(deeplink);

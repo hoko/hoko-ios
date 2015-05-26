@@ -94,11 +94,6 @@ NSString *const HKServerWarningDomain = @"HokoServerWarning";
   return [self errorWithCode:14 description:error.description];
 }
 
-+ (NSError *)ignoringKeyEventError:(id)event
-{
-  return [self errorWithCode:15 description:[NSString stringWithFormat:@"Ignoring key event %@ because there is no deeplinking session.", event]];
-}
-
 + (NSError *)handlerAlreadyExistsError
 {
   return [self errorWithCode:16 description:@"The handler being added has already been added."];

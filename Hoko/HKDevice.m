@@ -20,7 +20,6 @@
 NSString *const HKDeviceReachabilityUrl = @"www.google.com";
 
 NSString *const HKDeviceUUIDKey = @"UUID";
-NSString *const HKDeviceAPNSTokenKey = @"APNSToken";
 
 NSString *const HKDeviceVendor = @"Apple";
 NSString *const HKDeviceNoCarrier = @"No Carrier";
@@ -93,12 +92,7 @@ NSString *const HKDeviceIPadSimulator = @"iPad Simulator";
 
 - (NSString *)systemLanguage
 {
-  return [NSLocale preferredLanguages].firstObject;
-}
-
-- (NSString *)locale
-{
-  return [[NSLocale currentLocale] objectForKey:NSLocaleIdentifier];
+    return [NSLocale preferredLanguages].firstObject;
 }
 
 - (NSString *)name
@@ -108,28 +102,11 @@ NSString *const HKDeviceIPadSimulator = @"iPad Simulator";
 
 - (NSString *)screenSize
 {
-  CGFloat scale = [UIScreen mainScreen].scale;
-  CGSize screenSize = [UIScreen mainScreen].bounds.size;
-  NSInteger width = screenSize.width * scale;
-  NSInteger height = screenSize.height * scale;
-  return [NSString stringWithFormat:@"%ldx%ld", (unsigned long)height, (unsigned long)width];
-}
-
-// Using reflection to avoid unecessary framework imports on the actual application
-// Call is actually [[[CTTelephonyNetworkInfo alloc]init]subscriberCellularProvider].carrierName
-- (NSString *)carrier
-{
-  Class CTTelephonyNetworkInfoClass = NSClassFromString(@"CTTelephonyNetworkInfo");
-  if (CTTelephonyNetworkInfoClass) {
-    id networkInfo = [[CTTelephonyNetworkInfoClass alloc] init];
-    SEL subscriberCellularProviderSelector = NSSelectorFromString(@"subscriberCellularProvider");
-    id carrier = ((id (*)(id, SEL))[networkInfo methodForSelector:subscriberCellularProviderSelector])(networkInfo, subscriberCellularProviderSelector);
-    NSString *carrierName = [carrier valueForKey:@"carrierName"];
-    if (carrierName.length)
-      return carrierName;
-    return HKDeviceNoCarrier;
-  }
-  return HKDeviceNoTelephonyFramework;
+    CGFloat scale = [UIScreen mainScreen].scale;
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    NSInteger width = screenSize.width * scale;
+    NSInteger height = screenSize.height * scale;
+    return [NSString stringWithFormat:@"%ldx%ld", (unsigned long)height, (unsigned long)width];
 }
 
 // Load UUID from Disk, if it does not exist, use the Ad Identifier, if it can't
@@ -149,16 +126,6 @@ NSString *const HKDeviceIPadSimulator = @"iPad Simulator";
   return uid;
 }
 
-- (NSString *)apnsToken
-{
-  return [HKUtils objectForKey:HKDeviceAPNSTokenKey];
-}
-
-- (void)setApnsToken:(NSString *)apnsToken
-{
-  [HKUtils saveObject:apnsToken key:HKDeviceAPNSTokenKey];
-}
-
 - (BOOL)hasInternetConnection
 {
   return ![self.internetConnectivity isEqualToString:HKDeviceReachabilityNoConnectivity];
@@ -167,11 +134,6 @@ NSString *const HKDeviceIPadSimulator = @"iPad Simulator";
 - (BOOL)isSimulator
 {
   return [self.name compare:HKDeviceIPhoneSimulator] == NSOrderedSame || [self.name compare:HKDeviceIPadSimulator] == NSOrderedSame;
-}
-
-- (NSString *)timezoneOffset
-{
-    return [NSString stringWithFormat:@"%@",@([[NSTimeZone localTimeZone] secondsFromGMT] / ( 60.0f * 60.0f))];
 }
 
 #pragma mark - ID Getters
@@ -204,20 +166,11 @@ NSString *const HKDeviceIPadSimulator = @"iPad Simulator";
 #pragma mark - Serializer
 - (id)json
 {
-  return @{@"timestamp": [HKUtils jsonValue:[HKUtils stringFromDate:[NSDate date]]],
-           @"vendor": [HKUtils jsonValue:self.vendor],
+  return @{@"vendor": [HKUtils jsonValue:self.vendor],
            @"platform": [HKUtils jsonValue:self.platform],
            @"model": [HKUtils jsonValue:self.model],
            @"system_version": [HKUtils jsonValue:self.systemVersion],
-           @"system_language": [HKUtils jsonValue:self.systemLanguage],
-           @"locale": [HKUtils jsonValue:self.locale],
-           @"device_name": [HKUtils jsonValue:self.name],
-           @"screen_size": [HKUtils jsonValue:self.screenSize],
-           @"carrier": [HKUtils jsonValue:self.carrier],
-           @"internet_connectivity": [HKUtils jsonValue:self.internetConnectivity],
-           @"uid": [HKUtils jsonValue:self.uid],
-           @"token": [HKUtils jsonValue:self.apnsToken],
-           @"application": [HKApp app].json};
+           @"uid": [HKUtils jsonValue:self.uid]};
 }
 
 #pragma mark - Reachability

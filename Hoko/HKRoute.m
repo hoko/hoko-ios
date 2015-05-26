@@ -19,44 +19,51 @@ NSString *const HKRoutePath = @"routes";
 
 #pragma mark - Initializer
 - (instancetype)initWithRoute:(NSString *)route target:(void (^)(HKDeeplink *deeplink))target {
-  self = [super init];
-  if (self) {
-    _route = route;
-    _target = target;
-  }
-  return self;
+    self = [super init];
+    if (self) {
+        _route = route;
+        _target = target;
+    }
+    return self;
 }
 
 #pragma mark - Public Static Initializer
 + (instancetype)routeWithRoute:(NSString *)route target:(void (^)(HKDeeplink *deeplink))target{
-  return [[HKRoute alloc] initWithRoute:route target:target];
+    return [[HKRoute alloc] initWithRoute:route target:target];
 }
 
 #pragma mark - Helper
 - (NSArray *)components
 {
-  return [self.route componentsSeparatedByString:@"/"];
+    return [self.route componentsSeparatedByString:@"/"];
 }
 
 #pragma mark - Networking
 - (void)postWithToken:(NSString *)token
 {
-  HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
-                                                                                      path:HKRoutePath
-                                                                                     token:token
-                                                                                parameters:self.json];
-  [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
+    if (![self hasBeenPosted]) {
+        [HKUtils saveBool:YES key:self.route];
+        HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
+                                                                                            path:HKRoutePath
+                                                                                           token:token
+                                                                                      parameters:self.json];
+        [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
+    }
 }
 
 #pragma mark - Serialization
 - (id)json
 {
-  return @{@"route": @{@"build": [HKApp app].build,
-                       @"device": [HKDevice device].platform,
-                       @"path": self.route,
-                       @"url_schemes": [HKApp app].urlSchemes,
-                       @"version": [HKApp app].version}};
+    return @{@"route": @{@"build": [HKApp app].build,
+                         @"device": [HKDevice device].platform,
+                         @"path": self.route,
+                         @"url_schemes": [HKApp app].urlSchemes,
+                         @"version": [HKApp app].version}};
 }
 
+- (BOOL)hasBeenPosted
+{
+    return [HKUtils boolForKey:self.route];
+}
 
 @end

@@ -11,20 +11,22 @@
 
 #import "HKApp.h"
 #import "HKError.h"
+#import "HKUtils.h"
 #import "HKLogger.h"
 #import "HKDevice.h"
 #import "HKVersionChecker.h"
-#import "HKAnalytics+Private.h"
 #import "HKDeeplinking+Private.h"
 #import "HKNetworkOperationQueue.h"
 
 NSString *const HokoVersion = @"2.0";
 
+NSString *const HokoPreviousVersionKey = @"hokoVersion";
+NSString *const AppPreviousVersionKey = @"appVersion";
+
 @interface Hoko ()
 
 @property (nonatomic, assign) BOOL debugMode;
 @property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) HKAnalytics *analytics;
 @property (nonatomic, strong) HKDeeplinking *deeplinking;
 
 
@@ -69,17 +71,10 @@ static Hoko *_sharedInstance = nil;
         
         [[HKDevice device] setupReachability];
         
-        // Hoko Analytics implements the HKHandlerProtocol
         [[HKNetworkOperationQueue sharedQueue] setup];
-        _analytics = [[HKAnalytics alloc] initWithToken:token];
         _deeplinking = [[HKDeeplinking alloc] initWithToken:token debugMode:debugMode];
-        [_deeplinking addHandler:_analytics];
         
-        // Only posting when in debug mode to avoid spaming the service
-        // Also checking for new version on github public repo
-        if (debugMode) {
-            [[HKVersionChecker versionChecker] checkForNewVersion:HokoVersion];
-        }
+        [self checkVersions];
         
         if (![HKApp app].hasURLSchemes)
             HKErrorLog([HKError noURLSchemesError]);
@@ -88,14 +83,6 @@ static Hoko *_sharedInstance = nil;
 }
 
 #pragma mark - Module accessors
-+ (HKAnalytics *)analytics
-{
-    if (![Hoko hoko].analytics) {
-        HKErrorLog([HKError setupNotCalledYetError]);
-    }
-    return [Hoko hoko].analytics;
-}
-
 + (HKDeeplinking *)deeplinking
 {
     if (![Hoko hoko].deeplinking) {
@@ -104,6 +91,27 @@ static Hoko *_sharedInstance = nil;
     return [Hoko hoko].deeplinking;
 }
 
+#pragma mark - Versioning
+- (void)checkVersions
+{
+    // Only posting when in debug mode to avoid spaming the service
+    // Also checking for new version on github public repo
+    if (self.debugMode) {
+        [[HKVersionChecker versionChecker] checkForNewVersion:HokoVersion];
+    }
+    
+    NSString *previousHokoVersion = [HKUtils objectForKey:HokoPreviousVersionKey];
+    [HKUtils saveObject:HokoVersion key:HokoPreviousVersionKey];
+    
+    NSString *previousAppVersion = [HKUtils objectForKey:AppPreviousVersionKey];
+    NSString *currentAppVersion = [HKApp app].build;
+    [HKUtils saveObject:currentAppVersion key:AppPreviousVersionKey];
+    
+    if ((previousHokoVersion != nil && ![previousHokoVersion isEqualToString:HokoVersion]) ||
+        (previousAppVersion != nil && ![previousAppVersion isEqualToString:currentAppVersion])) {
+        [HKUtils clearAllBools];
+    }
+}
 
 #pragma mark - Logging
 + (void)setVerbose:(BOOL)verbose {

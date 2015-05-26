@@ -13,11 +13,11 @@
 
 #import "HKStubbedTestCase.h"
 
-#import <Hoko/HKSession.h>
 #import <Hoko/HKApp.h>
 #import <Hoko/HKUtils.h>
 #import <Hoko/HKObserver.h>
 #import <Hoko/Hoko+Private.h>
+#import <Hoko/HKDeeplink+Private.h>
 #import <Hoko/HKNetworkOperationQueue.h>
 #import <Hoko/HKNetworkOperationQueue+Private.h>
 
@@ -39,6 +39,7 @@
 - (void)tearDown
 {
   [super tearDown];
+  [OHHTTPStubs removeAllStubs];
 }
 
 - (void)testQueueFlushing
@@ -47,16 +48,16 @@
   
   // Stubbing for success
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return [request.URL.absoluteString rangeOfString:@"session"].location != NSNotFound;
+    return [request.URL.absoluteString rangeOfString:@"smartlinks"].location != NSNotFound;
   } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
     NSDictionary *json = @{};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
   }];
   
-  HKSession *session = [[HKSession alloc] initWithDeeplink:[HKDeeplink deeplinkWithRoute:@"route" routeParameters:nil queryParameters:nil]];
+  HKDeeplink *deeplink = [HKDeeplink deeplinkWithRoute:@"route" routeParameters:nil queryParameters:@{@"_hk_sid" : @"1234"}];
   
-  [session postWithToken:@"1234"];
-  [session postWithToken:@"1234"];
+  [deeplink postWithToken:@"1234"];
+  [deeplink postWithToken:@"1234"];
   
   // Force flush for timer wait time
   [[HKNetworkOperationQueue sharedQueue] flush];
@@ -75,15 +76,15 @@
   
   // Stub for failure
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return [request.URL.path rangeOfString:@"session"].location != NSNotFound;
+    return [request.URL.path rangeOfString:@"smartlinks"].location != NSNotFound;
   } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
     NSDictionary *json = @{};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:500 headers:nil];
   }];
   
-  HKSession *session = [[HKSession alloc] initWithDeeplink:[HKDeeplink deeplinkWithRoute:@"route" routeParameters:nil queryParameters:nil]];
+  HKDeeplink *deeplink = [HKDeeplink deeplinkWithRoute:@"route" routeParameters:nil queryParameters:@{@"_hk_sid" : @"1234"}];
   
-  [session postWithToken:@"1234"];
+  [deeplink postWithToken:@"1234"];
   [[HKNetworkOperationQueue sharedQueue] flush];
   
   // Check inner operation array after the end of each flush, give up on 10th try

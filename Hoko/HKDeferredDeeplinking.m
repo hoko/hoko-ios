@@ -17,7 +17,7 @@
 #import "HKObserver.h"
 
 NSString *const HKDeferredDeeplinkingNotFirstRun = @"isNotFirstRun";
-NSString *const HKDeferredDeeplinkingPath = @"apps/install";
+NSString *const HKDeferredDeeplinkingPath = @"installs/ios";
 
 @interface HKDeferredDeeplinking ()
 
@@ -54,10 +54,11 @@ NSString *const HKDeferredDeeplinkingPath = @"apps/install";
 
 - (id)json
 {
-    return @{@"os_version": [HKDevice device].systemVersion,
-             @"device_type": [HKDevice device].platform,
-             @"language": [HKDevice device].systemLanguage.lowercaseString,
-             @"screen_size": [HKDevice device].screenSize};
+    return @{@"device": @{@"os_version": [HKDevice device].systemVersion,
+                          @"device_type": [HKDevice device].platform,
+                          @"language": [HKDevice device].systemLanguage.lowercaseString,
+                          @"screen_size": [HKDevice device].screenSize}
+             };
 }
 
 @end

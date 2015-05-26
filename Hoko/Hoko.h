@@ -11,16 +11,14 @@
 #import "HKDeeplink.h"
 
 /**
- *  Hoko is an easy-to-use Framework to handle Deeplinking and the Analytics around it.
+ *  Hoko is an easy-to-use Framework to handle Deeplinking.
  *
  *  This is a simple drop-in class for handling incoming deeplinks.
  *  With the Hoko framework you can map routes to your view controllers, add handlers that trigger when
  *  deeplinks are the point of entry to your application.
  *
- *  Hoko includes three seperate modules:
  *  - HKDeeplinking - handles every incoming deeplink, so long as it has been mapped
- *  - HKAnalytics - handles the tracking of users and events to allow creation and evaluation of campaigns
- *  
+ *
  *  You should setup Hoko on your AppDelegate's application:didFinishLaunchingWithOptions:, by calling
  *  [Hoko setupWithToken:@"YOUR-API-TOKEN"].
  *
@@ -30,7 +28,7 @@
 /**
  *  Setups all the Hoko module instances, logging and asynchronous networking queues.
  *  Setting up with a token will make sure you can take full advantage of the Hoko service,
- *  as you will be able to track everything through manual or automatic Analytics, which
+ *  as you will be able to track everything through automatic Analytics, which
  *  will be shown on your Hoko dashboards. Debug mode will automatically be enabled when
  *  your app is signed with a provisioning profile or you are running on the simulator. Debug
  *  mode serves the purpose of uploading the app icon and the mapped routes to the Hoko 
@@ -46,7 +44,7 @@
 /**
  *  Setups all the Hoko module instances, logging and asynchronous networking queues.
  *  Setting up with a token will make sure you can take full advantage of the Hoko service,
- *  as you will be able to track everything through manual or automatic Analytics, which
+ *  as you will be able to track everything through automatic Analytics, which
  *  will be shown on your Hoko dashboards. Also sets the debug mode manually. Debug mode 
  *  serves the purpose of uploading the app icon and the mapped routes to the Hoko backend
  *  service.

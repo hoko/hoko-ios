@@ -112,29 +112,6 @@
       </Group>
       <Group
          location = "container:"
-         name = "Analytics">
-         <Group
-            location = "container:"
-            name = "Session">
-            <FileRef
-               location = "group:Hoko/HKSession.h">
-            </FileRef>
-            <FileRef
-               location = "group:Hoko/HKSession.m">
-            </FileRef>
-         </Group>
-         <FileRef
-            location = "group:Hoko/HKAnalytics.h">
-         </FileRef>
-         <FileRef
-            location = "group:Hoko/HKAnalytics.m">
-         </FileRef>
-         <FileRef
-            location = "group:Hoko/HKAnalytics+Private.h">
-         </FileRef>
-      </Group>
-      <Group
-         location = "container:"
          name = "Utils">
          <Group
             location = "container:"

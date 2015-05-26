@@ -16,7 +16,6 @@
 #import "HKNetworkOperationQueue.h"
 
 NSString *const HKDeeplinkSmartlinkIdentifierKey = @"_hk_sid";
-NSString *const HKDeeplinkOpenIdentifierKey = @"_hk_oid";
 
 NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 
@@ -145,11 +144,6 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 }
 
 #pragma mark - Campaign Identifiers
-- (NSString *)openIdentifier
-{
-    return [self.queryParameters objectForKey:HKDeeplinkOpenIdentifierKey];
-}
-
 - (NSString *)smartlinkIdentifier
 {
     return [self.queryParameters objectForKey:HKDeeplinkSmartlinkIdentifierKey];
@@ -161,7 +155,7 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 }
 
 #pragma mark - Networking
-- (void)postWithToken:(NSString *)token statusCode:(HKDeeplinkStatus)statusCode
+- (void)postWithToken:(NSString *)token
 {
     if (self.isSmartlink) {
         HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
@@ -188,8 +182,7 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 
 - (id)smartlinkJSON
 {
-    return @{@"smartlink": @{HKDeeplinkOpenIdentifierKey: [HKUtils jsonValue:self.openIdentifier],
-                             @"opened_at": [HKUtils stringFromDate:[NSDate date]],
+    return @{@"smartlink": @{@"created_at": [HKUtils stringFromDate:[NSDate date]],
                              @"device": [HKDevice device].json}};
 }
 
