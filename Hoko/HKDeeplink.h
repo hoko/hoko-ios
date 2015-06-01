@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, HKDeeplinkPlatform) {
 @property (nonatomic, strong, readonly) NSString *route;
 @property (nonatomic, strong, readonly) NSDictionary *queryParameters;
 @property (nonatomic, strong, readonly) NSDictionary *routeParameters;
+@property (nonatomic, strong, readonly) NSDictionary *json;
 
 @end
 

@@ -54,7 +54,7 @@
                                 failure:(void (^)(NSError *error))failure
 {
     NSString *path = deeplink.hasURLs ? @"smartlinks/create_custom" : @"smartlinks/create_with_template";
-    [HKNetworking postToPath:[HKNetworkOperation urlFromPath:path] parameters:deeplink.json token:self.token successBlock:^(id json) {
+    [HKNetworking postToPath:[HKNetworkOperation urlFromPath:path] parameters:deeplink.generateSmartlinkJSON token:self.token successBlock:^(id json) {
         NSString *smartlink = [json objectForKey:@"smartlink"];
         if(smartlink)
             success(smartlink);

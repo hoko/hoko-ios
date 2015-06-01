@@ -23,7 +23,7 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 @interface HKDeeplink ()
 
 @property (nonatomic, strong, readonly) NSString *urlScheme;
-@property (nonatomic, strong, readonly) NSDictionary *json;
+@property (nonatomic, strong, readonly) NSDictionary *generateSmartlinkJSON;
 @property (nonatomic, strong, readonly) NSString *sourceApplication;
 @property (nonatomic, strong) NSMutableDictionary *urls;
 
@@ -169,6 +169,13 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 
 #pragma mark - Serialization
 - (id)json
+{
+    return @{@"route": self.route,
+             @"routeParameters": self.routeParameters,
+             @"queryParameters": self.queryParameters};
+}
+
+- (id)generateSmartlinkJSON
 {
     if (!self.hasURLs) {
         return @{@"original_url": [HKUtils jsonValue:self.url]};
