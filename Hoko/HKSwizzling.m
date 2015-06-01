@@ -38,7 +38,7 @@
     for (int i = 0; i < numClasses; i++) {
       Class class = classes[i];
       // Avoiding StoreKit inner classes
-      if (class_conformsToProtocol(class, @protocol(UIApplicationDelegate)) && [class isSubclassOfClass:[UIResponder class]] && ![class isSubclassOfClass:[UIApplication class]]) {
+      if (class_conformsToProtocol(class, @protocol(UIApplicationDelegate)) && ![class isSubclassOfClass:[UIApplication class]]) {
         appDelegates = [appDelegates arrayByAddingObject:NSStringFromClass(classes[i])];
       }
       

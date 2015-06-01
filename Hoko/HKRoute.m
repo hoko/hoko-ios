@@ -42,7 +42,7 @@ NSString *const HKRoutePath = @"routes";
 - (void)postWithToken:(NSString *)token
 {
     if (![self hasBeenPosted]) {
-        [HKUtils saveBool:YES key:self.route];
+        [HKUtils saveBool:YES key:self.route]; //TODO check if response was 200
         HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
                                                                                             path:HKRoutePath
                                                                                            token:token
