@@ -41,14 +41,11 @@ NSString *const HKRoutePath = @"routes";
 #pragma mark - Networking
 - (void)postWithToken:(NSString *)token
 {
-    if (![self hasBeenPosted]) {
-        [HKUtils saveBool:YES key:self.route]; //TODO check if response was 200
-        HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
-                                                                                            path:HKRoutePath
-                                                                                           token:token
-                                                                                      parameters:self.json];
-        [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
-    }
+    HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
+                                                                                        path:HKRoutePath
+                                                                                       token:token
+                                                                                  parameters:self.json];
+    [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
 }
 
 #pragma mark - Serialization
@@ -61,9 +58,5 @@ NSString *const HKRoutePath = @"routes";
                          @"version": [HKApp app].version}};
 }
 
-- (BOOL)hasBeenPosted
-{
-    return [HKUtils boolForKey:self.route];
-}
 
 @end

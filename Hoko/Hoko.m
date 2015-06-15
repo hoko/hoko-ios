@@ -47,16 +47,22 @@ static Hoko *_sharedInstance = nil;
 #pragma mark - Setup
 + (void)setupWithToken:(NSString *)token
 {
-    [self setupWithToken:token debugMode:[HKApp app].isDebugBuild];
+    [self setupWithToken:token testDevices:nil];
 }
 
-+ (void)setupWithToken:(NSString *)token debugMode:(BOOL)debugMode
++ (void)setupWithToken:(NSString *)token testDevices:(NSArray *)testDevices
 {
     if (onceToken != 0) {
         HKErrorLog([HKError setupCalledMoreThanOnceError]);
         NSAssert(NO, [HKError setupCalledMoreThanOnceError].description);
     }
     dispatch_once(&onceToken, ^{
+        BOOL debugMode = [testDevices containsObject:[HKDevice device].uid] || [HKDevice device].isSimulator;
+        if (!debugMode && [HKApp app].isDebugBuild) {
+            NSArray *allDevices = [[NSArray arrayWithObject:[HKDevice device].uid] arrayByAddingObjectsFromArray:testDevices];
+            NSString *testDevicesString = [allDevices componentsJoinedByString:@"\", \""];
+            NSLog(@"[Hoko] To upload the mapped routes to Hoko on this device, please make sure to setup the SDK with \n[Hoko setupWithToken:\"%@\" testDevices:@[\"%@\"]]", token, testDevicesString);
+        }
         _sharedInstance = [[Hoko alloc] initWithToken:token debugMode:debugMode];
     });
 }
@@ -100,17 +106,6 @@ static Hoko *_sharedInstance = nil;
         [[HKVersionChecker versionChecker] checkForNewVersion:HokoVersion];
     }
     
-    NSString *previousHokoVersion = [HKUtils objectForKey:HokoPreviousVersionKey];
-    [HKUtils saveObject:HokoVersion key:HokoPreviousVersionKey];
-    
-    NSString *previousAppVersion = [HKUtils objectForKey:AppPreviousVersionKey];
-    NSString *currentAppVersion = [HKApp app].build;
-    [HKUtils saveObject:currentAppVersion key:AppPreviousVersionKey];
-    
-    if ((previousHokoVersion != nil && ![previousHokoVersion isEqualToString:HokoVersion]) ||
-        (previousAppVersion != nil && ![previousAppVersion isEqualToString:currentAppVersion])) {
-        [HKUtils clearAllBools];
-    }
 }
 
 #pragma mark - Logging

@@ -12,7 +12,6 @@
 #import <CommonCrypto/CommonDigest.h>
 
 NSString *const HKDomain = @"Hoko";
-NSString *const HKBool = @"BOOL";
 
 NSString *const HKDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
 NSString *const HKDateFormatLegacy = @"yyyy-MM-dd'T'HH:mm:ss.SSSZ";
@@ -37,30 +36,6 @@ NSString *const HKDateFormatDateOnly = @"yyyy-MM-dd";
     return [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
   else
     return nil;
-}
-
-+ (void)saveBool:(BOOL)boolean key:(NSString *)key
-{
-    NSString *filename = [NSString stringWithFormat:@"%@.%@", HKDomain, HKBool];
-    NSMutableDictionary *booleans = [[self objectFromFile:filename] mutableCopy];
-    if (!booleans) {
-        booleans = [@{} mutableCopy];
-    }
-    [booleans setObject:@(boolean) forKey:key];
-    [self saveObject:booleans toFile:filename];
-}
-
-+ (BOOL)boolForKey:(NSString *)key
-{
-    NSString *filename = [NSString stringWithFormat:@"%@.%@", HKDomain, HKBool];
-    NSDictionary *booleans = [self objectFromFile:filename];
-    return [[booleans objectForKey:key] boolValue];
-}
-
-+ (void)clearAllBools
-{
-    NSString *filename = [NSString stringWithFormat:@"%@.%@", HKDomain, HKBool];
-    [self saveObject:nil toFile:filename];
 }
 
 #pragma mark - File Management

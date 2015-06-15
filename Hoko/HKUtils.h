@@ -13,10 +13,6 @@
 + (void)saveObject:(id)object key:(NSString *)key;
 + (id)objectForKey:(NSString *)key;
 
-+ (void)saveBool:(BOOL)boolean key:(NSString *)key;
-+ (BOOL)boolForKey:(NSString *)ke;
-+ (void)clearAllBools;
-
 + (void)saveObject:(id)object toFile:(NSString *)filename;
 + (id)objectFromFile:(NSString *)filename;
 

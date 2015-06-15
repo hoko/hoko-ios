@@ -1,6 +1,5 @@
 //
 //  Hoko.h
-//  Version 1.0.1
 //
 //  Created by Hoko, S.A. on 23/07/14.
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
@@ -29,10 +28,7 @@
  *  Setups all the Hoko module instances, logging and asynchronous networking queues.
  *  Setting up with a token will make sure you can take full advantage of the Hoko service,
  *  as you will be able to track everything through automatic Analytics, which
- *  will be shown on your Hoko dashboards. Debug mode will automatically be enabled when
- *  your app is signed with a provisioning profile or you are running on the simulator. Debug
- *  mode serves the purpose of uploading the app icon and the mapped routes to the Hoko 
- *  backend service.
+ *  will be shown on your Hoko dashboards. 
  *  <pre>
  *  [Hoko setupWithToken:@"YOUR-API-TOKEN"];
  *  </pre>
@@ -45,16 +41,16 @@
  *  Setups all the Hoko module instances, logging and asynchronous networking queues.
  *  Setting up with a token will make sure you can take full advantage of the Hoko service,
  *  as you will be able to track everything through automatic Analytics, which
- *  will be shown on your Hoko dashboards. Also sets the debug mode manually. Debug mode 
- *  serves the purpose of uploading the app icon and the mapped routes to the Hoko backend
- *  service.
+ *  will be shown on your Hoko dashboards. Also sets the debug mode for the devices set. 
+ *  Debug mode serves the purpose of the mapped routes to the Hoko backend service.
+ *  Check the logs for your device's ID.
  *  <pre>
- *  [Hoko setupWithToken:@"YOUR-API-TOKEN" debugMode:YES];
+ *  [Hoko setupWithToken:@"YOUR-API-TOKEN" testDevices:@[@"YOUR-DEVICE-ID"]];
  *  </pre>
  *
  *  @param token Hoko service API key.
  */
-+ (void)setupWithToken:(NSString *)token debugMode:(BOOL)debugMode;
++ (void)setupWithToken:(NSString *)token testDevices:(NSArray *)testDevices;
 
 /**
  *  The HKDeeplinking module provides all the necessary APIs to map, handle and generate deeplinks.
