@@ -15,13 +15,14 @@
 #import "HKDeeplink+Private.h"
 #import "HKNetworkOperationQueue.h"
 
-NSString *const HKDeeplinkSmartlinkIdentifierKey = @"_hk_sid";
+NSString *const HKDeeplinkSmartlinkClickIdentifierKey = @"_hk_cid";
 
-NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
+NSString *const HKDeeplinkOpenPath = @"smartlinks/open";
 
 @interface HKDeeplink ()
 
 @property (nonatomic, strong, readonly) NSString *urlScheme;
+@property (nonatomic, strong, readonly) NSString *deeplinkURL;
 @property (nonatomic, strong, readonly) NSDictionary *generateSmartlinkJSON;
 @property (nonatomic, strong, readonly) NSString *sourceApplication;
 @property (nonatomic, strong) NSMutableDictionary *urls;
@@ -39,7 +40,8 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
                                        route:route
                              routeParameters:routeParameters
                              queryParameters:queryParameters
-                           sourceApplication:nil];
+                           sourceApplication:nil
+                                 deeplinkURL:nil];
 }
 
 #pragma mark - Private Static Initializer
@@ -48,12 +50,14 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
                       routeParameters:(NSDictionary *)routeParameters
                       queryParameters:(NSDictionary *)queryParameters
                     sourceApplication:(NSString *)sourceApplication
+                          deeplinkURL:(NSString *)deeplinkURL
 {
     HKDeeplink *deeplink = [[HKDeeplink alloc] initWithURLScheme:urlScheme
                                                            route:route
                                                  routeParameters:routeParameters
                                                  queryParameters:queryParameters
-                                               sourceApplication:sourceApplication];
+                                               sourceApplication:sourceApplication
+                                                     deeplinkURL:deeplinkURL];
     
     if(![HKDeeplink matchRoute:deeplink.route withRouteParameters:deeplink.routeParameters])
         return nil;
@@ -70,13 +74,15 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
                              route:route
                    routeParameters:routeParameters
                    queryParameters:queryParameters
-                 sourceApplication:nil];
+                 sourceApplication:nil
+                       deeplinkURL:nil];
 }
 - (instancetype)initWithURLScheme:(NSString *)urlScheme
                             route:(NSString *)route
                   routeParameters:(NSDictionary *)routeParameters
                   queryParameters:(NSDictionary *)queryParameters
                 sourceApplication:(NSString *)sourceApplication
+                      deeplinkURL:(NSString *)deeplinkURL
 {
     self = [super init];
     if (self) {
@@ -86,6 +92,7 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
         _queryParameters = queryParameters;
         _sourceApplication = sourceApplication;
         _urls = [@{} mutableCopy];
+        _deeplinkURL = deeplinkURL;
     }
     
     return self;
@@ -143,14 +150,14 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 }
 
 #pragma mark - Campaign Identifiers
-- (NSString *)smartlinkIdentifier
+- (NSString *)smartlinkOpenIdentifier
 {
-    return [self.queryParameters objectForKey:HKDeeplinkSmartlinkIdentifierKey];
+    return [self.queryParameters objectForKey:HKDeeplinkSmartlinkClickIdentifierKey];
 }
 
 - (BOOL)isSmartlink
 {
-    return self.smartlinkIdentifier != nil;
+    return self.smartlinkOpenIdentifier != nil;
 }
 
 #pragma mark - Networking
@@ -158,7 +165,7 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 {
     if (self.isSmartlink) {
         HKNetworkOperation *networkOperation = [[HKNetworkOperation alloc] initWithOperationType:HKNetworkOperationTypePOST
-                                                                                            path:[NSString stringWithFormat:HKDeeplinkOpenPath, self.smartlinkIdentifier]
+                                                                                            path:HKDeeplinkOpenPath
                                                                                            token:token
                                                                                       parameters:[self smartlinkJSON]];
         [[HKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
@@ -188,8 +195,7 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/%@/open";
 
 - (id)smartlinkJSON
 {
-    return @{@"smartlink": @{@"created_at": [HKUtils stringFromDate:[NSDate date]],
-                             @"device": [HKDevice device].json}};
+    return @{@"deeplink": [HKUtils jsonValue:self.deeplinkURL]};
 }
 
 #pragma mark - Description

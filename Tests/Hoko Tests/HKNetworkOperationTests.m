@@ -54,7 +54,7 @@
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
   }];
   
-  HKDeeplink *deeplink = [HKDeeplink deeplinkWithRoute:@"route" routeParameters:nil queryParameters:@{@"_hk_sid" : @"1234"}];
+  HKDeeplink *deeplink = [HKDeeplink deeplinkWithRoute:@"route" routeParameters:nil queryParameters:@{@"_hk_cid" : @"1234"}];
   
   [deeplink postWithToken:@"1234"];
   [deeplink postWithToken:@"1234"];
@@ -82,7 +82,7 @@
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:500 headers:nil];
   }];
   
-  HKDeeplink *deeplink = [HKDeeplink deeplinkWithRoute:@"route" routeParameters:nil queryParameters:@{@"_hk_sid" : @"1234"}];
+  HKDeeplink *deeplink = [HKDeeplink deeplinkWithRoute:@"route" routeParameters:nil queryParameters:@{@"_hk_cid" : @"1234"}];
   
   [deeplink postWithToken:@"1234"];
   [[HKNetworkOperationQueue sharedQueue] flush];

@@ -16,7 +16,8 @@ extern NSString *const HKDeeplinkSmartlinkIdentifierKey;
                                 route:(NSString *)route
                       routeParameters:(NSDictionary *)routeParameters
                       queryParameters:(NSDictionary *)queryParameters
-                    sourceApplication:(NSString *)sourceApplication;
+                    sourceApplication:(NSString *)sourceApplication
+                          deeplinkURL:(NSString *)deeplinkURL;
 
 - (void)postWithToken:(NSString *)token;
 
@@ -24,7 +25,7 @@ extern NSString *const HKDeeplinkSmartlinkIdentifierKey;
 @property (nonatomic, strong, readonly) NSString *sourceApplication;
 @property (nonatomic, strong, readonly) id generateSmartlinkJSON;
 
-@property (nonatomic, strong, readonly) NSString *smartlinkIdentifier;
+@property (nonatomic, strong, readonly) NSString *smartlinkClickIdentifier;
 
 @property (nonatomic, readonly) BOOL isSmartlink;
 @property (nonatomic, readonly) BOOL hasURLs;

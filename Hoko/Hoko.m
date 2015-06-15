@@ -20,9 +20,6 @@
 
 NSString *const HokoVersion = @"2.0";
 
-NSString *const HokoPreviousVersionKey = @"hokoVersion";
-NSString *const AppPreviousVersionKey = @"appVersion";
-
 @interface Hoko ()
 
 @property (nonatomic, assign) BOOL debugMode;

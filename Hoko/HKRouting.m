@@ -68,7 +68,8 @@
                                                                route:route.route
                                                      routeParameters:routeParameters
                                                      queryParameters:hkURL.queryParameters
-                                                   sourceApplication:sourceApplication];
+                                                   sourceApplication:sourceApplication
+                                                         deeplinkURL:url.absoluteString];
             [deeplink postWithToken:self.token];
             [[Hoko deeplinking].handling handle:deeplink];
             if(route.target) {
@@ -83,7 +84,8 @@
                                                        route:nil
                                              routeParameters:nil
                                              queryParameters:hkURL.queryParameters
-                                           sourceApplication:sourceApplication];
+                                           sourceApplication:sourceApplication
+                                                 deeplinkURL:url.absoluteString];
     [deeplink postWithToken:self.token];
     [[Hoko deeplinking].handling handle:deeplink];
     if(self.defaultRoute && self.defaultRoute.target) {
