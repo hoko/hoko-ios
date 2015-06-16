@@ -184,9 +184,9 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/open";
 - (id)generateSmartlinkJSON
 {
     if (!self.hasURLs) {
-        return @{@"original_url": [HKUtils jsonValue:self.url]};
+        return @{@"uri": [HKUtils jsonValue:self.url]};
     } else {
-        return @{@"original_url": [HKUtils jsonValue:self.url],
+        return @{@"uri": [HKUtils jsonValue:self.url],
                  @"routes": self.urls};
     }
     
