@@ -54,12 +54,7 @@ static Hoko *_sharedInstance = nil;
         NSAssert(NO, [HKError setupCalledMoreThanOnceError].description);
     }
     dispatch_once(&onceToken, ^{
-        BOOL debugMode = [testDevices containsObject:[HKDevice device].uid] || [HKDevice device].isSimulator;
-        if (!debugMode && [HKApp app].isDebugBuild) {
-            NSArray *allDevices = [[NSArray arrayWithObject:[HKDevice device].uid] arrayByAddingObjectsFromArray:testDevices];
-            NSString *testDevicesString = [allDevices componentsJoinedByString:@"\", \""];
-            NSLog(@"[Hoko] To upload the mapped routes to Hoko on this device, please make sure to setup the SDK with \n[Hoko setupWithToken:\"%@\" testDevices:@[\"%@\"]]", token, testDevicesString);
-        }
+        BOOL debugMode = [self debugModeWithTestDevices:testDevices token:token];
         _sharedInstance = [[Hoko alloc] initWithToken:token debugMode:debugMode];
     });
 }
@@ -95,6 +90,9 @@ static Hoko *_sharedInstance = nil;
 }
 
 #pragma mark - Versioning
+/**
+ *  Checks for a new SDK version on the Github repo.
+ */
 - (void)checkVersions
 {
     // Only posting when in debug mode to avoid spaming the service
@@ -102,7 +100,28 @@ static Hoko *_sharedInstance = nil;
     if (self.debugMode) {
         [[HKVersionChecker versionChecker] checkForNewVersion:HokoVersion];
     }
-    
+}
+
+#pragma mark - Test Devices
+/**
+ *  This will check for debug mode with the device IDs specified.
+ *  iOS Simulator will always be considered a test device. 
+ *  Will also print a description to help developers integrate easier.
+ *
+ *  @param testDevices An array with the device IDs in which debug mode should be active.
+ *  @param token       The Hoko token to be printed out.
+ *
+ *  @return YES if debug mode is active, NO otherwise
+ */
++ (BOOL)debugModeWithTestDevices:(NSArray *)testDevices token:(NSString *)token
+{
+    BOOL debugMode = [testDevices containsObject:[HKDevice device].uid] || [HKDevice device].isSimulator;
+    if (!debugMode && [HKApp app].isDebugBuild) {
+        NSArray *allDevices = [[NSArray arrayWithObject:[HKDevice device].uid] arrayByAddingObjectsFromArray:testDevices];
+        NSString *testDevicesString = [allDevices componentsJoinedByString:@"\", \""];
+        NSLog(@"[Hoko] To upload the mapped routes to Hoko on this device, please make sure to setup the SDK with \n[Hoko setupWithToken:\"%@\" testDevices:@[\"%@\"]]", token, testDevicesString);
+    }
+    return debugMode;
 }
 
 #pragma mark - Logging
