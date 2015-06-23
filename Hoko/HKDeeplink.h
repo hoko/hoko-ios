@@ -30,10 +30,9 @@ typedef NS_ENUM(NSUInteger, HKDeeplinkPlatform) {
 
 - (void)addURL:(hk_nonnull NSString *)url forPlatform:(HKDeeplinkPlatform)platform;
 
-@property (hk_nullable, nonatomic, strong, readonly) NSString *route;
-@property (hk_nullable, nonatomic, strong, readonly) NSDictionary *queryParameters;
-@property (hk_nullable, nonatomic, strong, readonly) NSDictionary *routeParameters;
-@property (hk_nonnull, nonatomic, strong, readonly) NSDictionary *json;
+@property (nonatomic, strong, readonly, hk_nullable) NSString *route;
+@property (nonatomic, strong, readonly, hk_nullable) NSDictionary *queryParameters;
+@property (nonatomic, strong, readonly, hk_nullable) NSDictionary *routeParameters;
+@property (nonatomic, strong, readonly, hk_nonnull) NSDictionary *json;
 
 @end
-
