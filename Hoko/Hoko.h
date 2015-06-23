@@ -35,7 +35,7 @@
  *
  *  @param token Hoko service API key.
  */
-+ (void)setupWithToken:(NSString *)token;
++ (void)setupWithToken:(nonnull NSString *)token;
 
 /**
  *  Setups all the Hoko module instances, logging and asynchronous networking queues.
@@ -50,7 +50,7 @@
  *
  *  @param token Hoko service API key.
  */
-+ (void)setupWithToken:(NSString *)token testDevices:(NSArray *)testDevices;
++ (void)setupWithToken:(nonnull NSString *)token testDevices:(nullable NSArray *)testDevices;
 
 /**
  *  The HKDeeplinking module provides all the necessary APIs to map, handle and generate deeplinks.
@@ -58,7 +58,7 @@
  *
  *  @return A reference to the HKDeeplinking instance.
  */
-+ (HKDeeplinking *)deeplinking;
++ (nullable HKDeeplinking *)deeplinking;
 
 
 /**

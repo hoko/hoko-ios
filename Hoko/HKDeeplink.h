@@ -18,20 +18,20 @@ typedef NS_ENUM(NSUInteger, HKDeeplinkPlatform) {
 
 @interface HKDeeplink : NSObject
 
-+ (instancetype)deeplinkWithRoute:(NSString *)route
-                  routeParameters:(NSDictionary *)routeParameters
-                  queryParameters:(NSDictionary *)queryParameters;
++ (nonnull instancetype)deeplinkWithRoute:(nullable NSString *)route
+                  routeParameters:(nullable NSDictionary *)routeParameters
+                  queryParameters:(nullable NSDictionary *)queryParameters;
 
-- (instancetype)initWithRoute:(NSString *)route
-              routeParameters:(NSDictionary *)routeParameters
-              queryParameters:(NSDictionary *)queryParameters;
+- (nonnull instancetype)initWithRoute:(nullable NSString *)route
+              routeParameters:(nullable NSDictionary *)routeParameters
+              queryParameters:(nullable NSDictionary *)queryParameters;
 
-- (void)addURL:(NSString *)url forPlatform:(HKDeeplinkPlatform)platform;
+- (void)addURL:(nonnull NSString *)url forPlatform:(HKDeeplinkPlatform)platform;
 
-@property (nonatomic, strong, readonly) NSString *route;
-@property (nonatomic, strong, readonly) NSDictionary *queryParameters;
-@property (nonatomic, strong, readonly) NSDictionary *routeParameters;
-@property (nonatomic, strong, readonly) NSDictionary *json;
+@property (nullable, nonatomic, strong, readonly) NSString *route;
+@property (nullable, nonatomic, strong, readonly) NSDictionary *queryParameters;
+@property (nullable, nonatomic, strong, readonly) NSDictionary *routeParameters;
+@property (nonnull, nonatomic, strong, readonly) NSDictionary *json;
 
 @end
 

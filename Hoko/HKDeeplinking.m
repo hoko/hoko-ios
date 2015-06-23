@@ -95,7 +95,7 @@
 
 #pragma mark - Link Generation
 - (void)generateSmartlinkForDeeplink:(HKDeeplink *)deeplink
-                             success:(void (^)(NSString *martlink))success
+                             success:(void (^)(NSString *smartlink))success
                              failure:(void (^)(NSError *error))failure
 {
     [self.linkGenerator generateSmartlinkForDeeplink:deeplink success:success failure:failure];

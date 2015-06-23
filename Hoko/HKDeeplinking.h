@@ -21,7 +21,7 @@
  *
  *  @param deeplink The deeplink object with which the application was launched.
  */
-- (void)handleDeeplink:(HKDeeplink *)deeplink;
+- (void)handleDeeplink:(nonnull HKDeeplink *)deeplink;
 
 @end
 
@@ -48,7 +48,8 @@
  *  @param route  The route format string (e.g. "product/:product_id").
  *  @param target The target block in which you should construct your navigation.
  */
-- (void)mapRoute:(NSString *)route toTarget:(void (^)(HKDeeplink *deeplink))target;
+- (void)mapRoute:(nullable NSString *)route toTarget:(nullable void (^)(HKDeeplink * __nonnull deeplink))target;
+
 /**
  *  mapDefaultRouteToTarget: allows any deeplink that does not apply to a mapped route to be sent
  *  to this default target. Most common usage should be to send the user to your application's main
@@ -63,7 +64,7 @@
  *
  *  @param target The target block in which you should construct your navigation
  */
-- (void)mapDefaultRouteToTarget:(void (^)(HKDeeplink *deeplink))target;
+- (void)mapDefaultRouteToTarget:(nullable void (^)(HKDeeplink * __nonnull deeplink))target;
 
 /**
  *  With addHandler: you can add an object which implements the HKHandlerProtocol to be called everytime
@@ -76,7 +77,7 @@
  *
  *  @param handler An object which implements the HKHandlerProtocol.
  */
-- (void)addHandler:(id<HKHandlerProcotol>)handler;
+- (void)addHandler:(nonnull id<HKHandlerProcotol>)handler;
 
 /**
  *  With addHandlerBlock: you can add a block which will be called everytime your application
@@ -90,7 +91,7 @@
  *
  *  @param handlerBlock A block that receives an HKDeeplink object.
  */
-- (void)addHandlerBlock:(void (^)(HKDeeplink *deeplink))handlerBlock;
+- (void)addHandlerBlock:(nullable void (^)(HKDeeplink * __nonnull deeplink))handlerBlock;
 
 /**
  *  handleOpenURL: is a mimicked method from the UIApplicationDelegate protocol for iOS < 4.2. 
@@ -104,7 +105,7 @@
  *
  *  @return     Returns YES if Hoko can open the deeplink or NO otherwise.
  */
-- (BOOL)handleOpenURL:(NSURL *)url;
+- (BOOL)handleOpenURL:(nonnull NSURL *)url;
 
 /**
  *  openURL:sourceApplication:annotation: is a mimicked method from the UIApplicationDelegate
@@ -118,7 +119,7 @@
  *
  *  @return     Returns YES if Hoko can open the deeplink or NO otherwise.
  */
-- (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation NS_AVAILABLE_IOS(4_2);
+- (BOOL)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation NS_AVAILABLE_IOS(4_2);
 
 /**
  *  openSmartlink: serves the purpose of handling the open of a Smartlink, by resolving it through
@@ -126,19 +127,20 @@
  *
  *  @param smartlink A Smartlink.
  */
-- (void)openSmartlink:(NSString *)smartlink;
+- (void)openSmartlink:(nonnull NSString *)smartlink;
+
 /**
  *  generateSmartlinkForDeeplink:success:failure allows the app to generate Smartlinks for the
  *  user to share with other users, independent of the platform, users will be redirected to the
  *  corresponding view. A user generated HKDeeplink object may be passed along to generate the
  *  deeplinks for all available platforms. In case the request is succesful, the success block will
- *  receive an Smartlink (e.g. http://hoko.link/XmPle). Otherwise it will return the cause of failure in
+ *  receive an Smartlink (e.g. http://hoko.link/XmPle ). Otherwise it will return the cause of failure in
  *  the failure block.
  *
  *  @param success      The block called in case of success, will have an Smartlink as a parameter.
  *  @param failure      The block called in case of failure, will have an NSError as a parameter.
  */
-- (void)generateSmartlinkForDeeplink:(HKDeeplink *)deeplink success:(void(^)(NSString *smartlink))success failure:(void(^)(NSError *error))failure;
+- (void)generateSmartlinkForDeeplink:(nonnull HKDeeplink *)deeplink success:(nullable void(^)(NSString * __nonnull smartlink))success failure:(nullable void(^)(NSError * __nonnull error))failure;
 
 @end
 
