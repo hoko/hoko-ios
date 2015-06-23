@@ -23,7 +23,7 @@ extern NSString *const HKDeeplinkSmartlinkIdentifierKey;
 
 @property (nonatomic, strong, readonly) NSString *urlScheme;
 @property (nonatomic, strong, readonly) NSString *sourceApplication;
-@property (nonatomic, strong, readonly) id generateSmartlinkJSON;
+@property (nonatomic, strong, readonly) NSDictionary *generateSmartlinkJSON;
 
 @property (nonatomic, strong, readonly) NSString *smartlinkClickIdentifier;
 

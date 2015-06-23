@@ -174,14 +174,14 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/open";
 }
 
 #pragma mark - Serialization
-- (id)json
+- (NSDictionary *)json
 {
     return @{@"route": [HKUtils jsonValue:self.route],
              @"routeParameters": [HKUtils jsonValue:self.routeParameters],
              @"queryParameters": [HKUtils jsonValue:self.queryParameters]};
 }
 
-- (id)generateSmartlinkJSON
+- (NSDictionary *)generateSmartlinkJSON
 {
     if (!self.hasURLs) {
         return @{@"uri": [HKUtils jsonValue:self.url]};
@@ -193,7 +193,7 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/open";
 }
 
 
-- (id)smartlinkJSON
+- (NSDictionary *)smartlinkJSON
 {
     return @{@"deeplink": [HKUtils jsonValue:self.deeplinkURL]};
 }

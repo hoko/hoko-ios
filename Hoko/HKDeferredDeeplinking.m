@@ -52,7 +52,7 @@ NSString *const HKDeferredDeeplinkingPath = @"installs/ios";
     }
 }
 
-- (id)json
+- (NSDictionary *)json
 {
     return @{@"device": @{@"os_version": [HKDevice device].systemVersion,
                           @"device_type": [HKDevice device].platform,

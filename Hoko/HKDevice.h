@@ -23,6 +23,6 @@
 @property (nonatomic, strong, readonly) NSString *uid;
 @property (nonatomic, readonly) BOOL hasInternetConnection;
 @property (nonatomic, readonly) BOOL isSimulator;
-@property (nonatomic, strong, readonly) id json;
+@property (nonatomic, strong, readonly) NSDictionary *json;
 
 @end
