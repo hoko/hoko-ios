@@ -26,7 +26,6 @@ NSString *const HKDeeplinkOpenPath = @"smartlinks/open";
 @property (nonatomic, strong, readonly) NSDictionary *generateSmartlinkJSON;
 @property (nonatomic, strong, readonly) NSString *sourceApplication;
 @property (nonatomic, strong) NSMutableDictionary *urls;
-@property (nonatomic, strong, readonly) NSDictionary *json;
 
 
 @end
