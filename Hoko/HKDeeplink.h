@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Hoko+Nullability.h"
+
 typedef NS_ENUM(NSUInteger, HKDeeplinkPlatform) {
     HKDeeplinkPlatformiPhone,
     HKDeeplinkPlatformiPad,
@@ -18,20 +20,20 @@ typedef NS_ENUM(NSUInteger, HKDeeplinkPlatform) {
 
 @interface HKDeeplink : NSObject
 
-+ (nonnull instancetype)deeplinkWithRoute:(nullable NSString *)route
-                  routeParameters:(nullable NSDictionary *)routeParameters
-                  queryParameters:(nullable NSDictionary *)queryParameters;
++ (hk_nonnull instancetype)deeplinkWithRoute:(hk_nullable NSString *)route
+                  routeParameters:(hk_nullable NSDictionary *)routeParameters
+                  queryParameters:(hk_nullable NSDictionary *)queryParameters;
 
-- (nonnull instancetype)initWithRoute:(nullable NSString *)route
-              routeParameters:(nullable NSDictionary *)routeParameters
-              queryParameters:(nullable NSDictionary *)queryParameters;
+- (hk_nonnull instancetype)initWithRoute:(hk_nullable NSString *)route
+              routeParameters:(hk_nullable NSDictionary *)routeParameters
+              queryParameters:(hk_nullable NSDictionary *)queryParameters;
 
-- (void)addURL:(nonnull NSString *)url forPlatform:(HKDeeplinkPlatform)platform;
+- (void)addURL:(hk_nonnull NSString *)url forPlatform:(HKDeeplinkPlatform)platform;
 
-@property (nullable, nonatomic, strong, readonly) NSString *route;
-@property (nullable, nonatomic, strong, readonly) NSDictionary *queryParameters;
-@property (nullable, nonatomic, strong, readonly) NSDictionary *routeParameters;
-@property (nonnull, nonatomic, strong, readonly) NSDictionary *json;
+@property (hk_nullable, nonatomic, strong, readonly) NSString *route;
+@property (hk_nullable, nonatomic, strong, readonly) NSDictionary *queryParameters;
+@property (hk_nullable, nonatomic, strong, readonly) NSDictionary *routeParameters;
+@property (hk_nonnull, nonatomic, strong, readonly) NSDictionary *json;
 
 @end
 

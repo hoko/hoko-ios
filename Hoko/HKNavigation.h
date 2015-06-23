@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Hoko+Nullability.h"
+
 /**
  *  HKNavigation is a helper class which allows you to push, present and set view
  *  controllers taking basis on your view controller hierararchy. This only takes
@@ -26,7 +28,7 @@
  *
  *  @param viewController Your view controller (or hierarchy of).
  */
-+ (void)setRootViewController:(nonnull UIViewController *)viewController;
++ (void)setRootViewController:(hk_nonnull UIViewController *)viewController;
 
 /**
  *  pushViewController:animated: pushes a view controller inside a navigation controller.
@@ -37,7 +39,7 @@
  *  @param viewController Your view controller.
  *  @param animated       If you choose to animate the pushing of the viewController.
  */
-+ (void)pushViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated;
++ (void)pushViewController:(hk_nonnull UIViewController *)viewController animated:(BOOL)animated;
 
 /**
  *  pushViewController:animated:replace: pushes a view controller inside a navigation controller.
@@ -51,7 +53,7 @@
  *  @param viewController Your view controller.
  *  @param animated       If you choose to animate the pushing of the viewController.
  */
-+ (void)pushViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated replace:(BOOL)replace;
++ (void)pushViewController:(hk_nonnull UIViewController *)viewController animated:(BOOL)animated replace:(BOOL)replace;
 
 /**
  *  presentViewController:animated: presents a view controller as a modal view controller,
@@ -60,6 +62,6 @@
  *  @param viewController Your view controller.
  *  @param animated       If you choose to animate the presenting of the viewController.
  */
-+ (void)presentViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated;
++ (void)presentViewController:(hk_nonnull UIViewController *)viewController animated:(BOOL)animated;
 
 @end

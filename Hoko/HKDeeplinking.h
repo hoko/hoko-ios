@@ -8,6 +8,8 @@
 
 #import "HKDeeplink.h"
 
+#import "Hoko+Nullability.h"
+
 /**
  *  HKHandlerProtocol can be implemented on any object to be mapped on to a route,
  *  common implementations are loggers, analytics, validators or A/B testing mechanics.
@@ -21,7 +23,7 @@
  *
  *  @param deeplink The deeplink object with which the application was launched.
  */
-- (void)handleDeeplink:(nonnull HKDeeplink *)deeplink;
+- (void)handleDeeplink:(hk_nonnull HKDeeplink *)deeplink;
 
 @end
 
@@ -48,7 +50,7 @@
  *  @param route  The route format string (e.g. "product/:product_id").
  *  @param target The target block in which you should construct your navigation.
  */
-- (void)mapRoute:(nullable NSString *)route toTarget:(nullable void (^)(HKDeeplink * __nonnull deeplink))target;
+- (void)mapRoute:(hk_nullable NSString *)route toTarget:(hk_nullable void (^)(HKDeeplink * __hk_nonnull deeplink))target;
 
 /**
  *  mapDefaultRouteToTarget: allows any deeplink that does not apply to a mapped route to be sent
@@ -64,7 +66,7 @@
  *
  *  @param target The target block in which you should construct your navigation
  */
-- (void)mapDefaultRouteToTarget:(nullable void (^)(HKDeeplink * __nonnull deeplink))target;
+- (void)mapDefaultRouteToTarget:(hk_nullable void (^)(HKDeeplink * __hk_nonnull deeplink))target;
 
 /**
  *  With addHandler: you can add an object which implements the HKHandlerProtocol to be called everytime
@@ -77,7 +79,7 @@
  *
  *  @param handler An object which implements the HKHandlerProtocol.
  */
-- (void)addHandler:(nonnull id<HKHandlerProcotol>)handler;
+- (void)addHandler:(hk_nonnull id<HKHandlerProcotol>)handler;
 
 /**
  *  With addHandlerBlock: you can add a block which will be called everytime your application
@@ -91,7 +93,7 @@
  *
  *  @param handlerBlock A block that receives an HKDeeplink object.
  */
-- (void)addHandlerBlock:(nullable void (^)(HKDeeplink * __nonnull deeplink))handlerBlock;
+- (void)addHandlerBlock:(hk_nullable void (^)(HKDeeplink * __hk_nonnull deeplink))handlerBlock;
 
 /**
  *  handleOpenURL: is a mimicked method from the UIApplicationDelegate protocol for iOS < 4.2. 
@@ -105,7 +107,7 @@
  *
  *  @return     Returns YES if Hoko can open the deeplink or NO otherwise.
  */
-- (BOOL)handleOpenURL:(nonnull NSURL *)url;
+- (BOOL)handleOpenURL:(hk_nonnull NSURL *)url;
 
 /**
  *  openURL:sourceApplication:annotation: is a mimicked method from the UIApplicationDelegate
@@ -119,7 +121,7 @@
  *
  *  @return     Returns YES if Hoko can open the deeplink or NO otherwise.
  */
-- (BOOL)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation NS_AVAILABLE_IOS(4_2);
+- (BOOL)openURL:(hk_nonnull NSURL *)url sourceApplication:(hk_nullable NSString *)sourceApplication annotation:(hk_nullable id)annotation NS_AVAILABLE_IOS(4_2);
 
 /**
  *  openSmartlink: serves the purpose of handling the open of a Smartlink, by resolving it through
@@ -127,7 +129,7 @@
  *
  *  @param smartlink A Smartlink.
  */
-- (void)openSmartlink:(nonnull NSString *)smartlink;
+- (void)openSmartlink:(hk_nonnull NSString *)smartlink;
 
 /**
  *  generateSmartlinkForDeeplink:success:failure allows the app to generate Smartlinks for the
@@ -140,7 +142,7 @@
  *  @param success      The block called in case of success, will have an Smartlink as a parameter.
  *  @param failure      The block called in case of failure, will have an NSError as a parameter.
  */
-- (void)generateSmartlinkForDeeplink:(nonnull HKDeeplink *)deeplink success:(nullable void(^)(NSString * __nonnull smartlink))success failure:(nullable void(^)(NSError * __nonnull error))failure;
+- (void)generateSmartlinkForDeeplink:(hk_nonnull HKDeeplink *)deeplink success:(hk_nullable void(^)(NSString * __hk_nonnull smartlink))success failure:(hk_nullable void(^)(NSError * __hk_nonnull error))failure;
 
 @end
 

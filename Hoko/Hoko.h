@@ -9,6 +9,8 @@
 
 #import "HKDeeplink.h"
 
+#import "Hoko+Nullability.h"
+
 /**
  *  Hoko is an easy-to-use Framework to handle Deeplinking.
  *
@@ -35,7 +37,7 @@
  *
  *  @param token Hoko service API key.
  */
-+ (void)setupWithToken:(nonnull NSString *)token;
++ (void)setupWithToken:(hk_nonnull NSString *)token;
 
 /**
  *  Setups all the Hoko module instances, logging and asynchronous networking queues.
@@ -50,7 +52,7 @@
  *
  *  @param token Hoko service API key.
  */
-+ (void)setupWithToken:(nonnull NSString *)token testDevices:(nullable NSArray *)testDevices;
++ (void)setupWithToken:(hk_nonnull NSString *)token testDevices:(hk_nullable NSArray *)testDevices;
 
 /**
  *  The HKDeeplinking module provides all the necessary APIs to map, handle and generate deeplinks.
@@ -58,7 +60,7 @@
  *
  *  @return A reference to the HKDeeplinking instance.
  */
-+ (nullable HKDeeplinking *)deeplinking;
++ (hk_nonnull HKDeeplinking *)deeplinking;
 
 
 /**
