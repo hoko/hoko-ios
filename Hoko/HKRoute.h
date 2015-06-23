@@ -18,6 +18,6 @@
 @property (nonatomic, strong, readonly) NSArray *components;
 @property (nonatomic, copy, readonly) void (^target)(HKDeeplink *deeplink);
 
-@property (nonatomic, strong, readonly) id json;
+@property (nonatomic, strong, readonly) NSDictionary *json;
 
 @end

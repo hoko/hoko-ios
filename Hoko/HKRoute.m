@@ -49,7 +49,7 @@ NSString *const HKRoutePath = @"routes";
 }
 
 #pragma mark - Serialization
-- (id)json
+- (NSDictionary *)json
 {
     return @{@"route": @{@"build": [HKApp app].build,
                          @"device": [HKDevice device].platform,

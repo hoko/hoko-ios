@@ -114,7 +114,7 @@ NSString *const HKAppEnvironmentRelease = @"release";
 }
 
 #pragma mark - Serializer
-- (id)json
+- (NSDictionary *)json
 {
   return @{@"name": [HKUtils jsonValue:self.name],
            @"bundle": [HKUtils jsonValue:self.bundle],

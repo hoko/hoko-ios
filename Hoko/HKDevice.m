@@ -164,7 +164,7 @@ NSString *const HKDeviceIPadSimulator = @"iPad Simulator";
 }
 
 #pragma mark - Serializer
-- (id)json
+- (NSDictionary *)json
 {
   return @{@"vendor": [HKUtils jsonValue:self.vendor],
            @"platform": [HKUtils jsonValue:self.platform],
