@@ -26,7 +26,7 @@
  *
  *  @param viewController Your view controller (or hierarchy of).
  */
-+ (void)setRootViewController:(UIViewController *)viewController;
++ (void)setRootViewController:(nonnull UIViewController *)viewController;
 
 /**
  *  pushViewController:animated: pushes a view controller inside a navigation controller.
@@ -37,7 +37,7 @@
  *  @param viewController Your view controller.
  *  @param animated       If you choose to animate the pushing of the viewController.
  */
-+ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
++ (void)pushViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated;
 
 /**
  *  pushViewController:animated:replace: pushes a view controller inside a navigation controller.
@@ -51,7 +51,7 @@
  *  @param viewController Your view controller.
  *  @param animated       If you choose to animate the pushing of the viewController.
  */
-+ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated replace:(BOOL)replace;
++ (void)pushViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated replace:(BOOL)replace;
 
 /**
  *  presentViewController:animated: presents a view controller as a modal view controller,
@@ -60,6 +60,6 @@
  *  @param viewController Your view controller.
  *  @param animated       If you choose to animate the presenting of the viewController.
  */
-+ (void)presentViewController:(UIViewController *)viewController animated:(BOOL)animated;
++ (void)presentViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated;
 
 @end
