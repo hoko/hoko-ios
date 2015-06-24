@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'Hoko'
-  s.version  = '1.2.1'
+  s.version  = '2.0'
   s.platform = :ios, '5.0'
   s.license  = 'Apache'
   s.summary  = 'Connect all your platforms with a single link with HOKO deep linking technology'

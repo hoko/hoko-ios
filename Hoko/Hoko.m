@@ -9,25 +9,22 @@
 #import "Hoko.h"
 #import "Hoko+Private.h"
 
-#import "HKApp.h"
-#import "HKError.h"
-#import "HKLogger.h"
-#import "HKDevice.h"
-#import "HKVersionChecker.h"
-#import "HKAnalytics+Private.h"
-#import "HKDeeplinking+Private.h"
-#import "HKNetworkOperationQueue.h"
-#import "HKPushNotifications+Private.h"
+#import "HOKApp.h"
+#import "HOKError.h"
+#import "HOKUtils.h"
+#import "HOKLogger.h"
+#import "HOKDevice.h"
+#import "HOKVersionChecker.h"
+#import "HOKDeeplinking+Private.h"
+#import "HOKNetworkOperationQueue.h"
 
-NSString *const HokoVersion = @"1.2.1";
+NSString *const HokoVersion = @"2.0";
 
 @interface Hoko ()
 
 @property (nonatomic, assign) BOOL debugMode;
 @property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) HKAnalytics *analytics;
-@property (nonatomic, strong) HKDeeplinking *deeplinking;
-@property (nonatomic, strong) HKPushNotifications *pushNotifications;
+@property (nonatomic, strong) HOKDeeplinking *deeplinking;
 
 
 @end
@@ -35,7 +32,7 @@ NSString *const HokoVersion = @"1.2.1";
 @implementation Hoko
 
 #pragma mark - Singleton
-// Outside of setupWithToken:debugMode: for testing purposes
+// Outside of setupWithToken: for testing purposes
 static dispatch_once_t onceToken = 0;
 static Hoko *_sharedInstance = nil;
 
@@ -47,17 +44,12 @@ static Hoko *_sharedInstance = nil;
 #pragma mark - Setup
 + (void)setupWithToken:(NSString *)token
 {
-    [self setupWithToken:token debugMode:[HKApp app].isDebugBuild];
-}
-
-+ (void)setupWithToken:(NSString *)token debugMode:(BOOL)debugMode
-{
     if (onceToken != 0) {
-        HKErrorLog([HKError setupCalledMoreThanOnceError]);
-        NSAssert(NO, [HKError setupCalledMoreThanOnceError].description);
+        HOKErrorLog([HOKError setupCalledMoreThanOnceError]);
+        NSAssert(NO, [HOKError setupCalledMoreThanOnceError].description);
     }
     dispatch_once(&onceToken, ^{
-        _sharedInstance = [[Hoko alloc] initWithToken:token debugMode:debugMode];
+        _sharedInstance = [[Hoko alloc] initWithToken:token debugMode:[HOKApp app].isDebugBuild];
     });
 }
 
@@ -69,57 +61,44 @@ static Hoko *_sharedInstance = nil;
         _token = token;
         _debugMode = debugMode;
         
-        [[HKDevice device] setupReachability];
+        [[HOKDevice device] setupReachability];
         
-        // Hoko Analytics implements the HKHandlerProtocol
-        [[HKNetworkOperationQueue sharedQueue] setup];
-        _analytics = [[HKAnalytics alloc] initWithToken:token];
-        _deeplinking = [[HKDeeplinking alloc] initWithToken:token debugMode:debugMode];
-        [_deeplinking addHandler:_analytics];
+        [[HOKNetworkOperationQueue sharedQueue] setup];
+        _deeplinking = [[HOKDeeplinking alloc] initWithToken:token debugMode:debugMode];
         
-        _pushNotifications = [HKPushNotifications pushNotificationsWithToken:token];
+        [self checkVersions];
         
-        // Only posting when in debug mode to avoid spaming the service
-        // Also checking for new version on github public repo
-        if (debugMode) {
-            [[HKApp app] postIconWithToken:_token];
-            [[HKVersionChecker versionChecker] checkForNewVersion:HokoVersion];
-        }
-        
-        if (![HKApp app].hasURLSchemes)
-            HKErrorLog([HKError noURLSchemesError]);
+        if (![HOKApp app].hasURLSchemes)
+            HOKErrorLog([HOKError noURLSchemesError]);
     }
     return self;
 }
 
 #pragma mark - Module accessors
-+ (HKAnalytics *)analytics
-{
-    if (![Hoko hoko].analytics) {
-        HKErrorLog([HKError setupNotCalledYetError]);
-    }
-    return [Hoko hoko].analytics;
-}
-
-+ (HKDeeplinking *)deeplinking
++ (HOKDeeplinking *)deeplinking
 {
     if (![Hoko hoko].deeplinking) {
-        HKErrorLog([HKError setupNotCalledYetError]);
+        HOKErrorLog([HOKError setupNotCalledYetError]);
     }
     return [Hoko hoko].deeplinking;
 }
 
-+ (HKPushNotifications *)pushNotifications
+#pragma mark - Versioning
+/**
+ *  Checks for a new SDK version on the Github repo.
+ */
+- (void)checkVersions
 {
-    if (![Hoko hoko].pushNotifications) {
-        HKErrorLog([HKError setupNotCalledYetError]);
+    // Only posting when in debug mode to avoid spaming the service
+    // Also checking for new version on github public repo
+    if (self.debugMode) {
+        [[HOKVersionChecker versionChecker] checkForNewVersion:HokoVersion];
     }
-    return [Hoko hoko].pushNotifications;
 }
 
 #pragma mark - Logging
 + (void)setVerbose:(BOOL)verbose {
-    [HKLogger logger].verbose = verbose;
+    [HOKLogger logger].verbose = verbose;
 }
 
 #pragma mark - Resetting

@@ -7,30 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F1E951A88EE4984CB7A2B36 /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8C2A05B195FB4BE377D8E2 /* libPods-ios.a */; };
-		306F65E21AAC99E500F36B05 /* HKHandlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306F65E11AAC99E500F36B05 /* HKHandlingTests.m */; };
-		30DEC7ED1AA09BA800C77005 /* HKLinkGeneratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EA1AA09BA800C77005 /* HKLinkGeneratorTests.m */; };
-		30DEC7EE1AA09BA800C77005 /* HKNetworkOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EB1AA09BA800C77005 /* HKNetworkOperationTests.m */; };
-		30DEC7EF1AA09BA800C77005 /* HKURLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EC1AA09BA800C77005 /* HKURLTests.m */; };
-		30E2520C1AA86B9500D3D9CA /* HKStubbedTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2520B1AA86B9500D3D9CA /* HKStubbedTestCase.m */; };
-		30E2520F1AA9C2E600D3D9CA /* HKRouteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2520E1AA9C2E600D3D9CA /* HKRouteTests.m */; };
-		30E252111AA9C78300D3D9CA /* HKRoutingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E252101AA9C78300D3D9CA /* HKRoutingTests.m */; };
+		306F65E21AAC99E500F36B05 /* HOKHandlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306F65E11AAC99E500F36B05 /* HOKHandlingTests.m */; };
+		30DEC7ED1AA09BA800C77005 /* HOKLinkGeneratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EA1AA09BA800C77005 /* HOKLinkGeneratorTests.m */; };
+		30DEC7EE1AA09BA800C77005 /* HOKNetworkOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EB1AA09BA800C77005 /* HOKNetworkOperationTests.m */; };
+		30DEC7EF1AA09BA800C77005 /* HOKURLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EC1AA09BA800C77005 /* HOKURLTests.m */; };
+		30E2520C1AA86B9500D3D9CA /* HOKStubbedTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2520B1AA86B9500D3D9CA /* HOKStubbedTestCase.m */; };
+		30E2520F1AA9C2E600D3D9CA /* HOKRouteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2520E1AA9C2E600D3D9CA /* HOKRouteTests.m */; };
+		30E252111AA9C78300D3D9CA /* HOKRoutingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E252101AA9C78300D3D9CA /* HOKRoutingTests.m */; };
+		F31834059170F28D55DE1ABB /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF32258FD6F84577B04AB418 /* libPods-ios.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		306F65E11AAC99E500F36B05 /* HKHandlingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKHandlingTests.m; path = "Hoko Tests/HKHandlingTests.m"; sourceTree = SOURCE_ROOT; };
+		111976FF4C2DE37EBE204F56 /* Pods-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.release.xcconfig"; sourceTree = "<group>"; };
+		306F65E11AAC99E500F36B05 /* HOKHandlingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HOKHandlingTests.m; path = "Hoko Tests/HOKHandlingTests.m"; sourceTree = SOURCE_ROOT; };
 		30DEC7E01AA0934800C77005 /* iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30DEC7E41AA0934800C77005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		30DEC7EA1AA09BA800C77005 /* HKLinkGeneratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKLinkGeneratorTests.m; path = "Hoko Tests/HKLinkGeneratorTests.m"; sourceTree = SOURCE_ROOT; };
-		30DEC7EB1AA09BA800C77005 /* HKNetworkOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKNetworkOperationTests.m; path = "Hoko Tests/HKNetworkOperationTests.m"; sourceTree = SOURCE_ROOT; };
-		30DEC7EC1AA09BA800C77005 /* HKURLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKURLTests.m; path = "Hoko Tests/HKURLTests.m"; sourceTree = SOURCE_ROOT; };
-		30E2520B1AA86B9500D3D9CA /* HKStubbedTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKStubbedTestCase.m; path = "Hoko Tests/HKStubbedTestCase.m"; sourceTree = SOURCE_ROOT; };
-		30E2520D1AA86DA300D3D9CA /* HKStubbedTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HKStubbedTestCase.h; path = "Hoko Tests/HKStubbedTestCase.h"; sourceTree = SOURCE_ROOT; };
-		30E2520E1AA9C2E600D3D9CA /* HKRouteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKRouteTests.m; path = "Hoko Tests/HKRouteTests.m"; sourceTree = SOURCE_ROOT; };
-		30E252101AA9C78300D3D9CA /* HKRoutingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKRoutingTests.m; path = "Hoko Tests/HKRoutingTests.m"; sourceTree = SOURCE_ROOT; };
-		9D8C2A05B195FB4BE377D8E2 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3725A6F9C6C77E476889452 /* Pods-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.release.xcconfig"; sourceTree = "<group>"; };
-		EE688E1D9F5031600B413ABC /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		30DEC7EA1AA09BA800C77005 /* HOKLinkGeneratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HOKLinkGeneratorTests.m; path = "Hoko Tests/HOKLinkGeneratorTests.m"; sourceTree = SOURCE_ROOT; };
+		30DEC7EB1AA09BA800C77005 /* HOKNetworkOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HOKNetworkOperationTests.m; path = "Hoko Tests/HOKNetworkOperationTests.m"; sourceTree = SOURCE_ROOT; };
+		30DEC7EC1AA09BA800C77005 /* HOKURLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HOKURLTests.m; path = "Hoko Tests/HOKURLTests.m"; sourceTree = SOURCE_ROOT; };
+		30E2520B1AA86B9500D3D9CA /* HOKStubbedTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HOKStubbedTestCase.m; path = "Hoko Tests/HOKStubbedTestCase.m"; sourceTree = SOURCE_ROOT; };
+		30E2520D1AA86DA300D3D9CA /* HOKStubbedTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HOKStubbedTestCase.h; path = "Hoko Tests/HOKStubbedTestCase.h"; sourceTree = SOURCE_ROOT; };
+		30E2520E1AA9C2E600D3D9CA /* HOKRouteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HOKRouteTests.m; path = "Hoko Tests/HOKRouteTests.m"; sourceTree = SOURCE_ROOT; };
+		30E252101AA9C78300D3D9CA /* HOKRoutingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HOKRoutingTests.m; path = "Hoko Tests/HOKRoutingTests.m"; sourceTree = SOURCE_ROOT; };
+		AF32258FD6F84577B04AB418 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB48C82D22E1AF8F0D4E5FCE /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F1E951A88EE4984CB7A2B36 /* libPods-ios.a in Frameworks */,
+				F31834059170F28D55DE1ABB /* libPods-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,8 +50,8 @@
 			children = (
 				30DEC7E21AA0934800C77005 /* Hoko Tests */,
 				30DEC7E11AA0934800C77005 /* Products */,
-				B2E90E5054A50D83D2D026C3 /* Pods */,
-				8826A5AB88FBF6E3648A8791 /* Frameworks */,
+				89B7C07255B1DEB06BE5383E /* Pods */,
+				7D3D4B1B2350340923C93EF8 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -67,14 +67,14 @@
 		30DEC7E21AA0934800C77005 /* Hoko Tests */ = {
 			isa = PBXGroup;
 			children = (
-				30E2520D1AA86DA300D3D9CA /* HKStubbedTestCase.h */,
-				30E2520B1AA86B9500D3D9CA /* HKStubbedTestCase.m */,
-				30DEC7EA1AA09BA800C77005 /* HKLinkGeneratorTests.m */,
-				30DEC7EB1AA09BA800C77005 /* HKNetworkOperationTests.m */,
-				30DEC7EC1AA09BA800C77005 /* HKURLTests.m */,
-				30E2520E1AA9C2E600D3D9CA /* HKRouteTests.m */,
-				30E252101AA9C78300D3D9CA /* HKRoutingTests.m */,
-				306F65E11AAC99E500F36B05 /* HKHandlingTests.m */,
+				30E2520D1AA86DA300D3D9CA /* HOKStubbedTestCase.h */,
+				30E2520B1AA86B9500D3D9CA /* HOKStubbedTestCase.m */,
+				30DEC7EA1AA09BA800C77005 /* HOKLinkGeneratorTests.m */,
+				30DEC7EB1AA09BA800C77005 /* HOKNetworkOperationTests.m */,
+				30DEC7EC1AA09BA800C77005 /* HOKURLTests.m */,
+				30E2520E1AA9C2E600D3D9CA /* HOKRouteTests.m */,
+				30E252101AA9C78300D3D9CA /* HOKRoutingTests.m */,
+				306F65E11AAC99E500F36B05 /* HOKHandlingTests.m */,
 				30DEC7E31AA0934800C77005 /* Supporting Files */,
 			);
 			name = "Hoko Tests";
@@ -89,19 +89,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8826A5AB88FBF6E3648A8791 /* Frameworks */ = {
+		7D3D4B1B2350340923C93EF8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D8C2A05B195FB4BE377D8E2 /* libPods-ios.a */,
+				AF32258FD6F84577B04AB418 /* libPods-ios.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B2E90E5054A50D83D2D026C3 /* Pods */ = {
+		89B7C07255B1DEB06BE5383E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				EE688E1D9F5031600B413ABC /* Pods-ios.debug.xcconfig */,
-				C3725A6F9C6C77E476889452 /* Pods-ios.release.xcconfig */,
+				FB48C82D22E1AF8F0D4E5FCE /* Pods-ios.debug.xcconfig */,
+				111976FF4C2DE37EBE204F56 /* Pods-ios.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -113,11 +113,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30DEC7E71AA0934800C77005 /* Build configuration list for PBXNativeTarget "iOS Tests" */;
 			buildPhases = (
-				28B276754AE47F6F6473AC77 /* Check Pods Manifest.lock */,
+				F9875B1C5284869BBB763C22 /* Check Pods Manifest.lock */,
 				30DEC7DC1AA0934800C77005 /* Sources */,
 				30DEC7DD1AA0934800C77005 /* Frameworks */,
 				30DEC7DE1AA0934800C77005 /* Resources */,
-				BE40076C211D1662802DC4E1 /* Copy Pods Resources */,
+				6FA52BCBCE49BC242A8F7586 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -134,7 +134,7 @@
 		30DEC7D61AA0930C00C77005 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				TargetAttributes = {
 					30DEC7DF1AA0934800C77005 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -169,22 +169,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		28B276754AE47F6F6473AC77 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		BE40076C211D1662802DC4E1 /* Copy Pods Resources */ = {
+		6FA52BCBCE49BC242A8F7586 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -199,6 +184,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F9875B1C5284869BBB763C22 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -206,13 +206,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30DEC7EF1AA09BA800C77005 /* HKURLTests.m in Sources */,
-				30E252111AA9C78300D3D9CA /* HKRoutingTests.m in Sources */,
-				30E2520F1AA9C2E600D3D9CA /* HKRouteTests.m in Sources */,
-				30DEC7ED1AA09BA800C77005 /* HKLinkGeneratorTests.m in Sources */,
-				30E2520C1AA86B9500D3D9CA /* HKStubbedTestCase.m in Sources */,
-				306F65E21AAC99E500F36B05 /* HKHandlingTests.m in Sources */,
-				30DEC7EE1AA09BA800C77005 /* HKNetworkOperationTests.m in Sources */,
+				30DEC7EF1AA09BA800C77005 /* HOKURLTests.m in Sources */,
+				30E252111AA9C78300D3D9CA /* HOKRoutingTests.m in Sources */,
+				30E2520F1AA9C2E600D3D9CA /* HOKRouteTests.m in Sources */,
+				30DEC7ED1AA09BA800C77005 /* HOKLinkGeneratorTests.m in Sources */,
+				30E2520C1AA86B9500D3D9CA /* HOKStubbedTestCase.m in Sources */,
+				306F65E21AAC99E500F36B05 /* HOKHandlingTests.m in Sources */,
+				30DEC7EE1AA09BA800C77005 /* HOKNetworkOperationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +222,7 @@
 		30DEC7DA1AA0930C00C77005 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 			};
@@ -236,7 +237,7 @@
 		};
 		30DEC7E81AA0934800C77005 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE688E1D9F5031600B413ABC /* Pods-ios.debug.xcconfig */;
+			baseConfigurationReference = FB48C82D22E1AF8F0D4E5FCE /* Pods-ios.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -277,6 +278,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hokolinks.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 			};
@@ -284,7 +286,7 @@
 		};
 		30DEC7E91AA0934800C77005 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C3725A6F9C6C77E476889452 /* Pods-ios.release.xcconfig */;
+			baseConfigurationReference = 111976FF4C2DE37EBE204F56 /* Pods-ios.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -318,6 +320,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hokolinks.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
