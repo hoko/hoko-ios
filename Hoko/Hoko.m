@@ -49,7 +49,7 @@ static Hoko *_sharedInstance = nil;
         NSAssert(NO, [HOKError setupCalledMoreThanOnceError].description);
     }
     dispatch_once(&onceToken, ^{
-        _sharedInstance = [[Hoko alloc] initWithToken:token debugMode:[HKApp app].isDebugBuild];
+        _sharedInstance = [[Hoko alloc] initWithToken:token debugMode:[HOKApp app].isDebugBuild];
     });
 }
 

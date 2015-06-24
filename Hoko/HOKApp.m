@@ -27,7 +27,7 @@ NSString *const HOKAppEnvironmentRelease = @"release";
     static dispatch_once_t once;
     static id sharedInstance;
     dispatch_once(&once, ^{
-        sharedInstance = [[HKApp alloc] init];
+        sharedInstance = [[HOKApp alloc] init];
     });
     return sharedInstance;
 }
@@ -46,13 +46,13 @@ NSString *const HOKAppEnvironmentRelease = @"release";
 - (NSString *)version
 {
     NSString *version = [[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    return version ? version : HKAppUnknownVersion;
+    return version ? version : HOKAppUnknownVersion;
 }
 
 - (NSString *)build
 {
     NSString *build = [[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleVersion"];
-    return build ? build : HKAppUnknownBuild;
+    return build ? build : HOKAppUnknownBuild;
 }
 
 // URL Schemes from app requires the drill down of the main bundle, only doing it once.
@@ -106,7 +106,7 @@ NSString *const HOKAppEnvironmentRelease = @"release";
 
 - (BOOL)isDebugBuild
 {
-    if ([HKDevice device].isSimulator)
+    if ([HOKDevice device].isSimulator)
         return YES;
     return [self.embeddedMobileProvision rangeOfString:@"<key>get-task-allow</key><true/>"].length > 0;
 }
@@ -142,10 +142,10 @@ NSString *const HOKAppEnvironmentRelease = @"release";
 #pragma mark - Serializer
 - (NSDictionary *)json
 {
-    return @{@"name": [HKUtils jsonValue:self.name],
-             @"bundle": [HKUtils jsonValue:self.bundle],
-             @"version": [HKUtils jsonValue:self.version],
-             @"build": [HKUtils jsonValue:self.build]};
+    return @{@"name": [HOKUtils jsonValue:self.name],
+             @"bundle": [HOKUtils jsonValue:self.bundle],
+             @"version": [HOKUtils jsonValue:self.version],
+             @"build": [HOKUtils jsonValue:self.build]};
 }
 
 

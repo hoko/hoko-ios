@@ -137,10 +137,10 @@ NSString *const HOKNetworkingFormat = @"json";
     if (token) {
         [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
         [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
-        [request setValue:[HKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
-        if ([HKApp app].isDebugBuild) {
-            [request setValue:[HKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
-            NSString *teamId = [HKApp app].teamId;
+        [request setValue:[HOKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
+        if ([HOKApp app].isDebugBuild) {
+            [request setValue:[HOKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
+            NSString *teamId = [HOKApp app].teamId;
             if (teamId) {
                 [request setValue:teamId forHTTPHeaderField:@"Hoko-App-TeamId"];
             }
@@ -182,10 +182,10 @@ NSString *const HOKNetworkingFormat = @"json";
     if (token) {
         [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
         [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
-        [request setValue:[HKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
-        if ([HKApp app].isDebugBuild) {
-            [request setValue:[HKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
-            NSString *teamId = [HKApp app].teamId;
+        [request setValue:[HOKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
+        if ([HOKApp app].isDebugBuild) {
+            [request setValue:[HOKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
+            NSString *teamId = [HOKApp app].teamId;
             if (teamId) {
                 [request setValue:teamId forHTTPHeaderField:@"Hoko-App-TeamId"];
             }
@@ -227,10 +227,10 @@ NSString *const HOKNetworkingFormat = @"json";
     if (token) {
         [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
         [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
-        [request setValue:[HKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
-        if ([HKApp app].isDebugBuild) {
-            [request setValue:[HKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
-            NSString *teamId = [HKApp app].teamId;
+        [request setValue:[HOKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
+        if ([HOKApp app].isDebugBuild) {
+            [request setValue:[HOKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
+            NSString *teamId = [HOKApp app].teamId;
             if (teamId) {
                 [request setValue:teamId forHTTPHeaderField:@"Hoko-App-TeamId"];
             }
