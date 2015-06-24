@@ -138,6 +138,13 @@ NSString *const HKNetworkingFormat = @"json";
         [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
         [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
         [request setValue:[HKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
+        if ([HKApp app].isDebugBuild) {
+            [request setValue:[HKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
+            NSString *teamId = [HKApp app].teamId;
+            if (teamId) {
+                [request setValue:teamId forHTTPHeaderField:@"Hoko-App-TeamId"];
+            }
+        }
     }
     
     _urlConnection = [[NSURLConnection alloc] initWithRequest:request
@@ -176,6 +183,13 @@ NSString *const HKNetworkingFormat = @"json";
         [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
         [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
         [request setValue:[HKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
+        if ([HKApp app].isDebugBuild) {
+            [request setValue:[HKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
+            NSString *teamId = [HKApp app].teamId;
+            if (teamId) {
+                [request setValue:teamId forHTTPHeaderField:@"Hoko-App-TeamId"];
+            }
+        }
     }
     [request setHTTPBody:jsonData];
     
@@ -214,6 +228,13 @@ NSString *const HKNetworkingFormat = @"json";
         [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
         [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
         [request setValue:[HKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
+        if ([HKApp app].isDebugBuild) {
+            [request setValue:[HKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
+            NSString *teamId = [HKApp app].teamId;
+            if (teamId) {
+                [request setValue:teamId forHTTPHeaderField:@"Hoko-App-TeamId"];
+            }
+        }
     }
     [request setHTTPBody:jsonData];
     

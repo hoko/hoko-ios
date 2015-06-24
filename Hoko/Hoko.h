@@ -40,21 +40,6 @@
 + (void)setupWithToken:(hk_nonnull NSString *)token;
 
 /**
- *  Setups all the Hoko module instances, logging and asynchronous networking queues.
- *  Setting up with a token will make sure you can take full advantage of the Hoko service,
- *  as you will be able to track everything through automatic Analytics, which
- *  will be shown on your Hoko dashboards. Also sets the debug mode for the devices set. 
- *  Debug mode serves the purpose of the mapped routes to the Hoko backend service.
- *  Check the logs for your device's ID.
- *  <pre>
- *  [Hoko setupWithToken:@"YOUR-API-TOKEN" testDevices:@[@"YOUR-DEVICE-ID"]];
- *  </pre>
- *
- *  @param token Hoko service API key.
- */
-+ (void)setupWithToken:(hk_nonnull NSString *)token testDevices:(hk_nullable NSArray *)testDevices;
-
-/**
  *  The HKDeeplinking module provides all the necessary APIs to map, handle and generate deeplinks.
  *  Different APIs as provided in order to be as versatile as your application requires them to be.
  *

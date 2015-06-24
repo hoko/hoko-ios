@@ -21,6 +21,7 @@
 @property (nonatomic, readonly) BOOL isDebugBuild;
 @property (nonatomic, strong, readonly) NSString *environment;
 @property (nonatomic, strong, readonly) NSDictionary *json;
+@property (nonatomic, strong, readonly) NSString *teamId;
 
 
 @end

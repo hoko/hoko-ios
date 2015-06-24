@@ -7,6 +7,7 @@
 //
 
 #ifndef _Hoko_Nullability_h
+
     #define _Hoko_Nullability_h
 
     #if __has_feature(nullability)
@@ -20,6 +21,5 @@
         #define __hk_nonnull
         #define __hk_nullable
     #endif
-
 
 #endif
