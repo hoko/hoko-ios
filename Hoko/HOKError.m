@@ -31,7 +31,7 @@ NSString *const HOKServerWarningDomain = @"HokoServerWarning";
 
 + (NSError *)setupCalledMoreThanOnceError
 {
-  return [self errorWithCode:2 description:@"Cannot call the [Hoko setupWithToken:] methods more than once on the application's lifecycle."];
+  return [self errorWithCode:2 description:@"Cannot call the [Hoko setupWithToken:] method more than once on the application's lifecycle."];
 }
 
 + (NSError *)noURLSchemesError
