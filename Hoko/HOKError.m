@@ -26,12 +26,12 @@ NSString *const HOKServerWarningDomain = @"HokoServerWarning";
 #pragma mark - Public Errors
 + (NSError *)setupNotCalledYetError
 {
-  return [self errorWithCode:1 description:@"Cannot access modules without calling [Hoko setup] or [Hoko setupWithToken:] beforehand."];
+  return [self errorWithCode:1 description:@"Cannot access modules without calling [Hoko setupWithToken:] beforehand."];
 }
 
 + (NSError *)setupCalledMoreThanOnceError
 {
-  return [self errorWithCode:2 description:@"Cannot call the [Hoko setup] or [Hoko setupWithToken:] methods more than once on the application's lifecycle."];
+  return [self errorWithCode:2 description:@"Cannot call the [Hoko setupWithToken:] methods more than once on the application's lifecycle."];
 }
 
 + (NSError *)noURLSchemesError
