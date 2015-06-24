@@ -5,9 +5,9 @@
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
-#import "HKDeeplinking.h"
+#import "HOKDeeplinking.h"
 
-#import "HKDeeplink.h"
+#import "HOKDeeplink.h"
 
 #import "Hoko+Nullability.h"
 
@@ -18,7 +18,7 @@
  *  With the Hoko framework you can map routes to your view controllers, add handlers that trigger when
  *  deeplinks are the point of entry to your application.
  *
- *  - HKDeeplinking - handles every incoming deeplink, so long as it has been mapped
+ *  - HOKDeeplinking - handles every incoming deeplink, so long as it has been mapped
  *
  *  You should setup Hoko on your AppDelegate's application:didFinishLaunchingWithOptions:, by calling
  *  [Hoko setupWithToken:@"YOUR-API-TOKEN"].
@@ -37,7 +37,7 @@
  *
  *  @param token Hoko service API key.
  */
-+ (void)setupWithToken:(hk_nonnull NSString *)token;
++ (void)setupWithToken:(hok_nonnull NSString *)token;
 
 /**
  *  The HKDeeplinking module provides all the necessary APIs to map, handle and generate deeplinks.
@@ -45,7 +45,7 @@
  *
  *  @return A reference to the HKDeeplinking instance.
  */
-+ (hk_nonnull HKDeeplinking *)deeplinking;
++ (hok_nonnull HOKDeeplinking *)deeplinking;
 
 
 /**

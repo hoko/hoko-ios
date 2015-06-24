@@ -9,14 +9,14 @@
 #import "Hoko.h"
 #import "Hoko+Private.h"
 
-#import "HKApp.h"
-#import "HKError.h"
-#import "HKUtils.h"
-#import "HKLogger.h"
-#import "HKDevice.h"
-#import "HKVersionChecker.h"
-#import "HKDeeplinking+Private.h"
-#import "HKNetworkOperationQueue.h"
+#import "HOKApp.h"
+#import "HOKError.h"
+#import "HOKUtils.h"
+#import "HOKLogger.h"
+#import "HOKDevice.h"
+#import "HOKVersionChecker.h"
+#import "HOKDeeplinking+Private.h"
+#import "HOKNetworkOperationQueue.h"
 
 NSString *const HokoVersion = @"2.0";
 
@@ -24,7 +24,7 @@ NSString *const HokoVersion = @"2.0";
 
 @property (nonatomic, assign) BOOL debugMode;
 @property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) HKDeeplinking *deeplinking;
+@property (nonatomic, strong) HOKDeeplinking *deeplinking;
 
 
 @end
@@ -45,8 +45,8 @@ static Hoko *_sharedInstance = nil;
 + (void)setupWithToken:(NSString *)token
 {
     if (onceToken != 0) {
-        HKErrorLog([HKError setupCalledMoreThanOnceError]);
-        NSAssert(NO, [HKError setupCalledMoreThanOnceError].description);
+        HOKErrorLog([HOKError setupCalledMoreThanOnceError]);
+        NSAssert(NO, [HOKError setupCalledMoreThanOnceError].description);
     }
     dispatch_once(&onceToken, ^{
         _sharedInstance = [[Hoko alloc] initWithToken:token debugMode:[HKApp app].isDebugBuild];
@@ -61,24 +61,24 @@ static Hoko *_sharedInstance = nil;
         _token = token;
         _debugMode = debugMode;
         
-        [[HKDevice device] setupReachability];
+        [[HOKDevice device] setupReachability];
         
-        [[HKNetworkOperationQueue sharedQueue] setup];
-        _deeplinking = [[HKDeeplinking alloc] initWithToken:token debugMode:debugMode];
+        [[HOKNetworkOperationQueue sharedQueue] setup];
+        _deeplinking = [[HOKDeeplinking alloc] initWithToken:token debugMode:debugMode];
         
         [self checkVersions];
         
-        if (![HKApp app].hasURLSchemes)
-            HKErrorLog([HKError noURLSchemesError]);
+        if (![HOKApp app].hasURLSchemes)
+            HOKErrorLog([HOKError noURLSchemesError]);
     }
     return self;
 }
 
 #pragma mark - Module accessors
-+ (HKDeeplinking *)deeplinking
++ (HOKDeeplinking *)deeplinking
 {
     if (![Hoko hoko].deeplinking) {
-        HKErrorLog([HKError setupNotCalledYetError]);
+        HOKErrorLog([HOKError setupNotCalledYetError]);
     }
     return [Hoko hoko].deeplinking;
 }
@@ -92,13 +92,13 @@ static Hoko *_sharedInstance = nil;
     // Only posting when in debug mode to avoid spaming the service
     // Also checking for new version on github public repo
     if (self.debugMode) {
-        [[HKVersionChecker versionChecker] checkForNewVersion:HokoVersion];
+        [[HOKVersionChecker versionChecker] checkForNewVersion:HokoVersion];
     }
 }
 
 #pragma mark - Logging
 + (void)setVerbose:(BOOL)verbose {
-    [HKLogger logger].verbose = verbose;
+    [HOKLogger logger].verbose = verbose;
 }
 
 #pragma mark - Resetting

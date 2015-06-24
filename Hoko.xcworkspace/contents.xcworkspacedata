@@ -11,20 +11,20 @@
             location = "container:"
             name = "Deferred">
             <FileRef
-               location = "group:Hoko/HKDeferredDeeplinking.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKDeferredDeeplinking.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKDeferredDeeplinking.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKDeferredDeeplinking.m">
             </FileRef>
          </Group>
          <Group
             location = "container:"
             name = "Link Generation">
             <FileRef
-               location = "group:Hoko/HKLinkGenerator.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKLinkGenerator.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKLinkGenerator.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKLinkGenerator.m">
             </FileRef>
          </Group>
          <Group
@@ -34,17 +34,17 @@
                location = "container:"
                name = "Handler Block Wrapper">
                <FileRef
-                  location = "group:Hoko/HKHandlerBlockWrapper.h">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKHandlerBlockWrapper.h">
                </FileRef>
                <FileRef
-                  location = "group:Hoko/HKHandlerBlockWrapper.m">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKHandlerBlockWrapper.m">
                </FileRef>
             </Group>
             <FileRef
-               location = "group:Hoko/HKHandling.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKHandling.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKHandling.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKHandling.m">
             </FileRef>
          </Group>
          <Group
@@ -54,60 +54,60 @@
                location = "container:"
                name = "Resolver">
                <FileRef
-                  location = "group:Hoko/HKResolver.h">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKResolver.h">
                </FileRef>
                <FileRef
-                  location = "group:Hoko/HKResolver.m">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKResolver.m">
                </FileRef>
             </Group>
             <Group
                location = "container:"
                name = "URL">
                <FileRef
-                  location = "group:Hoko/HKURL.h">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKURL.h">
                </FileRef>
                <FileRef
-                  location = "group:Hoko/HKURL.m">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKURL.m">
                </FileRef>
             </Group>
             <Group
                location = "container:"
                name = "Route">
                <FileRef
-                  location = "group:Hoko/HKRoute.h">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKRoute.h">
                </FileRef>
                <FileRef
-                  location = "group:Hoko/HKRoute.m">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKRoute.m">
                </FileRef>
             </Group>
             <FileRef
-               location = "group:Hoko/HKRouting.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKRouting.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKRouting.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKRouting.m">
             </FileRef>
          </Group>
          <Group
             location = "container:"
             name = "Deeplink">
             <FileRef
-               location = "group:Hoko/HKDeeplink.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKDeeplink.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKDeeplink.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKDeeplink.m">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKDeeplink+Private.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKDeeplink+Private.h">
             </FileRef>
          </Group>
          <FileRef
-            location = "group:Hoko/HKDeeplinking.h">
+            location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKDeeplinking.h">
          </FileRef>
          <FileRef
-            location = "group:Hoko/HKDeeplinking.m">
+            location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKDeeplinking.m">
          </FileRef>
          <FileRef
-            location = "group:Hoko/HKDeeplinking+Private.h">
+            location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKDeeplinking+Private.h">
          </FileRef>
       </Group>
       <Group
@@ -117,92 +117,92 @@
             location = "container:"
             name = "App">
             <FileRef
-               location = "group:Hoko/HKApp.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKApp.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKApp.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKApp.m">
             </FileRef>
          </Group>
          <Group
             location = "container:"
             name = "Device">
             <FileRef
-               location = "group:Hoko/HKDevice.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKDevice.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKDevice.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKDevice.m">
             </FileRef>
          </Group>
          <Group
             location = "container:"
             name = "Error">
             <FileRef
-               location = "group:Hoko/HKError.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKError.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKError.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKError.m">
             </FileRef>
          </Group>
          <Group
             location = "container:"
             name = "Logger">
             <FileRef
-               location = "group:Hoko/HKLogger.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKLogger.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKLogger.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKLogger.m">
             </FileRef>
          </Group>
          <Group
             location = "container:"
             name = "Navigation">
             <FileRef
-               location = "group:Hoko/HKNavigation.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNavigation.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKNavigation.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNavigation.m">
             </FileRef>
          </Group>
          <Group
             location = "container:"
             name = "Networking">
             <FileRef
-               location = "group:Hoko/HKNetworking.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNetworking.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKNetworking.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNetworking.m">
             </FileRef>
             <Group
                location = "container:"
                name = "GZip">
                <FileRef
-                  location = "group:Hoko/HKGZip.h">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKGZip.h">
                </FileRef>
                <FileRef
-                  location = "group:Hoko/HKGZip.m">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKGZip.m">
                </FileRef>
             </Group>
             <Group
                location = "container:"
                name = "Network Operation">
                <FileRef
-                  location = "group:Hoko/HKNetworkOperation.h">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNetworkOperation.h">
                </FileRef>
                <FileRef
-                  location = "group:Hoko/HKNetworkOperation.m">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNetworkOperation.m">
                </FileRef>
             </Group>
             <Group
                location = "container:"
                name = "Network Operation Queue">
                <FileRef
-                  location = "group:Hoko/HKNetworkOperationQueue.h">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNetworkOperationQueue.h">
                </FileRef>
                <FileRef
-                  location = "group:Hoko/HKNetworkOperationQueue.m">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNetworkOperationQueue.m">
                </FileRef>
                <FileRef
-                  location = "group:Hoko/HKNetworkOperationQueue+Private.h">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNetworkOperationQueue+Private.h">
                </FileRef>
             </Group>
          </Group>
@@ -213,54 +213,54 @@
                location = "container:"
                name = "Notification Observer">
                <FileRef
-                  location = "group:Hoko/HKNotificationObserver.h">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNotificationObserver.h">
                </FileRef>
                <FileRef
-                  location = "group:Hoko/HKNotificationObserver.m">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKNotificationObserver.m">
                </FileRef>
             </Group>
             <Group
                location = "container:"
                name = "Object Observer">
                <FileRef
-                  location = "group:Hoko/HKObjectObserver.h">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKObjectObserver.h">
                </FileRef>
                <FileRef
-                  location = "group:Hoko/HKObjectObserver.m">
+                  location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKObjectObserver.m">
                </FileRef>
             </Group>
             <FileRef
-               location = "group:Hoko/HKObserver.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKObserver.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKObserver.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKObserver.m">
             </FileRef>
          </Group>
          <Group
             location = "container:"
             name = "Swizzling">
             <FileRef
-               location = "group:Hoko/HKSwizzling.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKSwizzling.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKSwizzling.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKSwizzling.m">
             </FileRef>
          </Group>
          <Group
             location = "container:"
             name = "Version Checker">
             <FileRef
-               location = "group:Hoko/HKVersionChecker.h">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKVersionChecker.h">
             </FileRef>
             <FileRef
-               location = "group:Hoko/HKVersionChecker.m">
+               location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKVersionChecker.m">
             </FileRef>
          </Group>
          <FileRef
-            location = "group:Hoko/HKUtils.h">
+            location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKUtils.h">
          </FileRef>
          <FileRef
-            location = "group:Hoko/HKUtils.m">
+            location = "group:/Users/pedrovieira/Documents/HOKO/hoko-ios/Hoko/HOKUtils.m">
          </FileRef>
       </Group>
       <FileRef

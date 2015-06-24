@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "98D3F453153C8D5277F2AB8F"
+               BlueprintIdentifier = "5952558DA24C803C37737470"
                BuildableName = "libPods-ios-Hoko.a"
                BlueprintName = "Pods-ios-Hoko"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -11,15 +11,15 @@
     #define _Hoko_Nullability_h
 
     #if __has_feature(nullability)
-        #define hk_nonnull nonnull
-        #define hk_nullable nullable
-        #define __hk_nonnull __nonnull
-        #define __hk_nullable __nullable
+        #define hok_nonnull nonnull
+        #define hok_nullable nullable
+        #define __hok_nonnull __nonnull
+        #define __hok_nullable __nullable
     #else
-        #define hk_nonnull
-        #define hk_nullable
-        #define __hk_nonnull
-        #define __hk_nullable
+        #define hok_nonnull
+        #define hok_nullable
+        #define __hok_nonnull
+        #define __hok_nullable
     #endif
 
 #endif
