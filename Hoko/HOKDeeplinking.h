@@ -108,7 +108,7 @@
  *
  *  @return     Returns YES if Hoko can open the deeplink or NO otherwise.
  */
-- (BOOL)handleOpenURL:(hok_nonnull NSURL *)url;
+- (BOOL)handleOpenURL:(hok_nullable NSURL *)url;
 
 /**
  *  openURL:sourceApplication:annotation: is a mimicked method from the UIApplicationDelegate

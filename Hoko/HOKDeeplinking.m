@@ -82,6 +82,15 @@
     }];
 }
 
+- (void)openSmartlink:(NSString *)smartlink completion:(void (^)(NSString *deeplink))completion
+{
+    [self.resolver resolveSmartlink:smartlink completion:^(NSURL *deeplink, NSError *error) {
+        if (deeplink)
+            [self handleOpenURL:deeplink];
+        completion(deeplink.absoluteString);
+    }];
+}
+
 #pragma mark - Handlers
 - (void)addHandler:(id<HOKHandlerProcotol>)handler
 {

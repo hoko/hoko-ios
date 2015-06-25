@@ -14,6 +14,7 @@
 #import "Hoko.h"
 #import "HOKError.h"
 #import "HOKLogger.h"
+#import "HOKDeeplinking+Private.h"
 
 @implementation HOKSwizzling
 
@@ -28,27 +29,27 @@
  */
 + (NSString *)appDelegateClassName
 {
-  NSArray *appDelegates = @[];
-  int numClasses;
-  Class *classes = NULL;
-  numClasses = objc_getClassList(NULL, 0);
-  if (numClasses > 0 )
-  {
-    classes = (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
-    numClasses = objc_getClassList(classes, numClasses);
-    for (int i = 0; i < numClasses; i++) {
-      Class class = classes[i];
-      // Avoiding StoreKit inner classes
-      if (class_conformsToProtocol(class, @protocol(UIApplicationDelegate)) && ![class isSubclassOfClass:[UIApplication class]]) {
-        appDelegates = [appDelegates arrayByAddingObject:NSStringFromClass(classes[i])];
-      }
-      
+    NSArray *appDelegates = @[];
+    int numClasses;
+    Class *classes = NULL;
+    numClasses = objc_getClassList(NULL, 0);
+    if (numClasses > 0 )
+    {
+        classes = (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
+        numClasses = objc_getClassList(classes, numClasses);
+        for (int i = 0; i < numClasses; i++) {
+            Class class = classes[i];
+            // Avoiding StoreKit inner classes
+            if (class_conformsToProtocol(class, @protocol(UIApplicationDelegate)) && ![class isSubclassOfClass:[UIApplication class]]) {
+                appDelegates = [appDelegates arrayByAddingObject:NSStringFromClass(classes[i])];
+            }
+            
+        }
+        free(classes);
     }
-    free(classes);
-  }
-  if (appDelegates.count == 1)
-    return appDelegates.firstObject;
-  return nil;
+    if (appDelegates.count == 1)
+        return appDelegates.firstObject;
+    return nil;
 }
 
 #pragma mark - Generic Swizzling
@@ -63,25 +64,25 @@
         originalSelector:(SEL)originalSelector
         swizzledSelector:(SEL)swizzledSelector
 {
-  Class class = NSClassFromString(classname);
-  
-  Method originalMethod = class_getInstanceMethod(class, originalSelector);
-  Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-  
-  BOOL didAddMethod =
-  class_addMethod(class,
-                  originalSelector,
-                  method_getImplementation(swizzledMethod),
-                  method_getTypeEncoding(swizzledMethod));
-  
-  if (didAddMethod) {
-    class_replaceMethod(class,
-                        swizzledSelector,
-                        method_getImplementation(originalMethod),
-                        method_getTypeEncoding(originalMethod));
-  } else {
-    method_exchangeImplementations(originalMethod, swizzledMethod);
-  }
+    Class class = NSClassFromString(classname);
+    
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+    
+    BOOL didAddMethod =
+    class_addMethod(class,
+                    originalSelector,
+                    method_getImplementation(swizzledMethod),
+                    method_getTypeEncoding(swizzledMethod));
+    
+    if (didAddMethod) {
+        class_replaceMethod(class,
+                            swizzledSelector,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
 }
 
 /**
@@ -99,52 +100,80 @@
                 originalSelector:(SEL)originalSelector
                            block:(id)block
 {
-  IMP newImplementation = imp_implementationWithBlock(block);
-  Class class = NSClassFromString(classname);
-  Method method = class_getInstanceMethod(class, originalSelector);
-  if (method == nil) {
-    class_addMethod(class, originalSelector, newImplementation, "");
-    return nil;
-  } else {
-    return class_replaceMethod(class, originalSelector, newImplementation, method_getTypeEncoding(method));
-  }
+    IMP newImplementation = imp_implementationWithBlock(block);
+    Class class = NSClassFromString(classname);
+    Method method = class_getInstanceMethod(class, originalSelector);
+    if (method == nil) {
+        class_addMethod(class, originalSelector, newImplementation, "");
+        return nil;
+    } else {
+        return class_replaceMethod(class, originalSelector, newImplementation, method_getTypeEncoding(method));
+    }
 }
 
 #pragma mark - HKDeeplinking Swizzles
 + (void)swizzleHKDeeplinking
 {
-  NSString *appDelegateClassName = [self appDelegateClassName];
-  if (appDelegateClassName) {
-    [self swizzleOpenURLWithAppDelegateClassName:appDelegateClassName];
-    [self swizzleLegacyOpenURLWithAppDelegateClassName:appDelegateClassName];
-  } else {
-    HOKErrorLog([HOKError couldNotFindAppDelegateError]);
-  }
+    NSString *appDelegateClassName = [self appDelegateClassName];
+    if (appDelegateClassName) {
+        [self swizzleOpenURLWithAppDelegateClassName:appDelegateClassName];
+        [self swizzleLegacyOpenURLWithAppDelegateClassName:appDelegateClassName];
+        
+        //TEST
+        [self swizzleContinueUserActivityWityhAppDelegateClassName:appDelegateClassName];
+        
+    } else {
+        HOKErrorLog([HOKError couldNotFindAppDelegateError]);
+    }
 }
 
 + (void)swizzleOpenURLWithAppDelegateClassName:(NSString *)appDelegateClassName
 {
-  __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:openURL:sourceApplication:annotation:) block:^BOOL(id blockSelf, UIApplication *application, NSURL *url, NSString *sourceApplication, id annotation){
-    BOOL result = [[Hoko deeplinking] openURL:url sourceApplication:sourceApplication annotation:annotation];
-    if (!result && implementation) {
-      BOOL (*func)() = (void *)implementation;
-      result = func(blockSelf, @selector(application:openURL:sourceApplication:annotation:), application, url, sourceApplication, annotation);
-    }
-    return result;
-  }];
+    __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:openURL:sourceApplication:annotation:) block:^BOOL(id blockSelf, UIApplication *application, NSURL *url, NSString *sourceApplication, id annotation){
+        BOOL result = [[Hoko deeplinking] openURL:url sourceApplication:sourceApplication annotation:annotation];
+        if (!result && implementation) {
+            BOOL (*func)() = (void *)implementation;
+            result = func(blockSelf, @selector(application:openURL:sourceApplication:annotation:), application, url, sourceApplication, annotation);
+        }
+        return result;
+    }];
 }
 
 + (void)swizzleLegacyOpenURLWithAppDelegateClassName:(NSString *)appDelegateClassName
 {
-  __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:handleOpenURL:) block:^BOOL(id blockSelf, UIApplication *application, NSURL *url){
-    BOOL result = [[Hoko deeplinking] handleOpenURL:url];
-    if (!result && implementation) {
-      BOOL (*func)() = (void *)implementation;
-      result = func(blockSelf, @selector(application:handleOpenURL:), application, url);
-    }
-    return result;
-  }];
+    __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:handleOpenURL:) block:^BOOL(id blockSelf, UIApplication *application, NSURL *url){
+        BOOL result = [[Hoko deeplinking] handleOpenURL:url];
+        if (!result && implementation) {
+            BOOL (*func)() = (void *)implementation;
+            result = func(blockSelf, @selector(application:handleOpenURL:), application, url);
+        }
+        return result;
+    }];
 }
 
+
+//TEST
++ (void)swizzleContinueUserActivityWityhAppDelegateClassName:(NSString *)appDelegateClassName {
+    __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:continueUserActivity:restorationHandler:) block:^BOOL(id blockSelf, UIApplication *application, NSUserActivity *userActivity, id restorationHandler){
+        
+        if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+            NSURL *webpageURL = userActivity.webpageURL;
+            if (webpageURL && [webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound) {
+                [[Hoko deeplinking] openSmartlink:userActivity.webpageURL.absoluteString completion:^(NSString *deeplink) {
+                    if (!deeplink) {
+                        [[Hoko deeplinking] handleOpenURL:nil];
+                    }
+                }];
+                return YES;
+            }
+        }
+        
+        if (implementation) {
+            BOOL (*func)() = (void *)implementation;
+            return func(blockSelf, @selector(application:continueUserActivity:restorationHandler:), application, userActivity, restorationHandler);
+        }
+        return NO;
+    }];
+}
 
 @end

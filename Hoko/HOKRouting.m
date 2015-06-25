@@ -19,6 +19,7 @@
 #import "HOKNetworkOperationQueue.h"
 #import "HOKDeeplinking+Private.h"
 #import "HOKDeeplink+Private.h"
+#import "HOKRouting.h"
 
 @interface HOKRouting ()
 
