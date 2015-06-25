@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
-#import "HOKDeeplink.h"
+#import <UIKit/UIKit.h>
 
+#import "HOKDeeplink.h"
 #import "Hoko+Nullability.h"
 
 /**
