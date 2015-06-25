@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 @class HOKDeeplink;
 
 @interface HOKRouting : NSObject

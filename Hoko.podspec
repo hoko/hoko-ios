@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
 
   s.public_header_files = 'Hoko/*.h'
   s.source_files = 'Hoko/*.{h,m}'
-  s.frameworks = %w(Foundation SystemConfiguration)
+  s.frameworks = %w(Foundation SystemConfiguration UIKit)
   s.library = 'z'
 end

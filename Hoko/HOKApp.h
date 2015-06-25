@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
-#import <UIKit/UIImage.h>
+#import <Foundation/Foundation.h>
 
 @interface HOKApp : NSObject
 

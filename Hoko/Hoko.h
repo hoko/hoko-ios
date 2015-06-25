@@ -5,10 +5,10 @@
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
-#import "HOKDeeplinking.h"
+#import <Foundation/Foundation.h>
 
 #import "HOKDeeplink.h"
-
+#import "HOKDeeplinking.h"
 #import "Hoko+Nullability.h"
 
 /**
