@@ -111,8 +111,8 @@
     }
 }
 
-#pragma mark - HKDeeplinking Swizzles
-+ (void)swizzleHKDeeplinking
+#pragma mark - HOKDeeplinking Swizzles
++ (void)swizzleHOKDeeplinking
 {
     NSString *appDelegateClassName = [self appDelegateClassName];
     if (appDelegateClassName) {
@@ -128,7 +128,9 @@
 + (void)swizzleOpenURLWithAppDelegateClassName:(NSString *)appDelegateClassName
 {
     __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:openURL:sourceApplication:annotation:) block:^BOOL(id blockSelf, UIApplication *application, NSURL *url, NSString *sourceApplication, id annotation){
+        
         BOOL result = [[Hoko deeplinking] openURL:url sourceApplication:sourceApplication annotation:annotation];
+        
         if (!result && implementation) {
             BOOL (*func)() = (void *)implementation;
             result = func(blockSelf, @selector(application:openURL:sourceApplication:annotation:), application, url, sourceApplication, annotation);
@@ -140,7 +142,9 @@
 + (void)swizzleLegacyOpenURLWithAppDelegateClassName:(NSString *)appDelegateClassName
 {
     __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:handleOpenURL:) block:^BOOL(id blockSelf, UIApplication *application, NSURL *url){
+        
         BOOL result = [[Hoko deeplinking] handleOpenURL:url];
+        
         if (!result && implementation) {
             BOOL (*func)() = (void *)implementation;
             result = func(blockSelf, @selector(application:handleOpenURL:), application, url);
@@ -153,19 +157,9 @@
 + (void)swizzleContinueUserActivityWithAppDelegateClassName:(NSString *)appDelegateClassName {
     __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:continueUserActivity:restorationHandler:) block:^BOOL(id blockSelf, UIApplication *application, NSUserActivity *userActivity, id restorationHandler){
         
-        if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
-            NSURL *webpageURL = userActivity.webpageURL;
-            if (webpageURL && [webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound) {
-                [[Hoko deeplinking] openSmartlink:userActivity.webpageURL.absoluteString completion:^(HOKDeeplink *deeplink) {
-                    if (!deeplink) {
-                        [[Hoko deeplinking] handleOpenURL:nil];
-                    }
-                }];
-                return YES;
-            }
-        }
+        BOOL result = [[Hoko deeplinking] continueUserActivity:userActivity restorationHandler:restorationHandler];
         
-        if (implementation) {
+        if (!result && implementation) {
             BOOL (*func)() = (void *)implementation;
             return func(blockSelf, @selector(application:continueUserActivity:restorationHandler:), application, userActivity, restorationHandler);
         }

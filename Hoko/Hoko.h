@@ -40,10 +40,10 @@
 + (void)setupWithToken:(hok_nonnull NSString *)token;
 
 /**
- *  The HKDeeplinking module provides all the necessary APIs to map, handle and generate deeplinks.
+ *  The HOKDeeplinking module provides all the necessary APIs to map, handle and generate deeplinks.
  *  Different APIs as provided in order to be as versatile as your application requires them to be.
  *
- *  @return A reference to the HKDeeplinking instance.
+ *  @return A reference to the HOKDeeplinking instance.
  */
 + (hok_nonnull HOKDeeplinking *)deeplinking;
 

@@ -79,15 +79,15 @@
 
 - (HOKDeeplink *)deeplinkForURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation route:(HOKRoute **)route
 {
-    HOKURL *hkURL = [[HOKURL alloc]initWithURL:url];
+    HOKURL *hokURL = [[HOKURL alloc]initWithURL:url];
     NSDictionary *routeParameters;
     // Search for a match with any given route
     for (HOKRoute *hokRoute in self.routes) {
-        if([hkURL matchesWithRoute:hokRoute routeParameters:&routeParameters]) {
-            HOKDeeplink *deeplink = [HOKDeeplink deeplinkWithURLScheme:hkURL.scheme
+        if([hokURL matchesWithRoute:hokRoute routeParameters:&routeParameters]) {
+            HOKDeeplink *deeplink = [HOKDeeplink deeplinkWithURLScheme:hokURL.scheme
                                                                  route:hokRoute.route
                                                        routeParameters:routeParameters
-                                                       queryParameters:hkURL.queryParameters
+                                                       queryParameters:hokURL.queryParameters
                                                      sourceApplication:sourceApplication
                                                            deeplinkURL:url.absoluteString];
             if (route) {
@@ -98,10 +98,10 @@
     }
     
     // Default Route
-    HOKDeeplink *deeplink = [HOKDeeplink deeplinkWithURLScheme:hkURL.scheme
+    HOKDeeplink *deeplink = [HOKDeeplink deeplinkWithURLScheme:hokURL.scheme
                                                          route:nil
                                                routeParameters:nil
-                                               queryParameters:hkURL.queryParameters
+                                               queryParameters:hokURL.queryParameters
                                              sourceApplication:sourceApplication
                                                    deeplinkURL:url.absoluteString];
     if (self.defaultRoute) {
@@ -119,11 +119,11 @@
     }
     
     // Look for a matching route for this URL
-    HOKURL *hkURL = [[HOKURL alloc] initWithURL:url];
+    HOKURL *hokURL = [[HOKURL alloc] initWithURL:url];
     
     // Search for a match with any given route
     for (HOKRoute *route in self.routes) {
-        if([hkURL matchesWithRoute:route routeParameters:nil]) {
+        if([hokURL matchesWithRoute:route routeParameters:nil]) {
             return YES;
         }
     }
