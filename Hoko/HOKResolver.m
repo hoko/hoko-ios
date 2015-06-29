@@ -11,6 +11,7 @@
 #import "HOKLogger.h"
 #import "HOKNetworking.h"
 #import "HOKNetworkOperation.h"
+#import "HOKDevice.h"
 
 NSString *const HOKResolverEndpoint = @"smartlinks/resolve";
 
@@ -49,7 +50,9 @@ NSString *const HOKResolverEndpoint = @"smartlinks/resolve";
     NSString *smartlinkString = smartlink;
     if ([smartlink isKindOfClass:[NSURL class]])
         smartlinkString = [(NSURL *)smartlink absoluteString];
-    return @{@"smartlink": smartlinkString};
+    return @{@"smartlink": smartlinkString,
+             @"universal": [HOKDevice device].uid};
 }
+
 
 @end

@@ -14,6 +14,7 @@
 - (instancetype)initWithToken:(NSString *)token debugMode:(BOOL)debugMode;
 
 - (BOOL)canOpenURL:(NSURL *)url;
+- (void)openSmartlink:(NSString *)smartlink completion:(void (^)(NSString *deeplink))completion;
 
 @property (nonatomic, strong) HOKRouting *routing;
 @property (nonatomic, strong) HOKHandling *handling;
