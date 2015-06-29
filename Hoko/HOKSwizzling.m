@@ -118,8 +118,6 @@
     if (appDelegateClassName) {
         [self swizzleOpenURLWithAppDelegateClassName:appDelegateClassName];
         [self swizzleLegacyOpenURLWithAppDelegateClassName:appDelegateClassName];
-        
-        //TEST
         [self swizzleContinueUserActivityWityhAppDelegateClassName:appDelegateClassName];
         
     } else {
@@ -152,7 +150,6 @@
 }
 
 
-//TEST
 + (void)swizzleContinueUserActivityWityhAppDelegateClassName:(NSString *)appDelegateClassName {
     __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:continueUserActivity:restorationHandler:) block:^BOOL(id blockSelf, UIApplication *application, NSUserActivity *userActivity, id restorationHandler){
         
