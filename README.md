@@ -28,7 +28,7 @@ To integrate HOKO in your app, simply follow the 3 simple steps below after addi
 2. Open your Xcode project folder and create a file called `Podfile` with the following content:
 
     ```ruby
-    pod 'Hoko', '~> 2.0'
+    pod 'Hoko', '~> 2.0.1'
     ```
 
 3. Run `pod install` and wait for CocoaPod to install HOKO SDK. From this moment on, instead of using `.xcodeproj` file, you should start using `.xcworkspace`.
@@ -37,7 +37,7 @@ To integrate HOKO in your app, simply follow the 3 simple steps below after addi
 
 1. Download the [Hoko SDK](https://github.com/hokolinks/hoko-ios/archive/master.zip).
 2. Drag the `Hoko` folder to your project.
-3. Be sure to also add `SystemConfiguration.framework` and `zlib.dylib` in case your project does not include it already.
+3. Be sure to also add `SystemConfiguration.framework` and `libz.dylib` in case your project does not include it already.
 
 ### Integrating the SDK with your Swift project
 
