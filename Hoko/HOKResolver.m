@@ -8,10 +8,10 @@
 
 #import "HOKResolver.h"
 
+#import "HOKDevice.h"
 #import "HOKLogger.h"
 #import "HOKNetworking.h"
 #import "HOKNetworkOperation.h"
-#import "HOKDevice.h"
 
 NSString *const HOKResolverEndpoint = @"smartlinks/resolve";
 
@@ -31,12 +31,12 @@ NSString *const HOKResolverEndpoint = @"smartlinks/resolve";
     return self;
 }
 
-- (void)resolveSmartlink:(NSString *)smartlink completion:(void(^)(NSURL *deeplink, NSError *error))completion
+- (void)resolveSmartlink:(NSString *)smartlink completion:(void(^)(NSString *deeplink, NSError *error))completion
 {
     [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:HOKResolverEndpoint] parameters:[self jsonWithSmartlink:smartlink] token:self.token successBlock:^(id json) {
         NSString *deeplink = [json objectForKey:@"deeplink"];
         if (completion)
-            completion([NSURL URLWithString:deeplink], nil);
+            completion(deeplink, nil);
     } failedBlock:^(NSError *error) {
         HOKErrorLog(error);
         if (completion)
@@ -51,7 +51,7 @@ NSString *const HOKResolverEndpoint = @"smartlinks/resolve";
     if ([smartlink isKindOfClass:[NSURL class]])
         smartlinkString = [(NSURL *)smartlink absoluteString];
     return @{@"smartlink": smartlinkString,
-             @"universal": [HOKDevice device].uid};
+             @"uid": [HOKDevice device].uid};
 }
 
 

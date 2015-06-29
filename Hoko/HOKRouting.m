@@ -60,41 +60,55 @@
 #pragma mark - Open URL
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    HOKRoute *route;
+    HOKDeeplink *deeplink = [self deeplinkForURL:url sourceApplication:sourceApplication annotation:annotation route:&route];
+    [deeplink postWithToken:self.token];
+    if (route) {
+        if (route.target) {
+            route.target(deeplink);
+        }
+        return YES;
+    }
+    return NO;
+}
+
+- (HOKDeeplink *)deeplinkForURL:(NSURL *)url
+{
+    return [self deeplinkForURL:url sourceApplication:nil annotation:nil route:nil];
+}
+
+- (HOKDeeplink *)deeplinkForURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation route:(HOKRoute **)route
+{
     HOKURL *hkURL = [[HOKURL alloc]initWithURL:url];
     NSDictionary *routeParameters;
     // Search for a match with any given route
-    for (HOKRoute *route in self.routes) {
-        if([hkURL matchesWithRoute:route routeParameters:&routeParameters]) {
+    for (HOKRoute *hokRoute in self.routes) {
+        if([hkURL matchesWithRoute:hokRoute routeParameters:&routeParameters]) {
             HOKDeeplink *deeplink = [HOKDeeplink deeplinkWithURLScheme:hkURL.scheme
-                                                               route:route.route
-                                                     routeParameters:routeParameters
-                                                     queryParameters:hkURL.queryParameters
-                                                   sourceApplication:sourceApplication
-                                                         deeplinkURL:url.absoluteString];
-            [deeplink postWithToken:self.token];
-            [[Hoko deeplinking].handling handle:deeplink];
-            if(route.target) {
-                route.target(deeplink);
+                                                                 route:hokRoute.route
+                                                       routeParameters:routeParameters
+                                                       queryParameters:hkURL.queryParameters
+                                                     sourceApplication:sourceApplication
+                                                           deeplinkURL:url.absoluteString];
+            if (route) {
+                *route = hokRoute;
             }
-            return YES;
+            return deeplink;
         }
     }
     
     // Default Route
     HOKDeeplink *deeplink = [HOKDeeplink deeplinkWithURLScheme:hkURL.scheme
-                                                       route:nil
-                                             routeParameters:nil
-                                             queryParameters:hkURL.queryParameters
-                                           sourceApplication:sourceApplication
-                                                 deeplinkURL:url.absoluteString];
-    [deeplink postWithToken:self.token];
-    [[Hoko deeplinking].handling handle:deeplink];
-    if(self.defaultRoute && self.defaultRoute.target) {
-        self.defaultRoute.target(deeplink);
-        return YES;
+                                                         route:nil
+                                               routeParameters:nil
+                                               queryParameters:hkURL.queryParameters
+                                             sourceApplication:sourceApplication
+                                                   deeplinkURL:url.absoluteString];
+    if (self.defaultRoute) {
+        *route = self.defaultRoute;
     }
     
-    return NO;
+    return deeplink;
 }
 
 - (BOOL)canOpenURL:(NSURL *)url

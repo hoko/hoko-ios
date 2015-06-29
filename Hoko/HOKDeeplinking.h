@@ -51,7 +51,7 @@
  *  @param route  The route format string (e.g. "product/:product_id").
  *  @param target The target block in which you should construct your navigation.
  */
-- (void)mapRoute:(hok_nullable NSString *)route toTarget:(hok_nullable void (^)(HOKDeeplink * __hok_nonnull deeplink))target;
+- (void)mapRoute:(hok_nullable NSString *)route toTarget:(hok_nonnull void (^)(HOKDeeplink * __hok_nonnull deeplink))target;
 
 /**
  *  mapDefaultRouteToTarget: allows any deeplink that does not apply to a mapped route to be sent
@@ -67,7 +67,7 @@
  *
  *  @param target The target block in which you should construct your navigation
  */
-- (void)mapDefaultRouteToTarget:(hok_nullable void (^)(HOKDeeplink * __hok_nonnull deeplink))target;
+- (void)mapDefaultRouteToTarget:(hok_nonnull void (^)(HOKDeeplink * __hok_nonnull deeplink))target;
 
 /**
  *  With addHandler: you can add an object which implements the HOKHandlerProtocol to be called everytime
@@ -94,7 +94,7 @@
  *
  *  @param handlerBlock A block that receives an HOKDeeplink object.
  */
-- (void)addHandlerBlock:(hok_nullable void (^)(HOKDeeplink * __hok_nonnull deeplink))handlerBlock;
+- (void)addHandlerBlock:(hok_nonnull void (^)(HOKDeeplink * __hok_nonnull deeplink))handlerBlock;
 
 /**
  *  handleOpenURL: is a mimicked method from the UIApplicationDelegate protocol for iOS < 4.2. 
@@ -118,11 +118,13 @@
  *  error message at the start of your application you should manually delegate this method from your 
  *  AppDelegate to the Deeplinking module.
  *
- *  @param url  The url received by the AppDelegate.
+ *  @param url  The url received by the App Delegate.
+ *  @param sourceApplication The source application string received on the App Delegate.
+ *  @param annotation The annotation object received on the App Delegate.
  *
  *  @return     Returns YES if Hoko can open the deeplink or NO otherwise.
  */
-- (BOOL)openURL:(hok_nonnull NSURL *)url sourceApplication:(hok_nullable NSString *)sourceApplication annotation:(hok_nullable id)annotation NS_AVAILABLE_IOS(4_2);
+- (BOOL)openURL:(hok_nullable NSURL *)url sourceApplication:(hok_nullable NSString *)sourceApplication annotation:(hok_nullable id)annotation NS_AVAILABLE_IOS(4_2);
 
 /**
  *  openSmartlink: serves the purpose of handling the open of a Smartlink, by resolving it through
@@ -131,6 +133,17 @@
  *  @param smartlink A Smartlink.
  */
 - (void)openSmartlink:(hok_nonnull NSString *)smartlink;
+
+/**
+ *  openSmartlink: serves the purpose of handling the open of a Smartlink, by resolving it through
+ *  HOKO's backend, opening the resolved deeplink and calling the mapped route's target block. 
+ *  Will also receive a completion block which will be executed when the deeplink is opened.
+ *
+ *  @param smartlink A Smartlink.
+ *  @param completion A completion block that will be executed upon opening a Smartlink.
+ */
+- (void)openSmartlink:(hok_nonnull NSString *)smartlink completion:(hok_nullable void (^)(HOKDeeplink * __hok_nullable deeplink))completion;
+
 
 /**
  *  generateSmartlinkForDeeplink:success:failure allows the app to generate Smartlinks for the

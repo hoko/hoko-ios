@@ -53,7 +53,7 @@
                                 success:(void (^)(NSString *smartlink))success
                                 failure:(void (^)(NSError *error))failure
 {
-    [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:@"smartlinks/create"] parameters:deeplink.generateSmartlinkJSON token:self.token successBlock:^(id json) {
+    [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:@"smartlinks"] parameters:deeplink.generateSmartlinkJSON token:self.token successBlock:^(id json) {
         NSString *smartlink = [json objectForKey:@"smartlink"];
         if(smartlink)
             success(smartlink);

@@ -118,7 +118,7 @@
     if (appDelegateClassName) {
         [self swizzleOpenURLWithAppDelegateClassName:appDelegateClassName];
         [self swizzleLegacyOpenURLWithAppDelegateClassName:appDelegateClassName];
-        [self swizzleContinueUserActivityWityhAppDelegateClassName:appDelegateClassName];
+        [self swizzleContinueUserActivityWithAppDelegateClassName:appDelegateClassName];
         
     } else {
         HOKErrorLog([HOKError couldNotFindAppDelegateError]);
@@ -150,13 +150,13 @@
 }
 
 
-+ (void)swizzleContinueUserActivityWityhAppDelegateClassName:(NSString *)appDelegateClassName {
++ (void)swizzleContinueUserActivityWithAppDelegateClassName:(NSString *)appDelegateClassName {
     __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:continueUserActivity:restorationHandler:) block:^BOOL(id blockSelf, UIApplication *application, NSUserActivity *userActivity, id restorationHandler){
         
         if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
             NSURL *webpageURL = userActivity.webpageURL;
             if (webpageURL && [webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound) {
-                [[Hoko deeplinking] openSmartlink:userActivity.webpageURL.absoluteString completion:^(NSString *deeplink) {
+                [[Hoko deeplinking] openSmartlink:userActivity.webpageURL.absoluteString completion:^(HOKDeeplink *deeplink) {
                     if (!deeplink) {
                         [[Hoko deeplinking] handleOpenURL:nil];
                     }
