@@ -191,8 +191,8 @@ NSString *const HOKDeviceIPadSimulator = @"iPad Simulator";
   self.networkReachability = SCNetworkReachabilityCreateWithName(NULL, [HOKDeviceReachabilityUrl UTF8String]);
   if (self.networkReachability != NULL) {
     SCNetworkReachabilityContext context = {0, (__bridge void*)self, NULL, NULL, NULL};
-    if (SCNetworkReachabilitySetCallback(self.networkReachability, HKDeviceNetworkReachabilityCallback, &context)) {
-      dispatch_queue_t queue  = dispatch_queue_create("HKReachabilityQueue", DISPATCH_QUEUE_SERIAL);
+    if (SCNetworkReachabilitySetCallback(self.networkReachability, HOKDeviceNetworkReachabilityCallback, &context)) {
+      dispatch_queue_t queue  = dispatch_queue_create("HOKReachabilityQueue", DISPATCH_QUEUE_SERIAL);
       if (SCNetworkReachabilitySetDispatchQueue(self.networkReachability, queue)) {
         reachabilityInitated = YES;
       } else {
@@ -206,7 +206,7 @@ NSString *const HOKDeviceIPadSimulator = @"iPad Simulator";
   }
 }
 
-static void HKDeviceNetworkReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void *info) {
+static void HOKDeviceNetworkReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void *info) {
   if (info != NULL && [(__bridge NSObject*)info isKindOfClass:[HOKDevice class]]) {
     @autoreleasepool {
       HOKDevice *device = (__bridge HOKDevice *)info;

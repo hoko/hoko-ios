@@ -14,7 +14,6 @@
 
 NSString *const HOKAppUnknownBuild = @"Unknown Build";
 NSString *const HOKAppUnknownVersion = @"Unknown Version";
-NSString *const HOKAppIconKey = @"HKAppIconKey";
 
 NSString *const HOKAppEnvironmentDebug = @"debug";
 NSString *const HOKAppEnvironmentRelease = @"release";
