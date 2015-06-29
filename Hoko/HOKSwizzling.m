@@ -9,6 +9,7 @@
 #import "HOKSwizzling.h"
 
 #import <objc/runtime.h>
+#import <UIKit/UIKit.h>
 
 #import "Hoko.h"
 #import "HOKError.h"

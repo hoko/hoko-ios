@@ -25,6 +25,20 @@ With HOKO, you can aggregate all the platforms where your App is available. Each
 
 3. Run `pod install` and wait for CocoaPod to install HOKO SDK. From this moment on, instead of using `.xcodeproj` file, you should start using `.xcworkspace`.
 
+### Integrating the SDK with your Swift project
+
+Because the HOKO SDK is written in `Objective-C`, you'll have to manually add a `Bridging Header file` into your project in order to use it with your Swift code:
+
+* `File` > `New` > `File...` > `iOS` > `Source` > `Header File`
+
+* Name that header file `YourAppName-Bridging-Header.h`
+
+* Inside that header file, import `#import "Hoko.h"`
+
+* Go to your project > `Build Settings` > `Objective-C Bridging Header` > add the path to your bridging header file, from your root folder (e.g. `MyApp/MyApp-Bridging-Header.h`)
+
+* Get Swifty!
+
 ### Framework
 
 1. Download the [Hoko SDK](https://github.com/hokolinks/hoko-ios/archive/master.zip).
