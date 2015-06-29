@@ -17,6 +17,7 @@
 - (void)mapRoute:(NSString *)route toTarget:(void (^)(HOKDeeplink *deeplink))target;
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
 - (BOOL)canOpenURL:(NSURL *)url;
+- (HOKDeeplink *)deeplinkForURL:(NSURL *)url;
 - (BOOL)routeExists:(NSString *)route;
 
 @end

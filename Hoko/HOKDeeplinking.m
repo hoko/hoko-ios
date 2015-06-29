@@ -76,9 +76,24 @@
 
 - (void)openSmartlink:(NSString *)smartlink
 {
-    [self.resolver resolveSmartlink:smartlink completion:^(NSURL *deeplink, NSError *error) {
+    [self.resolver resolveSmartlink:smartlink completion:^(NSString *deeplink, NSError *error) {
         if (deeplink)
-            [self handleOpenURL:deeplink];
+            [self handleOpenURL:[NSURL URLWithString:deeplink]];
+    }];
+}
+
+- (void)openSmartlink:(NSString *)smartlink completion:(void (^)(HOKDeeplink *deeplink))completion
+{
+    [self.resolver resolveSmartlink:smartlink completion:^(NSString *deeplink, NSError *error) {
+        if (deeplink) {
+            NSURL *deeplinkURL = [NSURL URLWithString:deeplink];
+            [self handleOpenURL:deeplinkURL];
+            if (completion && deeplinkURL) {
+                completion([self.routing deeplinkForURL:deeplinkURL]);
+            }
+        } else if (completion) {
+            completion(nil);
+        }
     }];
 }
 
