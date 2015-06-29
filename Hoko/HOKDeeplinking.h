@@ -127,6 +127,20 @@
 - (BOOL)openURL:(hok_nullable NSURL *)url sourceApplication:(hok_nullable NSString *)sourceApplication annotation:(hok_nullable id)annotation NS_AVAILABLE_IOS(4_2);
 
 /**
+ *  continueUserActivity:restorationHandler is a mimicked method from the UIApplicationDelegate protocol
+ *  for iOS >= 8.0. It serves many purposes, but HOKO uses it to open Smartlinks directly from the 
+ *  NSUserActivity object. This method call will only return YES if the NSUserActivity is 
+ *  NSUserActivityTypeBrowsingWeb and the webpageURL property has the hoko.link domain. This will trigger
+ *  a link resolve on the HOKO backend, resulting on a deeplink open by the App itself.
+ *
+ *  @param userActivity       The NSUserActivity object from the AppDelegate call.
+ *  @param restorationHandler The restoration handler from the AppDelegate call.
+ *
+ *  @return YES in case it contains a Smartlink, NO otherwise.
+ */
+- (BOOL)continueUserActivity:(hok_nonnull NSUserActivity *)userActivity restorationHandler:(hok_nonnull void(^)(NSArray * __hok_nullable restorableObjects))restorationHandler NS_AVAILABLE_IOS(8_0);
+
+/**
  *  openSmartlink: serves the purpose of handling the open of a Smartlink, by resolving it through
  *  HOKO's backend, opening the resolved deeplink and calling the mapped route's target block.
  *

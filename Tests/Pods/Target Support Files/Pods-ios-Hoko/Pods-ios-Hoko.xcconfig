@@ -1,1 +1,1 @@
-PODS_IOS_HOKO_OTHER_LDFLAGS = -l"z" -framework "Foundation" -framework "SystemConfiguration"
+PODS_IOS_HOKO_OTHER_LDFLAGS = -l"z" -framework "Foundation" -framework "SystemConfiguration" -framework "UIKit"

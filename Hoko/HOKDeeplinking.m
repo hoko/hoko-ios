@@ -37,7 +37,7 @@
     self = [super init];
     if (self) {
         _routing = [[HOKRouting alloc] initWithToken:token
-                                          debugMode:debugMode];
+                                           debugMode:debugMode];
         _handling = [HOKHandling new];
         _linkGenerator = [[HOKLinkGenerator alloc] initWithToken:token];
         _deferredDeeplinking = [[HOKDeferredDeeplinking alloc] initWithToken:token];
@@ -97,6 +97,22 @@
     }];
 }
 
+- (BOOL)continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray *restorableObjects))restorationHandler
+{
+    if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+        NSURL *webpageURL = userActivity.webpageURL;
+        if (webpageURL && [webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound) {
+            [self openSmartlink:userActivity.webpageURL.absoluteString completion:^(HOKDeeplink *deeplink) {
+                if (!deeplink) {
+                    [self handleOpenURL:nil];
+                }
+            }];
+            return YES;
+        }
+    }
+    return NO;
+}
+
 #pragma mark - Handlers
 - (void)addHandler:(id<HOKHandlerProcotol>)handler
 {
@@ -134,7 +150,7 @@
 #pragma mark - Swizzling
 + (void)load
 {
-    [HOKSwizzling swizzleHKDeeplinking];
+    [HOKSwizzling swizzleHOKDeeplinking];
 }
 
 @end

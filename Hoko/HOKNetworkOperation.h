@@ -14,8 +14,6 @@ typedef NS_ENUM(NSUInteger, HOKNetworkOperationType) {
   HOKNetworkOperationTypePUT,
 };
 
-FOUNDATION_EXPORT NSString *const HKNetworkingOperationEndpoint;
-
 @interface HOKNetworkOperation : NSOperation <NSCoding>
 
 - (instancetype)initWithOperation:(HOKNetworkOperation *)operation;
