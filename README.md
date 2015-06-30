@@ -130,4 +130,4 @@ Hoko.deeplinking().addHandlerBlock { (deeplink: HOKDeeplink!) -> Void in
 
 ### Full documentation
 
-We recommend you to read the full documentation at [http://hokolinks.com/documentation#ios](http://support.hokolinks.com/ios/ios-setup/).
+We recommend you to read the full documentation at [http://support.hokolinks.com/quickstart/ios/](http://support.hokolinks.com/quickstart/ios/).
