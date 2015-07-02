@@ -1,7 +1,6 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) $(DEVELOPER_FRAMEWORKS_DIR) "$(PLATFORM_DIR)/Developer/Library/Frameworks" "$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks" "$(SDKROOT)/Developer/Library/Frameworks"
+FRAMEWORK_SEARCH_PATHS = $(inherited) $(DEVELOPER_FRAMEWORKS_DIR) "$(PLATFORM_DIR)/Developer/Library/Frameworks" "$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks" "$(SDKROOT)/Developer/Library/Frameworks" $(inherited) $(DEVELOPER_FRAMEWORKS_DIR) "$(PLATFORM_DIR)/Developer/Library/Frameworks" "$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks" "$(SDKROOT)/Developer/Library/Frameworks"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1 XCODE_VERSION=$(XCODE_VERSION_MAJOR)
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Expecta" "${PODS_ROOT}/Headers/Public/Hoko" "${PODS_ROOT}/Headers/Public/OCMock" "${PODS_ROOT}/Headers/Public/OHHTTPStubs"
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Expecta" -isystem "${PODS_ROOT}/Headers/Public/Hoko" -isystem "${PODS_ROOT}/Headers/Public/OCMock" -isystem "${PODS_ROOT}/Headers/Public/OHHTTPStubs"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-ios-Expecta" -l"Pods-ios-Hoko" -l"Pods-ios-OCMock" -l"Pods-ios-OHHTTPStubs" -l"z" -framework "CFNetwork" -framework "Foundation" -framework "SystemConfiguration" -framework "UIKit" -framework "XCTest"
-OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Expecta" -l"Hoko" -l"OCMock" -l"OHHTTPStubs" -l"z" -framework "CFNetwork" -framework "Foundation" -framework "SystemConfiguration" -framework "UIKit" -framework "XCTest"
 PODS_ROOT = ${SRCROOT}/Pods
