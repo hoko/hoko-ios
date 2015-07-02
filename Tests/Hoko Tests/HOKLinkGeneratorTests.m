@@ -41,7 +41,7 @@
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
   }];
   
-  [[Hoko deeplinking] mapRoute:@"store/:language_code/product/:product_id" toTarget:nil];
+  [[Hoko deeplinking] mapRoute:@"store/:language_code/product/:product_id" toTarget:^(HOKDeeplink *deeplink) {}];
   
 }
 
