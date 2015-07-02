@@ -63,6 +63,7 @@
     HOKRoute *route;
     HOKDeeplink *deeplink = [self deeplinkForURL:url sourceApplication:sourceApplication annotation:annotation route:&route];
     [deeplink postWithToken:self.token];
+    [[Hoko deeplinking].handling handle:deeplink];
     if (route) {
         if (route.target) {
             route.target(deeplink);
