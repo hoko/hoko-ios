@@ -49,7 +49,7 @@
 - (void)mapRoute:(NSString *)route
         toTarget:(void (^)(HOKDeeplink *deeplink))target
 {
-    if([self routeExists:route])
+    if ([self routeExists:route])
         HOKErrorLog([HOKError duplicateRouteError:route]);
     else if ([HOKApp app].hasURLSchemes)
         [self addNewRoute:[HOKRoute routeWithRoute:[HOKURL sanitizeURLString:route] target:target]];
@@ -80,11 +80,11 @@
 
 - (HOKDeeplink *)deeplinkForURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation route:(HOKRoute **)route
 {
-    HOKURL *hokURL = [[HOKURL alloc]initWithURL:url];
+    HOKURL *hokURL = [[HOKURL alloc] initWithURL:url];
     NSDictionary *routeParameters;
     // Search for a match with any given route
     for (HOKRoute *hokRoute in self.routes) {
-        if([hokURL matchesWithRoute:hokRoute routeParameters:&routeParameters]) {
+        if ([hokURL matchesWithRoute:hokRoute routeParameters:&routeParameters]) {
             HOKDeeplink *deeplink = [HOKDeeplink deeplinkWithURLScheme:hokURL.scheme
                                                                  route:hokRoute.route
                                                        routeParameters:routeParameters
@@ -115,7 +115,7 @@
 - (BOOL)canOpenURL:(NSURL *)url
 {
     // If a default route exists it can always open the URL
-    if(self.defaultRoute) {
+    if (self.defaultRoute) {
         return YES;
     }
     
@@ -124,7 +124,7 @@
     
     // Search for a match with any given route
     for (HOKRoute *route in self.routes) {
-        if([hokURL matchesWithRoute:route routeParameters:nil]) {
+        if ([hokURL matchesWithRoute:route routeParameters:nil]) {
             return YES;
         }
     }
@@ -152,7 +152,7 @@
 - (BOOL)routeExists:(NSString *)route
 {
     for (HOKRoute *routeObj in self.routes) {
-        if([routeObj.route isEqualToString:[HOKURL sanitizeURLString:route]])
+        if ([routeObj.route isEqualToString:[HOKURL sanitizeURLString:route]])
             return YES;
     }
     

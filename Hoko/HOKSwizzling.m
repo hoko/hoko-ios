@@ -118,7 +118,10 @@
     if (appDelegateClassName) {
         [self swizzleOpenURLWithAppDelegateClassName:appDelegateClassName];
         [self swizzleLegacyOpenURLWithAppDelegateClassName:appDelegateClassName];
+        
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
         [self swizzleContinueUserActivityWithAppDelegateClassName:appDelegateClassName];
+#endif
         
     } else {
         HOKErrorLog([HOKError couldNotFindAppDelegateError]);
@@ -153,7 +156,7 @@
     }];
 }
 
-
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 + (void)swizzleContinueUserActivityWithAppDelegateClassName:(NSString *)appDelegateClassName {
     __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:continueUserActivity:restorationHandler:) block:^BOOL(id blockSelf, UIApplication *application, NSUserActivity *userActivity, id restorationHandler){
         
@@ -166,5 +169,6 @@
         return NO;
     }];
 }
+#endif
 
 @end

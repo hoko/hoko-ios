@@ -18,6 +18,7 @@
 #import "HOKResolver.h"
 #import "HOKDeferredDeeplinking.h"
 #import "HOKDeeplinking+Private.h"
+#import "HOKURL.h"
 
 @interface HOKDeeplinking ()
 
@@ -101,17 +102,23 @@
 {
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         NSURL *webpageURL = userActivity.webpageURL;
-        if (webpageURL && [webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound) {
-            [self openSmartlink:userActivity.webpageURL.absoluteString completion:^(HOKDeeplink *deeplink) {
-                if (!deeplink) {
-                    [self handleOpenURL:nil];
-                }
-            }];
-            return YES;
+        if (webpageURL) {
+            if ([webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound) {
+                [self openSmartlink:userActivity.webpageURL.absoluteString completion:^(HOKDeeplink *deeplink) {
+                    if (!deeplink) {
+                        [self handleOpenURL:nil];
+                    }
+                }];
+                return YES;
+            } else {
+                return [self handleOpenURL:[HOKURL deeplinkifyURL:webpageURL]];
+            }
         }
     }
+    
     return NO;
 }
+
 
 #pragma mark - Handlers
 - (void)addHandler:(id<HOKHandlerProcotol>)handler
