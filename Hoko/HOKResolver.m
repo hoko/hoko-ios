@@ -31,16 +31,17 @@ NSString *const HOKResolverEndpoint = @"smartlinks/resolve";
     return self;
 }
 
-- (void)resolveSmartlink:(NSString *)smartlink completion:(void(^)(NSString *deeplink, NSError *error))completion
+- (void)resolveSmartlink:(NSString *)smartlink completion:(void(^)(NSString *deeplink, NSDictionary *metadata, NSError *error))completion
 {
     [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:HOKResolverEndpoint] parameters:[self jsonWithSmartlink:smartlink] token:self.token successBlock:^(id json) {
         NSString *deeplink = [json objectForKey:@"deeplink"];
+        NSDictionary *metadata = [json objectForKey:@"metadata"];
         if (completion)
-            completion(deeplink, nil);
+            completion(deeplink, metadata, nil);
     } failedBlock:^(NSError *error) {
         HOKErrorLog(error);
         if (completion)
-            completion(nil, error);
+            completion(nil, nil, error);
 
     }];
 }

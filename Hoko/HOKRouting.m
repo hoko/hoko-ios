@@ -13,13 +13,13 @@
 #import "HOKError.h"
 #import "HOKRoute.h"
 #import "HOKLogger.h"
+#import "HOKRouting.h"
 #import "HOKHandling.h"
 #import "Hoko+Private.h"
 #import "HOKNetworkOperation.h"
 #import "HOKNetworkOperationQueue.h"
 #import "HOKDeeplinking+Private.h"
 #import "HOKDeeplink+Private.h"
-#import "HOKRouting.h"
 
 @interface HOKRouting ()
 
@@ -58,10 +58,33 @@
 }
 
 #pragma mark - Open URL
+- (BOOL)openURL:(NSURL *)url metadata:(NSDictionary *)metadata
+{
+    return [self openURL:url sourceApplication:nil annotation:nil metadata:metadata];
+}
+
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [self openURL:url sourceApplication:sourceApplication annotation:annotation metadata:nil];
+}
+
+- (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation metadata:(NSDictionary *)metadata
 {
     HOKRoute *route;
     HOKDeeplink *deeplink = [self deeplinkForURL:url sourceApplication:sourceApplication annotation:annotation route:&route];
+    deeplink.metadata = metadata;
+    if (deeplink.needsMetadata) {
+        [deeplink requestMetadataWithToken:self.token completion:^{
+            [self openDeeplink:deeplink route:route];
+        }];
+        return route;
+    } else {
+        return [self openDeeplink:deeplink route:route];
+    }
+}
+
+- (BOOL)openDeeplink:(HOKDeeplink *)deeplink route:(HOKRoute *)route
+{
     [deeplink postWithToken:self.token];
     [[Hoko deeplinking].handling handle:deeplink];
     if (route) {
@@ -78,7 +101,10 @@
     return [self deeplinkForURL:url sourceApplication:nil annotation:nil route:nil];
 }
 
-- (HOKDeeplink *)deeplinkForURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation route:(HOKRoute **)route
+- (HOKDeeplink *)deeplinkForURL:(NSURL *)url
+              sourceApplication:(NSString *)sourceApplication
+                     annotation:(id)annotation
+                          route:(HOKRoute **)route
 {
     HOKURL *hokURL = [[HOKURL alloc] initWithURL:url];
     NSDictionary *routeParameters;
@@ -89,6 +115,7 @@
                                                                  route:hokRoute.route
                                                        routeParameters:routeParameters
                                                        queryParameters:hokURL.queryParameters
+                                                              metadata:nil
                                                      sourceApplication:sourceApplication
                                                            deeplinkURL:url.absoluteString];
             if (route) {
@@ -103,6 +130,7 @@
                                                          route:nil
                                                routeParameters:nil
                                                queryParameters:hokURL.queryParameters
+                                                      metadata:nil
                                              sourceApplication:sourceApplication
                                                    deeplinkURL:url.absoluteString];
     if (self.defaultRoute) {

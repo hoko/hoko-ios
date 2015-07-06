@@ -8,6 +8,7 @@
 
 #import "HOKDeeplinking.h"
 
+#import "HOKURL.h"
 #import "HOKError.h"
 #import "HOKRouting.h"
 #import "HOKObserver.h"
@@ -16,12 +17,13 @@
 #import "HOKLinkGenerator.h"
 #import "HOKRouting.h"
 #import "HOKResolver.h"
+#import "HOKDeeplink+Private.h"
 #import "HOKDeferredDeeplinking.h"
 #import "HOKDeeplinking+Private.h"
-#import "HOKURL.h"
 
 @interface HOKDeeplinking ()
 
+@property (nonatomic, strong) NSArray *customDomains;
 @property (nonatomic, strong) HOKResolver *resolver;
 @property (nonatomic, strong) HOKRouting *routing;
 @property (nonatomic, strong) HOKHandling *handling;
@@ -33,10 +35,11 @@
 @implementation HOKDeeplinking
 
 #pragma mark - Initialization
-- (instancetype)initWithToken:(NSString *)token debugMode:(BOOL)debugMode
+- (instancetype)initWithToken:(NSString *)token customDomains:(NSArray *)customDomains debugMode:(BOOL)debugMode
 {
     self = [super init];
     if (self) {
+        _customDomains = customDomains;
         _routing = [[HOKRouting alloc] initWithToken:token
                                            debugMode:debugMode];
         _handling = [HOKHandling new];
@@ -77,18 +80,18 @@
 
 - (void)openSmartlink:(NSString *)smartlink
 {
-    [self.resolver resolveSmartlink:smartlink completion:^(NSString *deeplink, NSError *error) {
-        if (deeplink)
-            [self handleOpenURL:[NSURL URLWithString:deeplink]];
-    }];
+    [self openSmartlink:smartlink completion:nil];
 }
 
 - (void)openSmartlink:(NSString *)smartlink completion:(void (^)(HOKDeeplink *deeplink))completion
 {
-    [self.resolver resolveSmartlink:smartlink completion:^(NSString *deeplink, NSError *error) {
+    [self.resolver resolveSmartlink:smartlink completion:^(NSString *deeplink, NSDictionary *metadata, NSError *error) {
         if (deeplink) {
             NSURL *deeplinkURL = [NSURL URLWithString:deeplink];
-            [self handleOpenURL:deeplinkURL];
+            [self.routing openURL:deeplinkURL metadata:metadata];
+
+            HOKDeeplink *deeplinkObject = [self.routing deeplinkForURL:deeplinkURL];
+            deeplinkObject.metadata = metadata;
             if (completion && deeplinkURL) {
                 completion([self.routing deeplinkForURL:deeplinkURL]);
             }
@@ -103,7 +106,7 @@
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         NSURL *webpageURL = userActivity.webpageURL;
         if (webpageURL) {
-            if ([webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound) {
+            if ([webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound || [self.customDomains containsObject:webpageURL.host]) {
                 [self openSmartlink:userActivity.webpageURL.absoluteString completion:^(HOKDeeplink *deeplink) {
                     if (!deeplink) {
                         [self handleOpenURL:nil];

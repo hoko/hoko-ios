@@ -16,7 +16,7 @@
 
 @end
 
-NSString *const HOKDefaultURLScheme = @"loko_for_hoko";
+NSString *const HOKDefaultURLScheme = @"hoko";
 
 @implementation HOKURL
 

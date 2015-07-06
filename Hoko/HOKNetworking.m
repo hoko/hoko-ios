@@ -17,7 +17,8 @@
 
 double const HOKNetworkingRequestTimeout = 15.0f;
 
-NSString *const HOKNetworkingEndpoint = @"https://api.hokolinks.com";
+//NSString *const HOKNetworkingEndpoint = @"https://api.hokolinks.com";
+NSString *const HOKNetworkingEndpoint = @"http://otero.local:3000";
 NSString *const HOKNetworkingVersion = @"v2";
 NSString *const HOKNetworkingFormat = @"json";
 

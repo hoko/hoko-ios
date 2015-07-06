@@ -40,6 +40,20 @@
 + (void)setupWithToken:(hok_nonnull NSString *)token;
 
 /**
+ *  Setups all the Hoko module instances, logging and asynchronous networking queues.
+ *  Setting up with a token will make sure you can take full advantage of the Hoko service,
+ *  as you will be able to track everything through automatic Analytics, which
+ *  will be shown on your Hoko dashboards. Will also make sure HOKO works with your custom domains.
+ *  <pre>
+ *  [Hoko setupWithToken:@"YOUR-API-TOKEN" customDomains:@[@"your.custom.domain.com"]];
+ *  </pre>
+ *
+ *  @param token Hoko service API key.
+ */
++ (void)setupWithToken:(hok_nonnull NSString *)token customDomains:(hok_nullable NSArray *)customDomains;
+
+
+/**
  *  The HOKDeeplinking module provides all the necessary APIs to map, handle and generate deeplinks.
  *  Different APIs as provided in order to be as versatile as your application requires them to be.
  *
