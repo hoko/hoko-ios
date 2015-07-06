@@ -98,6 +98,8 @@
     }];
 }
 
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 - (BOOL)continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray *restorableObjects))restorationHandler
 {
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
@@ -118,6 +120,8 @@
     
     return NO;
 }
+#endif
+
 
 #pragma mark - Handlers
 - (void)addHandler:(id<HOKHandlerProcotol>)handler
