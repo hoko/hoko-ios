@@ -8,11 +8,15 @@
 
 #import "HOKURL.h"
 
+#import "HOKApp.h"
+
 @interface HOKURL ()
 
 @property (nonatomic, strong) NSURL *url;
 
 @end
+
+NSString *const HOKDefaultURLScheme = @"loko_for_hoko";
 
 @implementation HOKURL
 
@@ -133,22 +137,23 @@
     return url;
 }
 
+// Using this method instead of NSURL's scheme because it doesn't recognize "app:" as a scheme, for instance
 + (NSString *)urlSchemeFromURLString:(NSString *)urlString
 {
-    NSString *urlScheme = @"";
+    NSMutableString *urlScheme = [NSMutableString string];
     for (NSInteger index = 0; index < urlString.length; index ++) {
         char character = [urlString characterAtIndex:index];
         
         // if '/' is before a ':' we have no urlScheme
         if (character == '/') {
-            urlScheme = @":";
+            urlScheme = [NSMutableString stringWithString:@":"];
             break;
         }
         
         if (character == ':') {
             break;
         }
-        urlScheme = [urlScheme stringByAppendingFormat:@"%c",character];
+        [urlScheme appendFormat:@"%c",character];
     }
     return urlScheme;
 }
@@ -157,9 +162,9 @@
 {
     if (urlScheme != nil) {
         if (urlString.length > urlScheme.length) {
-            NSString *path = [urlString substringFromIndex:urlScheme.length];
+            NSMutableString *path = [[urlString substringFromIndex:urlScheme.length] mutableCopy];
             while ([path hasPrefix:@"/"] && path.length > 0) {
-                path = [path substringFromIndex:1];
+                [path deleteCharactersInRange:NSMakeRange(0, 1)];
             }
             return path;
         }
@@ -169,7 +174,7 @@
 
 + (NSDictionary *)matchPathComponents:(NSArray *)pathComponents withRouteComponents:(NSArray *)routeComponents
 {
-    NSMutableDictionary *routeParameters = [@{} mutableCopy];
+    NSMutableDictionary *routeParameters = [NSMutableDictionary dictionary];
     for (NSInteger index = 0; index < pathComponents.count; index++) {
         NSString *pathComponent = [pathComponents objectAtIndex:index];
         NSString *routeComponent = [routeComponents objectAtIndex:index];
@@ -181,6 +186,23 @@
         }
     }
     return routeParameters;
+}
+
++ (NSURL *)deeplinkifyURL:(NSURL *)url {
+    if (!url)
+        return nil;
+    
+    NSString *prefix = [self grabURLScheme];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@", prefix, [self pathForURLString:url.absoluteString urlScheme:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]]]];
+}
+
++ (NSString *)grabURLScheme {
+    HOKApp *app = [HOKApp app];
+    if (app.hasURLSchemes) {
+        return app.urlSchemes[0];
+    } else {
+        return HOKDefaultURLScheme;
+    }
 }
 
 @end

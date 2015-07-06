@@ -1,1 +1,0 @@
-HOKO_OTHER_LDFLAGS = -l"z" -framework "Foundation" -framework "SystemConfiguration" -framework "UIKit"

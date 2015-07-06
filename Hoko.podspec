@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name     = 'Hoko'
-  s.version  = '2.0.2'
+  s.version  = '2.0.3'
   s.platform = :ios, '5.0'
   s.license  = 'Apache'
   s.summary  = 'Connect all your platforms with a single link with HOKO deep linking technology'
   s.homepage = 'https://github.com/hokolinks/hoko-ios'
   s.social_media_url = 'https://twitter.com/hokolinks'
-  s.authors  = { 
+  s.authors  = {
   	'Ivan Bruel' => 'ibruel@faber-ventures.com',
   	'Hoko S.A.' => 'support@hokolinks.com'
   }

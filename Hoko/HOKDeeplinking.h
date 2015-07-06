@@ -126,6 +126,8 @@
  */
 - (BOOL)openURL:(hok_nullable NSURL *)url sourceApplication:(hok_nullable NSString *)sourceApplication annotation:(hok_nullable id)annotation NS_AVAILABLE_IOS(4_2);
 
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 /**
  *  continueUserActivity:restorationHandler is a mimicked method from the UIApplicationDelegate protocol
  *  for iOS >= 8.0. It serves many purposes, but HOKO uses it to open Smartlinks directly from the 
@@ -139,6 +141,7 @@
  *  @return YES in case it contains a Smartlink, NO otherwise.
  */
 - (BOOL)continueUserActivity:(hok_nonnull NSUserActivity *)userActivity restorationHandler:(hok_nonnull void(^)(NSArray * __hok_nullable restorableObjects))restorationHandler NS_AVAILABLE_IOS(8_0);
+#endif
 
 /**
  *  openSmartlink: serves the purpose of handling the open of a Smartlink, by resolving it through

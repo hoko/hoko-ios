@@ -16,6 +16,8 @@
 
 + (NSString *)sanitizeURLString:(NSString *)urlString;
 
++ (NSURL *)deeplinkifyURL:(NSURL *)url;
+
 @property (nonatomic, strong, readonly) NSURL *url;
 @property (nonatomic, strong, readonly) NSString *scheme;
 @property (nonatomic, strong, readonly) NSDictionary *queryParameters;

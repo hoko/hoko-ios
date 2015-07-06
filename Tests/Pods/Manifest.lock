@@ -1,6 +1,6 @@
 PODS:
   - Expecta (0.3.2)
-  - Hoko (2.0.2)
+  - Hoko (2.0.3)
   - OCMock (3.1.2)
   - OHHTTPStubs (3.1.12):
     - OHHTTPStubs/Core (= 3.1.12)
@@ -14,12 +14,12 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Hoko:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
   Expecta: 8c507baf13211207b1e9d0a741480600e6b4ed15
-  Hoko: 58ee691440205d5af9f6661a56de5f284939e0b7
+  Hoko: bc2e423149642970a51192eabdcf91513ecde762
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
   OHHTTPStubs: 8cf0cfe6f34f13fc88fdf5b2a1b2c2536e8c0261
 
-COCOAPODS: 0.38.0.beta.1
+COCOAPODS: 0.37.2
