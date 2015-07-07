@@ -37,6 +37,11 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
 
 #pragma mark - Public Static Initializers
 
++ (HOKDeeplink *)deeplink
+{
+    return [self deeplinkWithRoute:nil];
+}
+
 + (HOKDeeplink *)deeplinkWithRoute:(NSString *)route
 {
     return [self deeplinkWithRoute:route
@@ -92,11 +97,10 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
                                                           metadata:metadata
                                                sourceApplication:sourceApplication
                                                      deeplinkURL:deeplinkURL];
+    if ([HOKDeeplink matchRoute:deeplink.route withRouteParameters:deeplink.routeParameters] || (route == nil && routeParameters == nil && queryParameters == nil && metadata == nil))
+        return deeplink;
     
-    if(![HOKDeeplink matchRoute:deeplink.route withRouteParameters:deeplink.routeParameters])
-        return nil;
-    
-    return deeplink;
+    return nil;
 }
 
 #pragma mark - Private Initializer
@@ -114,7 +118,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
         _route = route;
         _routeParameters = routeParameters;
         _queryParameters = queryParameters;
-        if ([HOKDeeplink validateMetadataDictionary:metadata]) {
+        if ([HOKDeeplink validateMetadataDictionary:metadata]){
             _metadata = metadata;
         }
         _sourceApplication = sourceApplication;
