@@ -11,9 +11,9 @@
 #import "Hoko+Nullability.h"
 
 typedef NS_ENUM(NSUInteger, HOKDeeplinkPlatform) {
-    HOKDeeplinkPlatformiPhone,
-    HOKDeeplinkPlatformiPad,
-    HOKDeeplinkPlatformiOSUniversal,
+    HOKDeeplinkPlatformIPhone,
+    HOKDeeplinkPlatformIPad,
+    HOKDeeplinkPlatformIOSUniversal,
     HOKDeeplinkPlatformAndroid,
     HOKDeeplinkPlatformWeb,
 };

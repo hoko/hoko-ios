@@ -160,11 +160,11 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
 - (NSString *)stringForPlatform:(HOKDeeplinkPlatform)platform
 {
     switch (platform) {
-        case HOKDeeplinkPlatformiPhone:
+        case HOKDeeplinkPlatformIPhone:
             return @"iphone";
-        case HOKDeeplinkPlatformiPad:
+        case HOKDeeplinkPlatformIPad:
             return @"ipad";
-        case HOKDeeplinkPlatformiOSUniversal:
+        case HOKDeeplinkPlatformIOSUniversal:
             return @"ios";
         case HOKDeeplinkPlatformAndroid:
             return @"android";
