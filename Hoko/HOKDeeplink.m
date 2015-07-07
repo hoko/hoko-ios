@@ -10,6 +10,7 @@
 
 #import "HOKURL.h"
 #import "HOKUtils.h"
+#import "HOKError.h"
 #import "HOKLogger.h"
 #import "HOKDevice.h"
 #import "HOKRouting.h"
@@ -104,6 +105,11 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
 }
 
 #pragma mark - Private Initializer
+- (instancetype)init
+{
+    return [self initWithURLScheme:nil route:nil routeParameters:nil queryParameters:nil metadata:nil sourceApplication:nil deeplinkURL:nil];
+}
+
 - (instancetype)initWithURLScheme:(NSString *)urlScheme
                             route:(NSString *)route
                   routeParameters:(NSDictionary *)routeParameters
@@ -120,6 +126,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
         _queryParameters = queryParameters;
         if ([HOKDeeplink validateMetadataDictionary:metadata]){
             _metadata = metadata;
+        } else {
+            HOKErrorLog([HOKError invalidJSONMetadata]);
         }
         _sourceApplication = sourceApplication;
         _urls = [@{} mutableCopy];

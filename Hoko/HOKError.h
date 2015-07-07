@@ -28,6 +28,6 @@
 + (NSError *)unknownError;
 + (NSError *)serverErrorFromJSON:(id)json;
 + (NSError *)serverWarning:(NSDictionary *)warningJSON;
-
++ (NSError *)invalidJSONMetadata;
 
 @end

@@ -99,10 +99,17 @@ NSString *const HOKServerWarningDomain = @"HokoServerWarning";
   return [self errorWithCode:16 description:@"The handler being added has already been added."];
 }
 
++ (NSError *)invalidJSONMetadata
+{
+    return [self errorWithCode:15 description:@"Metadata is not valid JSON, only NSString, NSNumber, NSNull or NSDictionary/NSarray of such values are allowed."];
+}
+
 + (NSError *)unknownError
 {
   return [self errorWithCode:0 description:@"Unkown Error"];
 }
+
+
 
 #pragma mark - Server Errors
 + (NSError *)serverErrorFromJSON:(id)json
