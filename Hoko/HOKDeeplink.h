@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, HOKDeeplinkPlatform) {
 @interface HOKDeeplink : NSObject
 
 + (hok_nonnull instancetype)deeplink;
+
 + (hok_nonnull instancetype)deeplinkWithRoute:(hok_nullable NSString *)route;
 
 + (hok_nonnull instancetype)deeplinkWithRoute:(hok_nullable NSString *)route
