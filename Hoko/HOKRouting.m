@@ -57,6 +57,11 @@
         HOKErrorLog([HOKError noURLSchemesError]);
 }
 
+- (NSArray *)routes
+{
+    return _routes;
+}
+
 #pragma mark - Open URL
 - (BOOL)openURL:(NSURL *)url metadata:(NSDictionary *)metadata
 {
@@ -77,7 +82,7 @@
         [deeplink requestMetadataWithToken:self.token completion:^{
             [self openDeeplink:deeplink route:route];
         }];
-        return route;
+        return route != nil;
     } else {
         return [self openDeeplink:deeplink route:route];
     }
@@ -169,7 +174,7 @@
         return;
     }
     
-    self.routes = [self.routes arrayByAddingObject:route];
+    self.routes = [HOKRouting sortedRoutes:[self.routes arrayByAddingObject:route]];
     
     // POST routes to the backend only in debug mode
     if (self.debugMode)
@@ -187,5 +192,37 @@
     return NO;
 }
 
+#pragma mark - Sorting
++ (NSArray *)sortedRoutes:(NSArray *)routes
+{
+    return [routes sortedArrayUsingComparator:^NSComparisonResult(HOKRoute *route1, HOKRoute *route2) {
+        // lesser components have higher priority
+        if (route1.components.count != route2.components.count) {
+            return route1.components.count < route2.components.count ? NSOrderedAscending : NSOrderedDescending;
+        }
+        
+        for (NSInteger index = 0; index < route1.components.count; index ++) {
+            NSString *component1 = [route1.components objectAtIndex:index];
+            NSString *component2 = [route2.components objectAtIndex:index];
+            
+            BOOL component1IsParameter = [component1 hasPrefix:@":"];
+            BOOL component2IsParameter = [component2 hasPrefix:@":"];
+            
+            if (component1IsParameter && component2IsParameter) {
+                continue;
+            }
+            
+            if (component1IsParameter) {
+                return NSOrderedDescending;
+            }
+            if (component2IsParameter) {
+                return NSOrderedAscending;
+            }
+         
+        }
+        return [route1.route compare:route2.route];
+        
+    }];
+}
 
 @end

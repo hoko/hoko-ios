@@ -82,4 +82,18 @@
   expect(blockDeeplink.sourceApplication).will.equal(@"com.hoko.black");
 }
 
+- (void)testRoutingSort
+{
+  [HokoDeeplinking.routing mapRoute:@"product/:product_id" toTarget:nil];
+  [HokoDeeplinking.routing mapRoute:@"product/xpto/:id" toTarget:nil];
+  [HokoDeeplinking.routing mapRoute:@"product/xpto/zzz" toTarget:nil];
+  [HokoDeeplinking.routing mapRoute:@"product/xpto" toTarget:nil];
+  [HokoDeeplinking.routing mapRoute:@"mkay" toTarget:nil];
+  [HokoDeeplinking.routing mapRoute:@"anything" toTarget:nil];
+  [HokoDeeplinking.routing mapRoute:@"zoidberg" toTarget:nil];
+  NSArray *sortedRoutes = [HokoDeeplinking.routing routes];
+  expect([sortedRoutes valueForKeyPath:@"route"]).to.equal(@[@"anything", @"mkay", @"zoidberg", @"product/xpto", @"product/:product_id", @"product/xpto/zzz", @"product/xpto/:id"]);
+  
+}
+
 @end

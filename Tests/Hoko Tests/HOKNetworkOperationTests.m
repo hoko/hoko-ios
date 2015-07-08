@@ -66,8 +66,8 @@
     lastOperationExecuted = YES;
   }];
   
-  expect([HOKNetworkOperationQueue sharedQueue].networkOperations.count).will.equal(0);
   expect(lastOperationExecuted).will.beTruthy();
+  expect([HOKNetworkOperationQueue sharedQueue].networkOperations.count).will.equal(0);
 }
 
 - (void)testQueueRetrying

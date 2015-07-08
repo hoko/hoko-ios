@@ -20,5 +20,5 @@
 - (BOOL)canOpenURL:(NSURL *)url;
 - (HOKDeeplink *)deeplinkForURL:(NSURL *)url;
 - (BOOL)routeExists:(NSString *)route;
-
+- (NSArray *)routes;
 @end
