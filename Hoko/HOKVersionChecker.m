@@ -8,12 +8,9 @@
 
 #import "HOKVersionChecker.h"
 
-#import "HOKNetworking.h"
 #import "HOKLogger.h"
-
-NSString *const HOKVersionCheckerGitHubApi = @"https://api.github.com/repos/hokolinks/hoko-ios/releases?per_page=1";
-NSString *const HOKVersionCheckerGithubVersionName = @"tag_name";
-NSString *const HOKVersionCheckerGithubPrerelease = @"prerelease";
+#import "HOKNetworking.h"
+#import "HOKNetworkOperation.h"
 
 @implementation HOKVersionChecker
 
@@ -29,19 +26,12 @@ NSString *const HOKVersionCheckerGithubPrerelease = @"prerelease";
 }
 
 #pragma mark - Class Methods
-- (void)checkForNewVersion:(NSString *)currentVersion
+- (void)checkForNewVersion:(NSString *)currentVersion token:(NSString *)token
 {
-    [HOKNetworking requestToPath:HOKVersionCheckerGitHubApi parameters:nil token:nil successBlock:^(id json) {
-        if ([json isKindOfClass:[NSArray class]]) {
-            id firstJson = [json objectAtIndex:0];
-            NSString *versionName = [firstJson objectForKey:HOKVersionCheckerGithubVersionName];
-            NSString *currentVersionName = [NSString stringWithFormat:@"v%@",currentVersion];
-            BOOL isPrerelease = [[firstJson objectForKey:HOKVersionCheckerGithubPrerelease] boolValue];
-            if ([versionName compare:currentVersionName options:NSNumericSearch] == NSOrderedDescending && !isPrerelease) {
-                HOKLog(@"A new version of HOKO is available at http://github.com/hokolinks/hoko-ios: %@",versionName);
-            }
-        } else {
-            HOKLog(@"Unexpected response from GITHUB.");
+    [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:@"version"] parameters:nil token:token successBlock:^(id json) {
+        NSString *versionName = [json objectForKey:@"version"];
+        if ([versionName compare:currentVersion options:NSNumericSearch] == NSOrderedDescending) {
+            NSLog(@"A new version of HOKO is available please update your Podfile to \"pod 'Hoko' '~> %@'\"",versionName);
         }
     } failedBlock:^(NSError *error) {
         HOKErrorLog(error);

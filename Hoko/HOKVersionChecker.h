@@ -12,6 +12,6 @@
 
 + (instancetype)versionChecker;
 
-- (void)checkForNewVersion:(NSString *)currentVersion;
+- (void)checkForNewVersion:(NSString *)currentVersion token:(NSString *)token;
 
 @end
