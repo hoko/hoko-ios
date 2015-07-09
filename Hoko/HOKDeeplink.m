@@ -296,7 +296,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
 
 + (BOOL)validateMetadataDictionary:(NSDictionary *)metadataDictionary
 {
-    if (![metadataDictionary isKindOfClass:[NSDictionary class]]) {
+    if (metadataDictionary && ![metadataDictionary isKindOfClass:[NSDictionary class]]) {
         return NO;
     }
     

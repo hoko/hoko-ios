@@ -76,8 +76,7 @@
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation metadata:(NSDictionary *)metadata
 {
     HOKRoute *route;
-    HOKDeeplink *deeplink = [self deeplinkForURL:url sourceApplication:sourceApplication annotation:annotation route:&route];
-    deeplink.metadata = metadata;
+    HOKDeeplink *deeplink = [self deeplinkForURL:url sourceApplication:sourceApplication annotation:annotation metadata:metadata route:&route];
     if (deeplink.needsMetadata) {
         [deeplink requestMetadataWithToken:self.token completion:^{
             [self openDeeplink:deeplink route:route];
@@ -103,12 +102,13 @@
 
 - (HOKDeeplink *)deeplinkForURL:(NSURL *)url
 {
-    return [self deeplinkForURL:url sourceApplication:nil annotation:nil route:nil];
+    return [self deeplinkForURL:url sourceApplication:nil annotation:nil metadata:nil route:nil];
 }
 
 - (HOKDeeplink *)deeplinkForURL:(NSURL *)url
               sourceApplication:(NSString *)sourceApplication
                      annotation:(id)annotation
+                       metadata:(NSDictionary *)metadata
                           route:(HOKRoute **)route
 {
     HOKURL *hokURL = [[HOKURL alloc] initWithURL:url];
@@ -120,7 +120,7 @@
                                                                  route:hokRoute.route
                                                        routeParameters:routeParameters
                                                        queryParameters:hokURL.queryParameters
-                                                              metadata:nil
+                                                              metadata:metadata
                                                      sourceApplication:sourceApplication
                                                            deeplinkURL:url.absoluteString];
             if (route) {
@@ -135,7 +135,7 @@
                                                          route:nil
                                                routeParameters:nil
                                                queryParameters:hokURL.queryParameters
-                                                      metadata:nil
+                                                      metadata:metadata
                                              sourceApplication:sourceApplication
                                                    deeplinkURL:url.absoluteString];
     if (self.defaultRoute) {
