@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		306F65E21AAC99E500F36B05 /* HOKHandlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306F65E11AAC99E500F36B05 /* HOKHandlingTests.m */; };
+		307BE1551B4E7EE300407709 /* HOKDeeplinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 307BE1541B4E7EE300407709 /* HOKDeeplinkTests.m */; };
 		30DEC7ED1AA09BA800C77005 /* HOKLinkGeneratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EA1AA09BA800C77005 /* HOKLinkGeneratorTests.m */; };
 		30DEC7EE1AA09BA800C77005 /* HOKNetworkOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EB1AA09BA800C77005 /* HOKNetworkOperationTests.m */; };
 		30DEC7EF1AA09BA800C77005 /* HOKURLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DEC7EC1AA09BA800C77005 /* HOKURLTests.m */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		111976FF4C2DE37EBE204F56 /* Pods-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.release.xcconfig"; sourceTree = "<group>"; };
 		306F65E11AAC99E500F36B05 /* HOKHandlingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HOKHandlingTests.m; path = "Hoko Tests/HOKHandlingTests.m"; sourceTree = SOURCE_ROOT; };
+		307BE1541B4E7EE300407709 /* HOKDeeplinkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HOKDeeplinkTests.m; path = "Hoko Tests/HOKDeeplinkTests.m"; sourceTree = SOURCE_ROOT; };
 		30DEC7E01AA0934800C77005 /* iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30DEC7E41AA0934800C77005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30DEC7EA1AA09BA800C77005 /* HOKLinkGeneratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HOKLinkGeneratorTests.m; path = "Hoko Tests/HOKLinkGeneratorTests.m"; sourceTree = SOURCE_ROOT; };
@@ -75,6 +77,7 @@
 				30E2520E1AA9C2E600D3D9CA /* HOKRouteTests.m */,
 				30E252101AA9C78300D3D9CA /* HOKRoutingTests.m */,
 				306F65E11AAC99E500F36B05 /* HOKHandlingTests.m */,
+				307BE1541B4E7EE300407709 /* HOKDeeplinkTests.m */,
 				30DEC7E31AA0934800C77005 /* Supporting Files */,
 			);
 			name = "Hoko Tests";
@@ -212,6 +215,7 @@
 				30DEC7ED1AA09BA800C77005 /* HOKLinkGeneratorTests.m in Sources */,
 				30E2520C1AA86B9500D3D9CA /* HOKStubbedTestCase.m in Sources */,
 				306F65E21AAC99E500F36B05 /* HOKHandlingTests.m in Sources */,
+				307BE1551B4E7EE300407709 /* HOKDeeplinkTests.m in Sources */,
 				30DEC7EE1AA09BA800C77005 /* HOKNetworkOperationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -190,7 +190,11 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
 
 - (void)setMetadata:(NSDictionary *)metadata
 {
-    _metadata = metadata;
+    if ([HOKDeeplink validateMetadataDictionary:metadata]){
+        _metadata = metadata;
+    } else {
+        HOKErrorLog([HOKError invalidJSONMetadata]);
+    }
 }
 
 #pragma mark - Campaign Identifiers
@@ -262,7 +266,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
 - (NSDictionary *)smartlinkJSON
 {
     return @{@"deeplink": [HOKUtils jsonValue:self.deeplinkURL],
-             @"referrer": [HOKUtils jsonValue:self.sourceApplication]};
+             @"referrer": [HOKUtils jsonValue:self.sourceApplication],
+             @"uid": [HOKUtils jsonValue:[HOKDevice device].uid]};
 }
 
 #pragma mark - Description
@@ -291,12 +296,12 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
 
 + (BOOL)validateMetadataDictionary:(NSDictionary *)metadataDictionary
 {
-    if (!metadataDictionary || ![metadataDictionary isKindOfClass:[NSDictionary class]]) {
+    if (![metadataDictionary isKindOfClass:[NSDictionary class]]) {
         return NO;
     }
     
-    for (id key in [metadataDictionary allKeys]) {
-        if (![self validateMetadataObject:key]) {
+    for (id object in [metadataDictionary allValues]) {
+        if (![self validateMetadataObject:object]) {
             return NO;
         }
     }
