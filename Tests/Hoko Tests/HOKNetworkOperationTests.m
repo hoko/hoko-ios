@@ -23,6 +23,8 @@
 
 @interface HOKNetworkOperationTests : HOKStubbedTestCase
 
+@property (nonatomic,strong) id utilsMock;
+
 @end
 
 @implementation HOKNetworkOperationTests
@@ -30,8 +32,8 @@
 
 - (void)setUp
 {
-  id utilsMock = OCMClassMock([HOKUtils class]);
-  OCMStub([utilsMock objectFromFile:@"networkOperations"]).andReturn(nil);
+  self.utilsMock = OCMClassMock([HOKUtils class]);
+  OCMStub([self.utilsMock objectFromFile:@"networkOperations"]).andReturn(nil);
 
   [super setUp];
 }
@@ -39,6 +41,7 @@
 - (void)tearDown
 {
   [super tearDown];
+  [self.utilsMock stopMocking];
   [OHHTTPStubs removeAllStubs];
 }
 

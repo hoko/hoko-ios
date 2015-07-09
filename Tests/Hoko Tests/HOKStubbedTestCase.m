@@ -11,16 +11,23 @@
 #import <Hoko/HOKApp.h>
 #import <Hoko/HOKNetworkOperationQueue+Private.h>
 
+@interface HOKStubbedTestCase ()
+
+@property (nonatomic, strong) id appMock;
+@property (nonatomic, strong) id networkOperationQueueMock;
+
+@end
+
 @implementation HOKStubbedTestCase
 
 - (void)setUp
 {
   [super setUp];
-  id appMock = OCMPartialMock([HOKApp app]);
-  [[[appMock stub] andReturn:@[@"hoko"]] urlSchemes];
+  self.appMock = OCMPartialMock([HOKApp app]);
+  [[[self.appMock stub] andReturn:@[@"hoko"]] urlSchemes];
   
-  id networkOperationQueueMock = OCMPartialMock([HOKNetworkOperationQueue sharedQueue]);
-  [[[networkOperationQueueMock stub] andDo:nil] saveNetworkOperations];
+  self.networkOperationQueueMock = OCMPartialMock([HOKNetworkOperationQueue sharedQueue]);
+  [[[self.networkOperationQueueMock stub] andDo:nil] saveNetworkOperations];
   
   [Hoko setVerbose:NO];
   [Hoko setupWithToken:@"1234"];
@@ -29,6 +36,8 @@
 - (void)tearDown
 {
   [super tearDown];
+  [self.appMock stopMocking];
+  [self.networkOperationQueueMock stopMocking];
   [OHHTTPStubs removeAllStubs];
   [Hoko reset];
 }
