@@ -59,9 +59,16 @@ NSString *const HOKDateFormatDateOnly = @"yyyy-MM-dd";
 {
   NSString *path = [self pathWithFilename:filename];
   if (path) {
-    NSData *encodedObject = [NSData dataWithContentsOfFile:path];
-    if (encodedObject)
-      return [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+      NSData *encodedObject = [NSData dataWithContentsOfFile:path];
+      if (encodedObject) {
+          @try {
+              id unarchivedObject = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+              return unarchivedObject;
+          }
+          @catch (NSException *exception) {
+              [self saveObject:nil toFile:filename];
+          }
+      }
   }
   return nil;
 }
