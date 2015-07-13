@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "HOKDeeplink.h"
-#import "Hoko+Nullability.h"
+#import "Hoko+Macros.h"
 
 /**
  *  HOKHandlerProtocol can be implemented on any object to be mapped on to a route,

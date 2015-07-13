@@ -9,7 +9,7 @@
 
 #import "HOKDeeplink.h"
 #import "HOKDeeplinking.h"
-#import "Hoko+Nullability.h"
+#import "Hoko+Macros.h"
 
 /**
  *  Hoko is an easy-to-use Framework to handle Deeplinking.
@@ -50,7 +50,7 @@
  *
  *  @param token Hoko service API key.
  */
-+ (void)setupWithToken:(hok_nonnull NSString *)token customDomains:(hok_nullable NSArray *)customDomains;
++ (void)setupWithToken:(hok_nonnull NSString *)token customDomains:(hok_nullable NSArray hok_generic(NSString *) *)customDomains;
 
 
 /**

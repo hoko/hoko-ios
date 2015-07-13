@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "Hoko+Nullability.h"
+#import "Hoko+Macros.h"
 
 /**
  *  HOKNavigation is a helper class which allows you to push, present and set view
