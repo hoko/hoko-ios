@@ -20,7 +20,7 @@ With HOKO, you can aggregate all the platforms where your App is available. Each
 2. Open your Xcode project folder and create a file called `Podfile` with the following content:
 
     ```ruby
-    pod 'Hoko', '~> 2.0'
+    pod 'Hoko', '~> 2.1'
     ```
 
 3. Run `pod install` and wait for CocoaPod to install HOKO SDK. From this moment on, instead of using `.xcodeproj` file, you should start using `.xcworkspace`.
