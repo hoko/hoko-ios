@@ -19,10 +19,11 @@
 #import "HOKNetworkOperationQueue.h"
 
 NSString *const HOKDeeplinkSmartlinkClickIdentifierKey = @"_hk_cid";
+NSString *const HOKDeeplinkSmartlinkIdentifierKey = @"_hk_sid";
 NSString *const HOKDeeplinkMetadataKey = @"_hk_md";
 
 NSString *const HOKDeeplinkOpenPath = @"smartlinks/open";
-NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
+NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 
 @interface HOKDeeplink ()
 
@@ -203,14 +204,30 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
     return [self.queryParameters objectForKey:HOKDeeplinkSmartlinkClickIdentifierKey];
 }
 
+- (NSString *)smartlinkIdentifier
+{
+    return [self.queryParameters objectForKey:HOKDeeplinkSmartlinkIdentifierKey];
+}
+
+
 - (BOOL)isSmartlink
 {
-    return self.smartlinkClickIdentifier != nil;
+    return self.smartlinkClickIdentifier || self.smartlinkIdentifier;
 }
 
 - (BOOL)needsMetadata
 {
     return [self.queryParameters objectForKey:HOKDeeplinkMetadataKey] && !self.metadata;
+}
+
+- (NSDictionary *)parametersForMetadataRequest {
+    NSString *identifier = self.smartlinkClickIdentifier;
+    if (identifier) {
+        return @{HOKDeeplinkSmartlinkClickIdentifierKey: identifier};
+    } else {
+        identifier = self.smartlinkIdentifier;
+        return @{HOKDeeplinkSmartlinkIdentifierKey: identifier};
+    }
 }
 
 #pragma mark - Networking
@@ -229,8 +246,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
 - (void)requestMetadataWithToken:(NSString *)token completion:(void(^)(void))completion
 {
     if (self.needsMetadata) {
-        NSString *path = [NSString stringWithFormat:HOKDeeplinkMetadataPath, self.smartlinkClickIdentifier];
-        [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:path] parameters:nil token:token successBlock:^(id json) {
+        NSString *path = [NSString stringWithFormat:HOKDeeplinkMetadataPath];
+        [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:path] parameters:[self parametersForMetadataRequest] token:token successBlock:^(id json) {
             _metadata = json;
             completion();
         } failedBlock:^(NSError *error) {
