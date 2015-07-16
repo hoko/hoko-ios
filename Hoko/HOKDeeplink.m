@@ -220,16 +220,6 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
     return [self.queryParameters objectForKey:HOKDeeplinkMetadataKey] && !self.metadata;
 }
 
-- (NSDictionary *)parametersForMetadataRequest {
-    NSString *identifier = self.smartlinkClickIdentifier;
-    if (identifier) {
-        return @{HOKDeeplinkSmartlinkClickIdentifierKey: identifier};
-    } else {
-        identifier = self.smartlinkIdentifier;
-        return @{HOKDeeplinkSmartlinkIdentifierKey: identifier};
-    }
-}
-
 #pragma mark - Networking
 - (void)postWithToken:(NSString *)token
 {
@@ -247,7 +237,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 {
     if (self.needsMetadata) {
         NSString *path = [NSString stringWithFormat:HOKDeeplinkMetadataPath];
-        [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:path] parameters:[self parametersForMetadataRequest] token:token successBlock:^(id json) {
+        [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:path] parameters:[self metadataJSON] token:token successBlock:^(id json) {
             _metadata = json;
             completion();
         } failedBlock:^(NSError *error) {
@@ -285,6 +275,14 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
     return @{@"deeplink": [HOKUtils jsonValue:self.deeplinkURL],
              @"referrer": [HOKUtils jsonValue:self.sourceApplication],
              @"uid": [HOKUtils jsonValue:[HOKDevice device].uid]};
+}
+
+- (NSDictionary *)metadataJSON {
+  if (self.smartlinkClickIdentifier) {
+    return @{HOKDeeplinkSmartlinkClickIdentifierKey: self.smartlinkClickIdentifier};
+  } else {
+    return @{HOKDeeplinkSmartlinkIdentifierKey: self.smartlinkIdentifier};
+  }
 }
 
 #pragma mark - Description
