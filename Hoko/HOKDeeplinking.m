@@ -107,7 +107,7 @@
         NSURL *webpageURL = userActivity.webpageURL;
         if (webpageURL) {
             if ([webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound || [self.customDomains containsObject:webpageURL.host]) {
-                [self openSmartlink:userActivity.webpageURL.absoluteString completion:^(HOKDeeplink *deeplink) {
+                [self openSmartlink:webpageURL.absoluteString completion:^(HOKDeeplink *deeplink) {
                     if (!deeplink) {
                         [self handleOpenURL:nil];
                     }
