@@ -1,6 +1,6 @@
 {
   "name": "Hoko",
-  "version": "2.1",
+  "version": "2.1.1",
   "platforms": {
     "ios": "5.0"
   },
@@ -10,11 +10,12 @@
   "social_media_url": "https://twitter.com/hokolinks",
   "authors": {
     "Ivan Bruel": "ibruel@faber-ventures.com",
+    "Pedro Vieira": "pedro@hokolinks.com",
     "Hoko S.A.": "support@hokolinks.com"
   },
   "source": {
     "git": "https://github.com/hokolinks/hoko-ios.git",
-    "tag": "v2.1"
+    "tag": "v2.1.1"
   },
   "requires_arc": true,
   "public_header_files": "Hoko/*.h",
