@@ -31,6 +31,7 @@ extern NSString *const HOKDeeplinkSmartlinkIdentifierKey;
 @property (nonatomic, strong, readonly) NSDictionary *generateSmartlinkJSON;
 
 @property (nonatomic, strong, readonly) NSString *smartlinkClickIdentifier;
+@property (nonatomic, strong, readonly) NSString *smartlinkIdentifier;
 
 @property (nonatomic, readonly) BOOL isSmartlink;
 @property (nonatomic, readonly) BOOL hasURLs;
