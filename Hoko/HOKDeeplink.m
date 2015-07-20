@@ -236,8 +236,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 - (void)requestMetadataWithToken:(NSString *)token completion:(void(^)(void))completion
 {
     if (self.needsMetadata) {
-        NSString *path = [NSString stringWithFormat:HOKDeeplinkMetadataPath];
-        [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:path] parameters:[self metadataJSON] token:token successBlock:^(id json) {
+        [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:HOKDeeplinkMetadataPath] parameters:[self metadataJSON] token:token successBlock:^(id json) {
             _metadata = json;
             completion();
         } failedBlock:^(NSError *error) {
