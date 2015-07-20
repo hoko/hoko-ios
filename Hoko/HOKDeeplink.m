@@ -19,10 +19,11 @@
 #import "HOKNetworkOperationQueue.h"
 
 NSString *const HOKDeeplinkSmartlinkClickIdentifierKey = @"_hk_cid";
+NSString *const HOKDeeplinkSmartlinkIdentifierKey = @"_hk_sid";
 NSString *const HOKDeeplinkMetadataKey = @"_hk_md";
 
 NSString *const HOKDeeplinkOpenPath = @"smartlinks/open";
-NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
+NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 
 @interface HOKDeeplink ()
 
@@ -173,7 +174,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
         case HOKDeeplinkPlatformIPad:
             return @"ipad";
         case HOKDeeplinkPlatformIOSUniversal:
-            return @"ios";
+            return @"universal";
         case HOKDeeplinkPlatformAndroid:
             return @"android";
         case HOKDeeplinkPlatformWeb:
@@ -203,9 +204,15 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
     return [self.queryParameters objectForKey:HOKDeeplinkSmartlinkClickIdentifierKey];
 }
 
+- (NSString *)smartlinkIdentifier
+{
+    return [self.queryParameters objectForKey:HOKDeeplinkSmartlinkIdentifierKey];
+}
+
+
 - (BOOL)isSmartlink
 {
-    return self.smartlinkClickIdentifier != nil;
+    return self.smartlinkClickIdentifier || self.smartlinkIdentifier;
 }
 
 - (BOOL)needsMetadata
@@ -229,8 +236,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
 - (void)requestMetadataWithToken:(NSString *)token completion:(void(^)(void))completion
 {
     if (self.needsMetadata) {
-        NSString *path = [NSString stringWithFormat:HOKDeeplinkMetadataPath, self.smartlinkClickIdentifier];
-        [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:path] parameters:nil token:token successBlock:^(id json) {
+        [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:HOKDeeplinkMetadataPath] parameters:[self metadataJSON] token:token successBlock:^(id json) {
             _metadata = json;
             completion();
         } failedBlock:^(NSError *error) {
@@ -268,6 +274,14 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/%@/metadata";
     return @{@"deeplink": [HOKUtils jsonValue:self.deeplinkURL],
              @"referrer": [HOKUtils jsonValue:self.sourceApplication],
              @"uid": [HOKUtils jsonValue:[HOKDevice device].uid]};
+}
+
+- (NSDictionary *)metadataJSON {
+  if (self.smartlinkClickIdentifier) {
+    return @{HOKDeeplinkSmartlinkClickIdentifierKey: self.smartlinkClickIdentifier};
+  } else {
+    return @{HOKDeeplinkSmartlinkIdentifierKey: self.smartlinkIdentifier};
+  }
 }
 
 #pragma mark - Description
