@@ -145,7 +145,7 @@
 #pragma mark - Deferred Deeplinking
 - (void)triggerDeferredDeeplinking
 {
-    __block typeof(self) wself = self;
+    __block HOKDeeplinking *wself = self;
     __block HOKNotificationObserver *didFinishLaunchingNotificationObserver = [[HOKObserver observer] registerForNotification:UIApplicationDidFinishLaunchingNotification triggered:^(NSNotification *notification) {
         [wself.deferredDeeplinking requestDeferredDeeplink:^(NSString *deeplink) {
             if (!notification.userInfo[UIApplicationLaunchOptionsURLKey]) {
