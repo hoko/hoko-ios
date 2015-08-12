@@ -260,6 +260,7 @@ NSString *const HOKNetworkingFormat = @"json";
   if (self.responseData.length > 1) {
     data = [HOKGZip gunzippedData:self.responseData];
   }
+  
   id json = [NSJSONSerialization JSONObjectWithData:data
                                             options:NSJSONReadingMutableContainers
                                               error:&error];
@@ -294,23 +295,23 @@ NSString *const HOKNetworkingFormat = @"json";
 
 #pragma mark - URL Encoded
 + (NSURL *)encodeURL:(NSString *)url withParameters:(NSDictionary *)parameters {
-  NSString *encodedParameters = @"";
+  NSMutableString *encodedURL = [NSMutableString stringWithString:url];
   
   if (parameters.count > 0) {
-    encodedParameters = [encodedParameters stringByAppendingString:@"?"];
+    [encodedURL appendString:@"?"];
   }
   
   for (NSString *key in [parameters allKeys]) {
     NSString *value = [[parameters objectForKey:key] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    encodedParameters = [encodedParameters stringByAppendingFormat:@"%@=%@&", key, value];
+    [encodedURL appendFormat:@"%@=%@&", key, value];
   }
   
   // Remove the extra '&'
   if (parameters.count > 0) {
-    encodedParameters = [encodedParameters substringToIndex:encodedParameters.length - 1];
+    [encodedURL deleteCharactersInRange:NSMakeRange(encodedURL.length - 1, 1)];
   }
   
-  return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", url, encodedParameters]];
+  return [NSURL URLWithString:encodedURL];
 }
 
 

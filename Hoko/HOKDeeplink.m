@@ -141,8 +141,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 - (NSString *)url {
   NSString *url = self.route;
   for (NSString *routeParameterKey in self.routeParameters.allKeys) {
-    url = [url stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@":%@",routeParameterKey]
-                                         withString:[NSString stringWithFormat:@"%@",[self.routeParameters objectForKey:routeParameterKey]]];
+    url = [url stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@":%@", routeParameterKey]
+                                         withString:[NSString stringWithFormat:@"%@", [self.routeParameters objectForKey:routeParameterKey]]];
   }
   
   if (self.queryParameters.count > 0) {
@@ -275,7 +275,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 
 #pragma mark - Description
 - (NSString *)description {
-  return [NSString stringWithFormat:@"<HOKDeeplink> URLScheme='%@' route='%@' routeParameters='%@' queryParameters='%@' metadata='%@' sourceApplication='%@'",self.urlScheme, self.route, self.routeParameters, self.queryParameters, self.metadata, self.sourceApplication];
+  return [NSString stringWithFormat:@"<HOKDeeplink> URLScheme='%@' route='%@' routeParameters='%@' queryParameters='%@' metadata='%@' sourceApplication='%@'", self.urlScheme, self.route, self.routeParameters, self.queryParameters, self.metadata, self.sourceApplication];
 }
 
 #pragma mark - Helper
