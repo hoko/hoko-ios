@@ -29,7 +29,6 @@ NSString *const HOKNetworkingFormat = @"json";
 @property (nonatomic, strong) NSURLConnection *urlConnection;
 @property (nonatomic, copy) HOKNetworkingFailedBlock failedBlock;
 @property (nonatomic, copy) HOKNetworkingSuccessBlock successBlock;
-@property (nonatomic, strong) NSString *userAgent;
 
 @end
 
@@ -106,45 +105,19 @@ NSString *const HOKNetworkingFormat = @"json";
   }
 }
 
-+ (NSString *)getUserAgent {
++ (NSString *)userAgent {
   NSString *platform = [HOKDevice device].platform;
   NSString *version = [[HOKDevice device].systemVersion stringByReplacingOccurrencesOfString:@"." withString:@"_"];
   NSString *environment = [HOKApp app].environment;
   return [NSString stringWithFormat:@"HOKO/%@ (%@; %@; CPU iPhone OS %@ like Mac OS X)", HokoVersion, environment, platform, version];
 }
 
-#pragma mark - Initialization
-- (id)initWithSuccessBlock:(HOKNetworkingSuccessBlock)successBlock failedBlock:(HOKNetworkingFailedBlock)failedBlock {
-  self = [super init];
-  if (self) {
-    _successBlock = successBlock;
-    _failedBlock = failedBlock;
-    _userAgent = [HOKNetworking getUserAgent];
-  }
-  return self;
-}
-
-#pragma mark - Instance Methods
-//
-//  GET
-//
-- (void)performRequestWithUrl:(NSString *)url token:(NSString *)token parameters:(NSDictionary *)parameters {
-  NSURL *encodedUrl = [HOKNetworking encodeURL:url
-                                withParameters:parameters];
-  HOKLog(@"GET from %@", encodedUrl.absoluteString);
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:encodedUrl
-                                                         cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                     timeoutInterval:HOKNetworkingRequestTimeout];
-  [request setHTTPMethod:@"GET"];
-  
-  [request setValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
-  [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-  
++ (void)applyHeadersForRequest:(NSMutableURLRequest *)request withToken:(NSString *)token {
   if (token) {
-    [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
+    [request setValue:[NSString stringWithFormat:@"Token %@", token] forHTTPHeaderField:@"Authorization"];
     [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
     [request setValue:[HOKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
-    [request setValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
+    [request setValue:[HOKNetworking userAgent] forHTTPHeaderField:@"User-Agent"];
     
     if ([HOKApp app].isDebugBuild) {
       [request setValue:[HOKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
@@ -154,6 +127,35 @@ NSString *const HOKNetworkingFormat = @"json";
       }
     }
   }
+}
+
+#pragma mark - Initialization
+- (id)initWithSuccessBlock:(HOKNetworkingSuccessBlock)successBlock failedBlock:(HOKNetworkingFailedBlock)failedBlock {
+  self = [super init];
+  if (self) {
+    _successBlock = successBlock;
+    _failedBlock = failedBlock;
+  }
+  return self;
+}
+
+#pragma mark - Instance Methods
+//
+//  GET
+//
+- (void)performRequestWithUrl:(NSString *)url token:(NSString *)token parameters:(NSDictionary *)parameters {
+  NSURL *encodedUrl = [HOKNetworking encodeURL:url withParameters:parameters];
+  HOKLog(@"GET from %@", encodedUrl.absoluteString);
+  
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:encodedUrl
+                                                         cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                     timeoutInterval:HOKNetworkingRequestTimeout];
+  [request setHTTPMethod:@"GET"];
+  
+  [request setValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
+  [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+  
+  [HOKNetworking applyHeadersForRequest:request withToken:token];
   
   self.urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
@@ -183,20 +185,7 @@ NSString *const HOKNetworkingFormat = @"json";
   [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
   [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
   
-  if (token) {
-    [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
-    [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
-    [request setValue:[HOKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
-    [request setValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
-    
-    if ([HOKApp app].isDebugBuild) {
-      [request setValue:[HOKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
-      NSString *teamId = [HOKApp app].teamId;
-      if (teamId) {
-        [request setValue:teamId forHTTPHeaderField:@"Hoko-App-TeamId"];
-      }
-    }
-  }
+  [HOKNetworking applyHeadersForRequest:request withToken:token];
   
   [request setHTTPBody:jsonData];
   
@@ -228,20 +217,7 @@ NSString *const HOKNetworkingFormat = @"json";
   [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
   [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
   
-  if (token) {
-    [request setValue:[NSString stringWithFormat:@"Token %@",token] forHTTPHeaderField:@"Authorization"];
-    [request setValue:HokoVersion forHTTPHeaderField:@"Hoko-SDK-Version"];
-    [request setValue:[HOKApp app].environment forHTTPHeaderField:@"Hoko-SDK-Env"];
-    [request setValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
-    
-    if ([HOKApp app].isDebugBuild) {
-      [request setValue:[HOKApp app].bundle forHTTPHeaderField:@"Hoko-App-Bundle"];
-      NSString *teamId = [HOKApp app].teamId;
-      if (teamId) {
-        [request setValue:teamId forHTTPHeaderField:@"Hoko-App-TeamId"];
-      }
-    }
-  }
+  [HOKNetworking applyHeadersForRequest:request withToken:token];
   
   [request setHTTPBody:jsonData];
   
