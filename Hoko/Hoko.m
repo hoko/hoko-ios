@@ -36,84 +36,82 @@ NSString *const HokoVersion = @"2.1.1";
 static dispatch_once_t onceToken = 0;
 static Hoko *_sharedInstance = nil;
 
-+ (instancetype)hoko
-{
-    return _sharedInstance;
++ (instancetype)hoko {
+  return _sharedInstance;
 }
 
 #pragma mark - Setup
-+ (void)setupWithToken:(NSString *)token
-{
-    [self setupWithToken:token customDomains:nil];
++ (void)setupWithToken:(NSString *)token {
+  [self setupWithToken:token customDomains:nil];
 }
 
-+ (void)setupWithToken:(NSString *)token customDomains:(NSArray *)customDomains
-{
-    if (onceToken != 0) {
-        HOKErrorLog([HOKError setupCalledMoreThanOnceError]);
-        NSAssert(NO, [HOKError setupCalledMoreThanOnceError].description);
-    }
-    dispatch_once(&onceToken, ^{
-        _sharedInstance = [[Hoko alloc] initWithToken:token
-                                        customDomains:customDomains
-                                            debugMode:[HOKApp app].isDebugBuild];
-    });
++ (void)setupWithToken:(NSString *)token customDomains:(NSArray *)customDomains {
+  if (onceToken != 0) {
+    HOKErrorLog([HOKError setupCalledMoreThanOnceError]);
+    NSAssert(NO, [HOKError setupCalledMoreThanOnceError].description);
+  }
+  
+  dispatch_once(&onceToken, ^{
+    _sharedInstance = [[Hoko alloc] initWithToken:token
+                                    customDomains:customDomains
+                                        debugMode:[HOKApp app].isDebugBuild];
+  });
 }
 
 #pragma mark - Initializer
 - (instancetype)initWithToken:(NSString *)token
                 customDomains:(NSArray *)customDomains
-                    debugMode:(BOOL)debugMode
-{
-    if (self = [super init]) {
-        _token = token;
-        _debugMode = debugMode;
-        
-        [[HOKDevice device] setupReachability];
-        
-        [[HOKNetworkOperationQueue sharedQueue] setup];
-        _deeplinking = [[HOKDeeplinking alloc] initWithToken:token customDomains:customDomains debugMode:debugMode];
-        
-        [self checkVersions];
-        
-        if (![HOKApp app].hasURLSchemes)
-            HOKErrorLog([HOKError noURLSchemesError]);
+                    debugMode:(BOOL)debugMode {
+  
+  if (self = [super init]) {
+    _token = token;
+    _debugMode = debugMode;
+    
+    [[HOKDevice device] setupReachability];
+    
+    [[HOKNetworkOperationQueue sharedQueue] setup];
+    _deeplinking = [[HOKDeeplinking alloc] initWithToken:token customDomains:customDomains debugMode:debugMode];
+    
+    [self checkVersions];
+    
+    if (![HOKApp app].hasURLSchemes) {
+      HOKErrorLog([HOKError noURLSchemesError]);
     }
-    return self;
+  }
+  
+  return self;
 }
 
 #pragma mark - Module accessors
-+ (HOKDeeplinking *)deeplinking
-{
-    if (![Hoko hoko].deeplinking) {
-        HOKErrorLog([HOKError setupNotCalledYetError]);
-    }
-    return [Hoko hoko].deeplinking;
++ (HOKDeeplinking *)deeplinking {
+  if (![Hoko hoko].deeplinking) {
+    HOKErrorLog([HOKError setupNotCalledYetError]);
+  }
+  
+  return [Hoko hoko].deeplinking;
 }
 
 #pragma mark - Versioning
 /**
  *  Checks for a new SDK version on the Github repo.
  */
-- (void)checkVersions
-{
-    // Only posting when in debug mode to avoid spaming the service
-    // Also checking for new version on github public repo
-    if (self.debugMode) {
-        [[HOKVersionChecker versionChecker] checkForNewVersion:HokoVersion token:self.token];
-    }
+- (void)checkVersions {
+  // Only posting when in debug mode to avoid spaming the service
+  // Also checking for new version on github public repo
+  if (self.debugMode) {
+    [[HOKVersionChecker versionChecker] checkForNewVersion:HokoVersion token:self.token];
+  }
 }
 
 #pragma mark - Logging
 + (void)setVerbose:(BOOL)verbose {
-    [HOKLogger logger].verbose = verbose;
+  [HOKLogger logger].verbose = verbose;
 }
 
 #pragma mark - Resetting
-+ (void)reset
-{
-    onceToken = 0;
-    _sharedInstance = nil;
++ (void)reset {
+  onceToken = 0;
+  _sharedInstance = nil;
 }
 
 @end

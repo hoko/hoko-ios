@@ -19,43 +19,40 @@ NSString *const HOKRoutePath = @"routes";
 
 #pragma mark - Initializer
 - (instancetype)initWithRoute:(NSString *)route target:(void (^)(HOKDeeplink *deeplink))target {
-    self = [super init];
-    if (self) {
-        _route = route;
-        _target = target;
-    }
-    return self;
+  self = [super init];
+  if (self) {
+    _route = route;
+    _target = target;
+  }
+  return self;
 }
 
 #pragma mark - Public Static Initializer
-+ (instancetype)routeWithRoute:(NSString *)route target:(void (^)(HOKDeeplink *deeplink))target{
-    return [[HOKRoute alloc] initWithRoute:route target:target];
++ (instancetype)routeWithRoute:(NSString *)route target:(void (^)(HOKDeeplink *deeplink))target {
+  return [[HOKRoute alloc] initWithRoute:route target:target];
 }
 
 #pragma mark - Helper
-- (NSArray *)components
-{
-    return [self.route componentsSeparatedByString:@"/"];
+- (NSArray *)components {
+  return [self.route componentsSeparatedByString:@"/"];
 }
 
 #pragma mark - Networking
-- (void)postWithToken:(NSString *)token
-{
-    HOKNetworkOperation *networkOperation = [[HOKNetworkOperation alloc] initWithOperationType:HOKNetworkOperationTypePOST
+- (void)postWithToken:(NSString *)token {
+  HOKNetworkOperation *networkOperation = [[HOKNetworkOperation alloc] initWithOperationType:HOKNetworkOperationTypePOST
                                                                                         path:HOKRoutePath
                                                                                        token:token
                                                                                   parameters:self.json];
-    [[HOKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
+  [[HOKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
 }
 
 #pragma mark - Serialization
-- (NSDictionary *)json
-{
-    return @{@"route": @{@"build": [HOKApp app].build,
-                         @"device": [HOKDevice device].platform,
-                         @"path": self.route,
-                         @"url_schemes": [HOKApp app].urlSchemes,
-                         @"version": [HOKApp app].version}};
+- (NSDictionary *)json {
+  return @{@"route": @{@"build": [HOKApp app].build,
+                       @"device": [HOKDevice device].platform,
+                       @"path": self.route,
+                       @"url_schemes": [HOKApp app].urlSchemes,
+                       @"version": [HOKApp app].version}};
 }
 
 

@@ -42,8 +42,7 @@ NSString *const HOKDeviceIPadSimulator = @"iPad Simulator";
 @implementation HOKDevice
 
 #pragma mark - Shared Instance
-+ (instancetype)device
-{
++ (instancetype)device {
   static HOKDevice *_sharedInstance = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
@@ -53,24 +52,26 @@ NSString *const HOKDeviceIPadSimulator = @"iPad Simulator";
 }
 
 #pragma mark - Methods
-- (NSString *)vendor
-{
+- (NSString *)vendor {
   return HOKDeviceVendor;
 }
 
 - (NSString *)platform
 {
-  UIUserInterfaceIdiom idiom = [UIDevice currentDevice].userInterfaceIdiom;
-  if(idiom == UIUserInterfaceIdiomPhone)
+  NSString *model = [UIDevice currentDevice].model;
+  
+  if ([model rangeOfString:@"iPhone"].location != NSNotFound) {
     return @"iPhone";
-  else if(idiom == UIUserInterfaceIdiomPad)
+  } else if ([model rangeOfString:@"iPod"].location != NSNotFound) {
+    return @"iPod";
+  } else if ([model rangeOfString:@"iPad"].location != NSNotFound) {
     return @"iPad";
+  }
   
   return HOKDeviceUnknownPlatform;
 }
 
-- (NSString *)model
-{
+- (NSString *)model {
   static NSString *_model = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
@@ -85,54 +86,53 @@ NSString *const HOKDeviceIPadSimulator = @"iPad Simulator";
   return _model;
 }
 
-- (NSString *)systemVersion
-{
+- (NSString *)systemVersion {
   return [UIDevice currentDevice].systemVersion;
 }
 
-- (NSString *)systemLanguage
-{
-    return [NSLocale preferredLanguages].firstObject;
+- (NSString *)systemLanguage {
+  return [NSLocale preferredLanguages].firstObject;
 }
 
-- (NSString *)name
-{
+- (NSString *)name {
   return [UIDevice currentDevice].name;
 }
 
-- (NSString *)screenSize
-{
-    CGFloat scale = [UIScreen mainScreen].scale;
-    CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    NSInteger width = screenSize.width * scale;
-    NSInteger height = screenSize.height * scale;
-    return [NSString stringWithFormat:@"%ldx%ld", (unsigned long)height, (unsigned long)width];
+- (NSString *)screenSize {
+  CGFloat scale = [UIScreen mainScreen].scale;
+  CGSize screenSize = [UIScreen mainScreen].bounds.size;
+  NSInteger width = screenSize.width * scale;
+  NSInteger height = screenSize.height * scale;
+  return [NSString stringWithFormat:@"%ldx%ld", (unsigned long)height, (unsigned long)width];
 }
 
 // Load UUID from Disk, if it does not exist, use the Ad Identifier, if it can't
 // use the Vendor Identifier, as a last resort generate a random UUID.
-- (NSString *)uid
-{
+- (NSString *)uid {
   NSString *uid = [HOKUtils objectForKey:HOKDeviceUUIDKey];
-  if(uid == nil) {
+  if (uid == nil) {
     NSString *newUid = self.appleIFA;
-    if (newUid == nil)
+    
+    if (newUid == nil) {
       newUid = self.appleIFV;
-    if (newUid == nil)
+    }
+    
+    if (newUid == nil) {
       newUid = [HOKUtils generateUUID];
+    }
+    
     [HOKUtils saveObject:newUid key:HOKDeviceUUIDKey];
     uid = newUid;
   }
+  
   return uid;
 }
 
-- (BOOL)hasInternetConnection
-{
+- (BOOL)hasInternetConnection {
   return ![self.internetConnectivity isEqualToString:HOKDeviceReachabilityNoConnectivity];
 }
 
-- (BOOL)isSimulator
-{
+- (BOOL)isSimulator {
   return [self.name compare:HOKDeviceIPhoneSimulator] == NSOrderedSame || [self.name compare:HOKDeviceIPadSimulator] == NSOrderedSame;
 }
 
@@ -150,6 +150,7 @@ NSString *const HOKDeviceIPadSimulator = @"iPad Simulator";
     NSUUID *advertisingIdentifier = ((NSUUID* (*)(id, SEL))[sharedManager methodForSelector:advertisingIdentifierSelector])(sharedManager, advertisingIdentifierSelector);
     ifa = advertisingIdentifier.UUIDString;
   }
+  
   return ifa;
 }
 
@@ -160,12 +161,12 @@ NSString *const HOKDeviceIPadSimulator = @"iPad Simulator";
       ifv = [UIDevice currentDevice].identifierForVendor.UUIDString;
     }
   }
+  
   return ifv;
 }
 
 #pragma mark - Serializer
-- (NSDictionary *)json
-{
+- (NSDictionary *)json {
   return @{@"vendor": [HOKUtils jsonValue:self.vendor],
            @"platform": [HOKUtils jsonValue:self.platform],
            @"model": [HOKUtils jsonValue:self.model],
@@ -174,8 +175,7 @@ NSString *const HOKDeviceIPadSimulator = @"iPad Simulator";
 }
 
 #pragma mark - Reachability
-- (void)setupReachability
-{
+- (void)setupReachability {
   [self initReachabilityCallback];
   SCNetworkReachabilityFlags flags;
   if (SCNetworkReachabilityGetFlags(self.networkReachability, &flags)) {
@@ -191,8 +191,10 @@ NSString *const HOKDeviceIPadSimulator = @"iPad Simulator";
   self.networkReachability = SCNetworkReachabilityCreateWithName(NULL, [HOKDeviceReachabilityUrl UTF8String]);
   if (self.networkReachability != NULL) {
     SCNetworkReachabilityContext context = {0, (__bridge void*)self, NULL, NULL, NULL};
+    
     if (SCNetworkReachabilitySetCallback(self.networkReachability, HOKDeviceNetworkReachabilityCallback, &context)) {
       dispatch_queue_t queue  = dispatch_queue_create("HOKReachabilityQueue", DISPATCH_QUEUE_SERIAL);
+      
       if (SCNetworkReachabilitySetDispatchQueue(self.networkReachability, queue)) {
         reachabilityInitated = YES;
       } else {
@@ -201,6 +203,7 @@ NSString *const HOKDeviceIPadSimulator = @"iPad Simulator";
       }
     }
   }
+  
   if (!reachabilityInitated) {
     HOKLog(@"%@ failed to set up reachability callback: %s", self, SCErrorString(SCError()));
   }
@@ -212,14 +215,15 @@ static void HOKDeviceNetworkReachabilityCallback(SCNetworkReachabilityRef target
       HOKDevice *device = (__bridge HOKDevice *)info;
       [device reachabilityChanged:flags];
     }
+    
   } else {
     HOKLog(@"Reachability: Unexpected info");
   }
 }
 
 - (void)reachabilityChanged:(SCNetworkReachabilityFlags)flags {
-  if(flags & kSCNetworkReachabilityFlagsReachable) {
-    if(flags & kSCNetworkReachabilityFlagsIsWWAN) {
+  if (flags & kSCNetworkReachabilityFlagsReachable) {
+    if (flags & kSCNetworkReachabilityFlagsIsWWAN) {
       self.internetConnectivity = HOKDeviceReachabilityCellular;
     } else {
       self.internetConnectivity = HOKDeviceReachabilityWifi;

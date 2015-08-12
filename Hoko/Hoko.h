@@ -30,7 +30,7 @@
  *  Setups all the Hoko module instances, logging and asynchronous networking queues.
  *  Setting up with a token will make sure you can take full advantage of the Hoko service,
  *  as you will be able to track everything through automatic Analytics, which
- *  will be shown on your Hoko dashboards. 
+ *  will be shown on your Hoko dashboards.
  *  <pre>
  *  [Hoko setupWithToken:@"YOUR-API-TOKEN"];
  *  </pre>

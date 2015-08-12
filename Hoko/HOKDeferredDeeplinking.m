@@ -27,38 +27,35 @@ NSString *const HOKDeferredDeeplinkingPath = @"installs/ios";
 
 @implementation HOKDeferredDeeplinking
 
-- (instancetype)initWithToken:(NSString *)token
-{
-    self = [super init];
-    if (self) {
-        _token = token;
-    }
-    return self;
+- (instancetype)initWithToken:(NSString *)token {
+  self = [super init];
+  if (self) {
+    _token = token;
+  }
+  return self;
 }
 
-- (void)requestDeferredDeeplink:(void (^)(NSString *))handler
-{
-    BOOL isFirstRun = ![[HOKUtils objectForKey:HOKDeferredDeeplinkingNotFirstRun] boolValue];
-    if (isFirstRun) {
-        [HOKUtils saveObject:@YES key:HOKDeferredDeeplinkingNotFirstRun];
-        [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:HOKDeferredDeeplinkingPath] parameters:self.json token:self.token successBlock:^(id json) {
-            NSString *deeplink = [json objectForKey:@"deeplink"];
-            if (deeplink && [deeplink isKindOfClass:[NSString class]] && handler) {
-                handler(deeplink);
-            }
-        } failedBlock:^(NSError *error) {
-            HOKErrorLog(error);
-        }];
-    }
+- (void)requestDeferredDeeplink:(void (^)(NSString *))handler {
+  BOOL isFirstRun = ![[HOKUtils objectForKey:HOKDeferredDeeplinkingNotFirstRun] boolValue];
+  if (isFirstRun) {
+    [HOKUtils saveObject:@YES key:HOKDeferredDeeplinkingNotFirstRun];
+    [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:HOKDeferredDeeplinkingPath] parameters:self.json token:self.token successBlock:^(id json) {
+      NSString *deeplink = [json objectForKey:@"deeplink"];
+      if (deeplink && [deeplink isKindOfClass:[NSString class]] && handler) {
+        handler(deeplink);
+      }
+    } failedBlock:^(NSError *error) {
+      HOKErrorLog(error);
+    }];
+  }
 }
 
-- (NSDictionary *)json
-{
-    return @{@"device": @{@"os_version": [HOKDevice device].systemVersion,
-                          @"device_type": [HOKDevice device].platform,
-                          @"language": [HOKDevice device].systemLanguage.lowercaseString,
-                          @"screen_size": [HOKDevice device].screenSize}
-             };
+- (NSDictionary *)json {
+  return @{@"device": @{@"os_version": [HOKDevice device].systemVersion,
+                        @"device_type": [HOKDevice device].platform,
+                        @"language": [HOKDevice device].systemLanguage.lowercaseString,
+                        @"screen_size": [HOKDevice device].screenSize}
+           };
 }
 
 @end

@@ -25,44 +25,44 @@
 
 @implementation HOKLinkGenerator
 
-- (instancetype)initWithToken:(NSString *)token
-{
-    self = [super init];
-    if (self) {
-        _token = token;
-    }
-    return self;
+- (instancetype)initWithToken:(NSString *)token {
+  self = [super init];
+  if (self) {
+    _token = token;
+  }
+  return self;
 }
 
 #pragma mark - Smartlink Generation
 - (void)generateSmartlinkForDeeplink:(HOKDeeplink *)deeplink
                              success:(void (^)(NSString *smartlink))success
-                             failure:(void (^)(NSError *error))failure
-{
-    if (!deeplink) {
-        failure([HOKError nilDeeplinkError]);
-    } else if (![[Hoko deeplinking].routing routeExists:deeplink.route]) {
-        failure([HOKError routeNotMappedError]);
-    }else {
-        [self requestForSmartlinkWithDeeplink:deeplink success:success failure:failure];
-    }
+                             failure:(void (^)(NSError *error))failure {
+  
+  if (!deeplink) {
+    failure([HOKError nilDeeplinkError]);
+  } else if (![[Hoko deeplinking].routing routeExists:deeplink.route]) {
+    failure([HOKError routeNotMappedError]);
+  } else {
+    [self requestForSmartlinkWithDeeplink:deeplink success:success failure:failure];
+  }
 }
 
 #pragma mark - Networking
 - (void)requestForSmartlinkWithDeeplink:(HOKDeeplink *)deeplink
                                 success:(void (^)(NSString *smartlink))success
-                                failure:(void (^)(NSError *error))failure
-{
-    [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:@"smartlinks"] parameters:deeplink.generateSmartlinkJSON token:self.token successBlock:^(id json) {
-        NSString *smartlink = [json objectForKey:@"smartlink"];
-        if(smartlink)
-            success(smartlink);
-        else
-            failure([HOKError smartlinkGenerationError]);
-    } failedBlock:^(id error) {
-        HOKErrorLog([HOKError serverErrorFromJSON:error]);
-        failure([HOKError serverErrorFromJSON:error]);
-    }];
+                                failure:(void (^)(NSError *error))failure {
+  
+  [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:@"smartlinks"] parameters:deeplink.generateSmartlinkJSON token:self.token successBlock:^(id json) {
+    NSString *smartlink = [json objectForKey:@"smartlink"];
+    if (smartlink) {
+      success(smartlink);
+    } else {
+      failure([HOKError smartlinkGenerationError]);
+    }
+  } failedBlock:^(id error) {
+    HOKErrorLog([HOKError serverErrorFromJSON:error]);
+    failure([HOKError serverErrorFromJSON:error]);
+  }];
 }
 
 @end

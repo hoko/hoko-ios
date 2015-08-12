@@ -14,7 +14,7 @@
  *  HOKNavigation is a helper class which allows you to push, present and set view
  *  controllers taking basis on your view controller hierararchy. This only takes
  *  account UITabBarControllers, UINavigationControllers and Modal View Controllers
- *  in order to traverse the hierarchy. 
+ *  in order to traverse the hierarchy.
  *
  *  WARNING: If you have custom navigation you should use your own methods to push and present
  *  view controllers, this is only a helper class for common navigation based on Apple's default
@@ -33,7 +33,7 @@
 /**
  *  pushViewController:animated: pushes a view controller inside a navigation controller.
  *  If your viewController is a navigation controller it replaces the rootViewController,
- *  otherwise it tries to push the viewController if the current view controller is a 
+ *  otherwise it tries to push the viewController if the current view controller is a
  *  UINavigationController, otherwise it creates it before pushing.
  *
  *  @param viewController Your view controller.

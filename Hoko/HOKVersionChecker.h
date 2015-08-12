@@ -2,8 +2,8 @@
 //  HOKVersionChecker.h
 //  Hoko
 //
-//  Created by Ivan Bruel on 22/01/15.
-//  Copyright (c) 2015 Faber Ventures. All rights reserved.
+//  Created by Hoko, S.A. on 22/01/15.
+//  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
