@@ -310,7 +310,7 @@ NSString *const HOKNetworkingFormat = @"json";
     encodedParameters = [encodedParameters substringToIndex:encodedParameters.length - 1];
   }
   
-  return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",url,encodedParameters]];
+  return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", url, encodedParameters]];
 }
 
 
