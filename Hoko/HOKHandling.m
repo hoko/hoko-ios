@@ -21,8 +21,7 @@
 @implementation HOKHandling
 
 #pragma mark - Initializer
-- (instancetype)init
-{
+- (instancetype)init {
   self = [super init];
   if (self) {
     _handlers = @[];
@@ -31,34 +30,37 @@
 }
 
 #pragma mark - Add Handlers
-- (void)addHandler:(id<HOKHandlerProcotol>)handler
-{
-  if (![self.handlers containsObject:handler])
+- (void)addHandler:(id<HOKHandlerProcotol>)handler {
+  if (![self.handlers containsObject:handler]) {
     self.handlers = [self.handlers arrayByAddingObject:handler];
-  else
+  } else {
     HOKErrorLog([HOKError handlerAlreadyExistsError]);
+  }
 }
 
-- (void)addHandlerBlock:(void(^)(HOKDeeplink *deeplink))handlerBlock
-{
+- (void)addHandlerBlock:(void(^)(HOKDeeplink *deeplink))handlerBlock {
   self.handlers = [self.handlers arrayByAddingObject:[[HOKHandlerBlockWrapper alloc] initWithHandlerBlock:handlerBlock]];
 }
 
 #pragma mark - Handle Deeplink
-- (void)handle:(HOKDeeplink *)deeplink
-{
+- (void)handle:(HOKDeeplink *)deeplink {
   for (id handler in self.handlers) {
     // Object implements protocol
     if ([handler conformsToProtocol:@protocol(HOKHandlerProcotol)]) {
       id<HOKHandlerProcotol> handlerObj = (id<HOKHandlerProcotol>)handler;
-      if ([handlerObj respondsToSelector:@selector(handleDeeplink:)])
+      
+      if ([handlerObj respondsToSelector:@selector(handleDeeplink:)]) {
         [handlerObj handleDeeplink:deeplink];
+      }
+      
     } else {
       // Object is a block wrapper
       if ([handler isKindOfClass:[HOKHandlerBlockWrapper class]]) {
         HOKHandlerBlockWrapper *handlerBlockWrapper = (HOKHandlerBlockWrapper *)handler;
-        if(handlerBlockWrapper.handlerBlock)
+        
+        if (handlerBlockWrapper.handlerBlock) {
           handlerBlockWrapper.handlerBlock(deeplink);
+        }
       }
     }
   }

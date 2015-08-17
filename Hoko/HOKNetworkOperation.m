@@ -22,8 +22,7 @@
 @implementation HOKNetworkOperation
 
 #pragma mark - Initialization
-- (instancetype)initWithOperation:(HOKNetworkOperation *)operation
-{
+- (instancetype)initWithOperation:(HOKNetworkOperation *)operation {
   return [self initWithOperationType:operation.operationType
                                 path:operation.path
                                token:operation.token
@@ -34,8 +33,8 @@
 - (instancetype)initWithOperationType:(HOKNetworkOperationType)operationType
                                  path:(NSString *)path
                                 token:(NSString *)token
-                           parameters:(id)parameters
-{
+                           parameters:(id)parameters {
+  
   return [self initWithOperationType:operationType
                                 path:path
                                token:token
@@ -47,8 +46,8 @@
                                  path:(NSString *)path
                                 token:(NSString *)token
                            parameters:(id)parameters
-                      numberOfRetries:(NSInteger)numberOfRetries
-{
+                      numberOfRetries:(NSInteger)numberOfRetries {
+  
   self = [super init];
   if (self) {
     _operationType = operationType;
@@ -62,27 +61,25 @@
 
 #pragma mark - Setters
 // Requires manual KVO implementation due to how NSOperations and NSOperationQueues work
-- (void)setIsFinished:(BOOL)isFinished
-{
+- (void)setIsFinished:(BOOL)isFinished {
   [self willChangeValueForKey:@"isFinished"];
   self.hokFinished = isFinished;
   [self didChangeValueForKey:@"isFinished"];
 }
 
-- (void)setIsExecuting:(BOOL)isExecuting
-{
+- (void)setIsExecuting:(BOOL)isExecuting {
   [self willChangeValueForKey:@"isExecuting"];
   self.hokExecuting = isExecuting;
   [self didChangeValueForKey:@"isExecuting"];
 }
 
 #pragma mark - NSOperation
-- (void)start
-{
+- (void)start {
   if (self.isCancelled || self.hokFinished) {
     [self setIsFinished:YES];
     return;
   }
+  
   id successBlock = ^(id json) {
     [self operationCompleted];
   };
@@ -94,68 +91,62 @@
   if (self.operationType == HOKNetworkOperationTypeGET) {
     [self setIsExecuting:YES];
     [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:self.path]
-                     parameters:self.parameters
-                          token:self.token
-                   successBlock:successBlock
-                    failedBlock:failedBlock];
+                      parameters:self.parameters
+                           token:self.token
+                    successBlock:successBlock
+                     failedBlock:failedBlock];
     
   } else if (self.operationType == HOKNetworkOperationTypePOST) {
     [self setIsExecuting:YES];
     [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:self.path]
+                   parameters:self.parameters
+                        token:self.token
+                 successBlock:successBlock
+                  failedBlock:failedBlock];
+    
+  } else if (self.operationType == HOKNetworkOperationTypePUT) {
+    [self setIsExecuting:YES];
+    [HOKNetworking putToPath:[HOKNetworkOperation urlFromPath:self.path]
                   parameters:self.parameters
                        token:self.token
                 successBlock:successBlock
                  failedBlock:failedBlock];
-  } else if (self.operationType == HOKNetworkOperationTypePUT) {
-    [self setIsExecuting:YES];
-    [HOKNetworking putToPath:[HOKNetworkOperation urlFromPath:self.path]
-                 parameters:self.parameters
-                      token:self.token
-               successBlock:successBlock
-                failedBlock:failedBlock];
   }
 }
 
-- (BOOL)isConcurrent
-{
+- (BOOL)isConcurrent {
   return YES;
 }
 
-- (BOOL)isExecuting
-{
+- (BOOL)isExecuting {
   return self.hokExecuting;
 }
 
-- (BOOL)isFinished
-{
+- (BOOL)isFinished {
   return self.hokFinished;
 }
 
 #pragma mark - Operation completion
-- (void)operationCompleted
-{
+- (void)operationCompleted {
   [[HOKNetworkOperationQueue sharedQueue] finishedOperation:self];
   [self setIsExecuting:NO];
   [self setIsFinished:YES];
 }
 
-- (void)operationFailedWithError:(NSError *)error
-{
+- (void)operationFailedWithError:(NSError *)error {
   [[HOKNetworkOperationQueue sharedQueue] failedOperation:self];
   [self setIsExecuting:NO];
   [self setIsFinished:YES];
 }
 
 #pragma mark - URL Generator
-+ (NSString *)urlFromPath:(NSString *)path
-{
++ (NSString *)urlFromPath:(NSString *)path {
   return [NSString stringWithFormat:@"%@/%@/%@.%@", HOKNetworkingEndpoint, HOKNetworkingVersion, path, HOKNetworkingFormat];
 }
 
 #pragma mark - NSCoding
 // NSCoding to Serialize network operations to storage whenever possible
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
   self = [super init];
   if (self) {
     _operationType = [[aDecoder decodeObjectForKey:NSStringFromSelector(@selector(operationType))]integerValue];
@@ -167,8 +158,7 @@
   return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
   [aCoder encodeObject:@(self.operationType) forKey:NSStringFromSelector(@selector(operationType))];
   [aCoder encodeObject:self.path forKey:NSStringFromSelector(@selector(path))];
   [aCoder encodeObject:self.token forKey:NSStringFromSelector(@selector(token))];

@@ -15,12 +15,12 @@ extern NSString *const HOKDeeplinkSmartlinkIdentifierKey;
 @interface HOKDeeplink (Private)
 
 + (HOKDeeplink *)deeplinkWithURLScheme:(NSString *)urlScheme
-                                route:(NSString *)route
-                      routeParameters:(NSDictionary *)routeParameters
+                                 route:(NSString *)route
+                       routeParameters:(NSDictionary *)routeParameters
                        queryParameters:(NSDictionary *)queryParameters
                               metadata:(NSDictionary *)metadata
-                    sourceApplication:(NSString *)sourceApplication
-                          deeplinkURL:(NSString *)deeplinkURL;
+                     sourceApplication:(NSString *)sourceApplication
+                           deeplinkURL:(NSString *)deeplinkURL;
 
 - (void)setMetadata:(NSDictionary *)metadata;
 - (void)postWithToken:(NSString *)token;
