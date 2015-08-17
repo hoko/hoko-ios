@@ -95,8 +95,7 @@
   return NO;
 }
 
-- (BOOL)openDeeplink:(HOKDeeplink *)deeplink route:(HOKRoute *)route
-{
+- (BOOL)openDeeplink:(HOKDeeplink *)deeplink route:(HOKRoute *)route {
   [Hoko deeplinking].currentDeeplink = deeplink;
   
   [deeplink postWithToken:self.token];
@@ -115,9 +114,13 @@
   return NO;
 }
 
-- (HOKDeeplink *)deeplinkForURL:(NSURL *)url
-{
+
+- (HOKDeeplink *)deeplinkForURL:(NSURL *)url {
   return [self deeplinkForURL:url sourceApplication:nil annotation:nil metadata:nil route:nil deferred:NO];
+}
+
+- (HOKDeeplink *)deeplinkForURL:(NSURL *)url metadata:(NSDictionary *)metadata {
+  return [self deeplinkForURL:url sourceApplication:nil annotation:nil metadata:metadata route:nil deferred:NO];
 }
 
 - (HOKDeeplink *)deeplinkForURL:(NSURL *)url
@@ -125,8 +128,8 @@
                      annotation:(id)annotation
                        metadata:(NSDictionary *)metadata
                           route:(HOKRoute **)route
-                       deferred:(BOOL)isDeferred
-{
+                       deferred:(BOOL)isDeferred {
+  
   HOKURL *hokURL = [[HOKURL alloc] initWithURL:url];
   NSDictionary *routeParameters;
   // Search for a match with any given route
@@ -159,21 +162,8 @@
   if (self.defaultRoute) {
     *route = self.defaultRoute;
   }
-}
-
-// Default Route
-HOKDeeplink *deeplink = [HOKDeeplink deeplinkWithURLScheme:hokURL.scheme
-                                                     route:nil
-                                           routeParameters:nil
-                                           queryParameters:hokURL.queryParameters
-                                                  metadata:metadata
-                                         sourceApplication:sourceApplication
-                                               deeplinkURL:url.absoluteString];
-if (self.defaultRoute) {
-  *route = self.defaultRoute;
-}
-
-return deeplink;
+  
+  return deeplink;
 }
 
 - (BOOL)canOpenURL:(NSURL *)url {

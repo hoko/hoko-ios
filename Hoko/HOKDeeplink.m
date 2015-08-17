@@ -109,8 +109,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 }
 
 #pragma mark - Private Initializer
-- (instancetype)init
-{
+- (instancetype)init {
   return [self initWithURLScheme:nil route:nil routeParameters:nil queryParameters:nil metadata:nil sourceApplication:nil deeplinkURL:nil deferred:NO];
 }
 

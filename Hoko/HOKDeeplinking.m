@@ -80,8 +80,7 @@
   return [self openURL:url sourceApplication:nil annotation:nil deferred:YES];
 }
 
-- (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
+- (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
   return [self openURL:url sourceApplication:sourceApplication annotation:annotation deferred:NO];
 }
 
@@ -97,13 +96,11 @@
   return [self.routing openDeeplink:deeplink];
 }
 
-- (void)openSmartlink:(NSString *)smartlink
-{
+- (void)openSmartlink:(NSString *)smartlink {
   [self openSmartlink:smartlink completion:nil];
 }
 
-- (void)openSmartlink:(NSString *)smartlink completion:(void (^)(HOKDeeplink *deeplink))completion
-{
+- (void)openSmartlink:(NSString *)smartlink completion:(void (^)(HOKDeeplink *deeplink))completion {
   [self.resolver resolveSmartlink:smartlink completion:^(NSString *deeplink, NSDictionary *metadata, NSError *error) {
     if (deeplink) {
       NSURL *deeplinkURL = [NSURL URLWithString:deeplink];
@@ -122,8 +119,7 @@
   }];
 }
 
-- (BOOL)continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler
-{
+- (BOOL)continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
   if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
     NSURL *webpageURL = userActivity.webpageURL;
     if (webpageURL) {
@@ -139,9 +135,8 @@
       }
     }
   }
-}
-
-return NO;
+  
+  return NO;
 }
 
 
@@ -170,8 +165,7 @@ return NO;
 }
 
 #pragma mark - Deferred Deeplinking
-- (void)triggerDeferredDeeplinking
-{
+- (void)triggerDeferredDeeplinking {
   __block typeof(self) wself = self;
   __block HOKNotificationObserver *didFinishLaunchingNotificationObserver = [[HOKObserver observer] registerForNotification:UIApplicationDidFinishLaunchingNotification triggered:^(NSNotification *notification) {
     [wself.deferredDeeplinking requestDeferredDeeplink:^(NSString *deeplink) {
