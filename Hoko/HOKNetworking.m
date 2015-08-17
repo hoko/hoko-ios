@@ -201,7 +201,7 @@ NSString *const HOKNetworkingFormat = @"json";
                                                      options:NSJSONWritingPrettyPrinted
                                                        error:&error];
   
-  HOKLog(@"Putting %@",[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+  HOKLog(@"PUT to %@\n%@", url, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
   if (error != nil) {
     HOKErrorLog([HOKError jsonParseError:parameters]);
     jsonData = nil;
@@ -211,7 +211,7 @@ NSString *const HOKNetworkingFormat = @"json";
                                                          cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                      timeoutInterval:HOKNetworkingRequestTimeout];
   
-  HOKLog(@"PUT to %@\n%@", url, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+  [request setHTTPMethod:@"PUT"];
   
   [request setValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
   [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
