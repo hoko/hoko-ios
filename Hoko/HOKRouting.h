@@ -19,6 +19,7 @@
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
 - (BOOL)canOpenURL:(NSURL *)url;
 - (HOKDeeplink *)deeplinkForURL:(NSURL *)url;
+- (HOKDeeplink *)deeplinkForURL:(NSURL *)url metadata:(NSDictionary *)metadata;
 - (BOOL)routeExists:(NSString *)route;
 - (NSArray *)routes;
 @end

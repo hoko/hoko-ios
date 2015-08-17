@@ -28,14 +28,13 @@
 }
 
 #pragma mark - Logging
-- (void)log:(NSString *)string
-{
-  if(self.verbose)
+- (void)log:(NSString *)string {
+  if (self.verbose) {
     NSLog(@"[HOKO] %@",string);
+  }
 }
 
-- (void)logError:(NSError *)error
-{
+- (void)logError:(NSError *)error {
   [self log:error.description];
 }
 

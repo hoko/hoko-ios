@@ -11,8 +11,7 @@
 @implementation HOKNavigation
 
 #pragma mark - Singleton
-+ (instancetype)navigation
-{
++ (instancetype)navigation {
   static HOKNavigation *_sharedInstance = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
@@ -23,22 +22,19 @@
 }
 
 #pragma mark - Public Method
-+ (void)setRootViewController:(UIViewController *)viewController
-{
++ (void)setRootViewController:(UIViewController *)viewController {
   [HOKNavigation navigation].applicationDelegate.window.rootViewController = viewController;
 }
 
-+ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
++ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
   [self pushViewController:viewController animated:animated replace:NO];
 }
 
-+ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated replace:(BOOL)replace
-{
++ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated replace:(BOOL)replace {
   // Check if viewController is a UINavigationController
-  if([viewController isKindOfClass:[UINavigationController class]])
+  if ([viewController isKindOfClass:[UINavigationController class]]) {
     [HOKNavigation setRootViewController:viewController];
-  else {
+  } else {
     // Check if a UINavigationController exists in the view controllers stack.
     UINavigationController *navigationController = [HOKNavigation navigation].currentNavigationViewController;
     if (navigationController) {
@@ -58,8 +54,7 @@
   }
 }
 
-+ (void)presentViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
++ (void)presentViewController:(UIViewController *)viewController animated:(BOOL)animated {
   // Look for the currentViewController
   UIViewController *currentViewController = [[HOKNavigation navigation] currentViewController];
   if (currentViewController) {
@@ -72,33 +67,32 @@
 }
 
 #pragma mark - Private Methods
-- (id<UIApplicationDelegate>)applicationDelegate
-{
+- (id<UIApplicationDelegate>)applicationDelegate {
   return [UIApplication sharedApplication].delegate;
 }
 
-- (UIViewController*)currentViewController
-{
+- (UIViewController*)currentViewController {
   UIViewController* rootViewController = self.applicationDelegate.window.rootViewController;
   return [self currentViewControllerFrom:rootViewController];
 }
 
-- (UINavigationController*)currentNavigationViewController
-{
+- (UINavigationController*)currentNavigationViewController {
   UIViewController* currentViewController = self.currentViewController;
   return currentViewController.navigationController;
 }
 
-- (UIViewController*)currentViewControllerFrom:(UIViewController*)viewController
-{
+- (UIViewController*)currentViewControllerFrom:(UIViewController*)viewController {
   if ([viewController isKindOfClass:[UINavigationController class]]) {
     UINavigationController* navigationController = (UINavigationController *)viewController;
     return [self currentViewControllerFrom:navigationController.viewControllers.lastObject];
-  } else if([viewController isKindOfClass:[UITabBarController class]]) {
+    
+  } else if ([viewController isKindOfClass:[UITabBarController class]]) {
     UITabBarController* tabBarController = (UITabBarController *)viewController;
     return [self currentViewControllerFrom:tabBarController.selectedViewController];
-  } else if(viewController.presentedViewController != nil) {
+    
+  } else if (viewController.presentedViewController != nil) {
     return [self currentViewControllerFrom:viewController.presentedViewController];
+    
   } else {
     return viewController;
   }
