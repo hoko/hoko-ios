@@ -131,7 +131,7 @@
 }
 
 + (void)swizzleOpenURLWithAppDelegateClassName:(NSString *)appDelegateClassName {
-  __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:openURL:sourceApplication:annotation:) block:^BOOL(id blockSelf, UIApplication *application, NSURL *url, NSString *sourceApplication, id annotation){
+  __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:openURL:sourceApplication:annotation:) block:^BOOL (id blockSelf, UIApplication *application, NSURL *url, NSString *sourceApplication, id annotation){
     
     BOOL result = [[Hoko deeplinking] openURL:url sourceApplication:sourceApplication annotation:annotation];
     
@@ -145,7 +145,7 @@
 }
 
 + (void)swizzleLegacyOpenURLWithAppDelegateClassName:(NSString *)appDelegateClassName {
-  __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:handleOpenURL:) block:^BOOL(id blockSelf, UIApplication *application, NSURL *url){
+  __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:handleOpenURL:) block:^BOOL (id blockSelf, UIApplication *application, NSURL *url){
     
     BOOL result = [[Hoko deeplinking] handleOpenURL:url];
     
@@ -160,7 +160,7 @@
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 + (void)swizzleContinueUserActivityWithAppDelegateClassName:(NSString *)appDelegateClassName {
-  __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:continueUserActivity:restorationHandler:) block:^BOOL(id blockSelf, UIApplication *application, NSUserActivity *userActivity, id restorationHandler){
+  __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:continueUserActivity:restorationHandler:) block:^BOOL (id blockSelf, UIApplication *application, NSUserActivity *userActivity, id restorationHandler){
     
     BOOL result = [[Hoko deeplinking] continueUserActivity:userActivity restorationHandler:restorationHandler];
     

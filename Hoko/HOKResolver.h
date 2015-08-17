@@ -12,6 +12,6 @@
 
 - (instancetype)initWithToken:(NSString *)token;
 
-- (void)resolveSmartlink:(NSString *)smartlink completion:(void(^)(NSString *deeplink, NSDictionary *metadata, NSError *error))completion;
+- (void)resolveSmartlink:(NSString *)smartlink completion:(void (^)(NSString *deeplink, NSDictionary *metadata, NSError *error))completion;
 
 @end

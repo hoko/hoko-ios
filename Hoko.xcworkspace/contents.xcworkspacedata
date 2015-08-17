@@ -49,6 +49,26 @@
          </Group>
          <Group
             location = "container:"
+            name = "Filter Handling">
+            <Group
+               location = "container:"
+               name = "Filer Handler Block Wrapper">
+               <FileRef
+                  location = "group:/Users/ivanbruel/Documents/hoko-ios/Hoko/HOKFilterBlockWrapper.h">
+               </FileRef>
+               <FileRef
+                  location = "group:/Users/ivanbruel/Documents/hoko-ios/Hoko/HOKFilterBlockWrapper.m">
+               </FileRef>
+            </Group>
+            <FileRef
+               location = "group:/Users/ivanbruel/Documents/hoko-ios/Hoko/HOKFiltering.h">
+            </FileRef>
+            <FileRef
+               location = "group:/Users/ivanbruel/Documents/hoko-ios/Hoko/HOKFiltering.m">
+            </FileRef>
+         </Group>
+         <Group
+            location = "container:"
             name = "Routing">
             <Group
                location = "container:"
@@ -85,6 +105,9 @@
             </FileRef>
             <FileRef
                location = "group:Hoko/HOKRouting.m">
+            </FileRef>
+            <FileRef
+               location = "group:Hoko/HOKRouting+Private.h">
             </FileRef>
          </Group>
          <Group

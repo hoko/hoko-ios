@@ -11,7 +11,7 @@
 @interface HOKHandling : NSObject
 
 - (void)addHandler:(id<HOKHandlerProcotol>)handler;
-- (void)addHandlerBlock:(void(^)(HOKDeeplink *deeplink))handlerBlock;
+- (void)addHandlerBlock:(void (^)(HOKDeeplink *deeplink))handlerBlock;
 
 - (void)handle:(HOKDeeplink *)deeplink;
 

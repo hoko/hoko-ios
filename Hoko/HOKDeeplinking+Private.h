@@ -8,14 +8,20 @@
 
 @class HOKHandling;
 @class HOKRouting;
+@class HOKFiltering;
 
 @interface HOKDeeplinking (Private)
 
 - (instancetype)initWithToken:(NSString *)token customDomains:(NSArray *)customDomains debugMode:(BOOL)debugMode;
 
+- (BOOL)handleOpenDeferredURL:(NSURL *)url;
+
 - (BOOL)canOpenURL:(NSURL *)url;
+
+- (void)setCurrentDeeplink:(HOKDeeplink *)currentDeeplink;
 
 @property (nonatomic, strong) HOKRouting *routing;
 @property (nonatomic, strong) HOKHandling *handling;
+@property (nonatomic, strong) HOKFiltering *filtering;
 
 @end
