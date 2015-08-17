@@ -81,10 +81,9 @@
       NSURL *deeplinkURL = [NSURL URLWithString:deeplink];
       [self.routing openURL:deeplinkURL metadata:metadata];
       
-      HOKDeeplink *deeplinkObject = [self.routing deeplinkForURL:deeplinkURL];
-      deeplinkObject.metadata = metadata;
-      if (completion && deeplinkURL) {
-        completion([self.routing deeplinkForURL:deeplinkURL]);
+      HOKDeeplink *deeplinkObject = [self.routing deeplinkForURL:deeplinkURL metadata:metadata];
+      if (completion && deeplinkObject) {
+        completion(deeplinkObject);
       }
     } else if (completion) {
       completion(nil);

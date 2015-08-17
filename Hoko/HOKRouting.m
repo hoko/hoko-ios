@@ -99,6 +99,10 @@
   return [self deeplinkForURL:url sourceApplication:nil annotation:nil metadata:nil route:nil];
 }
 
+- (HOKDeeplink *)deeplinkForURL:(NSURL *)url metadata:(NSDictionary *)metadata {
+  return [self deeplinkForURL:url sourceApplication:nil annotation:nil metadata:metadata route:nil];
+}
+
 - (HOKDeeplink *)deeplinkForURL:(NSURL *)url
               sourceApplication:(NSString *)sourceApplication
                      annotation:(id)annotation
