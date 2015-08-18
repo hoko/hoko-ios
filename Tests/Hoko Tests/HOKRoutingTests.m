@@ -47,7 +47,7 @@
   [HokoDeeplinking.routing mapRoute:@"product/:product_id" toTarget:^(HOKDeeplink *deeplink) {
     blockDeeplink = deeplink;
   }];
-  BOOL canOpenURL = [HokoDeeplinking.routing openURL:[NSURL URLWithString:@"hoko://product/2?query=hi+there"] sourceApplication:@"com.hoko.black" annotation:nil];
+  BOOL canOpenURL = [HokoDeeplinking.routing openURL:[NSURL URLWithString:@"hoko://product/2?query=hi+there"] sourceApplication:@"com.hoko.black" annotation:nil deferredDeeplink:NO];
   expect(canOpenURL).to.beTruthy();
   expect(blockDeeplink.urlScheme).will.equal(@"hoko");
   expect(blockDeeplink.route).will.equal(@"product/:product_id");
@@ -62,7 +62,7 @@
   [HokoDeeplinking.routing mapRoute:@"product/:product_id" toTarget:^(HOKDeeplink *deeplink) {
     blockDeeplink = deeplink;
   }];
-  BOOL canOpenURL = [HokoDeeplinking.routing openURL:[NSURL URLWithString:@"hoko://product?query=hi+there"] sourceApplication:nil annotation:nil];
+  BOOL canOpenURL = [HokoDeeplinking.routing openURL:[NSURL URLWithString:@"hoko://product?query=hi+there"] sourceApplication:nil annotation:nil deferredDeeplink:NO];
   expect(canOpenURL).to.beFalsy();
   expect(blockDeeplink).will.beNil();
 }
@@ -73,7 +73,7 @@
   [HokoDeeplinking.routing mapRoute:nil toTarget:^(HOKDeeplink *deeplink) {
     blockDeeplink = deeplink;
   }];
-  BOOL canOpenURL = [HokoDeeplinking.routing openURL:[NSURL URLWithString:@"hoko://product?query=hi+there"] sourceApplication:@"com.hoko.black" annotation:nil];
+  BOOL canOpenURL = [HokoDeeplinking.routing openURL:[NSURL URLWithString:@"hoko://product?query=hi+there"] sourceApplication:@"com.hoko.black" annotation:nil deferredDeeplink:NO];
   expect(canOpenURL).to.beTruthy();
   expect(blockDeeplink.urlScheme).will.equal(@"hoko");
   expect(blockDeeplink.route).will.beNil();
