@@ -32,6 +32,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 @property (nonatomic, strong, readonly) NSDictionary *generateSmartlinkJSON;
 @property (nonatomic, strong, readonly) NSString *sourceApplication;
 @property (nonatomic, strong) NSMutableDictionary *urls;
+@property (nonatomic) BOOL isDeferred;
+@property (nonatomic) BOOL wasOpened;
 
 @end
 
@@ -76,7 +78,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
                      queryParameters:queryParameters
                             metadata:metadata
                    sourceApplication:nil
-                         deeplinkURL:nil];
+                         deeplinkURL:nil
+                            deferred:NO];
 }
 
 #pragma mark - Private Static Initializer
@@ -86,7 +89,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
                        queryParameters:(NSDictionary *)queryParameters
                               metadata:(NSDictionary *)metadata
                      sourceApplication:(NSString *)sourceApplication
-                           deeplinkURL:(NSString *)deeplinkURL {
+                           deeplinkURL:(NSString *)deeplinkURL
+                              deferred:(BOOL)isDeferred {
   
   HOKDeeplink *deeplink = [[HOKDeeplink alloc] initWithURLScheme:urlScheme
                                                            route:route
@@ -94,10 +98,10 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
                                                  queryParameters:queryParameters
                                                         metadata:metadata
                                                sourceApplication:sourceApplication
-                                                     deeplinkURL:deeplinkURL];
+                                                     deeplinkURL:deeplinkURL
+                                                        deferred:isDeferred];
   
   if ([HOKDeeplink matchRoute:deeplink.route withRouteParameters:deeplink.routeParameters] || (route == nil && routeParameters == nil && queryParameters == nil && metadata == nil)) {
-    
     return deeplink;
   }
   
@@ -106,7 +110,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 
 #pragma mark - Private Initializer
 - (instancetype)init {
-  return [self initWithURLScheme:nil route:nil routeParameters:nil queryParameters:nil metadata:nil sourceApplication:nil deeplinkURL:nil];
+  return [self initWithURLScheme:nil route:nil routeParameters:nil queryParameters:nil metadata:nil sourceApplication:nil deeplinkURL:nil deferred:NO];
 }
 
 - (instancetype)initWithURLScheme:(NSString *)urlScheme
@@ -115,7 +119,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
                   queryParameters:(NSDictionary *)queryParameters
                          metadata:(NSDictionary *)metadata
                 sourceApplication:(NSString *)sourceApplication
-                      deeplinkURL:(NSString *)deeplinkURL {
+                      deeplinkURL:(NSString *)deeplinkURL
+                         deferred:(BOOL)isDeferred {
   
   self = [super init];
   if (self) {
@@ -123,16 +128,17 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
     _route = route;
     _routeParameters = routeParameters;
     _queryParameters = queryParameters;
-    
     if ([HOKDeeplink validateMetadataDictionary:metadata]){
       _metadata = metadata;
     } else {
       HOKErrorLog([HOKError invalidJSONMetadata]);
     }
-    
     _sourceApplication = sourceApplication;
     _urls = [@{} mutableCopy];
     _deeplinkURL = deeplinkURL;
+    
+    _isDeferred = isDeferred;
+    _wasOpened = NO;
   }
   
   return self;

@@ -10,7 +10,7 @@
 
 @interface HOKHandlerBlockWrapper : NSObject
 
-- (instancetype)initWithHandlerBlock:(void(^)(HOKDeeplink *deeplink))handlerBlock;
+- (instancetype)initWithHandlerBlock:(void (^)(HOKDeeplink *deeplink))handlerBlock;
 
 @property (nonatomic, copy) void (^handlerBlock)(HOKDeeplink *deeplink);
 

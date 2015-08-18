@@ -11,7 +11,7 @@
 @implementation HOKHandlerBlockWrapper
 
 #pragma mark - Initializer
-- (instancetype)initWithHandlerBlock:(void(^)(HOKDeeplink *deeplink))handlerBlock {
+- (instancetype)initWithHandlerBlock:(void (^)(HOKDeeplink *deeplink))handlerBlock {
   self = [super init];
   if (self) {
     _handlerBlock = handlerBlock;

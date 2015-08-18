@@ -9,6 +9,8 @@
 #import "HOKStubbedTestCase.h"
 
 #import <Hoko/HOKError.h>
+#import <Hoko/HOKDeeplinking+Private.h>
+#import <Hoko/HOKRouting.h>
 
 @interface HOKDeeplinkTests : HOKStubbedTestCase
 
@@ -48,7 +50,34 @@
   HOKDeeplink *deeplink = [HOKDeeplink deeplinkWithRoute:@"something" routeParameters:nil queryParameters:@{@"queryParam" : @2} metadata:nil];
   expect(deeplink.metadata).to.beNil();
   [errorMock stopMocking];
-  
 }
+
+- (void)testManualOpenDeeplink {
+  HOKDeeplink *deeplink = [HOKDeeplink deeplinkWithRoute:@"products/:id" routeParameters:@{@"id": @(2)}];
+  
+  __block BOOL deeplinkWasSuccessfullyOpened = NO;
+  [HokoDeeplinking mapRoute:@"products/:id" toTarget:^(HOKDeeplink *deeplink) {
+    deeplinkWasSuccessfullyOpened = YES;
+  }];
+  
+  [HokoDeeplinking openDeeplink:deeplink];
+  expect(deeplinkWasSuccessfullyOpened).to.beTruthy();
+  expect(deeplink.wasOpened).to.beTruthy();
+  expect([HokoDeeplinking currentDeeplink]).equal(deeplink);
+}
+
+- (void)testOpenDeferredDeeplink {
+  __block BOOL deeplinkWasSuccessfullyOpened = NO;
+  [HokoDeeplinking mapRoute:@"products/:id" toTarget:^(HOKDeeplink *deeplink) {
+    deeplinkWasSuccessfullyOpened = YES;
+  }];
+  
+  [HokoDeeplinking.routing openURL:[NSURL URLWithString:@"hoko://products/2"] sourceApplication:@"com.hoko.black" annotation:nil deferredDeeplink:YES];
+  
+  expect(deeplinkWasSuccessfullyOpened).to.beTruthy();
+  expect([HokoDeeplinking currentDeeplink].isDeferred).to.beTruthy();
+}
+
+
 
 @end

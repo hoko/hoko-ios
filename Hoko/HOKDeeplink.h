@@ -45,5 +45,8 @@ typedef NS_ENUM(NSUInteger, HOKDeeplinkPlatform) {
 @property (nonatomic, strong, readonly, hok_nullable) NSDictionary hok_generic2(NSString *, id) *metadata;
 @property (nonatomic, strong, readonly, hok_nonnull) NSDictionary hok_generic2(NSString *, id) *json;
 
+@property (nonatomic, readonly) BOOL isDeferred;
+@property (nonatomic, readonly) BOOL wasOpened;
+
 @end
 

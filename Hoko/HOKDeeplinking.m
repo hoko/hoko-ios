@@ -13,6 +13,7 @@
 #import "HOKRouting.h"
 #import "HOKObserver.h"
 #import "HOKHandling.h"
+#import "HOKFiltering.h"
 #import "HOKSwizzling.h"
 #import "HOKLinkGenerator.h"
 #import "HOKRouting.h"
@@ -20,6 +21,7 @@
 #import "HOKDeeplink+Private.h"
 #import "HOKDeferredDeeplinking.h"
 #import "HOKDeeplinking+Private.h"
+#import "HOKRouting+Private.h"
 
 @interface HOKDeeplinking ()
 
@@ -27,8 +29,10 @@
 @property (nonatomic, strong) HOKResolver *resolver;
 @property (nonatomic, strong) HOKRouting *routing;
 @property (nonatomic, strong) HOKHandling *handling;
+@property (nonatomic, strong) HOKFiltering *filtering;
 @property (nonatomic, strong) HOKLinkGenerator *linkGenerator;
 @property (nonatomic, strong) HOKDeferredDeeplinking *deferredDeeplinking;
+@property (nonatomic, strong) HOKDeeplink *currentDeeplink;
 
 @end
 
@@ -41,12 +45,21 @@
     _customDomains = customDomains;
     _routing = [[HOKRouting alloc] initWithToken:token debugMode:debugMode];
     _handling = [HOKHandling new];
+    _filtering = [HOKFiltering new];
     _linkGenerator = [[HOKLinkGenerator alloc] initWithToken:token];
     _deferredDeeplinking = [[HOKDeferredDeeplinking alloc] initWithToken:token];
     _resolver = [[HOKResolver alloc] initWithToken:token];
     [self triggerDeferredDeeplinking];
   }
   return self;
+}
+
+#pragma mark - Current Deeplink
+- (BOOL)openCurrentDeeplink {
+  if (self.currentDeeplink)
+    return [self openDeeplink:self.currentDeeplink];
+  else
+    return NO;
 }
 
 #pragma mark - Map Routes
@@ -63,12 +76,24 @@
   return [self openURL:url sourceApplication:nil annotation:nil];
 }
 
+- (BOOL)handleOpenDeferredURL:(NSURL *)url {
+  return [self openURL:url sourceApplication:nil annotation:nil deferred:YES];
+}
+
 - (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-  return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation];
+  return [self openURL:url sourceApplication:sourceApplication annotation:annotation deferred:NO];
+}
+
+- (BOOL)openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation deferred:(BOOL)isDeferred {
+  return [self.routing openURL:url sourceApplication:sourceApplication annotation:annotation deferredDeeplink:isDeferred];
 }
 
 - (BOOL)canOpenURL:(NSURL *)url {
   return [self.routing canOpenURL:url];
+}
+
+- (BOOL)openDeeplink:(HOKDeeplink *)deeplink {
+  return [self.routing openDeeplink:deeplink];
 }
 
 - (void)openSmartlink:(NSString *)smartlink {
@@ -79,21 +104,22 @@
   [self.resolver resolveSmartlink:smartlink completion:^(NSString *deeplink, NSDictionary *metadata, NSError *error) {
     if (deeplink) {
       NSURL *deeplinkURL = [NSURL URLWithString:deeplink];
-      [self.routing openURL:deeplinkURL metadata:metadata];
       
-      HOKDeeplink *deeplinkObject = [self.routing deeplinkForURL:deeplinkURL metadata:metadata];
-      if (completion && deeplinkObject) {
-        completion(deeplinkObject);
+      if ([self.routing openURL:deeplinkURL metadata:metadata]) {
+        HOKDeeplink *deeplinkObject = [self.routing deeplinkForURL:deeplinkURL];
+        deeplinkObject.metadata = metadata;
+        if (completion && deeplinkURL) {
+          completion([self.routing deeplinkForURL:deeplinkURL]);
+        }
       }
+      
     } else if (completion) {
       completion(nil);
     }
   }];
 }
 
-- (BOOL)continueUserActivity:(NSUserActivity *)userActivity
-          restorationHandler:(void(^)(NSArray *restorableObjects))restorationHandler {
-  
+- (BOOL)continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
   if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
     NSURL *webpageURL = userActivity.webpageURL;
     if (webpageURL) {
@@ -123,6 +149,13 @@
   [self.handling addHandlerBlock:handlerBlock];
 }
 
+
+#pragma mark - Filter Deep links
+- (void)addFilterBlock:(BOOL (^)(HOKDeeplink *deeplink))handlerBlock {
+  [self.filtering addFilterBlock:handlerBlock];
+}
+
+
 #pragma mark - Link Generation
 - (void)generateSmartlinkForDeeplink:(HOKDeeplink *)deeplink
                              success:(void (^)(NSString *smartlink))success
@@ -133,11 +166,11 @@
 
 #pragma mark - Deferred Deeplinking
 - (void)triggerDeferredDeeplinking {
-  __block HOKDeeplinking *wself = self;
+  __block typeof(self) wself = self;
   __block HOKNotificationObserver *didFinishLaunchingNotificationObserver = [[HOKObserver observer] registerForNotification:UIApplicationDidFinishLaunchingNotification triggered:^(NSNotification *notification) {
     [wself.deferredDeeplinking requestDeferredDeeplink:^(NSString *deeplink) {
       if (!notification.userInfo[UIApplicationLaunchOptionsURLKey]) {
-        [wself handleOpenURL:[NSURL URLWithString:deeplink]];
+        [wself handleOpenDeferredURL:[NSURL URLWithString:deeplink]];
       }
     }];
     [[HOKObserver observer] removeObserver:didFinishLaunchingNotificationObserver];

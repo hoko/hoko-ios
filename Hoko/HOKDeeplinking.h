@@ -35,18 +35,35 @@
 @interface HOKDeeplinking : NSObject
 
 /**
+ *  This method will return the last deep link that was processed (whether it was sucessfully opened, or not, due to filters)
+ *  by the HOKO SDK. If no deeplinks were processed at the time of the call, this will return nil.
+ *
+ *  @return currentDeeplink The last deeplink object that was processed by the SDK.
+ */
+- (hok_nullable HOKDeeplink *)currentDeeplink;
+
+/**
+ *  This method will try to open the last deep link that was processed (whether it was sucessfully opened, or not, due to filters)
+ *  by calling the route that is currently mapping this deeplink and the handlers.
+ *  If the deeplink object is not nil and was opened during this call, the method will return YES, otherwise NO.
+ *
+ *  @return Returns YES if the current deeplink object was successfully opened. NO otherwise.
+ */
+- (BOOL)openCurrentDeeplink;
+
+/**
  *  mapRoute:toTarget: allows deeplinks which conform to a certain route format to target blocks.
  *  Target blocks should be used to contruct your navigation flow and your data flow from both
  *  the deeplink object and your static data (e.g. CoreData, SQLite, etc).
  *
- *  <pre>
+ *  @code
  *  [[Hoko deeplinking] mapRoute:@"product/:product_id" toTarget:^(HOKDeeplink *deeplink) {
  *    DetailViewController *tableViewController = [[UIStoryboard storyboardWithName:@"Storyboard" bundle:nil]instantiateViewControllerWithIdentifier:@"DetailViewController"];
  *    tableViewController.productId = deeplink.routeParameters[@"product_id"];
  *    tableViewController.productPrice = deeplink.queryParameters[@"product_price"];
  *    [HOKNavigation pushViewController:tableViewController animated:YES];
  *  }];
- *  </pre>
+ *  @endcode
  *
  *  @param route  The route format string (e.g. "product/:product_id").
  *  @param target The target block in which you should construct your navigation.
@@ -58,12 +75,12 @@
  *  to this default target. Most common usage should be to send the user to your application's main
  *  screen. The deeplink target will still receive the information contained in the deeplink.
  *
- *  <pre>
+ *  @code
  *  [[Hoko deeplinking] mapDefaultRouteToTarget:^(HOKDeeplink *deeplink) {
  *    MainViewController *tableViewController = [[UIStoryboard storyboardWithName:@"Storyboard" bundle:nil]instantiateViewControllerWithIdentifier:@"MainViewController"];
  *    [HOKNavigation pushViewController:tableViewController animated:YES];
  *  }];
- *  </pre>
+ *  @endcode
  *
  *  @param target The target block in which you should construct your navigation
  */
@@ -74,9 +91,9 @@
  *  your application opens a deeplink. This allows you to track incoming deeplinks outside of the
  *  deeplinking targets.
  *
- *  <pre>
+ *  @code
  *  [[Hoko deeplinking] addHandler:[Analytics sharedInstance]];
- *  </pre>
+ *  @endcode
  *
  *  @param handler An object which implements the HOKHandlerProtocol.
  */
@@ -86,15 +103,40 @@
  *  With addHandlerBlock: you can add a block which will be called everytime your application
  *  opens a deeplink. This allows you to track incoming deeplinks outside of the deeplinking targets.
  *
- *  <pre>
+ *  @code
  *  [[Hoko deeplinking] addHandlerBlock:^(HOKDeeplink *deeplink) {
  *    [AppLogger log:deeplink];
  *  }];
- *  </pre>
+ *  @endcode
  *
  *  @param handlerBlock A block that receives an HOKDeeplink object.
  */
 - (void)addHandlerBlock:(hok_nonnull void (^)(HOKDeeplink * __hok_nonnull deeplink))handlerBlock;
+
+
+/**
+ *  This method will add a filter block that will be called whenever a new deep link is opened by the SDK.
+ *  By calling the block, the SDK will expect a BOOL return value from it, that says if the HOKDeeplink object
+ *  given in the block's parameters should be opened (YES) or not (NO). By saying NO (the deep link should not
+ *  be opened), the SDK will save in the "currentDeeplink" that can be accessed later with the "wasOpened" property set to NO.
+ *  By saying YES (the deep link should be opened) the SDK will try to open it normally.
+ *
+ *  One of the use cases for this is to only open deep links with a "friends" route if the user is already logged in in your application,
+ *  otherwise it should open all deep links.
+ *  @code
+ *  [[Hoko deeplinking] addFilterBlock:^BOOL (HOKDeeplink * deeplink) {
+ *      if ([deeplink.route isEqualToString:@"friends/:friend_id"]) {
+ *          return currentUser.isLoggedIn;
+ *      } else {
+ *          return YES;
+ *      }
+ *  }];
+ *  @endcode
+ *
+ *  @param handlerBlock A block that receives an HOKDeeplink object and returns a BOOL.
+ */
+- (void)addFilterBlock:(hok_nonnull BOOL (^)(HOKDeeplink * __hok_nonnull deeplink))handlerBlock;
+
 
 /**
  *  handleOpenURL: is a mimicked method from the UIApplicationDelegate protocol for iOS < 4.2. 
@@ -138,7 +180,18 @@
  *
  *  @return YES in case it contains a Smartlink, NO otherwise.
  */
-- (BOOL)continueUserActivity:(hok_nonnull NSUserActivity *)userActivity restorationHandler:(hok_nonnull void(^)(NSArray * __hok_nullable restorableObjects))restorationHandler NS_AVAILABLE_IOS(8_0);
+- (BOOL)continueUserActivity:(hok_nonnull NSUserActivity *)userActivity restorationHandler:(hok_nonnull void (^)(NSArray * __hok_nullable restorableObjects))restorationHandler NS_AVAILABLE_IOS(8_0);
+
+/**
+ *  This method will try to open the deeplink object given in the parameters,
+ *  by calling the route that is currently mapping that deeplink object's route and the handlers.
+ *  If the deeplink was opened during this call, the method will return YES, otherwise NO.
+ *
+ *  @param deeplink The deeplink object that will be opened.
+ *
+ *  @return Returns YES if the deeplink object given in the parameters was successfully opened. NO otherwise.
+ */
+- (BOOL)openDeeplink:(hok_nonnull HOKDeeplink *)deeplink;
 
 /**
  *  openSmartlink: serves the purpose of handling the open of a Smartlink, by resolving it through
@@ -170,7 +223,7 @@
  *  @param success      The block called in case of success, will have an Smartlink as a parameter.
  *  @param failure      The block called in case of failure, will have an NSError as a parameter.
  */
-- (void)generateSmartlinkForDeeplink:(hok_nonnull HOKDeeplink *)deeplink success:(hok_nullable void(^)(NSString * __hok_nonnull smartlink))success failure:(hok_nullable void(^)(NSError * __hok_nonnull error))failure;
+- (void)generateSmartlinkForDeeplink:(hok_nonnull HOKDeeplink *)deeplink success:(hok_nullable void (^)(NSString * __hok_nonnull smartlink))success failure:(hok_nullable void (^)(NSError * __hok_nonnull error))failure;
 
 @end
 
