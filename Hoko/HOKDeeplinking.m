@@ -56,8 +56,8 @@
 
 #pragma mark - Current Deeplink
 - (BOOL)openCurrentDeeplink {
-  if (_currentDeeplink)
-    return [self openDeeplink:_currentDeeplink];
+  if (self.currentDeeplink)
+    return [self openDeeplink:self.currentDeeplink];
   else
     return NO;
 }

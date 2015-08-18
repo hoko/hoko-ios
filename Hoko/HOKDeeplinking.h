@@ -35,7 +35,7 @@
 @interface HOKDeeplinking : NSObject
 
 /**
- *  This method will return the last deep link that was processed (whether it was sucessfully opened, or not)
+ *  This method will return the last deep link that was processed (whether it was sucessfully opened, or not, due to filters)
  *  by the HOKO SDK. If no deeplinks were processed at the time of the call, this will return nil.
  *
  *  @return currentDeeplink The last deeplink object that was processed by the SDK.
@@ -43,8 +43,8 @@
 - (hok_nullable HOKDeeplink *)currentDeeplink;
 
 /**
- *  This method will try to open the last deep link that was processed (whether it was sucessfully opened, or not)
- *  by calling the route that is currently mapping this deeplink object's route and the handlers.
+ *  This method will try to open the last deep link that was processed (whether it was sucessfully opened, or not, due to filters)
+ *  by calling the route that is currently mapping this deeplink and the handlers.
  *  If the deeplink object is not nil and was opened during this call, the method will return YES, otherwise NO.
  *
  *  @return Returns YES if the current deeplink object was successfully opened. NO otherwise.
