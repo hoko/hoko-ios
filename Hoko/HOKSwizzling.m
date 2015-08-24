@@ -51,7 +51,7 @@
   if (appDelegates.count == 1) {
     return appDelegates.firstObject;
   }
-  
+  NSLog(@"[HOKO] We have detected that you have %@ classes that implement the UIApplicationDelegate protocol (%@), please go to http://goo.gl/DGZGSL for how to manually delegate deep links to HOKO.", @(appDelegates.count), appDelegates);
   return nil;
 }
 
