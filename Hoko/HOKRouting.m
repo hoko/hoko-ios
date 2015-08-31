@@ -99,14 +99,15 @@
   [Hoko deeplinking].currentDeeplink = deeplink;
   
   [deeplink postWithToken:self.token];
-  [[Hoko deeplinking].handling handle:deeplink];
   if (route) {
     if ([[Hoko deeplinking].filtering filter:deeplink]) {
-      deeplink.wasOpened = YES;
+      [[Hoko deeplinking].handling handle:deeplink];
       
       if (route.target) {
         route.target(deeplink);
       }
+      
+      deeplink.wasOpened = YES;
       
       return YES;
     }

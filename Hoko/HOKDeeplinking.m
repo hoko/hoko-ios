@@ -151,8 +151,8 @@
 
 
 #pragma mark - Filter Deep links
-- (void)addFilterBlock:(BOOL (^)(HOKDeeplink *deeplink))handlerBlock {
-  [self.filtering addFilterBlock:handlerBlock];
+- (void)addFilterBlock:(BOOL (^)(HOKDeeplink *deeplink))filterBlock {
+  [self.filtering addFilterBlock:filterBlock];
 }
 
 
