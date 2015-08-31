@@ -133,9 +133,9 @@
  *  }];
  *  @endcode
  *
- *  @param handlerBlock A block that receives an HOKDeeplink object and returns a BOOL.
+ *  @param filterBlock A block that receives an HOKDeeplink object and returns a BOOL.
  */
-- (void)addFilterBlock:(hok_nonnull BOOL (^)(HOKDeeplink * __hok_nonnull deeplink))handlerBlock;
+- (void)addFilterBlock:(hok_nonnull BOOL (^)(HOKDeeplink * __hok_nonnull deeplink))filterBlock;
 
 
 /**
