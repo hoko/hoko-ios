@@ -23,7 +23,7 @@
 
 NSString *const HOKDeferredDeeplinkingNotFirstRun = @"isNotFirstRun";
 NSString *const HOKDeferredDeeplinkingPath = @"installs/ios";
-NSString *const HOKFingerprintMatchingPath = @"match?idfa=%@";
+NSString *const HOKFingerprintMatchingPath = @"fingerprints/match";
 
 @interface HOKDeferredDeeplinking ()
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
@@ -32,6 +32,10 @@ NSString *const HOKFingerprintMatchingPath = @"match?idfa=%@";
 
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, copy) void (^handler)(NSString *deeplink);
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
+@property (nonatomic, strong) SFSafariViewController *safariViewController;
+#endif
 
 @end
 
@@ -51,9 +55,15 @@ NSString *const HOKFingerprintMatchingPath = @"match?idfa=%@";
     self.handler = handler;
     
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
-    NSString *fingerprintString = [NSString stringWithFormat:HOKFingerprintMatchingPath, [HOKDevice device].uid];
-    SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:[HOKNetworkOperation urlFromPath:fingerprintString]]];
-    safariViewController.delegate = self;
+    NSString *fingerprintURL = [NSString stringWithFormat:@"%@?uid=%@", [HOKNetworkOperation urlFromPath:HOKFingerprintMatchingPath], [HOKDevice device].uid];
+    self.safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:fingerprintURL]];
+    self.safariViewController.delegate = self;
+    self.safariViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    self.safariViewController.view.alpha = 0;
+    self.safariViewController.view.hidden = YES;
+    
+    [[[UIApplication sharedApplication] windows][0].rootViewController presentViewController:self.safariViewController animated:NO completion:nil];
+    
 #else
     [self hok_requestDeferredDeeplink];
 #endif
@@ -77,8 +87,6 @@ NSString *const HOKFingerprintMatchingPath = @"match?idfa=%@";
                         @"device_type": [HOKDevice device].platform,
                         @"language": [HOKDevice device].systemLanguage.lowercaseString,
                         @"screen_size": [HOKDevice device].screenSize,
-                        
-                        /* ADDED NOW */
                         @"uid": [HOKDevice device].uid
                         }
            };
@@ -89,10 +97,9 @@ NSString *const HOKFingerprintMatchingPath = @"match?idfa=%@";
 #pragma mark - SFSafariViewController delegate method
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
 - (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
+  [self.safariViewController dismissViewControllerAnimated:NO completion:nil];
   [self hok_requestDeferredDeeplink];
 }
 #endif
-
-
 
 @end
