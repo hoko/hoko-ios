@@ -35,7 +35,7 @@
 }
 
 - (void)logError:(NSError *)error {
-  [self log:error.description];
+  NSLog(@"[HOKO] %@",error.description);
 }
 
 

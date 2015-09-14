@@ -47,6 +47,26 @@
   }
 }
 
+- (NSString *)generateLazySmartlinkForDeeplink:(HOKDeeplink *)deeplink domain:(NSString *)domain customDomains:(NSArray *)customDomains
+{
+  if (deeplink && domain) {
+    if (deeplink.hasURLs) {
+      HOKErrorLog([HOKError lazySmartlinkCantHaveURLsError]);
+      return nil;
+    }
+    NSString *strippedDomain = [domain stringByReplacingOccurrencesOfString:@"http://" withString:@""];
+    strippedDomain = [strippedDomain stringByReplacingOccurrencesOfString:@"https://" withString:@""];
+    if ([strippedDomain rangeOfString:@"/"].location != NSNotFound) {
+      HOKErrorLog([HOKError invalidDomain:domain]);
+    } else if ([customDomains containsObject:strippedDomain] || [strippedDomain rangeOfString:@"hoko.link"].location != NSNotFound) {
+      return [NSString stringWithFormat:@"http://%@/lazy?uri=%@", strippedDomain, [HOKLinkGenerator URLEncodeStringFromString:deeplink.url]];
+    } else {
+      HOKErrorLog([HOKError domainUnknown:domain customDomains:customDomains]);
+    }
+  }
+  return nil;
+}
+
 #pragma mark - Networking
 - (void)requestForSmartlinkWithDeeplink:(HOKDeeplink *)deeplink
                                 success:(void (^)(NSString *smartlink))success
@@ -63,6 +83,15 @@
     HOKErrorLog([HOKError serverErrorFromJSON:error]);
     failure([HOKError serverErrorFromJSON:error]);
   }];
+}
+
+#pragma mark - URL Encoding
++ (NSString *)URLEncodeStringFromString:(NSString *)string
+{
+  static CFStringRef charset = CFSTR("!@#$%&*()+'\";:=,/?[] ");
+  CFStringRef str = (__bridge CFStringRef)string;
+  CFStringEncoding encoding = kCFStringEncodingUTF8;
+  return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, str, NULL, charset, encoding));
 }
 
 @end

@@ -40,5 +40,6 @@ extern NSString *const HOKDeeplinkSmartlinkIdentifierKey;
 
 @property (nonatomic) BOOL isDeferred;
 @property (nonatomic) BOOL wasOpened;
+@property (nonatomic, strong, readonly) NSString *url;
 
 @end

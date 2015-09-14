@@ -29,5 +29,8 @@
 + (NSError *)serverErrorFromJSON:(id)json;
 + (NSError *)serverWarning:(NSDictionary *)warningJSON;
 + (NSError *)invalidJSONMetadata;
++ (NSError *)lazySmartlinkCantHaveURLsError;
++ (NSError *)domainUnknown:(NSString *)domain customDomains:(NSArray *)customDomains;
++ (NSError *)invalidDomain:(NSString *)domain;
 
 @end

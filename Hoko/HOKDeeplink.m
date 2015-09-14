@@ -34,6 +34,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 @property (nonatomic, strong) NSMutableDictionary *urls;
 @property (nonatomic) BOOL isDeferred;
 @property (nonatomic) BOOL wasOpened;
+@property (nonatomic) BOOL unique;
 
 @end
 
@@ -72,6 +73,19 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
                    queryParameters:(NSDictionary *)queryParameters
                           metadata:(NSDictionary *)metadata {
   
+  return [self deeplinkWithRoute:route
+                     routeParameters:routeParameters
+                     queryParameters:queryParameters
+                            metadata:metadata
+                              unique:NO];
+}
+
++ (HOKDeeplink *)deeplinkWithRoute:(NSString *)route
+                   routeParameters:(NSDictionary *)routeParameters
+                   queryParameters:(NSDictionary *)queryParameters
+                          metadata:(NSDictionary *)metadata
+                            unique:(BOOL)unique {
+  
   return [self deeplinkWithURLScheme:nil
                                route:route
                      routeParameters:routeParameters
@@ -79,7 +93,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
                             metadata:metadata
                    sourceApplication:nil
                          deeplinkURL:nil
-                            deferred:NO];
+                            deferred:NO
+                              unique:YES];
 }
 
 #pragma mark - Private Static Initializer
@@ -90,7 +105,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
                               metadata:(NSDictionary *)metadata
                      sourceApplication:(NSString *)sourceApplication
                            deeplinkURL:(NSString *)deeplinkURL
-                              deferred:(BOOL)isDeferred {
+                              deferred:(BOOL)isDeferred
+                                unique:(BOOL)unique {
   
   HOKDeeplink *deeplink = [[HOKDeeplink alloc] initWithURLScheme:urlScheme
                                                            route:route
@@ -99,7 +115,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
                                                         metadata:metadata
                                                sourceApplication:sourceApplication
                                                      deeplinkURL:deeplinkURL
-                                                        deferred:isDeferred];
+                                                        deferred:isDeferred
+                                                          unique:unique];
   
   if ([HOKDeeplink matchRoute:deeplink.route withRouteParameters:deeplink.routeParameters] || (route == nil && routeParameters == nil && queryParameters == nil && metadata == nil)) {
     return deeplink;
@@ -110,7 +127,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 
 #pragma mark - Private Initializer
 - (instancetype)init {
-  return [self initWithURLScheme:nil route:nil routeParameters:nil queryParameters:nil metadata:nil sourceApplication:nil deeplinkURL:nil deferred:NO];
+  return [self initWithURLScheme:nil route:nil routeParameters:nil queryParameters:nil metadata:nil sourceApplication:nil deeplinkURL:nil deferred:NO unique:NO];
 }
 
 - (instancetype)initWithURLScheme:(NSString *)urlScheme
@@ -120,7 +137,8 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
                          metadata:(NSDictionary *)metadata
                 sourceApplication:(NSString *)sourceApplication
                       deeplinkURL:(NSString *)deeplinkURL
-                         deferred:(BOOL)isDeferred {
+                         deferred:(BOOL)isDeferred
+                           unique:(BOOL)unique {
   
   self = [super init];
   if (self) {
@@ -139,6 +157,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
     
     _isDeferred = isDeferred;
     _wasOpened = NO;
+    _unique = unique;
   }
   
   return self;
@@ -255,10 +274,12 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 - (NSDictionary *)generateSmartlinkJSON {
   if (!self.hasURLs) {
     return @{@"uri": [HOKUtils jsonValue:self.url],
+             @"unique": [HOKUtils jsonValue:@(self.unique)],
              @"metadata": [HOKUtils jsonValue:self.metadata]};
   } else {
     return @{@"uri": [HOKUtils jsonValue:self.url],
              @"routes": self.urls,
+             @"unique": [HOKUtils jsonValue:@(self.unique)],
              @"metadata": [HOKUtils jsonValue:self.metadata]};
   }
   
