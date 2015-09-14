@@ -143,7 +143,8 @@
                                                         metadata:metadata
                                                sourceApplication:sourceApplication
                                                      deeplinkURL:url.absoluteString
-                                                        deferred:isDeferred];
+                                                        deferred:isDeferred
+                                                          unique:NO];
       if (route) {
         *route = hokRoute;
       }
@@ -159,7 +160,8 @@
                                                     metadata:metadata
                                            sourceApplication:sourceApplication
                                                  deeplinkURL:url.absoluteString
-                                                    deferred:isDeferred];
+                                                    deferred:isDeferred
+                                                      unique:NO];
   if (self.defaultRoute) {
     *route = self.defaultRoute;
   }
