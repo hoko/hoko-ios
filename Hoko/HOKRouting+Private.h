@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
+#import "HOKRouting.h"
+
 @interface HOKRouting (Private)
 
 - (BOOL)openDeeplink:(HOKDeeplink *)deeplink;

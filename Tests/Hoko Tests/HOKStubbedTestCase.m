@@ -8,6 +8,7 @@
 
 #import "HOKStubbedTestCase.h"
 
+#import <Hoko/Hoko.h>
 #import <Hoko/HOKApp.h>
 #import <Hoko/HOKNetworkOperationQueue+Private.h>
 
