@@ -62,8 +62,10 @@ NSString *const HOKFingerprintMatchingPath = @"fingerprints/match";
     self.safariViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     self.safariViewController.view.alpha = 0;
     self.safariViewController.view.hidden = YES;
-    
-    [[[UIApplication sharedApplication] windows][0].rootViewController presentViewController:self.safariViewController animated:NO completion:nil];
+    UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectZero];
+    window.rootViewController = self.safariViewController;
+    [window makeKeyAndVisible];
+    window.alpha = 0;
     
 #else
     [self requestDeferredDeeplink];
