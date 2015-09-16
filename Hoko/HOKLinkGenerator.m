@@ -47,7 +47,7 @@
   }
 }
 
-- (NSString *)generateLazySmartlinkForDeeplink:(HOKDeeplink *)deeplink domain:(NSString *)domain customDomains:(NSArray *)customDomains
+- (NSString *)generateLazySmartlinkForDeeplink:(HOKDeeplink *)deeplink domain:(NSString *)domain customDomain:(NSString *)customDomain
 {
   if (deeplink && domain) {
     if (deeplink.hasURLs) {
@@ -58,10 +58,10 @@
     strippedDomain = [strippedDomain stringByReplacingOccurrencesOfString:@"https://" withString:@""];
     if ([strippedDomain rangeOfString:@"/"].location != NSNotFound) {
       HOKErrorLog([HOKError invalidDomain:domain]);
-    } else if ([customDomains containsObject:strippedDomain] || [strippedDomain rangeOfString:@"hoko.link"].location != NSNotFound) {
+    } else if ([customDomain isEqualToString:strippedDomain] || [strippedDomain rangeOfString:@"hoko.link"].location != NSNotFound) {
       return [NSString stringWithFormat:@"http://%@/lazy?uri=%@", strippedDomain, [HOKLinkGenerator URLEncodeStringFromString:deeplink.url]];
     } else {
-      HOKErrorLog([HOKError domainUnknown:domain customDomains:customDomains]);
+      HOKErrorLog([HOKError domainUnknown:domain customDomain:customDomain]);
     }
   }
   return nil;

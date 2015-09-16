@@ -12,7 +12,7 @@
 
 @interface HOKDeeplinking (Private)
 
-- (instancetype)initWithToken:(NSString *)token customDomains:(NSArray *)customDomains debugMode:(BOOL)debugMode;
+- (instancetype)initWithToken:(NSString *)token customDomain:(NSString *)customDomain debugMode:(BOOL)debugMode;
 
 - (BOOL)handleOpenDeferredURL:(NSURL *)url;
 

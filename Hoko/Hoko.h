@@ -45,12 +45,12 @@
  *  as you will be able to track everything through automatic Analytics, which
  *  will be shown on your Hoko dashboards. Will also make sure HOKO works with your custom domains.
  *  <pre>
- *  [Hoko setupWithToken:@"YOUR-API-TOKEN" customDomains:@[@"your.custom.domain.com"]];
+ *  [Hoko setupWithToken:@"YOUR-API-TOKEN" customDomain:@"your.custom.domain.com"];
  *  </pre>
  *
  *  @param token Hoko service API key.
  */
-+ (void)setupWithToken:(hok_nonnull NSString *)token customDomains:(hok_nullable NSArray hok_generic(NSString *) *)customDomains;
++ (void)setupWithToken:(hok_nonnull NSString *)token customDomain:(hok_nullable NSString *)customDomain;
 
 
 /**

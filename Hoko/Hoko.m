@@ -42,10 +42,10 @@ static Hoko *_sharedInstance = nil;
 
 #pragma mark - Setup
 + (void)setupWithToken:(NSString *)token {
-  [self setupWithToken:token customDomains:nil];
+  [self setupWithToken:token customDomain:nil];
 }
 
-+ (void)setupWithToken:(NSString *)token customDomains:(NSArray *)customDomains {
++ (void)setupWithToken:(NSString *)token customDomain:(NSString *)customDomain {
   if (onceToken != 0) {
     HOKErrorLog([HOKError setupCalledMoreThanOnceError]);
     NSAssert(NO, [HOKError setupCalledMoreThanOnceError].description);
@@ -53,14 +53,14 @@ static Hoko *_sharedInstance = nil;
   
   dispatch_once(&onceToken, ^{
     _sharedInstance = [[Hoko alloc] initWithToken:token
-                                    customDomains:customDomains
+                                    customDomain:customDomain
                                         debugMode:[HOKApp app].isDebugBuild];
   });
 }
 
 #pragma mark - Initializer
 - (instancetype)initWithToken:(NSString *)token
-                customDomains:(NSArray *)customDomains
+                customDomain:(NSString *)customDomain
                     debugMode:(BOOL)debugMode {
   
   if (self = [super init]) {
@@ -70,7 +70,7 @@ static Hoko *_sharedInstance = nil;
     [[HOKDevice device] setupReachability];
     
     [[HOKNetworkOperationQueue sharedQueue] setup];
-    _deeplinking = [[HOKDeeplinking alloc] initWithToken:token customDomains:customDomains debugMode:debugMode];
+    _deeplinking = [[HOKDeeplinking alloc] initWithToken:token customDomain:customDomain debugMode:debugMode];
     
     [self checkVersions];
     
