@@ -124,7 +124,7 @@
     [self swizzleOpenURLWithAppDelegateClassName:appDelegateClassName];
     [self swizzleLegacyOpenURLWithAppDelegateClassName:appDelegateClassName];
     
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     [self swizzleContinueUserActivityWithAppDelegateClassName:appDelegateClassName];
 #endif
     
@@ -161,7 +161,7 @@
   }];
 }
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 + (void)swizzleContinueUserActivityWithAppDelegateClassName:(NSString *)appDelegateClassName {
   __block IMP implementation = [HOKSwizzling swizzleClassWithClassname:appDelegateClassName originalSelector:@selector(application:continueUserActivity:restorationHandler:) block:^BOOL (id blockSelf, UIApplication *application, NSUserActivity *userActivity, id restorationHandler){
     
