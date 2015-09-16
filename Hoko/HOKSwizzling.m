@@ -40,7 +40,7 @@
     for (int i = 0; i < numClasses; i++) {
       Class class = classes[i];
       // Avoiding StoreKit inner classes
-      if (class_conformsToProtocol(class, @protocol(UIApplicationDelegate)) && ![class isSubclassOfClass:[UIApplication class]]) {
+      if (class_conformsToProtocol(class, @protocol(UIApplicationDelegate)) && ![class isSubclassOfClass:[UIApplication class]] && class_getSuperclass(class) == [UIResponder class]) {
         appDelegates = [appDelegates arrayByAddingObject:NSStringFromClass(classes[i])];
       }
     }
@@ -50,8 +50,11 @@
   
   if (appDelegates.count == 1) {
     return appDelegates.firstObject;
+  } else if (appDelegates.count > 1) {
+    NSLog(@"[HOKO] We have detected that you have %@ classes that implement the UIApplicationDelegate protocol (%@), please go to http://goo.gl/DGZGSL for how to manually delegate deep links to HOKO.", @(appDelegates.count), appDelegates);
+  } else {
+    NSLog(@"[HOKO] We could not detect your AppDelegate class, HOKO requires your AppDelegate to descend from UIResponder and implement UIApplicationDelegate. Please go to http://goo.gl/DGZGSL for how to manually delegate deep links to HOKO.");
   }
-  NSLog(@"[HOKO] We have detected that you have %@ classes that implement the UIApplicationDelegate protocol (%@), please go to http://goo.gl/DGZGSL for how to manually delegate deep links to HOKO.", @(appDelegates.count), appDelegates);
   return nil;
 }
 
