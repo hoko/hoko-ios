@@ -55,19 +55,22 @@ NSString *const HOKFingerprintMatchingPath = @"fingerprints/match";
     self.handler = handler;
     
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
-    NSString *fingerprintURL = [NSString stringWithFormat:@"%@?uid=%@", [HOKNetworkOperation urlFromPath:HOKFingerprintMatchingPath], [HOKDevice device].uid];
-    self.safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:fingerprintURL]];
-    self.safariViewController.delegate = self;
-    
-    UIViewController *rootViewController = [[UIViewController alloc] init];
-    
-    UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectZero];
-    window.rootViewController = rootViewController;
-    [window makeKeyAndVisible];
-    window.alpha = 0;
-    
-    [rootViewController presentViewController:self.safariViewController animated:NO completion:nil];
-    
+    if (HOKSystemVersionGreaterThanOrEqualTo(@"9.0")) {
+      NSString *fingerprintURL = [NSString stringWithFormat:@"%@?uid=%@", [HOKNetworkOperation urlFromPath:HOKFingerprintMatchingPath], [HOKDevice device].uid];
+      self.safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:fingerprintURL]];
+      self.safariViewController.delegate = self;
+      
+      UIViewController *rootViewController = [[UIViewController alloc] init];
+      
+      UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectZero];
+      window.rootViewController = rootViewController;
+      [window makeKeyAndVisible];
+      window.alpha = 0;
+      
+      [rootViewController presentViewController:self.safariViewController animated:NO completion:nil];
+    } else {
+      [self requestDeferredDeeplink];
+    }
 #else
     [self requestDeferredDeeplink];
 #endif
