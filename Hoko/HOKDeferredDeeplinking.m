@@ -94,8 +94,7 @@ NSString *const HOKFingerprintMatchingPath = @"fingerprints/match";
                         @"device_type": [HOKDevice device].platform,
                         @"language": [HOKDevice device].systemLanguage.lowercaseString,
                         @"screen_size": [HOKDevice device].screenSize,
-                        @"uid": [HOKDevice device].uid
-                        }
+                        @"uid": [HOKDevice device].uid }
            };
 }
 
