@@ -48,11 +48,11 @@ NSString *const HOKRoutePath = @"routes";
 
 #pragma mark - Serialization
 - (NSDictionary *)json {
-  return @{@"route": @{@"build": [HOKApp app].build,
-                       @"device": [HOKDevice device].platform,
-                       @"path": self.route,
-                       @"url_schemes": [HOKApp app].urlSchemes,
-                       @"version": [HOKApp app].version}};
+  return @{@"route": @{@"build": [HOKUtils jsonValue:[HOKApp app].build],
+                       @"device": [HOKUtils jsonValue:[HOKDevice device].platform],
+                       @"path": [HOKUtils jsonValue:self.route],
+                       @"url_schemes": [HOKUtils jsonValue:[HOKApp app].urlSchemes],
+                       @"version": [HOKUtils jsonValue:[HOKApp app].version]}};
 }
 
 
