@@ -1,6 +1,6 @@
 {
   "name": "Hoko",
-  "version": "2.3",
+  "version": "2.3.0",
   "platforms": {
     "ios": "5.0"
   },
@@ -15,7 +15,7 @@
   },
   "source": {
     "git": "https://github.com/hokolinks/hoko-ios.git",
-    "tag": "v2.3"
+    "tag": "v2.3.0"
   },
   "requires_arc": true,
   "public_header_files": "Hoko/*.h",
