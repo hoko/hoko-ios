@@ -93,12 +93,12 @@ NSString *const HOKServerWarningDomain = @"HokoServerWarning";
   return [self errorWithCode:17 description:@"Lazy smartlinks cannot have custom URLs for each platform."];
 }
 
-+ (NSError *)domainUnknown:(NSString *)domain customDomains:(NSArray *)customDomains
++ (NSError *)domainUnknown:(NSString *)domain customDomain:(NSString *)customDomain
 {
-  if (!customDomains || customDomains.count == 0) {
+  if (!customDomain) {
     return [self errorWithCode:18 description:[NSString stringWithFormat:@"To generate a lazy smartlink you need to provide a known domain. %@ is not a hoko.link subdomain.", domain]];
   } else {
-    return [self errorWithCode:18 description:[NSString stringWithFormat:@"To generate a lazy smartlink you need to provide a known domain. %@ is not a hoko.link subdomain nor is it included in your custom domains %@.", domain, [customDomains description]]];
+    return [self errorWithCode:18 description:[NSString stringWithFormat:@"To generate a lazy smartlink you need to provide a known domain. %@ is not a hoko.link subdomain nor is it your custom domain %@.", domain, customDomain]];
   }
 }
 

@@ -30,7 +30,7 @@
 + (NSError *)serverWarning:(NSDictionary *)warningJSON;
 + (NSError *)invalidJSONMetadata;
 + (NSError *)lazySmartlinkCantHaveURLsError;
-+ (NSError *)domainUnknown:(NSString *)domain customDomains:(NSArray *)customDomains;
++ (NSError *)domainUnknown:(NSString *)domain customDomain:(NSString *)customDomain;
 + (NSError *)invalidDomain:(NSString *)domain;
 
 @end

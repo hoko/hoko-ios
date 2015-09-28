@@ -8,6 +8,7 @@
 
 #import "HOKResolver.h"
 
+#import "HOKUtils.h"
 #import "HOKDevice.h"
 #import "HOKLogger.h"
 #import "HOKNetworking.h"
@@ -54,8 +55,8 @@ NSString *const HOKResolverEndpoint = @"smartlinks/resolve";
     smartlinkString = [(NSURL *)smartlink absoluteString];
   }
   
-  return @{@"smartlink": smartlinkString,
-           @"uid": [HOKDevice device].uid};
+  return @{@"smartlink": [HOKUtils jsonValue:smartlinkString],
+           @"uid": [HOKUtils jsonValue:[HOKDevice device].uid] };
 }
 
 

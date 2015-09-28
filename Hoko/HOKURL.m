@@ -168,6 +168,10 @@ NSString *const HOKDefaultURLScheme = @"hoko";
         [path deleteCharactersInRange:NSMakeRange(0, 1)];
       }
       
+      if ([path hasSuffix:@"/"] && path.length > 0) {
+        [path deleteCharactersInRange:NSMakeRange(path.length-1, 1)];
+      }
+      
       return path;
     }
   }

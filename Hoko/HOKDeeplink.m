@@ -278,7 +278,7 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
              @"metadata": [HOKUtils jsonValue:self.metadata]};
   } else {
     return @{@"uri": [HOKUtils jsonValue:self.url],
-             @"routes": self.urls,
+             @"routes": [HOKUtils jsonValue:self.urls],
              @"unique": [HOKUtils jsonValue:@(self.unique)],
              @"metadata": [HOKUtils jsonValue:self.metadata]};
   }
@@ -294,9 +294,9 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 
 - (NSDictionary *)metadataJSON {
   if (self.smartlinkClickIdentifier) {
-    return @{HOKDeeplinkSmartlinkClickIdentifierKey: self.smartlinkClickIdentifier};
+    return @{HOKDeeplinkSmartlinkClickIdentifierKey: [HOKUtils jsonValue:self.smartlinkClickIdentifier]};
   } else {
-    return @{HOKDeeplinkSmartlinkIdentifierKey: self.smartlinkIdentifier};
+    return @{HOKDeeplinkSmartlinkIdentifierKey: [HOKUtils jsonValue:self.smartlinkIdentifier]};
   }
 }
 

@@ -25,7 +25,7 @@
 
 @interface HOKDeeplinking ()
 
-@property (nonatomic, strong) NSArray *customDomains;
+@property (nonatomic, strong) NSString *customDomain;
 @property (nonatomic, strong) HOKResolver *resolver;
 @property (nonatomic, strong) HOKRouting *routing;
 @property (nonatomic, strong) HOKHandling *handling;
@@ -39,10 +39,10 @@
 @implementation HOKDeeplinking
 
 #pragma mark - Initialization
-- (instancetype)initWithToken:(NSString *)token customDomains:(NSArray *)customDomains debugMode:(BOOL)debugMode {
+- (instancetype)initWithToken:(NSString *)token customDomain:(NSString *)customDomain debugMode:(BOOL)debugMode {
   self = [super init];
   if (self) {
-    _customDomains = customDomains;
+    _customDomain = customDomain;
     _routing = [[HOKRouting alloc] initWithToken:token debugMode:debugMode];
     _handling = [HOKHandling new];
     _filtering = [HOKFiltering new];
@@ -128,7 +128,7 @@
   if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
     NSURL *webpageURL = userActivity.webpageURL;
     if (webpageURL) {
-      if ([webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound || [self.customDomains containsObject:webpageURL.host]) {
+      if ([webpageURL.host rangeOfString:@"hoko.link"].location != NSNotFound || [self.customDomain isEqualToString:webpageURL.host]) {
         [self openSmartlink:webpageURL.absoluteString completion:^(HOKDeeplink *deeplink) {
           if (!deeplink) {
             [self handleOpenURL:nil];
@@ -171,7 +171,7 @@
 
 - (NSString *)generateLazySmartlinkForDeeplink:(HOKDeeplink *)deeplink domain:(NSString *)domain
 {
-  return [self.linkGenerator generateLazySmartlinkForDeeplink:deeplink domain:domain customDomains:self.customDomains];
+  return [self.linkGenerator generateLazySmartlinkForDeeplink:deeplink domain:domain customDomain:self.customDomain];
 }
 
 #pragma mark - Deferred Deeplinking
