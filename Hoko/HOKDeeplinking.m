@@ -62,6 +62,11 @@
     return NO;
 }
 
+- (BOOL)isLaunchingFromDeeplinkWithOptions:(NSDictionary *)launchOptions
+{
+  return launchOptions != nil && launchOptions[UIApplicationLaunchOptionsURLKey];
+}
+
 #pragma mark - Map Routes
 - (void)mapRoute:(NSString *)route toTarget:(void (^)(HOKDeeplink *deeplink))target {
   [self.routing mapRoute:route toTarget:target];
@@ -162,6 +167,11 @@
                              failure:(void (^)(NSError *error))failure {
   
   [self.linkGenerator generateSmartlinkForDeeplink:deeplink success:success failure:failure];
+}
+
+- (NSString *)generateLazySmartlinkForDeeplink:(HOKDeeplink *)deeplink domain:(NSString *)domain
+{
+  return [self.linkGenerator generateLazySmartlinkForDeeplink:deeplink domain:domain customDomains:self.customDomains];
 }
 
 #pragma mark - Deferred Deeplinking

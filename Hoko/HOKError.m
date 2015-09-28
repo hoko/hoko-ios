@@ -88,6 +88,26 @@ NSString *const HOKServerWarningDomain = @"HokoServerWarning";
   return [self errorWithCode:15 description:@"Metadata is not valid JSON, only NSString, NSNumber, NSNull or NSDictionary/NSarray of such values are allowed."];
 }
 
++ (NSError *)lazySmartlinkCantHaveURLsError
+{
+  return [self errorWithCode:17 description:@"Lazy smartlinks cannot have custom URLs for each platform."];
+}
+
++ (NSError *)domainUnknown:(NSString *)domain customDomains:(NSArray *)customDomains
+{
+  if (!customDomains || customDomains.count == 0) {
+    return [self errorWithCode:18 description:[NSString stringWithFormat:@"To generate a lazy smartlink you need to provide a known domain. %@ is not a hoko.link subdomain.", domain]];
+  } else {
+    return [self errorWithCode:18 description:[NSString stringWithFormat:@"To generate a lazy smartlink you need to provide a known domain. %@ is not a hoko.link subdomain nor is it included in your custom domains %@.", domain, [customDomains description]]];
+  }
+}
+
++ (NSError *)invalidDomain:(NSString *)domain
+{
+  return [self errorWithCode:19 description:@"%@ is not a valid domain. It should be something like yourapp.hoko.link or your.customdomain.com"];
+}
+
+
 + (NSError *)unknownError {
   return [self errorWithCode:0 description:@"Unkown Error"];
 }

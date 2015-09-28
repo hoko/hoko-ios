@@ -21,7 +21,8 @@ extern NSString *const HOKDeeplinkSmartlinkIdentifierKey;
                               metadata:(NSDictionary *)metadata
                      sourceApplication:(NSString *)sourceApplication
                            deeplinkURL:(NSString *)deeplinkURL
-                              deferred:(BOOL)isDeferred;
+                              deferred:(BOOL)isDeferred
+                                unique:(BOOL)unique;
 
 - (void)setMetadata:(NSDictionary *)metadata;
 - (void)postWithToken:(NSString *)token;
@@ -40,5 +41,6 @@ extern NSString *const HOKDeeplinkSmartlinkIdentifierKey;
 
 @property (nonatomic) BOOL isDeferred;
 @property (nonatomic) BOOL wasOpened;
+@property (nonatomic, strong, readonly) NSString *url;
 
 @end

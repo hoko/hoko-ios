@@ -52,6 +52,22 @@
 - (BOOL)openCurrentDeeplink;
 
 /**
+ *  isLaunchingFromDeeplinkWithOptions: will let you know if the launchOptions from 
+ *  application:didFinishLaunchingWithOptions: contain a deeplink which will be processed asynchronously.
+ *
+ *  @code
+ *  if ([[Hoko deeplinking] isLaunchingFromDeeplinkWithOptions:launchOptions]) {
+ *    // Hoko will open the deeplink asynchronously.
+ *  } else {
+ *    // Show your initial view controller by default.
+ *  }
+ *  @endcode
+ *
+ *  @param launchOptions  The launchOptions obtained in application:didFinishLaunchingWithOptions:
+ */
+- (BOOL)isLaunchingFromDeeplinkWithOptions:(hok_nullable NSDictionary *)launchOptions;
+
+/**
  *  mapRoute:toTarget: allows deeplinks which conform to a certain route format to target blocks.
  *  Target blocks should be used to contruct your navigation flow and your data flow from both
  *  the deeplink object and your static data (e.g. CoreData, SQLite, etc).
@@ -213,17 +229,31 @@
 
 
 /**
- *  generateSmartlinkForDeeplink:success:failure allows the app to generate Smartlinks for the
+ *  generateSmartlinkForDeeplink:success:failure: allows the app to generate Smartlinks for the
  *  user to share with other users, independent of the platform, users will be redirected to the
  *  corresponding view. A user generated HOKDeeplink object may be passed along to generate the
  *  deeplinks for all available platforms. In case the request is succesful, the success block will
- *  receive an Smartlink (e.g. http://hoko.link/XmPle ). Otherwise it will return the cause of failure in
+ *  receive a Smartlink (e.g. http://yourapp.hoko.link/XmPle ). Otherwise it will return the cause of failure in
  *  the failure block.
  *
+ *  @param deeplink     The deeplink to which HOKO should generate a Smartlink.
  *  @param success      The block called in case of success, will have an Smartlink as a parameter.
  *  @param failure      The block called in case of failure, will have an NSError as a parameter.
  */
 - (void)generateSmartlinkForDeeplink:(hok_nonnull HOKDeeplink *)deeplink success:(hok_nullable void (^)(NSString * __hok_nonnull smartlink))success failure:(hok_nullable void (^)(NSError * __hok_nonnull error))failure;
+
+/**
+ *  generateLazySmartlinkForDeeplink:domain: allows the app to generate lazy Smartlinks for the
+ *  user to share with other users, independent of the platform, users will be redirected to the
+ *  corresponding view. A user generated HOKDeeplink object may be passed along to generate the
+ *  deeplinks for all available platforms. In case the translation is possible, the method will return
+ *  a lazy Smartlink (e.g. http://yourapp.hoko.link/lazy?uri=%2Fproduct%2F0 ). Where the uri query parameter
+ *  will be the url encoded version of the translated deep link.
+ *
+ *  @param deeplink     The deeplink to which HOKO should generate a lazy Smartlink.
+ *  @param domain       The domain to which HOKO should generate a lazy Smartlink. (e.g. yourapp.hoko.link or yourapp.customdomain.com).
+ */
+- (hok_nullable NSString *)generateLazySmartlinkForDeeplink:(hok_nonnull HOKDeeplink *)deeplink domain:(hok_nonnull NSString *)domain;
 
 @end
 

@@ -17,5 +17,6 @@
 - (void)generateSmartlinkForDeeplink:(HOKDeeplink *)deeplink
                              success:(void (^)(NSString *smartlink))success
                              failure:(void (^)(NSError *error))failure;
+- (NSString *)generateLazySmartlinkForDeeplink:(HOKDeeplink *)deeplink domain:(NSString *)domain customDomains:(NSArray *)customDomains;
 
 @end

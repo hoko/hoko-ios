@@ -18,7 +18,7 @@
 #import "HOKDeeplinking+Private.h"
 #import "HOKNetworkOperationQueue.h"
 
-NSString *const HokoVersion = @"2.1.1";
+NSString *const HokoVersion = @"2.3";
 
 @interface Hoko ()
 
