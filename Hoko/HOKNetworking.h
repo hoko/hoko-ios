@@ -11,11 +11,13 @@
 typedef void (^HOKNetworkingSuccessBlock)(id json);
 typedef void (^HOKNetworkingFailedBlock)(NSError *error);
 
-extern NSString *const HOKNetworkingEndpoint;
 extern NSString *const HOKNetworkingVersion;
 extern NSString *const HOKNetworkingFormat;
 
 @interface HOKNetworking : NSObject
+
++ (NSString *)endpoint;
++ (void)setEndpoint:(NSString *)endpoint;
 
 + (void)requestToPath:(NSString *)path parameters:(id)parameters token:(NSString *)token successBlock:(HOKNetworkingSuccessBlock)successBlock failedBlock:(HOKNetworkingFailedBlock)failedBlock;
 

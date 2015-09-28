@@ -144,7 +144,8 @@
                                                sourceApplication:sourceApplication
                                                      deeplinkURL:url.absoluteString
                                                         deferred:isDeferred
-                                                          unique:NO];
+                                                          unique:NO
+                                                     redeemLimit:0];
       if (route) {
         *route = hokRoute;
       }
@@ -161,7 +162,8 @@
                                            sourceApplication:sourceApplication
                                                  deeplinkURL:url.absoluteString
                                                     deferred:isDeferred
-                                                      unique:NO];
+                                                      unique:NO
+                                                 redeemLimit:0];
   if (self.defaultRoute) {
     *route = self.defaultRoute;
   }

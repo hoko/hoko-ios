@@ -25,6 +25,7 @@
 
 @interface HOKDeeplinking ()
 
+@property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) NSString *customDomain;
 @property (nonatomic, strong) HOKResolver *resolver;
 @property (nonatomic, strong) HOKRouting *routing;
@@ -42,6 +43,7 @@
 - (instancetype)initWithToken:(NSString *)token customDomain:(NSString *)customDomain debugMode:(BOOL)debugMode {
   self = [super init];
   if (self) {
+      _token = token;
     _customDomain = customDomain;
     _routing = [[HOKRouting alloc] initWithToken:token debugMode:debugMode];
     _handling = [HOKHandling new];
@@ -187,6 +189,10 @@
   }];
 }
 
+#pragma mark - Redeeem
+- (void)redeemDeeplink:(HOKDeeplink *)deeplink {
+    [deeplink redeemWithToken:self.token];
+}
 
 #pragma mark - Swizzling
 + (void)load {
