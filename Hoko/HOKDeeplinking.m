@@ -43,7 +43,7 @@
 - (instancetype)initWithToken:(NSString *)token customDomain:(NSString *)customDomain debugMode:(BOOL)debugMode {
   self = [super init];
   if (self) {
-      _token = token;
+    _token = token;
     _customDomain = customDomain;
     _routing = [[HOKRouting alloc] initWithToken:token debugMode:debugMode];
     _handling = [HOKHandling new];
@@ -52,6 +52,7 @@
     _deferredDeeplinking = [[HOKDeferredDeeplinking alloc] initWithToken:token];
     _resolver = [[HOKResolver alloc] initWithToken:token];
     [self triggerDeferredDeeplinking];
+    [self setupBanners];
   }
   return self;
 }
@@ -189,9 +190,16 @@
   }];
 }
 
+#pragma mark - Banners
+- (void)setupBanners {
+  [self.routing mapInternalRoute:@"__banner" toTarget:^(HOKDeeplink *deeplink) {
+    [self openSmartlink:deeplink.url];
+  }];
+}
+
 #pragma mark - Redeeem
 - (void)redeemDeeplink:(HOKDeeplink *)deeplink {
-    [deeplink redeemWithToken:self.token];
+  [deeplink redeemWithToken:self.token];
 }
 
 #pragma mark - Swizzling

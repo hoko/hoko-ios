@@ -13,9 +13,12 @@
 @interface HOKRoute : NSObject
 
 + (instancetype)routeWithRoute:(NSString *)route target:(void (^)(HOKDeeplink *deeplink))target;
++ (instancetype)routeWithRoute:(NSString *)route target:(void (^)(HOKDeeplink *deeplink))target internal:(BOOL)internal;
+
 
 - (void)postWithToken:(NSString *)token;
 
+@property (nonatomic, readonly) BOOL internal;
 @property (nonatomic, strong, readonly) NSString *route;
 @property (nonatomic, strong, readonly) NSArray *components;
 @property (nonatomic, copy, readonly) void (^target)(HOKDeeplink *deeplink);

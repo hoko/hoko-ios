@@ -18,18 +18,23 @@ NSString *const HOKRoutePath = @"routes";
 @implementation HOKRoute
 
 #pragma mark - Initializer
-- (instancetype)initWithRoute:(NSString *)route target:(void (^)(HOKDeeplink *deeplink))target {
+- (instancetype)initWithRoute:(NSString *)route target:(void (^)(HOKDeeplink *deeplink))target internal:(BOOL)internal {
   self = [super init];
   if (self) {
     _route = route;
     _target = target;
+    _internal = internal;
   }
   return self;
 }
 
 #pragma mark - Public Static Initializer
 + (instancetype)routeWithRoute:(NSString *)route target:(void (^)(HOKDeeplink *deeplink))target {
-  return [[HOKRoute alloc] initWithRoute:route target:target];
+  return [self routeWithRoute:route target:target internal:NO];
+}
+
++ (instancetype)routeWithRoute:(NSString *)route target:(void (^)(HOKDeeplink *deeplink))target internal:(BOOL)internal {
+  return [[HOKRoute alloc] initWithRoute:route target:target internal:internal];
 }
 
 #pragma mark - Helper
@@ -39,11 +44,13 @@ NSString *const HOKRoutePath = @"routes";
 
 #pragma mark - Networking
 - (void)postWithToken:(NSString *)token {
-  HOKNetworkOperation *networkOperation = [[HOKNetworkOperation alloc] initWithOperationType:HOKNetworkOperationTypePOST
-                                                                                        path:HOKRoutePath
-                                                                                       token:token
-                                                                                  parameters:self.json];
-  [[HOKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
+  if (!self.internal) {
+    HOKNetworkOperation *networkOperation = [[HOKNetworkOperation alloc] initWithOperationType:HOKNetworkOperationTypePOST
+                                                                                          path:HOKRoutePath
+                                                                                         token:token
+                                                                                    parameters:self.json];
+    [[HOKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
+  }
 }
 
 #pragma mark - Serialization
