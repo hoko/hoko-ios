@@ -103,12 +103,12 @@
 - (BOOL)openDeeplink:(HOKDeeplink *)deeplink route:(HOKRoute *)route {
   if (!route.internal) {
     [Hoko deeplinking].currentDeeplink = deeplink;
-    [deeplink postWithToken:self.token];
   }
   
   if (route) {
     if (route.internal || [[Hoko deeplinking].filtering filter:deeplink]) {
       if (!route.internal) {
+        [deeplink postWithToken:self.token];
         [[Hoko deeplinking].handling handle:deeplink];
       }
       
