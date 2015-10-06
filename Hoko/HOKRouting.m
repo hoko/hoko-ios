@@ -101,9 +101,11 @@
 }
 
 - (BOOL)openDeeplink:(HOKDeeplink *)deeplink route:(HOKRoute *)route {
-  [Hoko deeplinking].currentDeeplink = deeplink;
+  if (!route.internal) {
+    [Hoko deeplinking].currentDeeplink = deeplink;
+    [deeplink postWithToken:self.token];
+  }
   
-  [deeplink postWithToken:self.token];
   if (route) {
     if (route.internal || [[Hoko deeplinking].filtering filter:deeplink]) {
       if (!route.internal) {
