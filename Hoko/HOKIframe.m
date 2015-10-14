@@ -33,21 +33,20 @@
 - (void)requestPage:(NSString *)withURL {
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
     if (HOKSystemVersionGreaterThanOrEqualTo(@"9.0")) {
+      // Create instance of SFViewController to open a URL
+      self.safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:withURL]];
+      self.safariViewController.delegate = self;
         
-        // Create instance of SFViewController to open a URL
-        self.safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:withURL]];
-        self.safariViewController.delegate = self;
+      // Create hidden controller
+      UIViewController *rootViewController = [[UIViewController alloc] init];
+      UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectZero];
+      window.rootViewController = rootViewController;
+      [window makeKeyAndVisible];
+      window.alpha = 0;
         
-        // Create hidden controller
-        UIViewController *rootViewController = [[UIViewController alloc] init];
-        UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectZero];
-        window.rootViewController = rootViewController;
-        [window makeKeyAndVisible];
-        window.alpha = 0;
-        
-        // Present controller
-        [rootViewController presentViewController:self.safariViewController animated:NO completion:nil];
-    }
+      // Present controller
+      [rootViewController presentViewController:self.safariViewController animated:NO completion:nil];
+  }
 #endif
 }
 
