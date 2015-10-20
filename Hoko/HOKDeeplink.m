@@ -79,30 +79,26 @@ NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
                  routeParameters:routeParameters
                  queryParameters:queryParameters
                         metadata:metadata
-                          unique:NO];
+                          redeemLimit:0];
 }
+
++ (instancetype)deeplinkWithRoute:(NSString *)route
+                  routeParameters:(NSDictionary *)routeParameters
+                  queryParameters:(NSDictionary *)queryParameters
+                         metadata:(NSDictionary *)metadata
+                      redeemLimit:(NSInteger)redeemLimit {
+    return [self deeplinkWithRoute:route routeParameters:routeParameters queryParameters:queryParameters metadata:metadata redeemLimit:redeemLimit unique:NO];
+}
+
 
 + (HOKDeeplink *)deeplinkWithRoute:(NSString *)route
                    routeParameters:(NSDictionary *)routeParameters
                    queryParameters:(NSDictionary *)queryParameters
                           metadata:(NSDictionary *)metadata
+                       redeemLimit:(NSInteger)redeemLimit
                             unique:(BOOL)unique {
-  
-  return [self deeplinkWithRoute:route
-                 routeParameters:routeParameters
-                 queryParameters:queryParameters
-                        metadata:metadata
-                          unique:NO
-                     redeemLimit:0];
-}
 
-+ (HOKDeeplink *)deeplinkWithRoute:(NSString *)route
-                   routeParameters:(NSDictionary *)routeParameters
-                   queryParameters:(NSDictionary *)queryParameters
-                          metadata:(NSDictionary *)metadata
-                            unique:(BOOL)unique
-                       redeemLimit:(NSInteger)redeemLimit{
-  
+
   return [self deeplinkWithURLScheme:nil
                                route:route
                      routeParameters:routeParameters
