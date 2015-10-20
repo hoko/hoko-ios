@@ -42,20 +42,11 @@ NSString *const HOKFingerprintMatchingPath = @"fingerprints/match";
   BOOL isFirstRun = ![[HOKUtils objectForKey:HOKDeferredDeeplinkingNotFirstRun] boolValue];
   if (isFirstRun) {
     self.handler = handler;
+    NSString *fingerprintURL = [NSString stringWithFormat:@"%@?uid=%@", [HOKNetworkOperation urlFromPath:HOKFingerprintMatchingPath], [HOKDevice device].uid];
     
-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
-    if (HOKSystemVersionGreaterThanOrEqualTo(@"9.0")) {
-      NSString *fingerprintURL = [NSString stringWithFormat:@"%@?uid=%@", [HOKNetworkOperation urlFromPath:HOKFingerprintMatchingPath], [HOKDevice device].uid];
-      
-      [HOKIframe requestPageWithURL:fingerprintURL completion:^{
-        [self requestDeferredDeeplink];
-      }];
-    } else {
+    [HOKIframe requestPageWithURL:fingerprintURL completion:^{
       [self requestDeferredDeeplink];
-    }
-#else
-    [self requestDeferredDeeplink];
-#endif
+    }];
   }
 }
 

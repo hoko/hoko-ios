@@ -433,7 +433,7 @@
 		B083C14E7CCCC29B7C8FCB6C02A1329C /* EXPMatchers+beInTheRangeOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beInTheRangeOf.h"; path = "Expecta/Matchers/EXPMatchers+beInTheRangeOf.h"; sourceTree = "<group>"; };
 		B12362C6C0BE3426D2EA171E9955521A /* HOKResolver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HOKResolver.h; sourceTree = "<group>"; };
 		B3F0C530823AC995C2650679E703C599 /* OHHTTPStubsResponse+JSON.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubsResponse+JSON.m"; path = "OHHTTPStubs/Sources/OHHTTPStubsResponse+JSON.m"; sourceTree = "<group>"; };
-		B44A3F5CFBBDCC58AD6E480E6626ECBA /* HOKIframe.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HOKIframe.m; sourceTree = "<group>"; };
+		B44A3F5CFBBDCC58AD6E480E6626ECBA /* HOKIframe.m */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = HOKIframe.m; sourceTree = "<group>"; };
 		B6ADADD0C9313A97C521E08126B49377 /* HOKDevice.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HOKDevice.m; sourceTree = "<group>"; };
 		B8138DD16409813A7A6A119A31B3D6CC /* HOKError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HOKError.h; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };

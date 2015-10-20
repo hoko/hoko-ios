@@ -16,7 +16,11 @@
 
 @implementation HOKIframe
 
-+ (void)requestPageWithURL:(NSString *)url completion:(void (^)(void))completion { }
++ (void)requestPageWithURL:(NSString *)url completion:(void (^)(void))completion {
+  if (completion) {
+    completion();
+  }
+}
 
 @end
 
@@ -44,7 +48,7 @@
     HOKIframe *iframe = [[HOKIframe alloc] initWithCompletion:completion];
     id safariViewController = [[SFSafariViewControllerClass alloc] initWithURL:[NSURL URLWithString:url]];
     [safariViewController setDelegate:(id)iframe];
-      
+    
     // Create hidden controller
     UIViewController *rootViewController = [[UIViewController alloc] init];
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectZero];
@@ -60,6 +64,9 @@
 #pragma mark - SFSafariViewController delegate method
 - (void)safariViewController:(UIViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
   [controller.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+  if (self.completion) {
+    self.completion();
+  }
 }
 
 @end
