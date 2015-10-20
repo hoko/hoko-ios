@@ -197,6 +197,16 @@
             </FileRef>
             <Group
                location = "container:"
+               name = "Iframe">
+               <FileRef
+                  location = "group:Hoko/HOKIframe.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Hoko/HOKIframe.m">
+               </FileRef>
+            </Group>
+            <Group
+               location = "container:"
                name = "GZip">
                <FileRef
                   location = "group:Hoko/HOKGZip.h">
