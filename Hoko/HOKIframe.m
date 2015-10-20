@@ -61,6 +61,8 @@
 - (void)safariViewController:(UIViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
   [controller.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
-#endif
 
 @end
+
+#endif
+
