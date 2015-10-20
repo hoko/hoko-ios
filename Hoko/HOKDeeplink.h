@@ -96,6 +96,25 @@ typedef NS_ENUM(NSUInteger, HOKDeeplinkPlatform) {
                                        unique:(BOOL)unique;
 
 /**
+ *  Creates and returns a new HOKDeeplink object with a given route, route parameters, query parameters and metadata.
+ *
+ *  @param route           A NSString that holds a route (for instance, "product/:product_id").
+ *  @param routeParameters A NSDictionary that contains the route parameters and their values.
+ *  @param queryParameters A NSDictionary that contains the query parameters and their values.
+ *  @param metadata        A NSDictionary that contains all the metadata values.
+ *  @param unique          A BOOL value to reflect if the link should be unique or not.
+ *  @param redeemLimit     The number of times this deep link may be redeemed (a.k.a. retrieving the metadata from the backend).
+ *
+ *  @return A new HOKDeeplink instance with a given route, route parameters, query parameters and metadatas.
+ */
++ (hok_nonnull instancetype)deeplinkWithRoute:(hok_nullable NSString *)route
+                              routeParameters:(hok_nullable NSDictionary hok_generic2(NSString *, NSString *) *)routeParameters
+                              queryParameters:(hok_nullable NSDictionary hok_generic2(NSString *, NSString *) *)queryParameters
+                                     metadata:(hok_nullable NSDictionary hok_generic2(NSString *, id) *)metadata
+                                       unique:(BOOL)unique
+                                  redeemLimit:(NSInteger)redeemLimit;
+
+/**
  *  Adds a new URL entry that will be opened in a given platform. There can only be one URL for each individual platform.
  *
  *  @param url      A non null NSString that represents which link should be opened for the given platform.
