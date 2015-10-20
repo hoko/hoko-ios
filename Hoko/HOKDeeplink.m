@@ -251,8 +251,7 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
         
     } else {
         NSString *universalLinkOpenURL = [HOKNetworkOperation urlFromPath:HOKUniversalLinkOpenPath];
-        
-        [[[HOKIframe alloc] init] requestPage:universalLinkOpenURL];
+        [HOKIframe requestPageWithURL:universalLinkOpenURL completion:nil];
     }
 }
 

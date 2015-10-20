@@ -31,51 +31,53 @@ NSString *const HOKFingerprintMatchingPath = @"fingerprints/match";
 @implementation HOKDeferredDeeplinking
 
 - (instancetype)initWithToken:(NSString *)token {
-    self = [super init];
-    if (self) {
-        _token = token;
-    }
-    return self;
+  self = [super init];
+  if (self) {
+    _token = token;
+  }
+  return self;
 }
 
 - (void)requestDeferredDeeplink:(void (^)(NSString *))handler {
-    BOOL isFirstRun = ![[HOKUtils objectForKey:HOKDeferredDeeplinkingNotFirstRun] boolValue];
-    if (isFirstRun) {
-      self.handler = handler;
-        
+  BOOL isFirstRun = ![[HOKUtils objectForKey:HOKDeferredDeeplinkingNotFirstRun] boolValue];
+  if (isFirstRun) {
+    self.handler = handler;
+    
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
-      if (HOKSystemVersionGreaterThanOrEqualTo(@"9.0")) {
-        NSString *fingerprintURL = [NSString stringWithFormat:@"%@?uid=%@", [HOKNetworkOperation urlFromPath:HOKFingerprintMatchingPath], [HOKDevice device].uid];
-          
-        [[[HOKIframe alloc] init] requestPage:fingerprintURL];
-      } else {
+    if (HOKSystemVersionGreaterThanOrEqualTo(@"9.0")) {
+      NSString *fingerprintURL = [NSString stringWithFormat:@"%@?uid=%@", [HOKNetworkOperation urlFromPath:HOKFingerprintMatchingPath], [HOKDevice device].uid];
+      
+      [HOKIframe requestPageWithURL:fingerprintURL completion:^{
         [self requestDeferredDeeplink];
-      }
-#else
+      }];
+    } else {
       [self requestDeferredDeeplink];
-#endif
     }
+#else
+    [self requestDeferredDeeplink];
+#endif
+  }
 }
 
 - (void)requestDeferredDeeplink {
-    [HOKUtils saveObject:@YES key:HOKDeferredDeeplinkingNotFirstRun];
-    [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:HOKDeferredDeeplinkingPath] parameters:self.json token:self.token successBlock:^(id json) {
-        NSString *deeplink = [json objectForKey:@"deeplink"];
-        if (deeplink && [deeplink isKindOfClass:[NSString class]] && self.handler) {
-            self.handler(deeplink);
-        }
-    } failedBlock:^(NSError *error) {
-        HOKErrorLog(error);
-    }];
+  [HOKUtils saveObject:@YES key:HOKDeferredDeeplinkingNotFirstRun];
+  [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:HOKDeferredDeeplinkingPath] parameters:self.json token:self.token successBlock:^(id json) {
+    NSString *deeplink = [json objectForKey:@"deeplink"];
+    if (deeplink && [deeplink isKindOfClass:[NSString class]] && self.handler) {
+      self.handler(deeplink);
+    }
+  } failedBlock:^(NSError *error) {
+    HOKErrorLog(error);
+  }];
 }
 
 - (NSDictionary *)json {
-    return @{@"device": @{@"os_version": [HOKUtils jsonValue:[HOKDevice device].systemVersion],
-                          @"device_type": [HOKUtils jsonValue:[HOKDevice device].platform],
-                          @"language": [HOKUtils jsonValue:[HOKDevice device].systemLanguage.lowercaseString],
-                          @"screen_size": [HOKUtils jsonValue:[HOKDevice device].screenSize],
-                          @"uid": [HOKUtils jsonValue:[HOKDevice device].uid] }
-             };
+  return @{@"device": @{@"os_version": [HOKUtils jsonValue:[HOKDevice device].systemVersion],
+                        @"device_type": [HOKUtils jsonValue:[HOKDevice device].platform],
+                        @"language": [HOKUtils jsonValue:[HOKDevice device].systemLanguage.lowercaseString],
+                        @"screen_size": [HOKUtils jsonValue:[HOKDevice device].screenSize],
+                        @"uid": [HOKUtils jsonValue:[HOKDevice device].uid] }
+           };
 }
 
 @end

@@ -1,1 +1,5 @@
-HOKO_OTHER_LDFLAGS = -l"z" -framework "Foundation" -framework "SystemConfiguration" -framework "UIKit"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/Hoko" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Expecta" "${PODS_ROOT}/Headers/Public/Hoko" "${PODS_ROOT}/Headers/Public/OCMock" "${PODS_ROOT}/Headers/Public/OHHTTPStubs"
+OTHER_LDFLAGS = -l"z" -framework "Foundation" -framework "SystemConfiguration" -framework "UIKit"
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES

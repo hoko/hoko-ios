@@ -12,48 +12,54 @@
 #import "HOKNetworkOperation.h"
 #import "HOKDevice.h"
 
-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
-#import <SafariServices/SafariServices.h>
-#endif
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED < 90000
+
+@implementation HOKIframe
+
++ (void)requestPageWithURL:(NSString *)url completion:(void (^)(void))completion { }
+
+@end
+
+#else
 
 @interface HOKIframe ()
 
-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
-<SFSafariViewControllerDelegate>
-#endif
-
-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
-@property (nonatomic, strong) SFSafariViewController *safariViewController;
-#endif
+@property (nonatomic, strong) void(^completion)(void);
 
 @end
 
 @implementation HOKIframe
 
-- (void)requestPage:(NSString *)withURL {
-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
-    if (HOKSystemVersionGreaterThanOrEqualTo(@"9.0")) {
-      // Create instance of SFViewController to open a URL
-      self.safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:withURL]];
-      self.safariViewController.delegate = self;
-        
-      // Create hidden controller
-      UIViewController *rootViewController = [[UIViewController alloc] init];
-      UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectZero];
-      window.rootViewController = rootViewController;
-      [window makeKeyAndVisible];
-      window.alpha = 0;
-        
-      // Present controller
-      [rootViewController presentViewController:self.safariViewController animated:NO completion:nil];
+- (instancetype)initWithCompletion:(void(^)(void))completion {
+  self = [super init];
+  if (self) {
+    self.completion = completion;
   }
-#endif
+  return self;
+}
+
++ (void)requestPageWithURL:(NSString *)url completion:(void (^)(void))completion {
+  Class SFSafariViewControllerClass = NSClassFromString(@"SFSafariViewController");
+  if (SFSafariViewControllerClass) {
+    HOKIframe *iframe = [[HOKIframe alloc] initWithCompletion:completion];
+    id safariViewController = [[SFSafariViewControllerClass alloc] initWithURL:[NSURL URLWithString:url]];
+    [safariViewController setDelegate:(id)iframe];
+      
+    // Create hidden controller
+    UIViewController *rootViewController = [[UIViewController alloc] init];
+    UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectZero];
+    window.rootViewController = rootViewController;
+    [window makeKeyAndVisible];
+    window.alpha = 0;
+    
+    // Present controller
+    [rootViewController presentViewController:safariViewController animated:NO completion:nil];
+  }
 }
 
 #pragma mark - SFSafariViewController delegate method
-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
-- (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
-    [self.safariViewController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+- (void)safariViewController:(UIViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
+  [controller.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 #endif
 

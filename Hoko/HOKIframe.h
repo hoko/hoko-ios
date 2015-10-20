@@ -9,6 +9,6 @@
 
 @interface HOKIframe : NSObject
 
-- (void)requestPage:(NSString *)withURL;
++ (void)requestPageWithURL:(NSString *)url completion:(void(^)(void))completion;
 
 @end
