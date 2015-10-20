@@ -77,7 +77,6 @@ typedef NS_ENUM(NSUInteger, HOKDeeplinkPlatform) {
                               routeParameters:(hok_nullable NSDictionary hok_generic2(NSString *, NSString *) *)routeParameters
                               queryParameters:(hok_nullable NSDictionary hok_generic2(NSString *, NSString *) *)queryParameters
                                      metadata:(hok_nullable NSDictionary hok_generic2(NSString *, id) *)metadata;
-
 /**
  *  Creates and returns a new HOKDeeplink object with a given route, route parameters, query parameters and metadata.
  *
@@ -85,6 +84,23 @@ typedef NS_ENUM(NSUInteger, HOKDeeplinkPlatform) {
  *  @param routeParameters A NSDictionary that contains the route parameters and their values.
  *  @param queryParameters A NSDictionary that contains the query parameters and their values.
  *  @param metadata        A NSDictionary that contains all the metadata values.
+ *  @param redeemLimit     The number of times this deep link may be redeemed (a.k.a. retrieving the metadata from the backend).
+ *
+ *  @return A new HOKDeeplink instance with a given route, route parameters, query parameters and metadatas.
+ */
++ (hok_nonnull instancetype)deeplinkWithRoute:(hok_nullable NSString *)route
+                              routeParameters:(hok_nullable NSDictionary hok_generic2(NSString *, NSString *) *)routeParameters
+                              queryParameters:(hok_nullable NSDictionary hok_generic2(NSString *, NSString *) *)queryParameters
+                                     metadata:(hok_nullable NSDictionary hok_generic2(NSString *, id) *)metadata
+                                  redeemLimit:(NSInteger)redeemLimit;
+/**
+ *  Creates and returns a new HOKDeeplink object with a given route, route parameters, query parameters and metadata.
+ *
+ *  @param route           A NSString that holds a route (for instance, "product/:product_id").
+ *  @param routeParameters A NSDictionary that contains the route parameters and their values.
+ *  @param queryParameters A NSDictionary that contains the query parameters and their values.
+ *  @param metadata        A NSDictionary that contains all the metadata values.
+ *  @param redeemLimit     The number of times this deep link may be redeemed (a.k.a. retrieving the metadata from the backend).
  *  @param unique          A BOOL value to reflect if the link should be unique or not.
  *
  *  @return A new HOKDeeplink instance with a given route, route parameters, query parameters and metadatas.
@@ -93,6 +109,7 @@ typedef NS_ENUM(NSUInteger, HOKDeeplinkPlatform) {
                               routeParameters:(hok_nullable NSDictionary hok_generic2(NSString *, NSString *) *)routeParameters
                               queryParameters:(hok_nullable NSDictionary hok_generic2(NSString *, NSString *) *)queryParameters
                                      metadata:(hok_nullable NSDictionary hok_generic2(NSString *, id) *)metadata
+                                  redeemLimit:(NSInteger)redeemLimit
                                        unique:(BOOL)unique;
 
 /**
@@ -123,7 +140,7 @@ typedef NS_ENUM(NSUInteger, HOKDeeplinkPlatform) {
 
 /**
  *  The metadata of the current HOKDeeplink object. This metadata can be created manually when initalizing a new HOKDeeplink instance
- *  using the static methods above or through http://hokolinks.com (Edit a smart link > Advanced tab). This NSDictionary property contains 
+ *  using the static methods above or through http://hokolinks.com (Edit a smart link > Advanced tab). This NSDictionary property contains
  *  private information that is not accessible through the URL.
  */
 @property (nonatomic, strong, readonly, hok_nullable) NSDictionary hok_generic2(NSString *, id) *metadata;
@@ -136,7 +153,7 @@ typedef NS_ENUM(NSUInteger, HOKDeeplinkPlatform) {
 /**
  *  A boolean parameter that indicates whether this HOKDeeplink object is a deferred deep link,
  *  meaning that the user clicked on a HOKO smart link and it was redirected to the App Store
- *  to download the app because it didn't have it earlier. After that, when the user launches the 
+ *  to download the app because it didn't have it earlier. After that, when the user launches the
  *  app, HOKO will try to get a deferred link: if it exists, it will try to open.
  */
 @property (nonatomic, readonly) BOOL isDeferred;

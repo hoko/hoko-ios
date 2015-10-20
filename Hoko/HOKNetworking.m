@@ -16,9 +16,9 @@
 #import "HOKNetworkOperation.h"
 #import "HOKDevice.h"
 
+static NSString *HOKNetworkingEndpoint = @"https://api.hokolinks.com";
 double const HOKNetworkingRequestTimeout = 15.0f;
 
-NSString *const HOKNetworkingEndpoint = @"https://api.hokolinks.com";
 NSString *const HOKNetworkingVersion = @"v2";
 NSString *const HOKNetworkingFormat = @"json";
 
@@ -33,6 +33,17 @@ NSString *const HOKNetworkingFormat = @"json";
 @end
 
 @implementation HOKNetworking
+
+#pragma mark - Endpoint Override
++ (NSString *)endpoint
+{
+    return HOKNetworkingEndpoint;
+}
+
++ (void)setEndpoint:(NSString *)endpoint
+{
+    HOKNetworkingEndpoint = endpoint;
+}
 
 #pragma mark - Class Methods
 //

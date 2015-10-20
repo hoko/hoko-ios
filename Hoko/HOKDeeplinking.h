@@ -52,7 +52,7 @@
 - (BOOL)openCurrentDeeplink;
 
 /**
- *  isLaunchingFromDeeplinkWithOptions: will let you know if the launchOptions from 
+ *  isLaunchingFromDeeplinkWithOptions: will let you know if the launchOptions from
  *  application:didFinishLaunchingWithOptions: contain a deeplink which will be processed asynchronously.
  *
  *  @code
@@ -155,8 +155,8 @@
 
 
 /**
- *  handleOpenURL: is a mimicked method from the UIApplicationDelegate protocol for iOS < 4.2. 
- *  It serves the purpose of receiving incoming deeplinks from the AppDelegate object and delegating 
+ *  handleOpenURL: is a mimicked method from the UIApplicationDelegate protocol for iOS < 4.2.
+ *  It serves the purpose of receiving incoming deeplinks from the AppDelegate object and delegating
  *  them to the Hoko Deeplinking module. On a common basis, this method will be automatically delegated
  *  to the Hoko Deeplinking module through swizzling, but in case you get an error message at the
  *  start of your application you should manually delegate this method from your AppDelegate
@@ -170,10 +170,10 @@
 
 /**
  *  openURL:sourceApplication:annotation: is a mimicked method from the UIApplicationDelegate
- *  protocol for iOS >= 4.2. It serves the purpose of receiving incoming deeplinks from the AppDelegate 
- *  object and delegating them to the Hoko Deeplinking module. On a common basis, this method will be 
- *  automatically delegated to the Hoko Deeplinking module through swizzling, but in case you get an 
- *  error message at the start of your application you should manually delegate this method from your 
+ *  protocol for iOS >= 4.2. It serves the purpose of receiving incoming deeplinks from the AppDelegate
+ *  object and delegating them to the Hoko Deeplinking module. On a common basis, this method will be
+ *  automatically delegated to the Hoko Deeplinking module through swizzling, but in case you get an
+ *  error message at the start of your application you should manually delegate this method from your
  *  AppDelegate to the Deeplinking module.
  *
  *  @param url  The url received by the App Delegate.
@@ -186,8 +186,8 @@
 
 /**
  *  continueUserActivity:restorationHandler is a mimicked method from the UIApplicationDelegate protocol
- *  for iOS >= 8.0. It serves many purposes, but HOKO uses it to open Smartlinks directly from the 
- *  NSUserActivity object. This method call will only return YES if the NSUserActivity is 
+ *  for iOS >= 8.0. It serves many purposes, but HOKO uses it to open Smartlinks directly from the
+ *  NSUserActivity object. This method call will only return YES if the NSUserActivity is
  *  NSUserActivityTypeBrowsingWeb and the webpageURL property has the hoko.link domain. This will trigger
  *  a link resolve on the HOKO backend, resulting on a deeplink open by the App itself.
  *
@@ -219,7 +219,7 @@
 
 /**
  *  openSmartlink: serves the purpose of handling the open of a Smartlink, by resolving it through
- *  HOKO's backend, opening the resolved deeplink and calling the mapped route's target block. 
+ *  HOKO's backend, opening the resolved deeplink and calling the mapped route's target block.
  *  Will also receive a completion block which will be executed when the deeplink is opened.
  *
  *  @param smartlink A Smartlink.
@@ -255,8 +255,15 @@
  */
 - (hok_nullable NSString *)generateLazySmartlinkForDeeplink:(hok_nonnull HOKDeeplink *)deeplink domain:(hok_nonnull NSString *)domain;
 
+/**
+ *  Redeem will let the HOKO backend know that the deep link was redeemed by the user.
+ *
+ *  @param deeplink     The deep link which should be redeemed.
+ */
+- (void)redeemDeeplink:(hok_nonnull HOKDeeplink *)deeplink;
+
 @end
 
 #ifndef HokoDeeplinking
-  #define HokoDeeplinking [Hoko deeplinking]
+#define HokoDeeplinking [Hoko deeplinking]
 #endif

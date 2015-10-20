@@ -8,8 +8,12 @@
 
 #import "HOKRouting.h"
 
+extern NSString *const HOKRoutingBannerRoute;
+
+
 @interface HOKRouting (Private)
 
+- (void)mapInternalRoute:(NSString *)route toTarget:(void (^)(HOKDeeplink *deeplink))target;
 - (BOOL)openDeeplink:(HOKDeeplink *)deeplink;
 
 @end

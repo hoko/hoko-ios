@@ -56,6 +56,11 @@
   }
 }
 
+- (void)mapInternalRoute:(NSString *)route toTarget:(void (^)(HOKDeeplink *deeplink))target {
+  [self addNewRoute:[HOKRoute routeWithRoute:[HOKURL sanitizeURLString:route] target:target internal:YES]];
+}
+
+
 - (NSArray *)routes {
   return _routes;
 }
@@ -96,12 +101,16 @@
 }
 
 - (BOOL)openDeeplink:(HOKDeeplink *)deeplink route:(HOKRoute *)route {
-  [Hoko deeplinking].currentDeeplink = deeplink;
+  if (!route.internal) {
+    [Hoko deeplinking].currentDeeplink = deeplink;
+  }
   
-  [deeplink postWithToken:self.token];
   if (route) {
-    if ([[Hoko deeplinking].filtering filter:deeplink]) {
-      [[Hoko deeplinking].handling handle:deeplink];
+    if (route.internal || [[Hoko deeplinking].filtering filter:deeplink]) {
+      if (!route.internal) {
+        [deeplink postWithToken:self.token];
+        [[Hoko deeplinking].handling handle:deeplink];
+      }
       
       if (route.target) {
         route.target(deeplink);
@@ -144,7 +153,8 @@
                                                sourceApplication:sourceApplication
                                                      deeplinkURL:url.absoluteString
                                                         deferred:isDeferred
-                                                          unique:NO];
+                                                          unique:NO
+                                                     redeemLimit:0];
       if (route) {
         *route = hokRoute;
       }
@@ -161,7 +171,8 @@
                                            sourceApplication:sourceApplication
                                                  deeplinkURL:url.absoluteString
                                                     deferred:isDeferred
-                                                      unique:NO];
+                                                      unique:NO
+                                                 redeemLimit:0];
   if (self.defaultRoute) {
     *route = self.defaultRoute;
   }

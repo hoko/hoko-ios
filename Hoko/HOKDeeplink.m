@@ -24,6 +24,7 @@ NSString *const HOKDeeplinkSmartlinkIdentifierKey = @"_hk_sid";
 NSString *const HOKDeeplinkMetadataKey = @"_hk_md";
 
 NSString *const HOKDeeplinkOpenPath = @"smartlinks/open";
+NSString *const HOKDeeplinkRedeemPath = @"smartlinks/redeem";
 NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
 NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
 
@@ -33,6 +34,7 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
 @property (nonatomic, strong, readonly) NSString *deeplinkURL;
 @property (nonatomic, strong, readonly) NSDictionary *generateSmartlinkJSON;
 @property (nonatomic, strong, readonly) NSString *sourceApplication;
+@property (nonatomic, readonly) NSInteger redeemLimit;
 @property (nonatomic, strong) NSMutableDictionary *urls;
 @property (nonatomic) BOOL isDeferred;
 @property (nonatomic) BOOL wasOpened;
@@ -76,18 +78,29 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
                           metadata:(NSDictionary *)metadata {
   
   return [self deeplinkWithRoute:route
-                     routeParameters:routeParameters
-                     queryParameters:queryParameters
-                            metadata:metadata
-                              unique:NO];
+                 routeParameters:routeParameters
+                 queryParameters:queryParameters
+                        metadata:metadata
+                          redeemLimit:0];
 }
+
++ (instancetype)deeplinkWithRoute:(NSString *)route
+                  routeParameters:(NSDictionary *)routeParameters
+                  queryParameters:(NSDictionary *)queryParameters
+                         metadata:(NSDictionary *)metadata
+                      redeemLimit:(NSInteger)redeemLimit {
+    return [self deeplinkWithRoute:route routeParameters:routeParameters queryParameters:queryParameters metadata:metadata redeemLimit:redeemLimit unique:NO];
+}
+
 
 + (HOKDeeplink *)deeplinkWithRoute:(NSString *)route
                    routeParameters:(NSDictionary *)routeParameters
                    queryParameters:(NSDictionary *)queryParameters
                           metadata:(NSDictionary *)metadata
+                       redeemLimit:(NSInteger)redeemLimit
                             unique:(BOOL)unique {
-  
+
+
   return [self deeplinkWithURLScheme:nil
                                route:route
                      routeParameters:routeParameters
@@ -96,7 +109,8 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
                    sourceApplication:nil
                          deeplinkURL:nil
                             deferred:NO
-                              unique:YES];
+                              unique:unique
+                         redeemLimit:redeemLimit];
 }
 
 #pragma mark - Private Static Initializer
@@ -108,7 +122,8 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
                      sourceApplication:(NSString *)sourceApplication
                            deeplinkURL:(NSString *)deeplinkURL
                               deferred:(BOOL)isDeferred
-                                unique:(BOOL)unique {
+                                unique:(BOOL)unique
+                           redeemLimit:(NSInteger)redeemLimit{
   
   HOKDeeplink *deeplink = [[HOKDeeplink alloc] initWithURLScheme:urlScheme
                                                            route:route
@@ -118,7 +133,8 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
                                                sourceApplication:sourceApplication
                                                      deeplinkURL:deeplinkURL
                                                         deferred:isDeferred
-                                                          unique:unique];
+                                                          unique:unique
+                                                     redeemLimit:redeemLimit];
   
   if ([HOKDeeplink matchRoute:deeplink.route withRouteParameters:deeplink.routeParameters] || (route == nil && routeParameters == nil && queryParameters == nil && metadata == nil)) {
     return deeplink;
@@ -129,7 +145,7 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
 
 #pragma mark - Private Initializer
 - (instancetype)init {
-  return [self initWithURLScheme:nil route:nil routeParameters:nil queryParameters:nil metadata:nil sourceApplication:nil deeplinkURL:nil deferred:NO unique:NO];
+  return [self initWithURLScheme:nil route:nil routeParameters:nil queryParameters:nil metadata:nil sourceApplication:nil deeplinkURL:nil deferred:NO unique:NO redeemLimit:0];
 }
 
 - (instancetype)initWithURLScheme:(NSString *)urlScheme
@@ -140,7 +156,8 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
                 sourceApplication:(NSString *)sourceApplication
                       deeplinkURL:(NSString *)deeplinkURL
                          deferred:(BOOL)isDeferred
-                           unique:(BOOL)unique {
+                           unique:(BOOL)unique
+                      redeemLimit:(NSInteger)redeemLimit {
   
   self = [super init];
   if (self) {
@@ -160,6 +177,7 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
     _isDeferred = isDeferred;
     _wasOpened = NO;
     _unique = unique;
+    _redeemLimit = redeemLimit;
   }
   
   return self;
@@ -241,6 +259,14 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
 }
 
 #pragma mark - Networking
+- (void)redeemWithToken:(NSString *)token {
+  HOKNetworkOperation *networkOperation = [[HOKNetworkOperation alloc] initWithOperationType:HOKNetworkOperationTypePOST
+                                                                                        path:HOKDeeplinkRedeemPath
+                                                                                       token:token
+                                                                                  parameters:[self idJSON]];
+  [[HOKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
+}
+
 - (void)postWithToken:(NSString *)token {
     if (self.isSmartlink) {
         HOKNetworkOperation *networkOperation = [[HOKNetworkOperation alloc] initWithOperationType:HOKNetworkOperationTypePOST
@@ -258,7 +284,7 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
 
 - (void)requestMetadataWithToken:(NSString *)token completion:(void(^)(void))completion {
   if (self.needsMetadata) {
-    [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:HOKDeeplinkMetadataPath] parameters:[self metadataJSON] token:token successBlock:^(id json) {
+    [HOKNetworking requestToPath:[HOKNetworkOperation urlFromPath:HOKDeeplinkMetadataPath] parameters:[self idJSON] token:token successBlock:^(id json) {
       _metadata = json;
       completion();
       
@@ -268,6 +294,7 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
     }];
   }
 }
+
 
 #pragma mark - Serialization
 - (NSDictionary *)json {
@@ -280,17 +307,17 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
 - (NSDictionary *)generateSmartlinkJSON {
   if (!self.hasURLs) {
     return @{@"uri": [HOKUtils jsonValue:self.url],
+             @"redeem_limit": [HOKUtils jsonValue:@(self.redeemLimit)],
              @"unique": [HOKUtils jsonValue:@(self.unique)],
              @"metadata": [HOKUtils jsonValue:self.metadata]};
   } else {
     return @{@"uri": [HOKUtils jsonValue:self.url],
+             @"redeem_limit": [HOKUtils jsonValue:@(self.redeemLimit)],
              @"routes": [HOKUtils jsonValue:self.urls],
              @"unique": [HOKUtils jsonValue:@(self.unique)],
              @"metadata": [HOKUtils jsonValue:self.metadata]};
   }
-  
 }
-
 
 - (NSDictionary *)smartlinkJSON {
   return @{@"deeplink": [HOKUtils jsonValue:self.deeplinkURL],
@@ -298,7 +325,7 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
            @"uid": [HOKUtils jsonValue:[HOKDevice device].uid]};
 }
 
-- (NSDictionary *)metadataJSON {
+- (NSDictionary *)idJSON {
   if (self.smartlinkClickIdentifier) {
     return @{HOKDeeplinkSmartlinkClickIdentifierKey: [HOKUtils jsonValue:self.smartlinkClickIdentifier]};
   } else {

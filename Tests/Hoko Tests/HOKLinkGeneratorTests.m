@@ -28,14 +28,14 @@
 {
   [super setUp];
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return [HOKNetworkingEndpoint rangeOfString:request.URL.host].location != NSNotFound && [request.URL.absoluteString hasSuffix:@"routes.json"];
+    return [[HOKNetworking endpoint] rangeOfString:request.URL.host].location != NSNotFound && [request.URL.absoluteString hasSuffix:@"routes.json"];
   } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
     NSDictionary *json = @{};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];
   }];
   
   [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-    return [HOKNetworkingEndpoint rangeOfString:request.URL.host].location != NSNotFound;
+    return [[HOKNetworking endpoint] rangeOfString:request.URL.host].location != NSNotFound;
   } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
     NSDictionary *json = @{@"smartlink":@"http://hoko.link/PRMLNK"};
     return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil] statusCode:200 headers:nil];

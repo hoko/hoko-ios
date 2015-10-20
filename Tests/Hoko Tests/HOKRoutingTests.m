@@ -92,7 +92,7 @@
   [HokoDeeplinking.routing mapRoute:@"anything" toTarget:nil];
   [HokoDeeplinking.routing mapRoute:@"zoidberg" toTarget:nil];
   NSArray *sortedRoutes = [HokoDeeplinking.routing routes];
-  expect([sortedRoutes valueForKeyPath:@"route"]).to.equal(@[@"anything", @"mkay", @"zoidberg", @"product/xpto", @"product/:product_id", @"product/xpto/zzz", @"product/xpto/:id"]);
+  expect([sortedRoutes valueForKeyPath:@"route"]).to.equal(@[@"__banner",@"anything", @"mkay", @"zoidberg", @"product/xpto", @"product/:product_id", @"product/xpto/zzz", @"product/xpto/:id"]);
   
 }
 

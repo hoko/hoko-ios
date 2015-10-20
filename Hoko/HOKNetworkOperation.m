@@ -141,7 +141,7 @@
 
 #pragma mark - URL Generator
 + (NSString *)urlFromPath:(NSString *)path {
-  return [NSString stringWithFormat:@"%@/%@/%@.%@", HOKNetworkingEndpoint, HOKNetworkingVersion, path, HOKNetworkingFormat];
+  return [NSString stringWithFormat:@"%@/%@/%@.%@", [HOKNetworking endpoint], HOKNetworkingVersion, path, HOKNetworkingFormat];
 }
 
 #pragma mark - NSCoding
