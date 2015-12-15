@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Hoko, S.A. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+
 #import "HOKIframe.h"
 #import "HOKUtils.h"
 #import "HOKNetworking.h"
@@ -48,14 +50,14 @@
     HOKIframe *iframe = [[HOKIframe alloc] initWithCompletion:completion];
     id safariViewController = [[SFSafariViewControllerClass alloc] initWithURL:[NSURL URLWithString:url]];
     [safariViewController setDelegate:(id)iframe];
-    
+
     // Create hidden controller
     UIViewController *rootViewController = [[UIViewController alloc] init];
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectZero];
     window.rootViewController = rootViewController;
     [window makeKeyAndVisible];
     window.alpha = 0;
-    
+
     // Present controller
     [rootViewController presentViewController:safariViewController animated:NO completion:nil];
   }
@@ -72,4 +74,3 @@
 @end
 
 #endif
-
