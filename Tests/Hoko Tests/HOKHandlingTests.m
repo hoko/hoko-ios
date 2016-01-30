@@ -14,7 +14,7 @@
 
 @end
 
-@interface HOKTestHandler : NSObject<HOKHandlerProcotol>
+@interface HOKTestHandler : NSObject<HOKHandlerProtocol>
 
 @property (nonatomic, strong) HOKDeeplink *handledDeeplink;
 @property (nonatomic, strong) NSDate *timestamp;

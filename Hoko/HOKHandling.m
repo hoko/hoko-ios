@@ -30,7 +30,7 @@
 }
 
 #pragma mark - Add Handlers
-- (void)addHandler:(id<HOKHandlerProcotol>)handler {
+- (void)addHandler:(id<HOKHandlerProtocol>)handler {
   if (![self.handlers containsObject:handler]) {
     [self.handlers addObject:handler];
   } else {
@@ -46,8 +46,8 @@
 - (void)handle:(HOKDeeplink *)deeplink {
   for (id handler in self.handlers) {
     // Object implements protocol
-    if ([handler conformsToProtocol:@protocol(HOKHandlerProcotol)]) {
-      id<HOKHandlerProcotol> handlerObj = (id<HOKHandlerProcotol>)handler;
+    if ([handler conformsToProtocol:@protocol(HOKHandlerProtocol)]) {
+      id<HOKHandlerProtocol> handlerObj = (id<HOKHandlerProtocol>)handler;
       
       if ([handlerObj respondsToSelector:@selector(handleDeeplink:)]) {
         [handlerObj handleDeeplink:deeplink];
