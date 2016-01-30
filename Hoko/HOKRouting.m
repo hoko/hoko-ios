@@ -162,7 +162,7 @@
                                                  deeplinkURL:url.absoluteString
                                                     deferred:isDeferred
                                                       unique:NO];
-  if (self.defaultRoute) {
+  if (route && self.defaultRoute) {
     *route = self.defaultRoute;
   }
   
