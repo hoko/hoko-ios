@@ -22,7 +22,7 @@ To integrate HOKO in your app, simply follow the 3 simple steps below after addi
 
 ## Install HOKO in your project
 
-### Cocoapods
+### CocoaPods
 
 1. Install [CocoaPods](http://cocoapods.org/) in your system
 2. Open your Xcode project folder and create a file called `Podfile` with the following content:
