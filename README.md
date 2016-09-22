@@ -4,7 +4,7 @@
 
 # Quick Start - HOKO framework for iOS
 
-This document is a quick start introduction to the HOKO framework for iOS (only <u>iOS 5 and higher</u>). You can read the full documentation at [http://hokolinks.com/documentation#ios](http://support.hokolinks.com/ios/ios-setup/).
+This document is a quick start introduction to the HOKO framework for iOS (only <u>iOS 5 and higher</u>). You can read the full documentation at [http://hokolinks.com/documentation#ios](http://support.hokolinks.com/quickstart/ios/).
 
 To integrate HOKO in your app, simply follow the 3 simple steps below after adding it to your project.
 
