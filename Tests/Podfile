@@ -10,7 +10,7 @@ def import_pods
   pod 'Hoko', :path => '../'
 end
 
-target 'Hoko Tests' do
+target 'iOS Tests' do
   platform :ios, '6.0'
   import_pods
 end
