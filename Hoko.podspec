@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/hokolinks/hoko-ios'
   s.social_media_url = 'https://twitter.com/hokolinks'
   s.authors  = {
-  	'Hoko S.A.' => 'support@hokolinks.com',
+    'Hoko S.A.' => 'support@hokolinks.com',
     'Hugo Sequeira' => 'hugo@hokolinks.com',
     'Ivan Bruel' => 'ibruel@faber-ventures.com',
     'Ricardo Otero' => 'ricardo@hokolinks.com',
