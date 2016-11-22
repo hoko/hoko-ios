@@ -51,11 +51,12 @@ NSString *const HOKDeferredDeeplinkingPath = @"installs/ios";
 }
 
 - (NSDictionary *)json {
-  return @{@"device": @{@"os_version": [HOKDevice device].systemVersion,
-                        @"device_type": [HOKDevice device].platform,
-                        @"language": [HOKDevice device].systemLanguage.lowercaseString,
-                        @"screen_size": [HOKDevice device].screenSize}
-           };
+    return @{@"device": @{@"os_version": [HOKUtils jsonValue:[HOKDevice device].systemVersion],
+                          @"device_type": [HOKUtils jsonValue:[HOKDevice device].platform],
+                          @"language": [HOKUtils jsonValue:[HOKDevice device].systemLanguage.lowercaseString],
+                          @"screen_size": [HOKUtils jsonValue:[HOKDevice device].screenSize],
+                          @"uid": [HOKUtils jsonValue:[HOKDevice device].uid] }
+             };
 }
 
 @end
