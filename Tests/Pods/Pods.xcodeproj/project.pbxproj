@@ -34,7 +34,6 @@
 		1A22BB6C70B03A5C762FB5404742BD5B /* HOKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2366A05708D1142FF83EBB5D02DF582F /* HOKNetworkOperation.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		1B3C76D245A716A4FF2CFB4EC679FD10 /* HOKDeferredDeeplinking.h in Headers */ = {isa = PBXBuildFile; fileRef = 83CE0683EB076D083CB62DB028A8654F /* HOKDeferredDeeplinking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C316B6C9C6C13E4CF60DDE2EC971EA5 /* HOKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 686C2B3227FB5CD1473D33E43229BBD2 /* HOKObserver.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		1C8A51B62425BAA924A27EE239AB8D44 /* HOKIframe.m in Sources */ = {isa = PBXBuildFile; fileRef = B44A3F5CFBBDCC58AD6E480E6626ECBA /* HOKIframe.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		1D127963E894ED1095A282896C33911F /* EXPExpect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9130C4DB029581F94EDBB20FDFCDC6BD /* EXPExpect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1E548D627037ADE0F87B4194DAAE618A /* EXPMatchers+beSupersetOf.h in Headers */ = {isa = PBXBuildFile; fileRef = 13757F74DECE6DAB47E56FD445EEE495 /* EXPMatchers+beSupersetOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FAA84709FD966E0DAA0E0E5B2CF7152 /* OCMMacroState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFC3FF397B4EDF4983E246A0CCB0A1F /* OCMMacroState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -52,7 +51,6 @@
 		343650FACAFBF5A6ED2E30A28AD701E3 /* NSNotificationCenter+OCMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A5BF46904D83EE65152A638D7CC51BB0 /* NSNotificationCenter+OCMAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		36435F77363F8191684ECEF5CD49B905 /* NSObject+OCMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC352286AFF5B4E80DE96041421A9B3 /* NSObject+OCMAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		36B6C75098C962634467640EA36D0623 /* NSValue+Expecta.h in Headers */ = {isa = PBXBuildFile; fileRef = 110711D15D53DE2A22594FCB6407BD3B /* NSValue+Expecta.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		36D04207BD401EA0BA8593DC20E8C5AD /* HOKIframe.h in Headers */ = {isa = PBXBuildFile; fileRef = DE079C356FC6CE582EF8BE2CB7EABD30 /* HOKIframe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		36EAD4611C2BE343B2F55D18BDD97E60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BED5CF3BABD828D22E8A731E83288F8 /* Foundation.framework */; };
 		383FFD5987C2CF3A5B03342C0EEE8655 /* HOKFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E86E9EF7CFEDA9073835F6C8AEF2868 /* HOKFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		388BD7C9C285636D94D0F733037FCB6C /* OHHTTPStubsResponse+HTTPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = DF3604B7DC8756B76D0BBFB2FD4D5E02 /* OHHTTPStubsResponse+HTTPMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -433,7 +431,6 @@
 		B083C14E7CCCC29B7C8FCB6C02A1329C /* EXPMatchers+beInTheRangeOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beInTheRangeOf.h"; path = "Expecta/Matchers/EXPMatchers+beInTheRangeOf.h"; sourceTree = "<group>"; };
 		B12362C6C0BE3426D2EA171E9955521A /* HOKResolver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HOKResolver.h; sourceTree = "<group>"; };
 		B3F0C530823AC995C2650679E703C599 /* OHHTTPStubsResponse+JSON.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubsResponse+JSON.m"; path = "OHHTTPStubs/Sources/OHHTTPStubsResponse+JSON.m"; sourceTree = "<group>"; };
-		B44A3F5CFBBDCC58AD6E480E6626ECBA /* HOKIframe.m */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = HOKIframe.m; sourceTree = "<group>"; };
 		B6ADADD0C9313A97C521E08126B49377 /* HOKDevice.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HOKDevice.m; sourceTree = "<group>"; };
 		B8138DD16409813A7A6A119A31B3D6CC /* HOKError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HOKError.h; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -476,7 +473,6 @@
 		DBBB6437D06A1B5813884F6FA3B1817A /* OCClassMockObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCClassMockObject.h; path = Source/OCMock/OCClassMockObject.h; sourceTree = "<group>"; };
 		DC32CC0D5F640D78AAE53D91CEB92543 /* NSObject+Expecta.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+Expecta.h"; path = "Expecta/NSObject+Expecta.h"; sourceTree = "<group>"; };
 		DD35703914820A188E2286032C4761E2 /* HOKSwizzling.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HOKSwizzling.m; sourceTree = "<group>"; };
-		DE079C356FC6CE582EF8BE2CB7EABD30 /* HOKIframe.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HOKIframe.h; sourceTree = "<group>"; };
 		DF3604B7DC8756B76D0BBFB2FD4D5E02 /* OHHTTPStubsResponse+HTTPMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OHHTTPStubsResponse+HTTPMessage.h"; path = "OHHTTPStubs/Sources/OHHTTPStubsResponse+HTTPMessage.h"; sourceTree = "<group>"; };
 		DFD7DFE372C7D66152ECCF871291CE41 /* HOKDeeplink+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HOKDeeplink+Private.h"; sourceTree = "<group>"; };
 		E0425B7621CC9701140106239B9C6EB4 /* OHHTTPStubs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubs.h; path = OHHTTPStubs/Sources/OHHTTPStubs.h; sourceTree = "<group>"; };
@@ -605,8 +601,6 @@
 				69A2918C7C6535FFD3938C60EC6DE5CC /* HOKHandlerBlockWrapper.m */,
 				24A90EEFC456651DFC88735266BD1406 /* HOKHandling.h */,
 				454D00CD1DAA23C09D91BEDCE76A3B2A /* HOKHandling.m */,
-				DE079C356FC6CE582EF8BE2CB7EABD30 /* HOKIframe.h */,
-				B44A3F5CFBBDCC58AD6E480E6626ECBA /* HOKIframe.m */,
 				893B87E5AE12B3417CBCCDCE6E26575B /* HOKLinkGenerator.h */,
 				E6452320CBBD873BFB92A48ABFB99A6E /* HOKLinkGenerator.m */,
 				7DA7895FB30CAED343CBA9E2A88FE5A8 /* HOKLogger.h */,
@@ -999,7 +993,6 @@
 				ABEC61D898E4C8E839B4A7BECF452D48 /* HOKGZip.h in Headers */,
 				26903E3668A87E5F4F4AEB6565892443 /* HOKHandlerBlockWrapper.h in Headers */,
 				0B375FFD4BCF7E07B729EECF394F582E /* HOKHandling.h in Headers */,
-				36D04207BD401EA0BA8593DC20E8C5AD /* HOKIframe.h in Headers */,
 				0808D935D5F8E2736918372093AD547F /* HOKLinkGenerator.h in Headers */,
 				C820D593B10181C36D502A920F23B205 /* HOKLogger.h in Headers */,
 				2EB0C7F06314D4CA26B538A71E943C42 /* HOKNavigation.h in Headers */,
@@ -1211,7 +1204,6 @@
 				C824639809BE2C493743240B8D5E9FEA /* HOKGZip.m in Sources */,
 				45ECEEA0BE76DD3F403C0D0A0401FE6A /* HOKHandlerBlockWrapper.m in Sources */,
 				F3904E2F12D29CEDDD44255130707430 /* HOKHandling.m in Sources */,
-				1C8A51B62425BAA924A27EE239AB8D44 /* HOKIframe.m in Sources */,
 				62D58DF68BCC32D6B9D3922F5DABEF5E /* HOKLinkGenerator.m in Sources */,
 				4902BB8DDAF258785913877876F7083B /* HOKLogger.m in Sources */,
 				E5F772C32B89201322F328CDC66C0A61 /* HOKNavigation.m in Sources */,

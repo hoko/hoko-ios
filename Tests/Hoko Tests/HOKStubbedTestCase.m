@@ -10,14 +10,12 @@
 
 #import <Hoko/Hoko.h>
 #import <Hoko/HOKApp.h>
-#import <Hoko/HOKIframe.h>
 #import <Hoko/HOKNetworkOperationQueue+Private.h>
 
 @interface HOKStubbedTestCase ()
 
 @property (nonatomic, strong) id appMock;
 @property (nonatomic, strong) id networkOperationQueueMock;
-@property (nonatomic, strong) id iframeMock;
 
 @end
 
@@ -32,9 +30,6 @@
   self.networkOperationQueueMock = OCMPartialMock([HOKNetworkOperationQueue sharedQueue]);
   [[[self.networkOperationQueueMock stub] andDo:nil] saveNetworkOperations];
   
-  self.iframeMock = OCMClassMock([HOKIframe class]);
-  [[[self.iframeMock stub] andDo:nil] requestPageWithURL:[OCMArg any] completion:[OCMArg any]];
-  
   [Hoko setVerbose:NO];
   [Hoko setupWithToken:@"1234"];
 }
@@ -44,7 +39,6 @@
   [super tearDown];
   [self.appMock stopMocking];
   [self.networkOperationQueueMock stopMocking];
-  [self.iframeMock stopMocking];
   [OHHTTPStubs removeAllStubs];
   [Hoko reset];
 }

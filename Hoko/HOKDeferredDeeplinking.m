@@ -7,6 +7,7 @@
 //
 
 #import "HOKDeferredDeeplinking.h"
+
 #import "HOKUtils.h"
 #import "HOKLogger.h"
 #import "HOKDevice.h"
@@ -14,17 +15,13 @@
 #import "HOKNetworkOperation.h"
 #import "HOKNotificationObserver.h"
 #import "HOKObserver.h"
-#import "HOKNavigation.h"
-#import "HOKIframe.h"
 
 NSString *const HOKDeferredDeeplinkingNotFirstRun = @"isNotFirstRun";
 NSString *const HOKDeferredDeeplinkingPath = @"installs/ios";
-NSString *const HOKFingerprintMatchingPath = @"fingerprints/match";
 
 @interface HOKDeferredDeeplinking ()
 
 @property (nonatomic, strong) NSString *token;
-@property (nonatomic, copy) void (^handler)(NSString *deeplink);
 
 @end
 
@@ -41,25 +38,16 @@ NSString *const HOKFingerprintMatchingPath = @"fingerprints/match";
 - (void)requestDeferredDeeplink:(void (^)(NSString *))handler {
   BOOL isFirstRun = ![[HOKUtils objectForKey:HOKDeferredDeeplinkingNotFirstRun] boolValue];
   if (isFirstRun) {
-    self.handler = handler;
-    NSString *fingerprintURL = [NSString stringWithFormat:@"%@?uid=%@", [HOKNetworkOperation urlFromPath:HOKFingerprintMatchingPath], [HOKDevice device].uid];
-    
-    [HOKIframe requestPageWithURL:fingerprintURL completion:^{
-      [self requestDeferredDeeplink];
+    [HOKUtils saveObject:@YES key:HOKDeferredDeeplinkingNotFirstRun];
+    [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:HOKDeferredDeeplinkingPath] parameters:self.json token:self.token successBlock:^(id json) {
+      NSString *deeplink = [json objectForKey:@"deeplink"];
+      if (deeplink && [deeplink isKindOfClass:[NSString class]] && handler) {
+        handler(deeplink);
+      }
+    } failedBlock:^(NSError *error) {
+      HOKErrorLog(error);
     }];
   }
-}
-
-- (void)requestDeferredDeeplink {
-  [HOKUtils saveObject:@YES key:HOKDeferredDeeplinkingNotFirstRun];
-  [HOKNetworking postToPath:[HOKNetworkOperation urlFromPath:HOKDeferredDeeplinkingPath] parameters:self.json token:self.token successBlock:^(id json) {
-    NSString *deeplink = [json objectForKey:@"deeplink"];
-    if (deeplink && [deeplink isKindOfClass:[NSString class]] && self.handler) {
-      self.handler(deeplink);
-    }
-  } failedBlock:^(NSError *error) {
-    HOKErrorLog(error);
-  }];
 }
 
 - (NSDictionary *)json {
@@ -72,4 +60,3 @@ NSString *const HOKFingerprintMatchingPath = @"fingerprints/match";
 }
 
 @end
-

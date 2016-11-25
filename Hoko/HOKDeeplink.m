@@ -17,7 +17,6 @@
 #import "HOKNetworking.h"
 #import "HOKDeeplink+Private.h"
 #import "HOKNetworkOperationQueue.h"
-#import "HOKIframe.h"
 
 NSString *const HOKDeeplinkSmartlinkClickIdentifierKey = @"_hk_cid";
 NSString *const HOKDeeplinkSmartlinkIdentifierKey = @"_hk_sid";
@@ -25,7 +24,6 @@ NSString *const HOKDeeplinkMetadataKey = @"_hk_md";
 
 NSString *const HOKDeeplinkOpenPath = @"smartlinks/open";
 NSString *const HOKDeeplinkMetadataPath = @"smartlinks/metadata";
-NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
 
 @interface HOKDeeplink ()
 
@@ -242,17 +240,14 @@ NSString *const HOKUniversalLinkOpenPath = @"universal_links/open";
 
 #pragma mark - Networking
 - (void)postWithToken:(NSString *)token {
-    if (self.isSmartlink) {
-        HOKNetworkOperation *networkOperation = [[HOKNetworkOperation alloc] initWithOperationType:HOKNetworkOperationTypePOST
-                                                                                              path:HOKDeeplinkOpenPath
-                                                                                             token:token
-                                                                                        parameters:[self smartlinkJSON]];
-        [[HOKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
-        
-    } else {
-        NSString *universalLinkOpenURL = [HOKNetworkOperation urlFromPath:HOKUniversalLinkOpenPath];
-        [HOKIframe requestPageWithURL:universalLinkOpenURL completion:nil];
-    }
+  if (self.isSmartlink) {
+    HOKNetworkOperation *networkOperation = [[HOKNetworkOperation alloc] initWithOperationType:HOKNetworkOperationTypePOST
+                                                                                          path:HOKDeeplinkOpenPath
+                                                                                         token:token
+                                                                                    parameters:[self smartlinkJSON]];
+    [[HOKNetworkOperationQueue sharedQueue] addOperation:networkOperation];
+    
+  }
 }
 
 - (void)requestMetadataWithToken:(NSString *)token completion:(void(^)(void))completion {

@@ -17,6 +17,12 @@ NSString *const HOKDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
 NSString *const HOKDateFormatLegacy = @"yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 NSString *const HOKDateFormatDateOnly = @"yyyy-MM-dd";
 
+#ifdef __IPHONE_8_0
+    #define GregorianCalendar NSCalendarIdentifierGregorian
+#else
+    #define GregorianCalendar NSGregorianCalendar
+#endif
+
 @implementation HOKUtils
 
 #pragma mark - NSUserDefaults
@@ -125,7 +131,7 @@ NSString *const HOKDateFormatDateOnly = @"yyyy-MM-dd";
 
 #pragma mark - Dates
 + (NSDateFormatter *)iso8601DateFormatterWithFormat:(NSString *)format {
-  NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:GregorianCalendar];
   NSDateFormatter *formatter = [NSDateFormatter new];
   [formatter setDateFormat:format];
   [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
