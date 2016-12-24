@@ -15,7 +15,7 @@
  *  HOKHandlerProtocol can be implemented on any object to be mapped on to a route,
  *  common implementations are loggers, analytics, validators or A/B testing mechanics.
  */
-@protocol HOKHandlerProcotol <NSObject>
+@protocol HOKHandlerProtocol <NSObject>
 
 /**
  *  This method will be called when a deeplink has been opened in the application,
@@ -113,7 +113,7 @@
  *
  *  @param handler An object which implements the HOKHandlerProtocol.
  */
-- (void)addHandler:(hok_nonnull id<HOKHandlerProcotol>)handler;
+- (void)addHandler:(hok_nonnull id<HOKHandlerProtocol>)handler;
 
 /**
  *  With addHandlerBlock: you can add a block which will be called everytime your application

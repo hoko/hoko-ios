@@ -146,7 +146,7 @@
 
 
 #pragma mark - Handlers
-- (void)addHandler:(id<HOKHandlerProcotol>)handler {
+- (void)addHandler:(id<HOKHandlerProtocol>)handler {
   [self.handling addHandler:handler];
 }
 
